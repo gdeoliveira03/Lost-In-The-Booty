@@ -1,0 +1,140 @@
+fileFormatVersion: 2
+guid: 5c68edc7878e03d44829bdfc40248990
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Palm Tree 1
+    100002: Palm Tree 2
+    100004: Palm Tree 3
+    100006: Palm Tree 4
+    100008: Palm Tree 5
+    100010: Palm Tree 6
+    100012: Palm Tree 7
+    100014: //RootNode
+    400000: Palm Tree 1
+    400002: Palm Tree 2
+    400004: Palm Tree 3
+    400006: Palm Tree 4
+    400008: Palm Tree 5
+    400010: Palm Tree 6
+    400012: Palm Tree 7
+    400014: //RootNode
+    2100000: Wood
+    2100002: Leaves
+    2300000: Palm Tree 1
+    2300002: Palm Tree 2
+    2300004: Palm Tree 3
+    2300006: Palm Tree 4
+    2300008: Palm Tree 5
+    2300010: Palm Tree 6
+    2300012: Palm Tree 7
+    3300000: Palm Tree 1
+    3300002: Palm Tree 2
+    3300004: Palm Tree 3
+    3300006: Palm Tree 4
+    3300008: Palm Tree 5
+    3300010: Palm Tree 6
+    3300012: Palm Tree 7
+    4300000: Palm Tree 1
+    4300002: Palm Tree 2
+    4300004: Palm Tree 3
+    4300006: Palm Tree 4
+    4300008: Palm Tree 5
+    4300010: Palm Tree 6
+    4300012: Palm Tree 7
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaves
+    second: {fileID: 2100000, guid: 784e8365145250b4faaa50110a6eae66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 4a9f5a5f5978a394b87cd23ed4c7e808, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.8
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

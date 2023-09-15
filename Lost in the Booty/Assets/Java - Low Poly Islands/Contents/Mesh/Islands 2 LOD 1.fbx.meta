@@ -1,0 +1,216 @@
+fileFormatVersion: 2
+guid: c123f74b64d24b845b601ebd189ab94c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Island (LOD 1) 01
+    100002: Island (LOD 1) 02
+    100004: Island (LOD 1) 03
+    100006: Island (LOD 1) 04
+    100008: Island (LOD 1) 05
+    100010: Island (LOD 1) 06
+    100012: Island (LOD 1) 07
+    100014: Island (LOD 1) 08
+    100016: Island (LOD 1) 09
+    100018: Island (LOD 1) 10
+    100020: Island (LOD 1) 11
+    100022: Island (LOD 1) 12
+    100024: Island (LOD 1) 13
+    100026: Island (LOD 1) 14
+    100028: Island (LOD 1) 15
+    100030: Island (LOD 1) 16
+    100032: Island (LOD 1) 17
+    100034: Island (LOD 1) 18
+    100036: Island (LOD 1) 19
+    100038: Island (LOD 1) 20
+    100040: Island (LOD 1) 21
+    100042: //RootNode
+    400000: Island (LOD 1) 01
+    400002: Island (LOD 1) 02
+    400004: Island (LOD 1) 03
+    400006: Island (LOD 1) 04
+    400008: Island (LOD 1) 05
+    400010: Island (LOD 1) 06
+    400012: Island (LOD 1) 07
+    400014: Island (LOD 1) 08
+    400016: Island (LOD 1) 09
+    400018: Island (LOD 1) 10
+    400020: Island (LOD 1) 11
+    400022: Island (LOD 1) 12
+    400024: Island (LOD 1) 13
+    400026: Island (LOD 1) 14
+    400028: Island (LOD 1) 15
+    400030: Island (LOD 1) 16
+    400032: Island (LOD 1) 17
+    400034: Island (LOD 1) 18
+    400036: Island (LOD 1) 19
+    400038: Island (LOD 1) 20
+    400040: Island (LOD 1) 21
+    400042: //RootNode
+    2100000: Sand
+    2100002: Rock
+    2100004: Grass
+    2300000: Island (LOD 1) 01
+    2300002: Island (LOD 1) 02
+    2300004: Island (LOD 1) 03
+    2300006: Island (LOD 1) 04
+    2300008: Island (LOD 1) 05
+    2300010: Island (LOD 1) 06
+    2300012: Island (LOD 1) 07
+    2300014: Island (LOD 1) 08
+    2300016: Island (LOD 1) 09
+    2300018: Island (LOD 1) 10
+    2300020: Island (LOD 1) 11
+    2300022: Island (LOD 1) 12
+    2300024: Island (LOD 1) 13
+    2300026: Island (LOD 1) 14
+    2300028: Island (LOD 1) 15
+    2300030: Island (LOD 1) 16
+    2300032: Island (LOD 1) 17
+    2300034: Island (LOD 1) 18
+    2300036: Island (LOD 1) 19
+    2300038: Island (LOD 1) 20
+    2300040: Island (LOD 1) 21
+    3300000: Island (LOD 1) 01
+    3300002: Island (LOD 1) 02
+    3300004: Island (LOD 1) 03
+    3300006: Island (LOD 1) 04
+    3300008: Island (LOD 1) 05
+    3300010: Island (LOD 1) 06
+    3300012: Island (LOD 1) 07
+    3300014: Island (LOD 1) 08
+    3300016: Island (LOD 1) 09
+    3300018: Island (LOD 1) 10
+    3300020: Island (LOD 1) 11
+    3300022: Island (LOD 1) 12
+    3300024: Island (LOD 1) 13
+    3300026: Island (LOD 1) 14
+    3300028: Island (LOD 1) 15
+    3300030: Island (LOD 1) 16
+    3300032: Island (LOD 1) 17
+    3300034: Island (LOD 1) 18
+    3300036: Island (LOD 1) 19
+    3300038: Island (LOD 1) 20
+    3300040: Island (LOD 1) 21
+    4300000: Island (LOD 1) 01
+    4300002: Island (LOD 1) 02
+    4300004: Island (LOD 1) 03
+    4300006: Island (LOD 1) 04
+    4300008: Island (LOD 1) 05
+    4300010: Island (LOD 1) 06
+    4300012: Island (LOD 1) 07
+    4300014: Island (LOD 1) 08
+    4300016: Island (LOD 1) 09
+    4300018: Island (LOD 1) 10
+    4300020: Island (LOD 1) 11
+    4300022: Island (LOD 1) 12
+    4300024: Island (LOD 1) 13
+    4300026: Island (LOD 1) 14
+    4300028: Island (LOD 1) 16
+    4300030: Island (LOD 1) 17
+    4300032: Island (LOD 1) 18
+    4300034: Island (LOD 1) 19
+    4300036: Island (LOD 1) 20
+    4300038: Island (LOD 1) 21
+    4300040: Island (LOD 1) 15
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass
+    second: {fileID: 2100000, guid: 10b1949e11a097547ae32f3f03dd2424, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock
+    second: {fileID: 2100000, guid: ed9c0598539dc5f428caa5dc67aea0bc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sand
+    second: {fileID: 2100000, guid: 36cf94deba65e9c43bbb46573e3bc06e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 80
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

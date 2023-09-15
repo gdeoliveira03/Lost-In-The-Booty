@@ -1,0 +1,194 @@
+fileFormatVersion: 2
+guid: 457dc8351d71fad438124626f0d45fc2
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Rock 01
+    100002: Rock 02
+    100004: Rock 03
+    100006: Rock 04
+    100008: Rock 05
+    100010: Rock 06
+    100012: Rock 07
+    100014: Rock 08
+    100016: Rock 09
+    100018: Rock 10
+    100020: Rock 11
+    100022: Rock 12
+    100024: Rock 13
+    100026: Rock 14
+    100028: Rock 15
+    100030: Rock 16
+    100032: Rock 17
+    100034: Rock 18
+    100036: Rock 19
+    100038: Rock 20
+    100040: //RootNode
+    400000: Rock 01
+    400002: Rock 02
+    400004: Rock 03
+    400006: Rock 04
+    400008: Rock 05
+    400010: Rock 06
+    400012: Rock 07
+    400014: Rock 08
+    400016: Rock 09
+    400018: Rock 10
+    400020: Rock 11
+    400022: Rock 12
+    400024: Rock 13
+    400026: Rock 14
+    400028: Rock 15
+    400030: Rock 16
+    400032: Rock 17
+    400034: Rock 18
+    400036: Rock 19
+    400038: Rock 20
+    400040: //RootNode
+    2100000: No Name
+    2300000: Rock 01
+    2300002: Rock 02
+    2300004: Rock 03
+    2300006: Rock 04
+    2300008: Rock 05
+    2300010: Rock 06
+    2300012: Rock 07
+    2300014: Rock 08
+    2300016: Rock 09
+    2300018: Rock 10
+    2300020: Rock 11
+    2300022: Rock 12
+    2300024: Rock 13
+    2300026: Rock 14
+    2300028: Rock 15
+    2300030: Rock 16
+    2300032: Rock 17
+    2300034: Rock 18
+    2300036: Rock 19
+    2300038: Rock 20
+    3300000: Rock 01
+    3300002: Rock 02
+    3300004: Rock 03
+    3300006: Rock 04
+    3300008: Rock 05
+    3300010: Rock 06
+    3300012: Rock 07
+    3300014: Rock 08
+    3300016: Rock 09
+    3300018: Rock 10
+    3300020: Rock 11
+    3300022: Rock 12
+    3300024: Rock 13
+    3300026: Rock 14
+    3300028: Rock 15
+    3300030: Rock 16
+    3300032: Rock 17
+    3300034: Rock 18
+    3300036: Rock 19
+    3300038: Rock 20
+    4300000: Rock 20
+    4300002: Rock 01
+    4300004: Rock 02
+    4300006: Rock 03
+    4300008: Rock 04
+    4300010: Rock 05
+    4300012: Rock 06
+    4300014: Rock 07
+    4300016: Rock 08
+    4300018: Rock 09
+    4300020: Rock 10
+    4300022: Rock 11
+    4300024: Rock 12
+    4300026: Rock 13
+    4300028: Rock 14
+    4300030: Rock 15
+    4300032: Rock 16
+    4300034: Rock 17
+    4300036: Rock 18
+    4300038: Rock 19
+  externalObjects: {}
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 7
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

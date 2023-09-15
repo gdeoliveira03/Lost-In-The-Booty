@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: 2884ad26ce5594a4087f2dea871f5f76
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Door 1
+    100002: Railing
+    100004: Roof 1
+    100006: Roof 2
+    100008: Roof 3
+    100010: Roof Support 1
+    100012: Roof Support 2
+    100014: Roof Support 3
+    100016: Roof Support 4
+    100018: Steps 1
+    100020: Support
+    100022: //RootNode
+    100024: Wall 1
+    100026: Window 1
+    100028: Wood Floor 1
+    100030: Wood Floor 2
+    100032: Wood Floor 3
+    100034: Wood Floor 4
+    100036: Wood Floor 5
+    100038: Wood Floor 6
+    100040: Wall 2
+    100042: Window 2
+    100044: Railing Angle
+    400000: Door 1
+    400002: Railing
+    400004: Roof 1
+    400006: Roof 2
+    400008: Roof 3
+    400010: Roof Support 1
+    400012: Roof Support 2
+    400014: Roof Support 3
+    400016: Roof Support 4
+    400018: Steps 1
+    400020: Support
+    400022: //RootNode
+    400024: Wall 1
+    400026: Window 1
+    400028: Wood Floor 1
+    400030: Wood Floor 2
+    400032: Wood Floor 3
+    400034: Wood Floor 4
+    400036: Wood Floor 5
+    400038: Wood Floor 6
+    400040: Wall 2
+    400042: Window 2
+    400044: Railing Angle
+    2100000: No Name
+    2100002: Wood
+    2100004: Straw
+    2300000: Door 1
+    2300002: Railing
+    2300004: Roof 1
+    2300006: Roof 2
+    2300008: Roof 3
+    2300010: Roof Support 1
+    2300012: Roof Support 2
+    2300014: Roof Support 3
+    2300016: Roof Support 4
+    2300018: Steps 1
+    2300020: Support
+    2300022: Wall 1
+    2300024: Window 1
+    2300026: Wood Floor 1
+    2300028: Wood Floor 2
+    2300030: Wood Floor 3
+    2300032: Wood Floor 4
+    2300034: Wood Floor 5
+    2300036: Wood Floor 6
+    2300038: Wall 2
+    2300040: Window 2
+    2300042: Railing Angle
+    3300000: Door 1
+    3300002: Railing
+    3300004: Roof 1
+    3300006: Roof 2
+    3300008: Roof 3
+    3300010: Roof Support 1
+    3300012: Roof Support 2
+    3300014: Roof Support 3
+    3300016: Roof Support 4
+    3300018: Steps 1
+    3300020: Support
+    3300022: Wall 1
+    3300024: Window 1
+    3300026: Wood Floor 1
+    3300028: Wood Floor 2
+    3300030: Wood Floor 3
+    3300032: Wood Floor 4
+    3300034: Wood Floor 5
+    3300036: Wood Floor 6
+    3300038: Wall 2
+    3300040: Window 2
+    3300042: Railing Angle
+    4300000: Wall 1
+    4300002: Door 1
+    4300004: Window 1
+    4300006: Roof 1
+    4300008: Roof 2
+    4300010: Roof 3
+    4300012: Roof Support 1
+    4300014: Roof Support 2
+    4300016: Roof Support 3
+    4300018: Roof Support 4
+    4300020: Wood Floor 1
+    4300022: Wood Floor 2
+    4300024: Wood Floor 3
+    4300026: Wood Floor 4
+    4300028: Wood Floor 5
+    4300030: Wood Floor 6
+    4300032: Steps 1
+    4300034: Railing
+    4300036: Support
+    4300038: Wall 2
+    4300040: Window 2
+    4300042: Railing Angle
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 4a9f5a5f5978a394b87cd23ed4c7e808, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Straw
+    second: {fileID: 2100000, guid: 684cdf49abceabc46974ab2f32b2bda5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: d4e0198bddb20134da42a3d613064891, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.8
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
