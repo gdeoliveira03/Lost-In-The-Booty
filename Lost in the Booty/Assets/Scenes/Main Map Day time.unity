@@ -27561,8 +27561,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 655814242}
+        m_TargetAssemblyTypeName: PlayerController1, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -27605,7 +27605,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!95 &655814241
 Animator:
@@ -44107,13 +44107,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020392054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.008154215, y: -0.9762085, z: 0.21319427, w: 0.038713805}
-  m_LocalPosition: {x: 57.44, y: 9.85, z: 38.76}
+  m_LocalRotation: {x: 0.014818873, y: -0.9236734, z: 0.381133, w: 0.036683112}
+  m_LocalPosition: {x: 57.115, y: 12.737, z: 37.458}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 24.637, y: 184.55, z: 0.037}
+  m_LocalEulerAnglesHint: {x: 44.843, y: 184.568, z: 0.047}
 --- !u!114 &1020392056
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class PlayerController1 : MonoBehaviour
     // send info to animator
     private Animator animator;
 
-    public void onMove(InputAction.CallbackContext context) {
+    public void OnMove(InputAction.CallbackContext context) {
         move = context.ReadValue<Vector2>();
     }
 
