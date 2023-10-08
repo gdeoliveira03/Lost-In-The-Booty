@@ -7,10 +7,17 @@ public class PlayerController1 : MonoBehaviour
 {
     
     public float speed;
+    public float walkSpeed = 4;
+    public float runSpeed = 8;
     private Vector2 move;
+    private float isRun = 0;
 
     // send info to animator
     private Animator animator;
+
+    public void onRun(InputAction.CallbackContext context) {
+        isRun = context.ReadValue<float>();
+    }
 
     public void OnMove(InputAction.CallbackContext context) {
         move = context.ReadValue<Vector2>();
@@ -31,7 +38,12 @@ public class PlayerController1 : MonoBehaviour
     }
 
     public void movePlayer() {
-
+        if (isRun > 0) {
+            speed = runSpeed;
+        }
+        else {
+            speed = walkSpeed;
+        }
         // take in the movement
         Vector3 movement = new Vector3(move.x, 0f, move.y);
 
