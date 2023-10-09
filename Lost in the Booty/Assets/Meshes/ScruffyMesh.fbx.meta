@@ -37,7 +37,7 @@ ModelImporter:
       takeName: Scruffy|idle
       internalID: 3745110460937997697
       firstFrame: 0
-      lastFrame: 159
+      lastFrame: 158
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -66,7 +66,7 @@ ModelImporter:
       takeName: Scruffy|runAnimation
       internalID: 6974249311579070876
       firstFrame: 0
-      lastFrame: 17
+      lastFrame: 16.9
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -151,7 +151,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.7
+    globalScale: 0.6
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -206,7 +206,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.7
+    globalScale: 0.6
     rootMotionBoneName: Scruffy
     hasTranslationDoF: 0
     hasExtraRoot: 0
