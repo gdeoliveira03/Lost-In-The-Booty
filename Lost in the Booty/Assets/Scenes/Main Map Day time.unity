@@ -9292,6 +9292,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13234,6 +13238,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3105566889275959571, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     - target: {fileID: 3105566889277962195, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_Name
       value: Palm Tree 3_1825
@@ -14043,6 +14051,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_2111
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18489,6 +18501,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3105566889275959571, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     - target: {fileID: 3105566889277962195, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_Name
       value: Palm Tree 3_1764
@@ -22003,6 +22019,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3675669443727940895, guid: 803d1274d6d205d4e83842a46050d818, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -22369,6 +22389,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 3105566889275959571, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     - target: {fileID: 3105566889277962195, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_Name
       value: Palm Tree 3_1795
@@ -22427,6 +22451,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3105566889278385139, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417304374433086033, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417304374433086033, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417304374433086033, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_ProvidesContacts
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -24621,6 +24657,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3675669443727940895, guid: 803d1274d6d205d4e83842a46050d818, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27684,6 +27724,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: efbe6de2-3517-420b-b473-fb3129a4b799
     m_ActionName: Player/New action[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 35607fc9-5330-4a88-86de-7354fc7ba86e
+    m_ActionName: Player/mouseLook[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 06c79790-2b79-4510-a9b7-ce6e2791037f
+    m_ActionName: Player/Ability[/Keyboard/1,/Keyboard/2,/Keyboard/3]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -28548,6 +28608,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34962,6 +35026,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 3105566889275959571, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     - target: {fileID: 3105566889277962195, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_Name
       value: Palm Tree 3_1810
@@ -36056,6 +36124,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1787
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40127,6 +40199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1833
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40200,6 +40276,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3675669443727940895, guid: 803d1274d6d205d4e83842a46050d818, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40990,6 +41070,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -43245,6 +43329,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 3105566889275959571, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     - target: {fileID: 3105566889277962195, guid: 48beb2e41d3ab934aa1c721995a95655, type: 3}
       propertyPath: m_Name
       value: Palm Tree 3_1811
@@ -53559,6 +53647,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -55489,6 +55581,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57399,6 +57495,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4990420965449362840, guid: ca99309f572855243801b2fa2608e5bb, type: 3}
   m_PrefabInstance: {fileID: 1313062993}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1313616648
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 56.8332
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1944728
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 29.341166
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6983018
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.27804917
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5750499
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.32308036
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
+      propertyPath: m_Name
+      value: ScruffySwordNew
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c73d26ca12afd642849de6feeeb95a2, type: 3}
 --- !u!1001 &1314799424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64593,6 +64746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1778
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -69628,6 +69785,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 2962711408531652991, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     - target: {fileID: 2962711408533554079, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
       propertyPath: m_RootOrder
       value: 118
@@ -69901,6 +70062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71972,6 +72137,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1823
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -75294,6 +75463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1807
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -77409,6 +77582,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 2962711408531652991, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     - target: {fileID: 2962711408533554079, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
       propertyPath: m_RootOrder
       value: 119
@@ -79883,6 +80060,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2962711408531652991, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     - target: {fileID: 2962711408533554079, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
       propertyPath: m_RootOrder
       value: 126
@@ -85133,6 +85314,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7921624456738499072, guid: 5f8717e24e5bf8240adf1bfbe664f2b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -88968,6 +89153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 5_1836
       objectReference: {fileID: 0}
+    - target: {fileID: 8716129398516871219, guid: a52fece933bec724991ce552fa51b880, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -89907,6 +90096,14 @@ PrefabInstance:
       propertyPath: m_UpdateWhenOffscreen
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8714690463061260050, guid: 65496cab42c6ca547b73ebe3f283b155, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -3981065676529349206, guid: 65496cab42c6ca547b73ebe3f283b155, type: 3}
+    - target: {fileID: -8714690463061260050, guid: 65496cab42c6ca547b73ebe3f283b155, type: 3}
+      propertyPath: m_Materials.Array.data[13]
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 65496cab42c6ca547b73ebe3f283b155, type: 3}
     - target: {fileID: -8679921383154817045, guid: 65496cab42c6ca547b73ebe3f283b155, type: 3}
       propertyPath: m_LocalPosition.x
       value: 56.22
@@ -91277,6 +91474,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 2962711408531652991, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6136362d6fe40db48a13b963f1f6db64, type: 2}
     - target: {fileID: 2962711408533554079, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
       propertyPath: m_RootOrder
       value: 138
@@ -91472,6 +91673,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 5_1781
       objectReference: {fileID: 0}
+    - target: {fileID: 8716129398516871219, guid: a52fece933bec724991ce552fa51b880, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -91651,6 +91856,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 218440781}
     m_Modifications:
+    - target: {fileID: 2962711408531652991, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37bd71969a204c14d97ad69f32764007, type: 2}
     - target: {fileID: 2962711408533554079, guid: 5f7fe0b581f631c43aaaca80a1d680cd, type: 3}
       propertyPath: m_RootOrder
       value: 122
@@ -92507,6 +92716,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Palm Tree 1_1831
       objectReference: {fileID: 0}
+    - target: {fileID: 3347418848104869041, guid: 31d81008578ad5f438a38de87a4850b5, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 550290a67bc3e1640960a849c03d8623, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95609,3 +95822,4 @@ SceneRoots:
   - {fileID: 2033516087}
   - {fileID: 460062405}
   - {fileID: 1639736459}
+  - {fileID: 1313616648}
