@@ -20,7 +20,6 @@ public class PlayerController1 : MonoBehaviour
     // accessed when shift is clicked
     public void onRun(InputAction.CallbackContext context) {
         isRun = context.ReadValue<float>();
-        isAbility = 0; // allows player run again
     }
 
     // called when ability 1 is clicked
@@ -57,6 +56,7 @@ public class PlayerController1 : MonoBehaviour
     // accessed when "WASD" is pressed 
     public void OnMove(InputAction.CallbackContext context) {
         move = context.ReadValue<Vector2>();
+        isAbility = 0; // allows player run again
     }
 
     // Start is called before the first frame update

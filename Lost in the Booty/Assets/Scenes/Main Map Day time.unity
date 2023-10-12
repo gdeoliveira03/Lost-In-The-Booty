@@ -27828,6 +27828,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 863e257d-b3aa-48fc-919d-72a335a4aa06
     m_ActionName: New action map/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 659a6384-a41a-457a-9351-2a93b0f2b6bb
+    m_ActionName: New action map/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6cf6839e-892d-47b9-a362-94456acf1e9f
+    m_ActionName: cameraRotate/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -44395,13 +44403,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020392054}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07111028, y: -0, z: -0.0000000027939677, w: 0.99746853}
-  m_LocalPosition: {x: -0.1, y: 2.69, z: -12.31}
+  m_LocalRotation: {x: 0.3253538, y: -7.1885686e-10, z: -0.0000000026999072, w: 0.94559234}
+  m_LocalPosition: {x: -0.1, y: 9.5, z: -12.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1639736459}
-  m_LocalEulerAnglesHint: {x: 8.156, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.974, y: 0, z: 0}
 --- !u!114 &1020392056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70430,6 +70438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639736459}
   - component: {fileID: 1639736458}
+  - component: {fileID: 1639736460}
   m_Layer: 0
   m_Name: CameraHolder
   m_TagString: Untagged
@@ -70451,7 +70460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 655814243}
   smoothTime: 0.3
-  offset: {x: 0, y: 20, z: 0}
+  offset: {x: 0, y: 1, z: 0}
+  conditionMet: 0
 --- !u!4 &1639736459
 Transform:
   m_ObjectHideFlags: 0
@@ -70460,14 +70470,116 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639736457}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.32856917, y: -0.035986815, z: 0.012929983, w: -0.94370556}
-  m_LocalPosition: {x: 55.82, y: 13.28, z: 21.03}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 55.82, y: 17, z: 21.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1020392055}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1639736460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639736457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 0c7a0fe120cdb0f47950de6639a779b8, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dbb6206b-1fdc-4d46-a464-c6baf3a6ec90
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: efbe6de2-3517-420b-b473-fb3129a4b799
+    m_ActionName: Player/LShift[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 35607fc9-5330-4a88-86de-7354fc7ba86e
+    m_ActionName: Player/mouseLook[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e7e83492-ddcc-4f53-89fc-039edf2caf76
+    m_ActionName: Player/ability1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fca67770-be91-46ba-8743-d34c5d2f0a83
+    m_ActionName: Player/ability2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d4dfdc3d-7220-442c-b896-47168105a667
+    m_ActionName: Player/ability3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f320ee31-997b-417a-bdf2-0d7c77367b77
+    m_ActionName: Player/ability4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d6797177-5df8-4f90-996a-f8512c3213c2
+    m_ActionName: Player/ability5[/Keyboard/5]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e91c4752-41dd-4ade-9111-e8a92007e949
+    m_ActionName: tridentAbility/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 863e257d-b3aa-48fc-919d-72a335a4aa06
+    m_ActionName: hammerAbility/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1639736458}
+        m_TargetAssemblyTypeName: cameraFollow, Assembly-CSharp
+        m_MethodName: rotateCamLeft
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 659a6384-a41a-457a-9351-2a93b0f2b6bb
+    m_ActionName: cameraRotate/rotateCamL[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1639736458}
+        m_TargetAssemblyTypeName: cameraFollow, Assembly-CSharp
+        m_MethodName: rotateCamRight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6cf6839e-892d-47b9-a362-94456acf1e9f
+    m_ActionName: cameraRotate/rotateCamR[/Keyboard/e]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: cameraRotate
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1641129185
 PrefabInstance:
   m_ObjectHideFlags: 0

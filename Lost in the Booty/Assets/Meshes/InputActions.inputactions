@@ -274,6 +274,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "cameraRotate",
+            "id": "dcafb887-1038-451c-953d-03c91ce8b655",
+            "actions": [
+                {
+                    "name": "rotateCamL",
+                    "type": "Button",
+                    "id": "659a6384-a41a-457a-9351-2a93b0f2b6bb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "rotateCamR",
+                    "type": "Button",
+                    "id": "6cf6839e-892d-47b9-a362-94456acf1e9f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6c274f92-fe21-4cd6-a8d8-22efe2d44009",
+                    "path": "<Keyboard>/q",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "rotateCamL",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "452a34f9-d9df-4c71-8dbe-624d04afbb6e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "rotateCamR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

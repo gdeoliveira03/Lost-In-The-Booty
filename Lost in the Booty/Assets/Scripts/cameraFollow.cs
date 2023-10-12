@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class cameraFollow : MonoBehaviour
 {
@@ -10,22 +11,110 @@ public class cameraFollow : MonoBehaviour
     // (larger means smoother)
     public float smoothTime = 0.3f;
     public Vector3 offset;
+
+    // larger means faster transition for camera angle
+    private float rotationSpeed = 5.0f;
     private Vector3 velocity = Vector3.zero;
+    private Quaternion targetRotation;
+    private Quaternion initialRotation;
+
+    // this int acts as a boolean to see if camera should be moving
+    private int isCamActive = 0;
+    private int rotationCount = 0;
+
+
+    private float isPressedDownR = 0.0f, isPressedDownL = 0.0f;
+
+    // 
+    public void rotateCamLeft(InputAction.CallbackContext context) 
+    {
+
+        isPressedDownL = context.ReadValue<float>();
+
+        if(isPressedDownL < 0.01f)
+        {
+            
+            rotationCount++;
+
+            // calculate the rotation that will occur
+            targetRotation = Quaternion.Euler(0, 90*rotationCount, 0);
+
+            // will now tell the update function to update target rotation
+            isCamActive = 1;
+
+            
+            Debug.Log("Currently rotating Left our rotation count is now: " + rotationCount);
+            if(rotationCount > 3)
+            {
+                rotationCount = 0;
+            }
+        }
+
+        
+    }
+
+
+    public void rotateCamRight(InputAction.CallbackContext context) 
+    {
+        isPressedDownR = context.ReadValue<float>();
+
+        if(isPressedDownR < 0.01f)
+        {
+            if(rotationCount != 0) {
+                rotationCount--;
+            }
+            else
+            {
+                rotationCount = 3;
+            }
+
+            // calculate the rotation that will occur
+            targetRotation = Quaternion.Euler(0, 90*rotationCount, 0);
+
+            // will now tell the update function to update target rotation
+            isCamActive = 1;
+
+            
+            
+            Debug.Log("Currently rotating Right our rotation count is now: " + rotationCount);
+            if(rotationCount > 3)
+            {
+                rotationCount = 0;
+            }
+        }
+
+    }
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // initialize our camera rotation angles
+        initialRotation = transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (target != null) {
+        if (target != null) 
+        {
+
             Vector3 targetPosition = target.position + offset;
+
+            // if camera should not move, set the target to its current rotation
+            if(isCamActive == 0) 
+            {
+                targetRotation = initialRotation;
+            }
             
+            // perform rotation smoothly
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
             transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, smoothTime);
+
         }
     }
+
+    
 
 }
