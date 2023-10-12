@@ -13,6 +13,8 @@ public class PlayerController1 : MonoBehaviour
     private Vector2 move, mouseLook;
     private float isRun = 0f;
 
+    //private Vector3 movement;
+
     // could be changed to bool
     private int isAbility = 0;
 
@@ -68,6 +70,7 @@ public class PlayerController1 : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -93,8 +96,34 @@ public class PlayerController1 : MonoBehaviour
         else {
             speed = walkSpeed;
         }
-        // take in the movement
+
         Vector3 movement = new Vector3(move.x, 0f, move.y);
+        Quaternion rotatedAngle;
+
+        // take in the movement
+        switch(inDirection)
+        {
+            case 0:
+                break;
+            case 1:
+                rotatedAngle = Quaternion.Euler(90, 0f, 270);
+                movement = rotatedAngle * move;
+                break;
+            case 2:
+                rotatedAngle = Quaternion.Euler(90, 0f, 180);
+                movement = rotatedAngle * move;
+                break;
+            case 3:
+                rotatedAngle = Quaternion.Euler(90, 0f, 90);
+                movement = rotatedAngle * move;
+                break;
+
+            // default state in case movement is temporarily 4
+            default:
+                //Vector3 movement = Vector3(move.x, 0f, move.y);
+                break;
+        }
+        //Vector3 movement = new Vector3(move.x, 0f, move.y);
 
         // if ability is not in use, then allow movement
         if(isAbility == 0) 
@@ -121,6 +150,26 @@ public class PlayerController1 : MonoBehaviour
         }
 
         
+    }
+
+    private void moveDirection0()
+    {
+
+    }
+
+    private void moveDirection1()
+    {
+
+    }
+
+    private void moveDirection2()
+    {
+
+    }
+
+    private void moveDirection3()
+    {
+
     }
 
     
