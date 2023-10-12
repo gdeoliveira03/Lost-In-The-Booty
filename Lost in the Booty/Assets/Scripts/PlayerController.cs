@@ -8,11 +8,16 @@ public class PlayerController1 : MonoBehaviour
     private InputActionAsset InputAction;
 
     public float speed;
-    public float walkSpeed = 4;
-    public float runSpeed = 8;
+    public float walkSpeed = 4f;
+    public float runSpeed = 8f;
     private Vector2 move, mouseLook;
-    private float isRun = 0;
-    private float isAbility = 0;
+    private float isRun = 0f;
+
+    // could be changed to bool
+    private int isAbility = 0;
+
+    // integer to know the direction the camera is facing
+    public int inDirection = 0;
 
     // send info to animator
     private Animator animator;
@@ -91,6 +96,7 @@ public class PlayerController1 : MonoBehaviour
         // take in the movement
         Vector3 movement = new Vector3(move.x, 0f, move.y);
 
+        // if ability is not in use, then allow movement
         if(isAbility == 0) 
         {
             if(movement != Vector3.zero) 
@@ -101,18 +107,26 @@ public class PlayerController1 : MonoBehaviour
 
             // have character move towards that location
             transform.Translate(movement * speed * Time.deltaTime, Space.World);
-        }
-        
 
-        // float to use as Speed parameter for animator
-        float charSpeed = (movement.magnitude * speed);
-        animator.SetFloat("Speed", charSpeed);
+
+            // float to use as Speed parameter for animator
+            float charSpeed = (movement.magnitude * speed);
+            animator.SetFloat("Speed", charSpeed);
+            
+        }
+        // if it is in use, animator speed set to zero
+        else
+        {
+            animator.SetFloat("Speed", 0f);
+        }
+
+        
     }
 
     
     public void useAbility() {
         
-        Debug.Log("Ability used float is: " + isAbility);
-        
+        Debug.Log("Ability used int is: " + isAbility);
+        Debug.Log("the value of direction is currently: " + inDirection);
     } 
 }

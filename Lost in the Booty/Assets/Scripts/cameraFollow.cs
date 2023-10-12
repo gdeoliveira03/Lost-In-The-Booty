@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class cameraFollow : MonoBehaviour
 {
+    public PlayerController1 playerControllerTemp;
 
     public Transform target;
     // how long it takes to reach our character
@@ -27,6 +28,15 @@ public class cameraFollow : MonoBehaviour
 
     // two seperate floats to prevent overWriting if both are are pressed
     private float isPressedDownR = 0.0f, isPressedDownL = 0.0f;
+
+
+    // function finds our object to later change the int value
+    private void Awake()
+    {
+        playerControllerTemp = FindObjectOfType<PlayerController1>();
+        // we can also use GameObject.FindWithTag("YourTag") to find an object by tag
+        // but i cant seem to implement it properly
+    }
 
     
     // context called is "R" button type float
@@ -53,6 +63,8 @@ public class cameraFollow : MonoBehaviour
                 rotationCount = 0;
             }
         }
+        // change direction value in our playerController script
+        playerControllerTemp.inDirection = rotationCount;
     }
 
 
@@ -86,6 +98,8 @@ public class cameraFollow : MonoBehaviour
                 rotationCount = 0;
             }
         }
+        // change direction value in our playerController script
+        playerControllerTemp.inDirection = rotationCount;
     }
 
 
