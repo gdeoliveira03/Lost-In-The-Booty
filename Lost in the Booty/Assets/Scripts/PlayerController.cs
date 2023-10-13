@@ -152,27 +152,6 @@ public class PlayerController1 : MonoBehaviour
         
     }
 
-    private void moveDirection0()
-    {
-
-    }
-
-    private void moveDirection1()
-    {
-
-    }
-
-    private void moveDirection2()
-    {
-
-    }
-
-    private void moveDirection3()
-    {
-
-    }
-
-    
     public void useAbility() {
         
         Debug.Log("Ability used int is: " + isAbility);
