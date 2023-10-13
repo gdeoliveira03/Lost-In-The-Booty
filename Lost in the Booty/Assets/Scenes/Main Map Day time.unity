@@ -27997,10 +27997,6 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 6cf6839e-892d-47b9-a362-94456acf1e9f
     m_ActionName: cameraRotate/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b9871c03-f149-41f2-8140-e96220483d24
-    m_ActionName: menuScreen/PauseScreen[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -71104,7 +71100,7 @@ Transform:
   m_GameObject: {fileID: 1639736457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.82, y: 17, z: 21.03}
+  m_LocalPosition: {x: 4.13, y: -0.09, z: 23.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -71208,10 +71204,6 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6cf6839e-892d-47b9-a362-94456acf1e9f
     m_ActionName: cameraRotate/rotateCamR[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b9871c03-f149-41f2-8140-e96220483d24
-    m_ActionName: menuScreen/PauseScreen[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: cameraRotate
