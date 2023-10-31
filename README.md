@@ -5,11 +5,17 @@ Welcome to the GitHub repository for **Lost in the Booty**, an exhilarating RPG/
 
 ## Table of Contents
 [Introduction](https://github.com/gdeoliveira03/Lost-In-The-Booty#introduction)
+
 [Features](https://github.com/gdeoliveira03/Lost-In-The-Booty#features)
+
 [Getting Started](https://github.com/gdeoliveira03/Lost-In-The-Booty#getting-started)
+
 [Gameplay](https://github.com/gdeoliveira03/Lost-In-The-Booty#gameplay)
+
 [Technologies Used](https://github.com/gdeoliveira03/Lost-In-The-Booty#technologies-used)
+
 [Contributing](https://github.com/gdeoliveira03/Lost-In-The-Booty#contributing)
+
 [License](https://github.com/gdeoliveira03/Lost-In-The-Booty#license)
 
 
