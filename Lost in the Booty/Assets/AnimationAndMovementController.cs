@@ -34,7 +34,7 @@ public class AnimationAndMovementController : MonoBehaviour
     // jumping variables
     bool isJumpPressed = false;
     float initialJumpVelocity;
-    float maxJumpHeight = 3.0f;
+    float maxJumpHeight = 2.0f;
     float maxJumpTime = 0.8f;
     bool isJumping = false;
     int isJumpingHash;
@@ -212,6 +212,14 @@ public class AnimationAndMovementController : MonoBehaviour
     }
 
 
+    /*
+    // function that takes in world space vector3 and returns local space camera vector
+    Vector3 ConvertToCameraSpace(Vector3 vectorToRotate)
+    {
+
+    }
+
+    */
 
     // Update is called once per frame
     void Update()
