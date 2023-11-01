@@ -153,8 +153,5 @@ public class PlayerController1 : MonoBehaviour
     }
 
     public void useAbility() {
-        
-        Debug.Log("Ability used int is: " + isAbility);
-        Debug.Log("the value of direction is currently: " + inDirection);
     } 
 }
