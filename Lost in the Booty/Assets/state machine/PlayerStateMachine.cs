@@ -18,6 +18,7 @@ public class PlayerStateMachine : MonoBehaviour
     Vector2 currentMovementInput;
     Vector3 currentMovement;
     Vector3 currentRunMovement;
+    Vector3 _cameraRelativeMovement; // updated vectors based on camera movement
 
     bool isMovementPressed;
     bool isRunPressed;
@@ -114,9 +115,9 @@ public class PlayerStateMachine : MonoBehaviour
     {
         Vector3 positionToLookAt;
 
-        positionToLookAt.x = currentMovement.x;
+        positionToLookAt.x = _cameraRelativeMovement.x;
         positionToLookAt.y = 0.0f;
-        positionToLookAt.z = currentMovement.z;
+        positionToLookAt.z = _cameraRelativeMovement.z;
 
         // current rotation of our character
         Quaternion currentRotation = transform.rotation;
@@ -181,7 +182,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         handleRotation();
         _currentState.UpdateStates();
-        characterController.Move(currentMovement * Time.deltaTime);
+        _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
+        characterController.Move(_cameraRelativeMovement * Time.deltaTime);
     }
 
     void OnEnable()
@@ -192,5 +194,27 @@ public class PlayerStateMachine : MonoBehaviour
     void OnDisable() 
     {
         playerInput.CharacterControls.Disable();
+    }
+    
+    Vector3 ConvertToCameraSpace(Vector3 vectorToRotate) {
+
+        float currentYValue = vectorToRotate.y;
+
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+
+        cameraForward = cameraForward.normalized;
+        cameraRight = cameraRight.normalized;
+
+        Vector3 cameraForwardZProduct = vectorToRotate.z * cameraForward;
+        Vector3 cameraRightXProduct = vectorToRotate.x * cameraRight;
+
+        Vector3 vectorRotatedToCameraSpace = cameraForwardZProduct + cameraRightXProduct;
+        vectorRotatedToCameraSpace.y = currentYValue;
+        return vectorRotatedToCameraSpace;
+
     }
 }
