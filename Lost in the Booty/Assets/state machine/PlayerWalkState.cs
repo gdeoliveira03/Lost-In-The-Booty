@@ -9,12 +9,18 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void EnterState()
     {
-
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
+        Ctx.CurrentMovementY = 0;
     }
 
     public override void UpdateState()
     {
         CheckSwitchStates();
+        Ctx.CurrentMovementX = Ctx.CurrentMovementInput.x * 3.0f;
+        Ctx.CurrentMovementZ = Ctx.CurrentMovementInput.y * 3.0f;
+        
+        //HandleGravity();
     }
 
     public override void ExitState()
@@ -29,6 +35,23 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-
+        // switch to idle if movement is no longer pressed
+        if(!Ctx.IsMovementPressed) {
+            SwitchStates(Factory.Idle());
+        }
+        // switch to run if run is pressed with movement
+        else if(Ctx.IsMovementPressed && Ctx.IsRunPressed) {
+            SwitchStates(Factory.Run());
+        }
     }
+    /*
+    void HandleGravity()
+    {
+        float previousYVelocity = Ctx.CurrentMovementY;
+        float newYVelocity = Ctx.CurrentMovementY + (Ctx.Gravity * Time.deltaTime);
+        float nextYvelocity = (previousYVelocity + newYVelocity) * .5f;
+
+        Ctx.CurrentMovementY = nextYvelocity;
+        Ctx.CurrentRunMovementY = nextYvelocity;
+    } */
 }

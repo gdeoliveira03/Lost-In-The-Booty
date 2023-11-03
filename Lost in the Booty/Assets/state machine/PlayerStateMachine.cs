@@ -45,17 +45,34 @@ public class PlayerStateMachine : MonoBehaviour
     PlayerStateFactory _states;
 
     // getters and setters
+    public CharacterController CharacterController { get { return characterController; } set {characterController = value; } }
     public PlayerBaseState CurrentState { get {return _currentState; } set {_currentState = value;}}
     public Animator Animator { get { return animator;}}
-    public int IsJumpingHash { get { return isJumpingHash; }}
+    public int IsJumpingHash { get { return isJumpingHash; } }
+    public int IsRunningHash {get {return isRunningHash;} }
+    public int IsWalkingHash {get {return isWalkingHash;} }
+
     public bool IsJumpPressed { get {return isJumpPressed;} set {isJumpPressed = value;} }
     public bool IsJumping { get { return isJumping;} set {isJumping = value;} }
     public bool IsJumpAnimating { get { return isJumpAnimating;} set {isJumpAnimating = value;} }
+    public bool IsRunPressed { get {return isRunPressed;} }
+    public bool IsMovementPressed {get {return isMovementPressed;} }
 
     public float InitialJumpVelocity {get { return initialJumpVelocity;} }
+    public float Gravity { get { return gravity; } set {gravity = value; } }
+    public float GroundedGravity { get { return groundedGravity; } set {groundedGravity = value; } }
 
     public float CurrentMovementY { get { return currentMovement.y;} set {currentMovement.y = value; } }
     public float CurrentRunMovementY { get { return currentRunMovement.y;} set {currentMovement.y = value; } }
+    public float CurrentMovementX { get { return currentMovement.x;} set {currentMovement.x = value; } }
+    public float CurrentRunMovementX { get { return currentRunMovement.x;} set {currentMovement.x = value; } }
+    public float CurrentMovementZ { get { return currentMovement.z;} set {currentMovement.z = value; } }
+    public float CurrentRunMovementZ { get { return currentRunMovement.z;} set {currentMovement.z = value; } }
+
+    public float RunMultiplier { get { return runSpeed;} }
+
+    public Vector2 CurrentMovementInput { get {return currentMovementInput;} }
+    //public float AppliedMovementX { get {return }}
     //public float AppliedMovementY { get { return appliedtMovement.y;} set {currentMovement.y = value; } }
     /*
     public Vector3 CurrentMovement { get {return currentMovement;} } // might need to modify
@@ -81,12 +98,12 @@ public class PlayerStateMachine : MonoBehaviour
     {
         currentMovementInput = context.ReadValue<Vector2>();
         // assign x and z in 3D space from xy in 2D vector
-        currentMovement.x = currentMovementInput.x * walkSpeed;
-        currentMovement.z = currentMovementInput.y * walkSpeed;
+        //currentMovement.x = currentMovementInput.x * walkSpeed;
+        //currentMovement.z = currentMovementInput.y * walkSpeed;
 
         // multiply by runSpeed can be changed in project (public)
-        currentRunMovement.x = currentMovementInput.x * runSpeed;
-        currentRunMovement.z = currentMovementInput.y * runSpeed;
+        //currentRunMovement.x = currentMovementInput.x * runSpeed;
+        //currentRunMovement.z = currentMovementInput.y * runSpeed;
 
         // change boolean if moving
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
@@ -163,7 +180,7 @@ public class PlayerStateMachine : MonoBehaviour
     void Update()
     {
         handleRotation();
-        _currentState.UpdateState();
+        _currentState.UpdateStates();
         characterController.Move(currentMovement * Time.deltaTime);
     }
 
