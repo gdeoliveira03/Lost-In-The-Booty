@@ -48,7 +48,7 @@ public class ScruffyStats : MonoBehaviour
             CurrentHealth -= damage;
             Debug.Log(transform.name + " takes " + damage + "damage.");
 
-            if (CurrentHealth < 0){
+            if (CurrentHealth <= 0){
                 Die();
             }
         }

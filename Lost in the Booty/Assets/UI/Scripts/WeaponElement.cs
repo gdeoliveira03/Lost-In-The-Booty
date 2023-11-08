@@ -50,17 +50,56 @@ public class WeaponElement : MonoBehaviour
     public GameObject LightningSpear;
     public GameObject LightningHammer;
 
+    // Stores the weapon colliders
+    private Collider NCWeaponCollider;
+    private Collider NSWeaponCollider;
+    private Collider NHWeaponCollider;  
+    private Collider FCWeaponCollider;
+    private Collider FSWeaponCollider;
+    private Collider FHWeaponCollider;
+    private Collider ICWeaponCollider;
+    private Collider ISWeaponCollider;
+    private Collider IHWeaponCollider;
+    private Collider LCWeaponCollider;
+    private Collider LSWeaponCollider;
+    private Collider LHWeaponCollider;
+
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
-
 
     // Start is called before the first frame update
     void Start()
     {
-
         animator = GetComponent<Animator>();
-        
-        
+
+        // Get the colliders
+        NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
+        NSWeaponCollider = NormalSpear.GetComponent<Collider>();
+        NHWeaponCollider = NormalHammer.GetComponent<Collider>();
+        FCWeaponCollider = FireCutlass.GetComponent<Collider>();
+        FSWeaponCollider = FireSpear.GetComponent<Collider>();
+        FHWeaponCollider = FireHammer.GetComponent<Collider>();
+        ICWeaponCollider = IceCutlass.GetComponent<Collider>();
+        ISWeaponCollider = IceSpear.GetComponent<Collider>();
+        IHWeaponCollider = IceHammer.GetComponent<Collider>();
+        LCWeaponCollider = LightningCutlass.GetComponent<Collider>();
+        LSWeaponCollider = LightningSpear.GetComponent<Collider>();
+        LHWeaponCollider = LightningHammer.GetComponent<Collider>();
+
+        // Sets the colliders to off
+        NCWeaponCollider.enabled = false;
+        NSWeaponCollider.enabled = false;
+        NHWeaponCollider.enabled = false;
+        FCWeaponCollider.enabled = false;
+        FSWeaponCollider.enabled = false;
+        FHWeaponCollider.enabled = false;
+        ICWeaponCollider.enabled = false;
+        ISWeaponCollider.enabled = false;
+        IHWeaponCollider.enabled = false;
+        LCWeaponCollider.enabled = false;
+        LSWeaponCollider.enabled = false;
+        LHWeaponCollider.enabled = false;
+
         if (Cutlass == true){
             GameUICutlass.SetActive(true);
             SpellBookImageCutlass.SetActive(true);
@@ -253,11 +292,48 @@ public class WeaponElement : MonoBehaviour
 
     }
 
+    // Cooldown times for basic abilities
+    private float CutlassBasicCooldown = 1f;
+    private float SpearBasicCooldown = 1f;
+    private float HammerBasicCooldown = 2f;
+    private float FireBasicCooldown = 1f;
+    private float IceBasicCooldown = 1f;
+    private float LightningBasicCooldown = 1f;
+
+    // Cooldown true/false for basic abilities
+    private bool isAbilityCooldownCutlass = false;
+    private bool isAbilityCooldownSpear = false;
+    private bool isAbilityCooldownHammer = false;
+    private bool isAbilityCooldownFire = false;
+    private bool isAbilityCooldownIce = false;
+    private bool isAbilityCooldownLightning = false;
+
+    // Current Cooldown for basic abilities
+    private float CurrentCutlassBasicCooldown;
+    private float CurrentSpearBasicCooldown;
+    private float CurrentHammerBasicCooldown;
+    private float CurrentFireBasicCooldown;
+    private float CurrentIceBasicCooldown;
+    private float CurrentLightningBasicCooldown;
+
+    private bool isAttacking = false;
+    private string enemyTag = "Enemy";
+    public int damage = 10;
+    private Dictionary<Collider, HashSet<Collider>> hitEnemies = new Dictionary<Collider, HashSet<Collider>>();
+
+    // Update Function starts here
     void Update()
     {
 
         animator = GetComponent<Animator>();
 
+        // Cooldown timers for basic attacks
+        BasicAttackCooldown(ref CurrentCutlassBasicCooldown, CutlassBasicCooldown, ref isAbilityCooldownCutlass); // Counts Cooldown time for cutlass
+        BasicAttackCooldown(ref CurrentSpearBasicCooldown, SpearBasicCooldown, ref isAbilityCooldownSpear); // Counts Cooldown time for spear
+        BasicAttackCooldown(ref CurrentHammerBasicCooldown, HammerBasicCooldown, ref isAbilityCooldownHammer); // Counts Cooldown time for hammer
+        BasicAttackCooldown(ref CurrentFireBasicCooldown, FireBasicCooldown, ref isAbilityCooldownFire); // Counts Cooldown time for fire
+        BasicAttackCooldown(ref CurrentIceBasicCooldown, IceBasicCooldown, ref isAbilityCooldownIce); // Counts Cooldown time for ice
+        BasicAttackCooldown(ref CurrentLightningBasicCooldown, LightningBasicCooldown, ref isAbilityCooldownLightning); // Counts Cooldown time for lightning
         
         if (Cutlass == true){
             GameUICutlass.SetActive(true);
@@ -266,7 +342,7 @@ public class WeaponElement : MonoBehaviour
 
             // CUTLASS BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
-                CutlassBasicAttack();
+                animator.SetTrigger("CutlassBasicAttack"); // Triggers the ability animation
             }
 
         }
@@ -283,7 +359,7 @@ public class WeaponElement : MonoBehaviour
 
             // SPEAR BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
-                SpearBasicAttack();
+                animator.SetTrigger("SpearBasicAttack"); // Triggers the ability animation
             }
 
         }
@@ -300,7 +376,7 @@ public class WeaponElement : MonoBehaviour
 
             // HAMMER BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
-                HammerBasicAttack();
+                animator.SetTrigger("HammerBasicAttack"); // Triggers the ability animation
             }
         }
         else {
@@ -356,8 +432,6 @@ public class WeaponElement : MonoBehaviour
             SpellBookImageLightning.SetActive(false);
             SpellBookSkillsLightning.SetActive(false);
         }
-
-
 
         // FOR WEAPONS HOLDING
         if (Cutlass == true && Fire == true){
@@ -440,7 +514,6 @@ public class WeaponElement : MonoBehaviour
             NormalSpear.SetActive(false);
         }
 
-
         // Normal Hammer
         if (Hammer == true && Spear == false && Cutlass == false && Fire == false && Ice == false && Lightning == false){
             NormalHammer.SetActive(true);
@@ -449,42 +522,202 @@ public class WeaponElement : MonoBehaviour
             NormalHammer.SetActive(false);
         }
 
+        if (isAttacking)
+        {
+            Collider activeWeaponCollider = null;
+
+            // Determine which weapon collider to use based on the currently selected element
+            if (Fire && Cutlass){
+                activeWeaponCollider = FCWeaponCollider;
+                FCWeaponCollider.enabled = true;
+            }
+            else if (Ice && Cutlass){
+                activeWeaponCollider = ICWeaponCollider;
+                ICWeaponCollider.enabled = true;
+            }
+            else if (Lightning && Cutlass){
+                activeWeaponCollider = LCWeaponCollider;
+                LCWeaponCollider.enabled = true;
+            }
+            else if (Fire && Spear){
+                activeWeaponCollider = FSWeaponCollider;
+                FSWeaponCollider.enabled = true;
+            }
+            else if (Ice && Spear){
+                activeWeaponCollider = ISWeaponCollider;
+                ISWeaponCollider.enabled = true;
+            }
+            else if (Lightning && Spear){
+                activeWeaponCollider = LSWeaponCollider;
+                LSWeaponCollider.enabled = true;
+            }
+            else if (Fire && Hammer){
+                activeWeaponCollider = FHWeaponCollider;
+                FHWeaponCollider.enabled = true;
+            }
+            else if (Ice && Hammer){
+                activeWeaponCollider = IHWeaponCollider;
+                IHWeaponCollider.enabled = true;
+            }
+            else if (Lightning && Hammer){
+                activeWeaponCollider = LHWeaponCollider;
+                LHWeaponCollider.enabled = true;
+            }
+            else if (Cutlass){
+                activeWeaponCollider = NCWeaponCollider;
+                NCWeaponCollider.enabled = true;
+            }
+            else if (Spear){
+                activeWeaponCollider = NSWeaponCollider;
+                NSWeaponCollider.enabled = true;
+            }
+            else if (Hammer){
+                activeWeaponCollider = NHWeaponCollider;
+                NHWeaponCollider.enabled = true;
+            }
+
+            // Check if the weapon collider is not null
+            if (activeWeaponCollider != null)
+            {
+                if (!hitEnemies.ContainsKey(activeWeaponCollider))
+                {
+                    hitEnemies[activeWeaponCollider] = new HashSet<Collider>();
+                }
+
+                Vector3 halfExtents = activeWeaponCollider.bounds.extents;
+                Vector3 center = activeWeaponCollider.bounds.center;
+
+                halfExtents.x *= 1.0f; // Adjust the size if needed
+                halfExtents.z *= 1.0f; // Adjust the size if needed
+
+                Collider[] hitColliders = Physics.OverlapBox(center, halfExtents, activeWeaponCollider.transform.rotation, LayerMask.GetMask(enemyTag));
+                foreach (Collider enemy in hitColliders)
+                {
+                    if (enemy.CompareTag(enemyTag) && !hitEnemies[activeWeaponCollider].Contains(enemy))
+                    {
+                        enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                        hitEnemies[activeWeaponCollider].Add(enemy);
+                    }
+                }
+            }
+        }
     }
-
-
-
 
     // BASIC ATTACK ABILITY CALLS
-    void CutlassBasicAttack(){
-
-        animator.SetTrigger("CutlassBasicAttack");
-        Debug.Log("Sword Basic Attack");
-
+    public void CutlassBasicAttack(){
+        if(!isAbilityCooldownCutlass){ // If the ability is not on cooldown
+            damage = 5;
+            isAttacking = true;
+            isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
+            CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
+        }
     }
+
+    public void CutlassEndAttack()
+    {
+        isAttacking = false;
+        foreach (var enemies in hitEnemies.Values)
+        {
+            enemies.Clear();
+        }
+    }
+
     void SpearBasicAttack(){
-        animator.SetTrigger("SpearBasicAttack");
-        Debug.Log("Spear Basic Attack");
-
+        if(!isAbilityCooldownSpear){ // If the ability is not on cooldown
+            damage = 5;
+            isAttacking = true;
+            isAbilityCooldownSpear = true; // Sets the ability to be on cooldown
+            CurrentSpearBasicCooldown = SpearBasicCooldown; // Current Cooldown becomes the basic cooldown  
+        }
     }
+
+    public void SpearEndAttack()
+    {
+        isAttacking = false;
+        foreach (var enemies in hitEnemies.Values)
+        {
+            enemies.Clear();
+        }
+    }
+
     void HammerBasicAttack(){
-        animator.SetTrigger("HammerBasicAttack");
-        Debug.Log("Hammer Basic Attack");
-
+        if(!isAbilityCooldownHammer){ // If the ability is not on cooldown
+            damage = 10;
+            isAttacking = true;
+            isAbilityCooldownHammer = true; // Sets the ability to be on cooldown
+            CurrentHammerBasicCooldown = HammerBasicCooldown; // Current Cooldown becomes the basic cooldown
+        }
     }
+
+    public void HammerEndAttack()
+    {
+        isAttacking = false;
+        foreach (var enemies in hitEnemies.Values)
+        {
+            enemies.Clear();
+        }
+    }
+
+    // In progress
     void FireBasicAttack(){
-        animator.SetTrigger("FireBasicAttack");
-        Debug.Log("Fire Basic Attack");
+        EndAttack();
+        if(!isAbilityCooldownFire){ // If the ability is not on cooldown
+            isAbilityCooldownFire = true; // Sets the ability to be on cooldown
+            animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
+            CurrentFireBasicCooldown = FireBasicCooldown; // Current Cooldown becomes the basic cooldown
 
+            Debug.Log("Fire Basic Attack"); // Performs the damage of the attack
+
+        }
     }
+
+    // In progress
     void IceBasicAttack(){
-        animator.SetTrigger("IceBasicAttack");
-        Debug.Log("Ice Basic Attack");
+        EndAttack();
+        if(!isAbilityCooldownIce){ // If the ability is not on cooldown
+            isAbilityCooldownIce = true; // Sets the ability to be on cooldown
+            animator.SetTrigger("IceBasicAttack"); // Triggers the ability animation
+            CurrentIceBasicCooldown = IceBasicCooldown; // Current Cooldown becomes the basic cooldown
 
+            Debug.Log("Ice Basic Attack"); // Performs the damage of the attack
+
+        }
     }
-    void LightningBasicAttack(){
-        animator.SetTrigger("LightningBasicAttack");
-        Debug.Log("Lightning Basic Attack");
 
+    // In progress
+    void LightningBasicAttack(){
+        EndAttack();
+        if(!isAbilityCooldownLightning){ // If the ability is not on cooldown
+            isAbilityCooldownLightning = true; // Sets the ability to be on cooldown
+            animator.SetTrigger("LightningBasicAttack"); // Triggers the ability animation
+            CurrentLightningBasicCooldown = LightningBasicCooldown; // Current Cooldown becomes the basic cooldown
+
+            Debug.Log("Lightning Basic Attack"); // Performs the damage of the attack
+
+        }
+    }
+
+    public void EndAttack()
+    {
+        isAttacking = false;
+        foreach (var enemies in hitEnemies.Values)
+        {
+            enemies.Clear();
+        }
+    }
+
+    private void BasicAttackCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown)
+    {
+        if(isCooldown)
+        {
+            currentCooldown -= Time.deltaTime;
+
+            if(currentCooldown <= 0f)
+            {   
+                isCooldown = false;
+                currentCooldown = 0f;
+            }
+        }
     }
 
 }

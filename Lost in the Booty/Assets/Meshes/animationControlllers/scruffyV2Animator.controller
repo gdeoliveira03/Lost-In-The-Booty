@@ -70,10 +70,10 @@ AnimatorStateMachine:
     m_Position: {x: 0, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -91018639224987885}
-    m_Position: {x: 0, y: 110, z: 0}
+    m_Position: {x: 0, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4745305971947533790}
-    m_Position: {x: 0, y: -40, z: 0}
+    m_Position: {x: 0, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -139354766958478161}
     m_Position: {x: 0, y: 190, z: 0}
@@ -170,9 +170,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_TransitionDuration: 0.2500038
+  m_TransitionOffset: 0.18105064
+  m_ExitTime: 0.7766668
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -328,8 +328,8 @@ AnimatorStateTransition:
   m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0.25000095
-  m_TransitionOffset: 0.122292235
-  m_ExitTime: 0.7615659
+  m_TransitionOffset: 0.16397125
+  m_ExitTime: 0.76649314
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -397,7 +397,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: SwordBasic1
-  m_Speed: 0.8
+  m_Speed: 1.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1977142274568525659}

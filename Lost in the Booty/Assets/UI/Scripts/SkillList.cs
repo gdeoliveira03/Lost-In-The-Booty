@@ -270,93 +270,165 @@ public class SkillList : MonoBehaviour
 
     //Individual Ability Actions Begin Here, these define what each skill does.
     void sword1(){
+        //float sword1Cooldown;
+        
         Debug.Log("Sword1 Has been activated!");
     }
+
     void sword2(){
+        //float sword2Cooldown;
+
+
         Debug.Log("Sword2 Has been activated!");
     }
+
     void sword3(){
+        //float sword3Cooldown;
+
         Debug.Log("Sword3 Has been activated!");
     }
+
     void sword4(){
+        //float sword4Cooldown;
+
         Debug.Log("Sword4 Has been activated!");
     }
+
     void sword5(){
+        //float sword5Cooldown;
+
         Debug.Log("Sword5 Has been activated!");
     }
+
     void spear1(){
+        //float spear1Cooldown;
+
         Debug.Log("spear1 Has been activated!");
     }
+
     void spear2(){
+        //float spear2Cooldown;
+
         Debug.Log("spear2 Has been activated!");
     }
+
     void spear3(){
+        //float spear3Cooldown;
+
         Debug.Log("spear3 Has been activated!");
     }
+
     void spear4(){
+        //float spear4Cooldown;
+
         Debug.Log("spear4 Has been activated!");
     }
+
     void spear5(){
+        //float spear5Cooldown;
+
         Debug.Log("spear5 Has been activated!");
     }
+
     void hammer1(){
+        //float hammer1Cooldown;
+
         Debug.Log("hammer1 Has been activated!");
     }
+
     void hammer2(){
+        //float hammer2Cooldown;
+
         Debug.Log("hammer2 Has been activated!");
     }
+
     void hammer3(){
+        //float hammer3Cooldown;
         Debug.Log("hammer3 Has been activated!");
     }
+
     void hammer4(){
+        //float hammer4Cooldown;
         Debug.Log("hammer4 Has been activated!");
     }
+
     void hammer5(){
+        //float hammer5Cooldown;
         Debug.Log("hammer5 Has been activated!");
     }
+
     void fire1(){
+        //float fire1Cooldown;
         Debug.Log("fire1 Has been activated!");
     }
+
     void fire2(){
+        //float fire2Cooldown;
         Debug.Log("fire2 Has been activated!");
     }
+
     void fire3(){
+        //float fire3Cooldown;
         Debug.Log("fire3 Has been activated!");
     }
+
     void fire4(){
+        //float fire4Cooldown;
         Debug.Log("fire4 Has been activated!");
     }
+
     void fire5(){
+        //float fire5Cooldown;
         Debug.Log("fire5 Has been activated!");
     }
+
     void ice1(){
+        //float ice1Cooldown;
         Debug.Log("ice1 Has been activated!");
     }
+
     void ice2(){
+        //float ice2Cooldown;
         Debug.Log("ice2 Has been activated!");
     }
+
     void ice3(){
+        //float ice3Cooldown;
         Debug.Log("ice3 Has been activated!");
     }
+
     void ice4(){
+        //float ice4Cooldown;
         Debug.Log("ice4 Has been activated!");
     }
+
     void ice5(){
+        //float ice5Cooldown;
         Debug.Log("ice5 Has been activated!");
     }
+
     void lightning1(){
+        //float lightning1Cooldown;
         Debug.Log("lightning1 Has been activated!");
     }
+
     void lightning2(){
+        //float lightning2Cooldown;
         Debug.Log("lightning2 Has been activated!");
     }
+
     void lightning3(){
+        //float lightning3Cooldown;
         Debug.Log("lightning3 Has been activated!");
     }
+
     void lightning4(){
+        //float lightning4Cooldown;
         Debug.Log("lightning4 Has been activated!");
     }
+
     void lightning5(){
+        //float lightning5Cooldown;
         Debug.Log("lightning5 Has been activated!");
     }
 
