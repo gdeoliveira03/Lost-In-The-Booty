@@ -337,7 +337,7 @@ public class WeaponElement : MonoBehaviour
 
     private bool isAttacking = false;
     private string enemyTag = "Enemy";
-    public int damage = 10;
+    public int damage = 5;
     private Dictionary<Collider, HashSet<Collider>> hitEnemies = new Dictionary<Collider, HashSet<Collider>>();
 
     // Update Function starts here
@@ -665,7 +665,7 @@ public class WeaponElement : MonoBehaviour
     }
 
     void SpearBasicAttack(){
-        damage = 5;
+        damage = 7;
         isAttacking = true;
     }
 
@@ -708,7 +708,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator FireBasicAttack()
     {
         FireBasicEnable.SetActive(true);
-        damage = 10;
+        damage = 5;
         FireCollider.enabled = true;
 
         float startTime = Time.time;
@@ -756,7 +756,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator IceBasicAttack()
     {
         IceBasicEnable.SetActive(true);
-        int damage = 10; // Set the damage value for the ice attack
+        int damage = 5; // Set the damage value for the ice attack
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the ice attack (you can adjust this value)
@@ -802,7 +802,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator LightningBasicAttack()
     {
         LightningBasicEnable.SetActive(true);
-        int damage = 10; // Set the damage value for the lightning attack
+        int damage = 5; // Set the damage value for the lightning attack
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the lightning attack (you can adjust this value)

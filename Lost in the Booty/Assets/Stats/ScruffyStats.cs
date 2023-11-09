@@ -17,6 +17,8 @@ public class ScruffyStats : MonoBehaviour
         public int MaxMana;
         public int CurrentMana {get; private set; }
         public Slider manaBar;
+
+        public GameObject DamageText;
      
         void Start ()
         {
@@ -32,7 +34,7 @@ public class ScruffyStats : MonoBehaviour
             manaBar.value = CurrentMana;
 
             if (Input.GetKeyDown(KeyCode.T)){
-                TakeDamage(10);
+                TakeDamage(5);
             }
             if (Input.GetKeyDown(KeyCode.Y)){
                 UseMana(5);
@@ -46,6 +48,8 @@ public class ScruffyStats : MonoBehaviour
             damage = Mathf.Clamp(damage, 0, int.MaxValue);
 
             CurrentHealth -= damage;
+            DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+            indicator.SetDamageText(damage);
             Debug.Log(transform.name + " takes " + damage + "damage.");
 
             if (CurrentHealth <= 0){
