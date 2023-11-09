@@ -64,6 +64,38 @@ public class WeaponElement : MonoBehaviour
     private Collider LSWeaponCollider;
     private Collider LHWeaponCollider;
 
+    // Stores the Elemental Attack Particles
+    // FIRE
+    public ParticleSystem FireParticles;
+    public ParticleSystem FireexplosionParticles;
+    private Collider FireCollider;
+    private Vector3 FireinitialPosition;
+    private bool Firemoving;
+    private float fireTimer;
+
+    // ICE
+    public ParticleSystem IceParticles;
+    public ParticleSystem IceexplosionParticles;
+    private Collider IceCollider;
+    private Vector3 IceinitialPosition;
+    private bool Icemoving;
+    private float iceTimer;
+
+    // LIGHTNING
+    public ParticleSystem LightningParticles;
+    public ParticleSystem LigthningexplosionParticles;
+    private Collider LightningCollider;
+    private Vector3 LightninginitialPosition;
+    private bool Lightningmoving;
+    private float lightningTimer;
+
+    private Transform characterTransform;
+
+    // Enables the particle effects
+    public GameObject FireBasicEnable;
+    public GameObject IceBasicEnable;
+    public GameObject LightningBasicEnable;
+
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
 
@@ -72,7 +104,7 @@ public class WeaponElement : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        // Get the colliders
+        // Get the weapon colliders
         NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
         NSWeaponCollider = NormalSpear.GetComponent<Collider>();
         NHWeaponCollider = NormalHammer.GetComponent<Collider>();
@@ -86,7 +118,11 @@ public class WeaponElement : MonoBehaviour
         LSWeaponCollider = LightningSpear.GetComponent<Collider>();
         LHWeaponCollider = LightningHammer.GetComponent<Collider>();
 
-        // Sets the colliders to off
+        FireCollider = FireParticles.GetComponent<Collider>();
+        IceCollider = IceParticles.GetComponent<Collider>();
+        LightningCollider = LightningParticles.GetComponent<Collider>();
+
+        // Sets the weapon colliders to off
         NCWeaponCollider.enabled = false;
         NSWeaponCollider.enabled = false;
         NHWeaponCollider.enabled = false;
@@ -100,16 +136,25 @@ public class WeaponElement : MonoBehaviour
         LSWeaponCollider.enabled = false;
         LHWeaponCollider.enabled = false;
 
+        FireCollider.enabled = false;
+        IceCollider.enabled = false;
+        LightningCollider.enabled = false;
+
+        FireBasicEnable.SetActive(false);
+        IceBasicEnable.SetActive(false);
+        LightningBasicEnable.SetActive(false);
+
+        // Initialize Initial positions for elemental basic attacks
+        FireinitialPosition = FireParticles.transform.position;
+        IceinitialPosition = IceParticles.transform.position;
+        LightninginitialPosition = LightningParticles.transform.position;
+        characterTransform = transform;
+
+
         if (Cutlass == true){
             GameUICutlass.SetActive(true);
             SpellBookImageCutlass.SetActive(true);
             SpellBookSkillsCutlass.SetActive(true);
-
-            // CUTLASS BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                CutlassBasicAttack();
-            }
-
         }
         else {
             GameUICutlass.SetActive(false);
@@ -121,12 +166,6 @@ public class WeaponElement : MonoBehaviour
             GameUISpear.SetActive(true);
             SpellBookImageSpear.SetActive(true);
             SpellBookSkillsSpear.SetActive(true);
-
-            // SPEAR BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                SpearBasicAttack();
-            }
-
         }
         else {
             GameUISpear.SetActive(false);
@@ -138,11 +177,6 @@ public class WeaponElement : MonoBehaviour
             GameUIHammer.SetActive(true);
             SpellBookImageHammer.SetActive(true);
             SpellBookSkillsHammer.SetActive(true);
-
-            // HAMMER BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                HammerBasicAttack();
-            }
         }
         else {
             GameUIHammer.SetActive(false);
@@ -154,11 +188,6 @@ public class WeaponElement : MonoBehaviour
             GameUIFire.SetActive(true);
             SpellBookImageFire.SetActive(true);
             SpellBookSkillsFire.SetActive(true);
-
-            // FIRE BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                FireBasicAttack();
-            }
         }
         else {
             GameUIFire.SetActive(false);
@@ -170,11 +199,6 @@ public class WeaponElement : MonoBehaviour
             GameUIIce.SetActive(true);
             SpellBookImageIce.SetActive(true);
             SpellBookSkillsIce.SetActive(true);
-
-            // ICE BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                IceBasicAttack();
-            }
         }
         else {
             GameUIIce.SetActive(false);
@@ -186,11 +210,6 @@ public class WeaponElement : MonoBehaviour
             GameUILightning.SetActive(true);
             SpellBookImageLightning.SetActive(true);
             SpellBookSkillsLightning.SetActive(true);
-
-            // LIGHTNING BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                LightningBasicAttack();
-            }
         }
         else {
             GameUILightning.SetActive(false);
@@ -296,9 +315,9 @@ public class WeaponElement : MonoBehaviour
     private float CutlassBasicCooldown = 1f;
     private float SpearBasicCooldown = 1f;
     private float HammerBasicCooldown = 2f;
-    private float FireBasicCooldown = 1f;
-    private float IceBasicCooldown = 1f;
-    private float LightningBasicCooldown = 1f;
+    private float FireBasicCooldown = 2f;
+    private float IceBasicCooldown = 2f;
+    private float LightningBasicCooldown = 2f;
 
     // Cooldown true/false for basic abilities
     private bool isAbilityCooldownCutlass = false;
@@ -404,7 +423,12 @@ public class WeaponElement : MonoBehaviour
 
             // FIRE BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse1)){
-                FireBasicAttack();
+                if(!isAbilityCooldownFire){ // If the ability is not on cooldown
+                    characterTransform = transform;
+                    animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
+                    isAbilityCooldownFire = true; // Sets the ability to be on cooldown
+                    CurrentFireBasicCooldown = FireBasicCooldown; // Current Cooldown becomes the basic cooldown
+                }
             }
         }
         else {
@@ -420,7 +444,12 @@ public class WeaponElement : MonoBehaviour
 
             // ICE BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse1)){
-                IceBasicAttack();
+                if(!isAbilityCooldownIce){ // If the ability is not on cooldown
+                    characterTransform = transform;
+                    animator.SetTrigger("IceBasicAttack"); // Triggers the ability animation
+                    isAbilityCooldownIce = true; // Sets the ability to be on cooldown
+                    CurrentIceBasicCooldown = IceBasicCooldown; // Current Cooldown becomes the basic cooldown
+                }
             }
         }
         else {
@@ -436,7 +465,12 @@ public class WeaponElement : MonoBehaviour
 
             // LIGHTNING BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse1)){
-                LightningBasicAttack();
+                if(!isAbilityCooldownLightning){ // If the ability is not on cooldown
+                    characterTransform = transform;
+                    animator.SetTrigger("LightningBasicAttack"); // Triggers the ability animation
+                    isAbilityCooldownLightning = true; // Sets the ability to be on cooldown
+                    CurrentLightningBasicCooldown = LightningBasicCooldown; // Current Cooldown becomes the basic cooldown
+                }
             }
         }
         else {
@@ -657,54 +691,160 @@ public class WeaponElement : MonoBehaviour
             enemies.Clear();
         }
     }
+    public GameObject particleSpawnPoint;
 
-    // In progress
-    void FireBasicAttack(){
-        EndAttack();
-        if(!isAbilityCooldownFire){ // If the ability is not on cooldown
-            isAbilityCooldownFire = true; // Sets the ability to be on cooldown
-            animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
-            CurrentFireBasicCooldown = FireBasicCooldown; // Current Cooldown becomes the basic cooldown
+    public float AttackRadius = 0.3f;
+    private float FireparticleMoveSpeed = 4f;
+    private float IceparticleMoveSpeed = 4f;
+    private float LightningparticleMoveSpeed = 4f;
+    private Vector3 initialParticleDirection;
+    private float attackHeight = 1f; // Adjust this value to control the attack height
+    private float distanceFromCharacter = 0.2f;
 
-            Debug.Log("Fire Basic Attack"); // Performs the damage of the attack
+    private HashSet<Collider> hitFireEnemies = new HashSet<Collider>();
+    private HashSet<Collider> hitIceEnemies = new HashSet<Collider>();
+    private HashSet<Collider> hitLightningEnemies = new HashSet<Collider>();
 
-        }
-    }
-
-    // In progress
-    void IceBasicAttack(){
-        EndAttack();
-        if(!isAbilityCooldownIce){ // If the ability is not on cooldown
-            isAbilityCooldownIce = true; // Sets the ability to be on cooldown
-            animator.SetTrigger("IceBasicAttack"); // Triggers the ability animation
-            CurrentIceBasicCooldown = IceBasicCooldown; // Current Cooldown becomes the basic cooldown
-
-            Debug.Log("Ice Basic Attack"); // Performs the damage of the attack
-
-        }
-    }
-
-    // In progress
-    void LightningBasicAttack(){
-        EndAttack();
-        if(!isAbilityCooldownLightning){ // If the ability is not on cooldown
-            isAbilityCooldownLightning = true; // Sets the ability to be on cooldown
-            animator.SetTrigger("LightningBasicAttack"); // Triggers the ability animation
-            CurrentLightningBasicCooldown = LightningBasicCooldown; // Current Cooldown becomes the basic cooldown
-
-            Debug.Log("Lightning Basic Attack"); // Performs the damage of the attack
-
-        }
-    }
-
-    public void EndAttack()
+    IEnumerator FireBasicAttack()
     {
-        isAttacking = false;
-        foreach (var enemies in hitEnemies.Values)
+        FireBasicEnable.SetActive(true);
+        damage = 10;
+        FireCollider.enabled = true;
+
+        float startTime = Time.time;
+        float journeyLength = 2.0f; // time
+
+        // Store the initial position of particles with a height offset
+        Vector3 originalPosition = characterTransform.position + characterTransform.forward * distanceFromCharacter + new Vector3(0, attackHeight, 0);
+
+        // Store the initial direction of the particles
+        Vector3 initialParticleDirection = characterTransform.forward;
+
+        while (Time.time - startTime < journeyLength)
         {
-            enemies.Clear();
+            float distanceCovered = (Time.time - startTime) * FireparticleMoveSpeed;
+            float journeyFraction = distanceCovered / journeyLength;
+
+            // Calculate the new position based on the initial position and the fixed initial direction
+            Vector3 newPosition = originalPosition + initialParticleDirection * distanceCovered;
+            FireParticles.transform.position = newPosition;
+
+            Collider[] hitColliders = Physics.OverlapSphere(newPosition, AttackRadius, LayerMask.GetMask(enemyTag));
+            foreach (Collider enemy in hitColliders)
+            {
+                if (enemy.CompareTag(enemyTag) && !hitFireEnemies.Contains(enemy))
+                {
+                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    hitFireEnemies.Add(enemy);
+                }
+            }
+
+            yield return null; // Wait for the next frame
         }
+
+        FireEndBasic();
     }
+
+    void FireEndBasic()
+    {
+        FireParticles.transform.position = FireinitialPosition;
+        FireCollider.enabled = false;
+        FireBasicEnable.SetActive(false);
+        hitFireEnemies.Clear(); // Reset the set of hit enemies
+    }
+    
+    IEnumerator IceBasicAttack()
+    {
+        IceBasicEnable.SetActive(true);
+        int damage = 10; // Set the damage value for the ice attack
+
+        float startTime = Time.time;
+        float journeyLength = 2.0f; // 2 seconds for the ice attack (you can adjust this value)
+
+        // Store the initial position of particles with a height offset
+        Vector3 originalPosition = characterTransform.position + characterTransform.forward * distanceFromCharacter + new Vector3(0, attackHeight, 0);
+
+        // Store the initial direction of the particles
+        initialParticleDirection = characterTransform.forward;
+
+        while (Time.time - startTime < journeyLength)
+        {
+            float distanceCovered = (Time.time - startTime) * IceparticleMoveSpeed;
+            float journeyFraction = distanceCovered / journeyLength;
+
+            // Calculate the new position based on the initial position and the fixed initial direction
+            IceParticles.transform.position = originalPosition + initialParticleDirection * distanceCovered;
+
+            // Check for collisions with enemies using Physics.OverlapSphere
+            Collider[] hitColliders = Physics.OverlapSphere(IceParticles.transform.position, AttackRadius, LayerMask.GetMask(enemyTag));
+            foreach (Collider enemy in hitColliders)
+            {
+                if (enemy.CompareTag(enemyTag) && !hitIceEnemies.Contains(enemy))
+                {
+                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    hitIceEnemies.Add(enemy);
+                }
+            }
+
+            yield return null; // Wait for the next frame
+        }
+
+        IceEndBasic();
+    }
+
+    void IceEndBasic()
+    {
+        IceParticles.transform.position = IceinitialPosition;
+        IceBasicEnable.SetActive(false);
+        hitIceEnemies.Clear();
+    }
+
+    IEnumerator LightningBasicAttack()
+    {
+        LightningBasicEnable.SetActive(true);
+        int damage = 10; // Set the damage value for the lightning attack
+
+        float startTime = Time.time;
+        float journeyLength = 2.0f; // 2 seconds for the lightning attack (you can adjust this value)
+
+        // Store the initial position of particles with a height offset
+        Vector3 originalPosition = characterTransform.position + characterTransform.forward * distanceFromCharacter + new Vector3(0, attackHeight, 0);
+
+        // Store the initial direction of the particles
+        initialParticleDirection = characterTransform.forward;
+
+        while (Time.time - startTime < journeyLength)
+        {
+            float distanceCovered = (Time.time - startTime) * LightningparticleMoveSpeed;
+            float journeyFraction = distanceCovered / journeyLength;
+
+            // Calculate the new position based on the initial position and the fixed initial direction
+            LightningParticles.transform.position = originalPosition + initialParticleDirection * distanceCovered;
+
+            // Check for collisions with enemies using Physics.OverlapSphere
+            Collider[] hitColliders = Physics.OverlapSphere(LightningParticles.transform.position, AttackRadius, LayerMask.GetMask(enemyTag));
+            foreach (Collider enemy in hitColliders)
+            {
+                if (enemy.CompareTag(enemyTag) && !hitLightningEnemies.Contains(enemy))
+                {
+                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    hitLightningEnemies.Add(enemy);
+                }
+            }
+
+            yield return null; // Wait for the next frame
+        }
+
+        LightningEndBasic();
+    }
+
+    void LightningEndBasic()
+    {
+        LightningParticles.transform.position = LightninginitialPosition;
+        LightningBasicEnable.SetActive(false);
+        hitLightningEnemies.Clear();
+    }
+
 
     private void BasicAttackCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown)
     {
