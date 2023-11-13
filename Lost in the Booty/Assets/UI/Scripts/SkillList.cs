@@ -45,9 +45,45 @@ public class SkillList : MonoBehaviour
     public Sprite Lightning4;
     public Sprite Lightning5;
 
+    public GameObject SwordP1;
+    public GameObject SwordP2;
+    public GameObject SwordP3;
+    public GameObject SwordP4;
+    public GameObject SwordP5;
+
+    public GameObject SpearP1;
+    public GameObject SpearP2;
+    public GameObject SpearP3;
+    public GameObject SpearP4;
+    public GameObject SpearP5;
+
+    public GameObject HammerP1;
+    public GameObject HammerP2;
+    public GameObject HammerP3;
+    public GameObject HammerP4;
+    public GameObject HammerP5;
+
+    public GameObject FireP1;
+    public GameObject FireP2;
+    public GameObject FireP3;
+    public GameObject FireP4;
+    public GameObject FireP5;
+
+    public GameObject IceP1;
+    public GameObject IceP2;
+    public GameObject IceP3;
+    public GameObject IceP4;
+    public GameObject IceP5;
+    
+    public GameObject LightningP1;
+    public GameObject LightningP2;
+    public GameObject LightningP3;
+    public GameObject LightningP4;
+    public GameObject LightningP5;
+
     // Cooldown times for abilities
     private float Sword1CD = 1f;
-    private float Sword2CD = 1f;
+    private float Sword2CD = 3f;
     private float Sword3CD = 1f;
     private float Sword4CD = 1f;
     private float Sword5CD = 1f;
@@ -403,448 +439,543 @@ public class SkillList : MonoBehaviour
     {
         if (!isAbilitySword1CD)
         {
-            // Your activation code for Sword1 here
             animator.SetTrigger("Sword1");
-
-            Debug.Log("Sword1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSword1CD = Sword1CD;
             isAbilitySword1CD = true;
         }
+    }
+
+    void sword1start(){
+
+    }
+
+    void sword1end(){
+
     }
 
     void sword2()
     {
         if (!isAbilitySword2CD)
         {
-            // Your activation code for Sword2 here
             animator.SetTrigger("Sword2");
 
-            Debug.Log("Sword2 Has been activated!");
+            SwordP2.SetActive(true);
+            ParticleSystem PS = SwordP2.GetComponentInChildren<ParticleSystem>();
+            PS.Play();
 
-            // Set the cooldown and update the cooldown flag
             CurrentSword2CD = Sword2CD;
             isAbilitySword2CD = true;
         }
+    }
+
+    void sword2start(){
+
+    }
+
+    void sword2end(){
+        SwordP2.SetActive(false);
     }
 
     void sword3()
     {
         if (!isAbilitySword3CD)
         {
-            // Your activation code for Sword3 here
             animator.SetTrigger("Sword3");
-
-            Debug.Log("Sword3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSword3CD = Sword3CD;
             isAbilitySword3CD = true;
         }
+    }
+
+    void sword3start(){
+
+    }
+
+    void sword3end(){
+        
     }
 
     void sword4()
     {
         if (!isAbilitySword4CD)
         {
-            // Your activation code for Sword4 here
             animator.SetTrigger("Sword4");
-
-            Debug.Log("Sword4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSword4CD = Sword4CD;
             isAbilitySword4CD = true;
         }
+    }
+
+    void sword4start(){
+
+    }
+
+    void sword4end(){
+        
     }
 
     void sword5()
     {
         if (!isAbilitySword5CD)
         {
-            // Your activation code for Sword5 here
-
-            Debug.Log("Sword5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSword5CD = Sword5CD;
             isAbilitySword5CD = true;
         }
+    }
+
+    void sword5start(){
+
+    }
+
+    void sword5end(){
+        
     }
 
     void spear1()
     {
         if (!isAbilitySpear1CD)
         {
-            // Your activation code for Spear1 here
             animator.SetTrigger("Spear1");
-
-            Debug.Log("Spear1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSpear1CD = Spear1CD;
             isAbilitySpear1CD = true;
         }
+    }
+
+    void spear1start(){
+
+    }
+
+    void spear1end(){
+        
     }
 
     void spear2()
     {
         if (!isAbilitySpear2CD)
         {
-            // Your activation code for Spear2 here
             animator.SetTrigger("Spear2");
-
-            Debug.Log("Spear2 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSpear2CD = Spear2CD;
             isAbilitySpear2CD = true;
         }
+    }
+
+    void spear2start(){
+
+    }
+
+    void spear2end(){
+        
     }
 
     void spear3()
     {
         if (!isAbilitySpear3CD)
         {
-            // Your activation code for Spear3 here
             animator.SetTrigger("Spear3");
-
-            Debug.Log("Spear3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSpear3CD = Spear3CD;
             isAbilitySpear3CD = true;
         }
+    }
+
+    void spear3start(){
+
+    }
+
+    void spear3end(){
+        
     }
 
     void spear4()
     {
         if (!isAbilitySpear4CD)
         {
-            // Your activation code for Spear4 here
             animator.SetTrigger("Spear4");
-
-            Debug.Log("Spear4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSpear4CD = Spear4CD;
             isAbilitySpear4CD = true;
         }
+    }
+
+    void spear4start(){
+
+    }
+
+    void spear4end(){
+        
     }
 
     void spear5()
     {
         if (!isAbilitySpear5CD)
         {
-            // Your activation code for Spear5 here
             animator.SetTrigger("Spear5");
-
-            Debug.Log("Spear5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentSpear5CD = Spear5CD;
             isAbilitySpear5CD = true;
         }
+    }
+
+    void spear5start(){
+
+    }
+
+    void spear5end(){
+        
     }
 
     void hammer1()
     {
         if (!isAbilityHammer1CD)
         {
-            // Your activation code for Hammer1 here
             animator.SetTrigger("Hammer1");
-
-            Debug.Log("Hammer1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentHammer1CD = Hammer1CD;
             isAbilityHammer1CD = true;
         }
+    }
+
+    void hammer1start(){
+
+    }
+
+    void hammer1end(){
+        
     }
 
     void hammer2()
     {
         if (!isAbilityHammer2CD)
         {
-            // Your activation code for Hammer2 here
             animator.SetTrigger("Hammer2");
-
-            Debug.Log("Hammer2 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentHammer2CD = Hammer2CD;
             isAbilityHammer2CD = true;
         }
+    }
+
+    void hammer2start(){
+
+    }
+
+    void hammer2end(){
+        
     }
 
     void hammer3()
     {
         if (!isAbilityHammer3CD)
         {
-            // Your activation code for Hammer3 here
             animator.SetTrigger("Hammer3");
-
-            Debug.Log("Hammer3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentHammer3CD = Hammer3CD;
             isAbilityHammer3CD = true;
         }
+    }
+
+    void hammer3start(){
+
+    }
+
+    void hammer3end(){
+        
     }
 
     void hammer4()
     {
         if (!isAbilityHammer4CD)
         {
-            // Your activation code for Hammer4 here
             animator.SetTrigger("Hammer4");
-
-            Debug.Log("Hammer4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentHammer4CD = Hammer4CD;
             isAbilityHammer4CD = true;
         }
+    }
+
+    void hammer4start(){
+
+    }
+
+    void hammer4end(){
+        
     }
 
     void hammer5()
     {
         if (!isAbilityHammer5CD)
         {
-            // Your activation code for Hammer5 here
             animator.SetTrigger("Hammer5");
-
-            Debug.Log("Hammer5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentHammer5CD = Hammer5CD;
             isAbilityHammer5CD = true;
         }
+    }
+
+    void hammer5start(){
+
+    }
+
+    void hammer5end(){
+        
     }
 
     void fire1()
     {
         if (!isAbilityFire1CD)
         {
-            // Your activation code for Fire1 here
             animator.SetTrigger("Fire1");
-
-            Debug.Log("Fire1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentFire1CD = Fire1CD;
             isAbilityFire1CD = true;
         }
+    }
+
+    void fire1start(){
+
+    }
+
+    void fire1end(){
+        
     }
 
     void fire2()
     {
         if (!isAbilityFire2CD)
         {
-            // Your activation code for Fire2 here
             animator.SetTrigger("Fire2");
-
-            Debug.Log("Fire2 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentFire2CD = Fire2CD;
             isAbilityFire2CD = true;
         }
+    }
+
+    void fire2start(){
+
+    }
+
+    void fire2end(){
+        
     }
 
     void fire3()
     {
         if (!isAbilityFire3CD)
         {
-            // Your activation code for Fire3 here
             animator.SetTrigger("Fire3");
-
-            Debug.Log("Fire3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentFire3CD = Fire3CD;
             isAbilityFire3CD = true;
         }
+    }
+
+    void fire3start(){
+
+    }
+
+    void fire3end(){
+        
     }
 
     void fire4()
     {
         if (!isAbilityFire4CD)
         {
-            // Your activation code for Fire4 here
             animator.SetTrigger("Fire4");
-
-            Debug.Log("Fire4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentFire4CD = Fire4CD;
             isAbilityFire4CD = true;
         }
+    }
+
+    void fire4start(){
+
+    }
+
+    void fire4end(){
+        
     }
 
     void fire5()
     {
         if (!isAbilityFire5CD)
         {
-            // Your activation code for Fire5 here
             animator.SetTrigger("Fire5");
-
-            Debug.Log("Fire5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentFire5CD = Fire5CD;
             isAbilityFire5CD = true;
         }
+    }
+
+    void fire5start(){
+
+    }
+
+    void fire5end(){
+        
     }
 
     void ice1()
     {
         if (!isAbilityIce1CD)
         {
-            // Your activation code for Ice1 here
             animator.SetTrigger("Ice1");
-
-            Debug.Log("Ice1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentIce1CD = Ice1CD;
             isAbilityIce1CD = true;
         }
+    }
+
+    void ice1start(){
+
+    }
+
+    void ice1end(){
+        
     }
 
     void ice2()
     {
         if (!isAbilityIce2CD)
         {
-            // Your activation code for Ice2 here
             animator.SetTrigger("Ice2");
-
-            Debug.Log("Ice2 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentIce2CD = Ice2CD;
             isAbilityIce2CD = true;
         }
+    }
+
+    void ice2start(){
+
+    }
+
+    void ice2end(){
+        
     }
 
     void ice3()
     {
         if (!isAbilityIce3CD)
         {
-            // Your activation code for Ice3 here
             animator.SetTrigger("Ice3");
-
-            Debug.Log("Ice3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentIce3CD = Ice3CD;
             isAbilityIce3CD = true;
         }
+    }
+
+    void ice3start(){
+
+    }
+
+    void ice3end(){
+        
     }
 
     void ice4()
     {
         if (!isAbilityIce4CD)
         {
-            // Your activation code for Ice4 here
             animator.SetTrigger("Ice4");
-
-            Debug.Log("Ice4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentIce4CD = Ice4CD;
             isAbilityIce4CD = true;
         }
+    }
+
+    void ice4start(){
+
+    }
+
+    void ice4end(){
+        
     }
 
     void ice5()
     {
         if (!isAbilityIce5CD)
         {
-            // Your activation code for Ice5 here
             animator.SetTrigger("Ice5");
-
-            Debug.Log("Ice5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentIce5CD = Ice5CD;
             isAbilityIce5CD = true;
         }
+    }
+
+    void ice5start(){
+
+    }
+
+    void ice5end(){
+        
     }
 
     void lightning1()
     {
         if (!isAbilityLightning1CD)
         {
-            // Your activation code for Lightning1 here
             animator.SetTrigger("Lightning1");
-
-            Debug.Log("Lightning1 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentLightning1CD = Lightning1CD;
             isAbilityLightning1CD = true;
         }
+    }
+
+    void lightning1start(){
+
+    }
+
+    void lightning1end(){
+        
     }
 
     void lightning2()
     {
         if (!isAbilityLightning2CD)
         {
-            // Your activation code for Lightning2 here
             animator.SetTrigger("Lightning2");
-
-            Debug.Log("Lightning2 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentLightning2CD = Lightning2CD;
             isAbilityLightning2CD = true;
         }
+    }
+
+    void lightning2start(){
+
+    }
+
+    void lightning2end(){
+        
     }
 
     void lightning3()
     {
         if (!isAbilityLightning3CD)
         {
-            // Your activation code for Lightning3 here
-
-            Debug.Log("Lightning3 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentLightning3CD = Lightning3CD;
             isAbilityLightning3CD = true;
         }
+    }
+
+    void lightning3start(){
+
+    }
+
+    void lightning3end(){
+        
     }
 
     void lightning4()
     {
         if (!isAbilityLightning4CD)
         {
-            // Your activation code for Lightning4 here
             animator.SetTrigger("Lightning4");
-
-            Debug.Log("Lightning4 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentLightning4CD = Lightning4CD;
             isAbilityLightning4CD = true;
         }
+    }
+
+    void lightning4start(){
+
+    }
+
+    void lightning4end(){
+        
     }
 
     void lightning5()
     {
         if (!isAbilityLightning5CD)
         {
-            // Your activation code for Lightning5 here
             animator.SetTrigger("Lightning5");
-
-            Debug.Log("Lightning5 Has been activated!");
-
-            // Set the cooldown and update the cooldown flag
             CurrentLightning5CD = Lightning5CD;
             isAbilityLightning5CD = true;
         }
+    }
+
+    void lightning5start(){
+
+    }
+
+    void lightning5end(){
+        
     }
 
 
