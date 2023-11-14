@@ -82,41 +82,41 @@ public class SkillList : MonoBehaviour
     public GameObject LightningP5;
 
     // Cooldown times for abilities
-    private float Sword1CD = 1f;
+    private float Sword1CD = 3f;
     private float Sword2CD = 3f;
-    private float Sword3CD = 1f;
-    private float Sword4CD = 1f;
-    private float Sword5CD = 1f;
+    private float Sword3CD = 3f;
+    private float Sword4CD = 3f;
+    private float Sword5CD = 3f;
 
-    private float Spear1CD = 1f;
-    private float Spear2CD = 1f;
-    private float Spear3CD = 1f;
-    private float Spear4CD = 1f;
-    private float Spear5CD = 1f;
+    private float Spear1CD = 3f;
+    private float Spear2CD = 3f;
+    private float Spear3CD = 3f;
+    private float Spear4CD = 3f;
+    private float Spear5CD = 3f;
 
-    private float Hammer1CD = 1f;
-    private float Hammer2CD = 1f;
-    private float Hammer3CD = 1f;
-    private float Hammer4CD = 1f;
-    private float Hammer5CD = 1f;
+    private float Hammer1CD = 3f;
+    private float Hammer2CD = 3f;
+    private float Hammer3CD = 3f;
+    private float Hammer4CD = 3f;
+    private float Hammer5CD = 3f;
 
-    private float Fire1CD = 1f;
-    private float Fire2CD = 1f;
-    private float Fire3CD = 1f;
-    private float Fire4CD = 1f;
-    private float Fire5CD = 1f;
+    private float Fire1CD = 3f;
+    private float Fire2CD = 3f;
+    private float Fire3CD = 3f;
+    private float Fire4CD = 3f;
+    private float Fire5CD = 3f;
     
-    private float Ice1CD = 1f;
-    private float Ice2CD = 1f;
-    private float Ice3CD = 1f;
-    private float Ice4CD = 1f;
-    private float Ice5CD = 1f;
+    private float Ice1CD = 3f;
+    private float Ice2CD = 3f;
+    private float Ice3CD = 3f;
+    private float Ice4CD = 3f;
+    private float Ice5CD = 3f;
 
-    private float Lightning1CD = 1f;
-    private float Lightning2CD = 1f;
-    private float Lightning3CD = 1f;
-    private float Lightning4CD = 1f;
-    private float Lightning5CD = 1f;
+    private float Lightning1CD = 3f;
+    private float Lightning2CD = 3f;
+    private float Lightning3CD = 3f;
+    private float Lightning4CD = 3f;
+    private float Lightning5CD = 3f;
 
     // Cooldown true/false for basic abilities
     private bool isAbilitySword1CD = false;
@@ -446,11 +446,13 @@ public class SkillList : MonoBehaviour
     }
 
     void sword1start(){
-
+        SwordP1.SetActive(true);
+        ParticleSystem PS = SwordP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void sword1end(){
-
+        SwordP1.SetActive(false);
     }
 
     void sword2()
@@ -458,18 +460,15 @@ public class SkillList : MonoBehaviour
         if (!isAbilitySword2CD)
         {
             animator.SetTrigger("Sword2");
-
-            SwordP2.SetActive(true);
-            ParticleSystem PS = SwordP2.GetComponentInChildren<ParticleSystem>();
-            PS.Play();
-
             CurrentSword2CD = Sword2CD;
             isAbilitySword2CD = true;
         }
     }
 
     void sword2start(){
-
+        SwordP2.SetActive(true);
+        ParticleSystem PS = SwordP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void sword2end(){
@@ -487,11 +486,13 @@ public class SkillList : MonoBehaviour
     }
 
     void sword3start(){
-
+        SwordP3.SetActive(true);
+        ParticleSystem PS = SwordP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void sword3end(){
-        
+        SwordP3.SetActive(false);        
     }
 
     void sword4()
@@ -505,28 +506,33 @@ public class SkillList : MonoBehaviour
     }
 
     void sword4start(){
-
+        SwordP4.SetActive(true);
+        ParticleSystem PS = SwordP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void sword4end(){
-        
+        SwordP4.SetActive(false);       
     }
 
     void sword5()
     {
         if (!isAbilitySword5CD)
         {
+            animator.SetTrigger("Sword5");
             CurrentSword5CD = Sword5CD;
             isAbilitySword5CD = true;
         }
     }
 
     void sword5start(){
-
+        SwordP5.SetActive(true);
+        ParticleSystem PS = SwordP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void sword5end(){
-        
+        SwordP5.SetActive(false);        
     }
 
     void spear1()
@@ -540,11 +546,13 @@ public class SkillList : MonoBehaviour
     }
 
     void spear1start(){
-
+        SpearP1.SetActive(true);
+        ParticleSystem PS = SpearP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void spear1end(){
-        
+        SpearP1.SetActive(false);    
     }
 
     void spear2()
@@ -558,11 +566,13 @@ public class SkillList : MonoBehaviour
     }
 
     void spear2start(){
-
+        SpearP2.SetActive(true);
+        ParticleSystem PS = SpearP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void spear2end(){
-        
+        SpearP2.SetActive(false);    
     }
 
     void spear3()
@@ -576,11 +586,13 @@ public class SkillList : MonoBehaviour
     }
 
     void spear3start(){
-
+        SpearP3.SetActive(true);
+        ParticleSystem PS = SpearP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void spear3end(){
-        
+        SpearP3.SetActive(false);    
     }
 
     void spear4()
@@ -594,11 +606,13 @@ public class SkillList : MonoBehaviour
     }
 
     void spear4start(){
-
+        SpearP4.SetActive(true);
+        ParticleSystem PS = SpearP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void spear4end(){
-        
+        SpearP4.SetActive(false);    
     }
 
     void spear5()
@@ -612,11 +626,13 @@ public class SkillList : MonoBehaviour
     }
 
     void spear5start(){
-
+        SpearP5.SetActive(true);
+        ParticleSystem PS = SpearP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void spear5end(){
-        
+        SpearP5.SetActive(false);    
     }
 
     void hammer1()
@@ -630,11 +646,13 @@ public class SkillList : MonoBehaviour
     }
 
     void hammer1start(){
-
+        HammerP1.SetActive(true);
+        ParticleSystem PS = HammerP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void hammer1end(){
-        
+        HammerP1.SetActive(false);    
     }
 
     void hammer2()
@@ -648,11 +666,13 @@ public class SkillList : MonoBehaviour
     }
 
     void hammer2start(){
-
+        HammerP2.SetActive(true);
+        ParticleSystem PS = HammerP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void hammer2end(){
-        
+        HammerP2.SetActive(false);    
     }
 
     void hammer3()
@@ -666,11 +686,13 @@ public class SkillList : MonoBehaviour
     }
 
     void hammer3start(){
-
+        HammerP3.SetActive(true);
+        ParticleSystem PS = HammerP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void hammer3end(){
-        
+        HammerP3.SetActive(false);    
     }
 
     void hammer4()
@@ -684,11 +706,13 @@ public class SkillList : MonoBehaviour
     }
 
     void hammer4start(){
-
+        HammerP4.SetActive(true);
+        ParticleSystem PS = HammerP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void hammer4end(){
-        
+        HammerP4.SetActive(false);    
     }
 
     void hammer5()
@@ -702,11 +726,13 @@ public class SkillList : MonoBehaviour
     }
 
     void hammer5start(){
-
+        HammerP5.SetActive(true);
+        ParticleSystem PS = HammerP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void hammer5end(){
-        
+        HammerP5.SetActive(false);    
     }
 
     void fire1()
@@ -719,13 +745,54 @@ public class SkillList : MonoBehaviour
         }
     }
 
-    void fire1start(){
+    private float FireparticleMoveSpeed = 2f;
+    private Vector3 initialParticleDirection;
+    private float attackHeight = 1f;
+    private float distanceFromCharacter = 0.2f;
+    public Transform characterTransform;
+    private Vector3 FireinitialPosition;
 
+    void fire1start()
+    {
+        FireP1.SetActive(true);
+
+        // Store the initial position of particles with a height offset
+        Vector3 originalPosition = characterTransform.position + characterTransform.forward * distanceFromCharacter + new Vector3(0, attackHeight, 0);
+
+        // Store the initial direction of the particles
+        Vector3 initialParticleDirection = characterTransform.forward;
+
+        StartCoroutine(MoveParticle(originalPosition, initialParticleDirection));
     }
 
-    void fire1end(){
-        
+    IEnumerator MoveParticle(Vector3 originalPosition, Vector3 initialParticleDirection)
+    {
+        ParticleSystem PS = FireP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
+
+        float startTime = Time.time;
+        float journeyLength = 3.0f; // time
+
+        while (Time.time - startTime < journeyLength)
+        {
+            float distanceCovered = (Time.time - startTime) * FireparticleMoveSpeed;
+            float journeyFraction = distanceCovered / journeyLength;
+
+            // Calculate the new position based on the initial position and the fixed initial direction
+            Vector3 newPosition = originalPosition + initialParticleDirection * distanceCovered;
+            FireP1.transform.position = newPosition;
+
+            yield return null; // Wait for the next frame
+        }
+
+        fire1end();
     }
+
+    void fire1end()
+    {
+        FireP1.transform.position = FireinitialPosition;
+    }
+
 
     void fire2()
     {
@@ -738,11 +805,13 @@ public class SkillList : MonoBehaviour
     }
 
     void fire2start(){
-
+        FireP2.SetActive(true);
+        ParticleSystem PS = FireP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void fire2end(){
-        
+        FireP2.SetActive(false);  
     }
 
     void fire3()
@@ -756,11 +825,13 @@ public class SkillList : MonoBehaviour
     }
 
     void fire3start(){
-
+        FireP3.SetActive(true);
+        ParticleSystem PS = FireP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void fire3end(){
-        
+        FireP3.SetActive(false);  
     }
 
     void fire4()
@@ -774,11 +845,13 @@ public class SkillList : MonoBehaviour
     }
 
     void fire4start(){
-
+        FireP4.SetActive(true);
+        ParticleSystem PS = FireP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void fire4end(){
-        
+        FireP4.SetActive(false);  
     }
 
     void fire5()
@@ -792,11 +865,13 @@ public class SkillList : MonoBehaviour
     }
 
     void fire5start(){
-
+        FireP5.SetActive(true);
+        ParticleSystem PS = FireP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void fire5end(){
-        
+        FireP5.SetActive(false);  
     }
 
     void ice1()
@@ -810,11 +885,13 @@ public class SkillList : MonoBehaviour
     }
 
     void ice1start(){
-
+        IceP1.SetActive(true);
+        ParticleSystem PS = IceP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void ice1end(){
-        
+        IceP1.SetActive(false);
     }
 
     void ice2()
@@ -828,11 +905,13 @@ public class SkillList : MonoBehaviour
     }
 
     void ice2start(){
-
+        IceP2.SetActive(true);
+        ParticleSystem PS = IceP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void ice2end(){
-        
+        IceP2.SetActive(false);
     }
 
     void ice3()
@@ -846,11 +925,13 @@ public class SkillList : MonoBehaviour
     }
 
     void ice3start(){
-
+        IceP3.SetActive(true);
+        ParticleSystem PS = IceP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void ice3end(){
-        
+        IceP3.SetActive(false);
     }
 
     void ice4()
@@ -864,11 +945,13 @@ public class SkillList : MonoBehaviour
     }
 
     void ice4start(){
-
+        IceP4.SetActive(true);
+        ParticleSystem PS = IceP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void ice4end(){
-        
+        IceP4.SetActive(false);
     }
 
     void ice5()
@@ -882,11 +965,13 @@ public class SkillList : MonoBehaviour
     }
 
     void ice5start(){
-
+        IceP5.SetActive(true);
+        ParticleSystem PS = IceP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void ice5end(){
-        
+        IceP5.SetActive(false);
     }
 
     void lightning1()
@@ -900,11 +985,13 @@ public class SkillList : MonoBehaviour
     }
 
     void lightning1start(){
-
+        LightningP1.SetActive(true);
+        ParticleSystem PS = LightningP1.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void lightning1end(){
-        
+        LightningP1.SetActive(false);  
     }
 
     void lightning2()
@@ -918,11 +1005,13 @@ public class SkillList : MonoBehaviour
     }
 
     void lightning2start(){
-
+        LightningP2.SetActive(true);
+        ParticleSystem PS = LightningP2.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void lightning2end(){
-        
+        LightningP2.SetActive(false);  
     }
 
     void lightning3()
@@ -935,11 +1024,13 @@ public class SkillList : MonoBehaviour
     }
 
     void lightning3start(){
-
+        LightningP3.SetActive(true);
+        ParticleSystem PS = LightningP3.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void lightning3end(){
-        
+        LightningP3.SetActive(false);  
     }
 
     void lightning4()
@@ -953,11 +1044,13 @@ public class SkillList : MonoBehaviour
     }
 
     void lightning4start(){
-
+        LightningP4.SetActive(true);
+        ParticleSystem PS = LightningP4.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void lightning4end(){
-        
+        LightningP4.SetActive(false);  
     }
 
     void lightning5()
@@ -971,11 +1064,13 @@ public class SkillList : MonoBehaviour
     }
 
     void lightning5start(){
-
+        LightningP5.SetActive(true);
+        ParticleSystem PS = LightningP5.GetComponentInChildren<ParticleSystem>();
+        PS.Play();
     }
 
     void lightning5end(){
-        
+        LightningP5.SetActive(false);  
     }
 
 
