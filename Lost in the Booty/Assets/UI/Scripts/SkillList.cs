@@ -1018,6 +1018,7 @@ public class SkillList : MonoBehaviour
     {
         if (!isAbilityLightning3CD)
         {
+            animator.SetTrigger("Lightning3");
             CurrentLightning3CD = Lightning3CD;
             isAbilityLightning3CD = true;
         }
