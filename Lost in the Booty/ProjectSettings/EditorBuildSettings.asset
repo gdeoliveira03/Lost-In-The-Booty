@@ -6,6 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Map Day time.unity
-    guid: 943770130b0f1a8428c032b575345136
+    path: Assets/Scenes/With_UI_Updated_Main_scene.unity
+    guid: af3ae8e586d37d54ca3c75702d1232bd
+  - enabled: 1
+    path: Assets/Scenes/Scenes/dungeon1(WIP).unity
+    guid: fa6b309ef1dd9cf4a877f4d546a75c48
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Full dungeon.unity
+    guid: 757e015986e3c1845b0b0a6d75c73d97
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Island 2(large).unity
+    guid: 5a03c4c736ea5da43bc806bc04ced6cb
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Island4(possible 3 repeat).unity
+    guid: 580ee17c7e46ca545a852edd318a1fc9
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Island6 (WIP).unity
+    guid: f84830a3ac270b7429a1e1123f1d21ef
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Main island (different)(blood moon).unity
+    guid: 3884630ad3a8f6f409acea3b0085017d
+  - enabled: 1
+    path: Assets/Scenes/Scenes/night island(wip).unity
+    guid: bb409184be4bbea42a1b4bcebacf964e
+  - enabled: 1
+    path: Assets/Scenes/Scenes/Possible different main island.unity
+    guid: 23211ffe37abc8d40894020ec905acbf
   m_configObjects: {}
