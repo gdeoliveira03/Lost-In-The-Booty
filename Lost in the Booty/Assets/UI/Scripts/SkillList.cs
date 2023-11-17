@@ -1040,7 +1040,7 @@ public class SkillList : MonoBehaviour
 
     void spear4()
     {
-        spdamage4 = (int) (scruffystats.damage * 1.8);
+        spdamage4 = (int) (scruffystats.damage * 2);
 
         Transform Slash1 =  SpearP4.transform.Find("Slash1");
         Transform Slash2 = Slash1.Find("Collider");
@@ -1236,9 +1236,9 @@ public class SkillList : MonoBehaviour
 
     void hammer2()
     {
-        hadamage2_1 = (int) (scruffystats.damage * 1.5);
-        hadamage2_2 = (int) (scruffystats.damage * 1.5);
-        hadamage2_3 = (int) (scruffystats.damage * 1.5);
+        hadamage2_1 = (int) (scruffystats.damage * 1.2);
+        hadamage2_2 = (int) (scruffystats.damage * 1.2);
+        hadamage2_3 = (int) (scruffystats.damage * 1.2);
 
         Transform Slam1 =  HammerP2.transform.Find("Stones hit");
         Transform Slam2 = Slam1.Find("Collider");
@@ -1496,7 +1496,7 @@ public class SkillList : MonoBehaviour
         ParticleSystem PS = HammerP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
 
-        ArmorBoostValue = 10;
+        ArmorBoostValue = 5;
         scruffystats.IncreaseArmor(ArmorBoostValue);
 
         Invoke("hammer5end", 5.0f);
@@ -1514,11 +1514,13 @@ public class SkillList : MonoBehaviour
 
     private BoxCollider fire1col;
     private int fidamage1;
+    private int fidamage1_2;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void fire1()
     {
         fidamage1 = (int) (scruffystats.damage * 2);
+        fidamage1_2 = (int) (scruffystats.damage * 1/5);
 
         Transform Fire1 =  FireP1.transform.Find("FireElement");
         Transform Fire2 = Fire1.Find("Collider");
@@ -1608,7 +1610,13 @@ public class SkillList : MonoBehaviour
             if (enemy.CompareTag("Enemy") && !hitEnemiesFire1[collider].Contains(enemy))
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(damage);
-                enemy.GetComponent<EnemyStats>().Stun();
+                if(DoubleDotDamage == true){
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*fidamage1_2, 5f, 0.5f));
+                }
+                else{
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", fidamage1_2, 5f, 0.5f));
+                }
+
                 hitEnemiesFire1[collider].Add(enemy);
             }
         }
@@ -1623,10 +1631,24 @@ public class SkillList : MonoBehaviour
 
 
 
-
+    private BoxCollider fire2col;
+    private int fidamage2;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void fire2()
     {
+        fidamage2 = (int) (scruffystats.damage * 1/5);
+        Transform Fire1 =  FireP2.transform.Find("FireCircle");
+        Transform Fire2 = Fire1.Find("Collider");
+        fire2col = Fire2.GetComponent<BoxCollider>();
+        
+        fire2col.enabled = false;
+
+        if (!hitEnemiesFire2.ContainsKey(fire2col))
+        {
+            hitEnemiesFire2.Add(fire2col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityFire2CD)
         {
             animator.SetTrigger("Fire2");
@@ -1639,10 +1661,45 @@ public class SkillList : MonoBehaviour
         FireP2.SetActive(true);
         ParticleSystem PS = FireP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("fire2hit", 0f);
+        Invoke("fire2end", 5f); 
+    }
+
+    void fire2hit(){
+        fire2col.enabled = true;
+        CheckEnemiesInBoxColliderFire2(fire2col, fidamage2);
     }
 
     void fire2end(){
-        FireP2.SetActive(false);  
+        FireP2.SetActive(false); 
+        MovementScript.enabled = true;
+        fire2col.enabled = false;
+
+        foreach (var collider in hitEnemiesFire2.Keys)
+        {
+            hitEnemiesFire2[collider].Clear();
+        }   
+    }
+
+    void CheckEnemiesInBoxColliderFire2(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesFire2[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                if(DoubleDotDamage == true){
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*damage, 5f, 0.5f));
+                }
+                else{
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage, 5f, 0.5f));
+                }
+
+
+                hitEnemiesFire2[collider].Add(enemy);
+            }
+        }
     }
     
 
@@ -1653,10 +1710,27 @@ public class SkillList : MonoBehaviour
 
 
 
+    private BoxCollider fire3col;
+    private int fidamage3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire3 = new Dictionary<BoxCollider, HashSet<Collider>>();
+
     void fire3()
     {
+        fidamage3 = (int) (scruffystats.damage);
+        Transform Fire1 =  FireP3.transform.Find("FireBeam");
+        Transform Fire3 = Fire1.Find("Collider");
+        fire3col = Fire3.GetComponent<BoxCollider>();
+        
+        fire3col.enabled = false;
+
+        if (!hitEnemiesFire3.ContainsKey(fire3col))
+        {
+            hitEnemiesFire3.Add(fire3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityFire3CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Fire3");
             CurrentFire3CD = Fire3CD;
             isAbilityFire3CD = true;
@@ -1667,10 +1741,43 @@ public class SkillList : MonoBehaviour
         FireP3.SetActive(true);
         ParticleSystem PS = FireP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("fire3hit", 0f);
+        Invoke("fire3end", 1.7f); 
+    }
+
+    void fire3hit(){
+        fire3col.enabled = true;
+        CheckEnemiesInBoxColliderFire3(fire3col, fidamage3);
     }
 
     void fire3end(){
-        FireP3.SetActive(false);  
+        FireP3.SetActive(false); 
+        MovementScript.enabled = true;
+        fire3col.enabled = false;
+
+        foreach (var collider in hitEnemiesFire3.Keys)
+        {
+            hitEnemiesFire3[collider].Clear();
+        }   
+    }
+
+    void CheckEnemiesInBoxColliderFire3(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesFire3[collider].Contains(enemy))
+            {
+                if(DoubleDotDamage == true){
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*(damage*3/4), 3f, 0.5f));
+                }
+                else{
+                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage*3/4, 3f, 0.5f));
+                }
+
+                hitEnemiesFire3[collider].Add(enemy);
+            }
+        }
     }
     
 
@@ -1682,10 +1789,31 @@ public class SkillList : MonoBehaviour
 
 
 
+    private BoxCollider fire4col;
+    private int fidamage4;
+    private int fidamage4_1;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire4 = new Dictionary<BoxCollider, HashSet<Collider>>();
+    Transform FireExplosion;
+
     void fire4()
     {
+        fidamage4 = (int) (scruffystats.damage * 4);
+        fidamage4_1 = (int) (scruffystats.MaxHealth * 1/5);
+        FireExplosion = FireP4.transform.Find("FireExplosion");
+        Transform Fire1 =  FireP4.transform.Find("FireCircle");
+        Transform Fire2 = Fire1.Find("Collider");
+        fire4col = Fire2.GetComponent<BoxCollider>();
+        
+        fire4col.enabled = false;
+
+        if (!hitEnemiesFire4.ContainsKey(fire4col))
+        {
+            hitEnemiesFire4.Add(fire4col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityFire4CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Fire4");
             CurrentFire4CD = Fire4CD;
             isAbilityFire4CD = true;
@@ -1696,12 +1824,39 @@ public class SkillList : MonoBehaviour
         FireP4.SetActive(true);
         ParticleSystem PS = FireP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("fire4hit", 0f);
+        scruffystats.TakeDamage(fidamage4_1);
+        Invoke("fire4end", 1f); 
+    }
+
+    void fire4hit(){
+        fire4col.enabled = true;
+        CheckEnemiesInBoxColliderFire4(fire4col, fidamage4);
     }
 
     void fire4end(){
-        FireP4.SetActive(false);  
+        FireP4.SetActive(false); 
+        MovementScript.enabled = true;
+        fire4col.enabled = false;
+
+        foreach (var collider in hitEnemiesFire4.Keys)
+        {
+            hitEnemiesFire4[collider].Clear();
+        }   
     }
-    
+
+    void CheckEnemiesInBoxColliderFire4(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesFire4[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesFire4[collider].Add(enemy);
+            }
+        }
+    }
 
 
 
@@ -1710,9 +1865,13 @@ public class SkillList : MonoBehaviour
 
 
 
+    private bool DoubleDotDamage = false;
+    WeaponElement weaponElementScript;
 
     void fire5()
     {
+        weaponElementScript = GetComponent<WeaponElement>();
+
         if (!isAbilityFire5CD)
         {
             animator.SetTrigger("Fire5");
@@ -1725,10 +1884,16 @@ public class SkillList : MonoBehaviour
         FireP5.SetActive(true);
         ParticleSystem PS = FireP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        weaponElementScript. DoubleDotDamage = true;
+        DoubleDotDamage = true;
+        StartCoroutine(scruffystats.TakeDamageOverTimeX("fire", 1, 7f, 1f));
+        Invoke("fire5end", 7f); 
     }
 
     void fire5end(){
         FireP5.SetActive(false);  
+        DoubleDotDamage = false;
+        weaponElementScript. DoubleDotDamage = false;
     }
     
 

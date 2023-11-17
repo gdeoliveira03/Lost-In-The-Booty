@@ -26,7 +26,6 @@ public class EnemyStats : MonoBehaviour
 
         [SerializeField] FloatingHealthBar healthbar;
 
-        private NavMeshAgent navMeshAgent;
         private bool isStunned = false;
         public string playerTag = "Player";
 
@@ -44,10 +43,6 @@ public class EnemyStats : MonoBehaviour
                 healthregen = 0;
                 manaregen = 0;
 
-                if (navMeshAgent == null)
-                {
-                    navMeshAgent = GetComponent<NavMeshAgent>();
-                }
             }
 
             CurrentHealth = MaxHealth;
@@ -58,61 +53,64 @@ public class EnemyStats : MonoBehaviour
 
         void Update()
         {
-            if (!isStunned)
+            if (isStunned)
             {
-                // Find the player GameObject by tag
-                GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-
-                if (player != null)
-                {
-                    // If the player is within a certain range, start chasing them
-                    if (Vector3.Distance(transform.position, player.transform.position) < 10f)
-                    {
-                        ChasePlayer(player.transform.position);
-                    }
-                    else
-                    {
-                        // If the player is not in range, stop chasing
-                        StopChasing();
-                    }
-                }
+                // Player cannot move
             }
         }
 
-        void ChasePlayer(Vector3 targetPosition)
-        {
-             if (navMeshAgent != null)
-            {
-                // Set the destination to the player's position
-                navMeshAgent.SetDestination(targetPosition);
-            }
-            else
-            {
-                Debug.LogError("NavMeshAgent is null. Ensure the GameObject has a NavMeshAgent component.");
-            }
-        }
-
-        void StopChasing()
-        {
-            // Stop the NavMeshAgent from moving
-            navMeshAgent.isStopped = true;
-        }
+        //STUNNED ENEMY
 
         public void Stun()
         {
-            // Set the flag to indicate that the enemy is stunned
             isStunned = true;
-            // Stop chasing when stunned
-            StopChasing();
         }
 
         IEnumerator RecoverFromStun()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
 
             // Reset the flag and allow the enemy to move again
             isStunned = false;
         }
+
+        public GameObject OnFireEffect;
+        // Keeps Track of Burning   
+        private bool isburning = false;
+        private int activeDOTEffects = 0;
+
+        public IEnumerator TakeDamageOverTime(string DOTType, int damages, float duration, float tickSpeed)
+        {
+            float elapsedTime = 0f;
+
+            activeDOTEffects++;
+
+            while (elapsedTime < duration)
+            {
+                if(DOTType == "fire" && !isburning){
+                    OnFireEffect.SetActive(true);
+                    isburning = true;
+                }
+
+                yield return new WaitForSeconds(tickSpeed);
+
+                // Apply damage
+                TakeDamage(damages);
+
+                // Update elapsed time
+                elapsedTime += tickSpeed;
+            }
+
+            // Decrement active DOT effects
+            activeDOTEffects--;
+
+            if (DOTType == "fire" && activeDOTEffects == 0)
+            {
+                OnFireEffect.SetActive(false);
+                isburning = false;
+            }
+        }
+
 
         public void TakeDamage (int damage)
         {
@@ -131,6 +129,6 @@ public class EnemyStats : MonoBehaviour
 
         public virtual void Die ()
         {
-            Destroy(DeadEnemy);
+            //Destroy(DeadEnemy);
         }
 }

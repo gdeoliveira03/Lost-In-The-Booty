@@ -38,6 +38,7 @@ public class ScruffyStats : MonoBehaviour
             damage = 5;
         }
 
+
         void Update (){
 
             healthBar.value = CurrentHealth;
@@ -57,7 +58,6 @@ public class ScruffyStats : MonoBehaviour
                 NaturalRestoreMana(1);
                 manarestoreTimer = 0f;
             }
-            
 
             if (Input.GetKeyDown(KeyCode.T)){
                 TakeDamage(5);
@@ -141,7 +141,31 @@ public class ScruffyStats : MonoBehaviour
             isTakenboosted = false;
         }
 
+        private bool isburning = false;
+        private int activeDOTEffects = 0;
 
+        public IEnumerator TakeDamageOverTimeX(string DOTType, int damages, float duration, float tickSpeed)
+        {
+            Debug.Log("hi>");
+            float elapsedTime = 0f;
+
+            activeDOTEffects++;
+
+            while (elapsedTime < duration)
+            {
+                yield return new WaitForSeconds(tickSpeed);
+
+                // Apply damage
+                TakeDamage(damages);
+
+                // Update elapsed time
+                elapsedTime += tickSpeed;
+            }
+
+            // Decrement active DOT effects
+            activeDOTEffects--;
+
+        }
 
 
         public void TakeDamage (int damagetaken)

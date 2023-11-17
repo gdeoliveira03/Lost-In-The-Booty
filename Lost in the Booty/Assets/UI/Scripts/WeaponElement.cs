@@ -99,14 +99,12 @@ public class WeaponElement : MonoBehaviour
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
     private ScruffyStats scruffystats;
-    private PlayerStateMachine MovementScript;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         scruffystats = GetComponent<ScruffyStats>();
-        MovementScript = GetComponent<PlayerStateMachine>();
 
         // Get the weapon colliders
         NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
@@ -365,7 +363,6 @@ public class WeaponElement : MonoBehaviour
             // CUTLASS BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownCutlass){
-                    MovementScript.enabled = false;
                     animator.SetTrigger("CutlassBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
                     CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
@@ -387,7 +384,6 @@ public class WeaponElement : MonoBehaviour
             // SPEAR BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownSpear){ // If the ability is not on cooldown
-                    MovementScript.enabled = false;
                     animator.SetTrigger("SpearBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownSpear = true; // Sets the ability to be on cooldown
                     CurrentSpearBasicCooldown = SpearBasicCooldown; // Current Cooldown becomes the basic cooldown  
@@ -409,7 +405,6 @@ public class WeaponElement : MonoBehaviour
             // HAMMER BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownHammer){ // If the ability is not on cooldown
-                    MovementScript.enabled = false;
                     animator.SetTrigger("HammerBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownHammer = true; // Sets the ability to be on cooldown
                     CurrentHammerBasicCooldown = HammerBasicCooldown; // Current Cooldown becomes the basic cooldown
@@ -664,7 +659,6 @@ public class WeaponElement : MonoBehaviour
     public void CutlassEndAttack()
     {
         isAttacking = false;
-        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
@@ -679,7 +673,6 @@ public class WeaponElement : MonoBehaviour
     public void SpearEndAttack()
     {
         isAttacking = false;
-        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
@@ -694,12 +687,14 @@ public class WeaponElement : MonoBehaviour
     public void HammerEndAttack()
     {
         isAttacking = false;
-        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
         }
     }
+
+
+    public bool DoubleDotDamage = false;
     public GameObject particleSpawnPoint;
 
     public float AttackRadius = 0.3f;
@@ -743,7 +738,12 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitFireEnemies.Contains(enemy))
                 {
-                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    if(DoubleDotDamage == true){
+                        enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*(damage*1/5), 3f, 0.5f));
+                    }
+                    else{
+                        enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage*1/5, 3f, 0.5f));
+                    }
                     hitFireEnemies.Add(enemy);
                 }
             }
