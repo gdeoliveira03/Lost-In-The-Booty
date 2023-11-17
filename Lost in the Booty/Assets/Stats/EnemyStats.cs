@@ -131,6 +131,6 @@ public class EnemyStats : MonoBehaviour
 
         public virtual void Die ()
         {
-            //Destroy(DeadEnemy);
+            Destroy(DeadEnemy);
         }
 }
