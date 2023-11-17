@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.AI; // Add this for NavMeshAgent support
+using UnityEngine.AI;
+using System.Collections;
 
 public class EnemyStats : MonoBehaviour
 {
-        private int damage = 5;
+        private int damage = 0;
         private int armor = 0;
         private int evasion = 0;
         private int attackspeed = 0;
@@ -25,36 +26,92 @@ public class EnemyStats : MonoBehaviour
 
         [SerializeField] FloatingHealthBar healthbar;
 
-        private float detectionRadius = 10f; // Adjust as needed
-        private float attackRange = 2f; // Adjust as needed
-        private Transform player;
+        private NavMeshAgent navMeshAgent;
+        private bool isStunned = false;
+        public string playerTag = "Player";
 
         void Start()
         {
-
             // Set Enemy Stats Here
             if (EnemyType == "Skeleton"){
-                detectionRadius = 10f;
-                attackRange = 2f;
                 damage = 5;
-                MaxHealth = 25;
+                MaxHealth = 30;
+                CurrentHealth = MaxHealth;
                 MaxMana = 0;
                 armor = 0;
                 evasion = 0;
                 attackspeed = 0;
                 healthregen = 0;
                 manaregen = 0;
+
+                if (navMeshAgent == null)
+                {
+                    navMeshAgent = GetComponent<NavMeshAgent>();
+                }
             }
 
-        }
-
-        void Awake ()
-        {
             CurrentHealth = MaxHealth;
             healthbar = GetComponentInChildren<FloatingHealthBar>();
+
         }
 
-        void Update (){
+
+        void Update()
+        {
+            if (!isStunned)
+            {
+                // Find the player GameObject by tag
+                GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+
+                if (player != null)
+                {
+                    // If the player is within a certain range, start chasing them
+                    if (Vector3.Distance(transform.position, player.transform.position) < 10f)
+                    {
+                        ChasePlayer(player.transform.position);
+                    }
+                    else
+                    {
+                        // If the player is not in range, stop chasing
+                        StopChasing();
+                    }
+                }
+            }
+        }
+
+        void ChasePlayer(Vector3 targetPosition)
+        {
+             if (navMeshAgent != null)
+            {
+                // Set the destination to the player's position
+                navMeshAgent.SetDestination(targetPosition);
+            }
+            else
+            {
+                Debug.LogError("NavMeshAgent is null. Ensure the GameObject has a NavMeshAgent component.");
+            }
+        }
+
+        void StopChasing()
+        {
+            // Stop the NavMeshAgent from moving
+            navMeshAgent.isStopped = true;
+        }
+
+        public void Stun()
+        {
+            // Set the flag to indicate that the enemy is stunned
+            isStunned = true;
+            // Stop chasing when stunned
+            StopChasing();
+        }
+
+        IEnumerator RecoverFromStun()
+        {
+            yield return new WaitForSeconds(3f);
+
+            // Reset the flag and allow the enemy to move again
+            isStunned = false;
         }
 
         public void TakeDamage (int damage)
@@ -74,6 +131,6 @@ public class EnemyStats : MonoBehaviour
 
         public virtual void Die ()
         {
-            Destroy(DeadEnemy);
+            //Destroy(DeadEnemy);
         }
 }

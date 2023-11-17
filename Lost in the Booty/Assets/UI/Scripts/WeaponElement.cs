@@ -98,11 +98,15 @@ public class WeaponElement : MonoBehaviour
 
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
+    private ScruffyStats scruffystats;
+    private PlayerStateMachine MovementScript;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        scruffystats = GetComponent<ScruffyStats>();
+        MovementScript = GetComponent<PlayerStateMachine>();
 
         // Get the weapon colliders
         NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
@@ -337,13 +341,12 @@ public class WeaponElement : MonoBehaviour
 
     private bool isAttacking = false;
     private string enemyTag = "Enemy";
-    public int damage = 5;
+    private int damage;
     private Dictionary<Collider, HashSet<Collider>> hitEnemies = new Dictionary<Collider, HashSet<Collider>>();
 
     // Update Function starts here
     void Update()
     {
-
         animator = GetComponent<Animator>();
 
         // Cooldown timers for basic attacks
@@ -362,6 +365,7 @@ public class WeaponElement : MonoBehaviour
             // CUTLASS BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownCutlass){
+                    MovementScript.enabled = false;
                     animator.SetTrigger("CutlassBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
                     CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
@@ -383,6 +387,7 @@ public class WeaponElement : MonoBehaviour
             // SPEAR BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownSpear){ // If the ability is not on cooldown
+                    MovementScript.enabled = false;
                     animator.SetTrigger("SpearBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownSpear = true; // Sets the ability to be on cooldown
                     CurrentSpearBasicCooldown = SpearBasicCooldown; // Current Cooldown becomes the basic cooldown  
@@ -404,6 +409,7 @@ public class WeaponElement : MonoBehaviour
             // HAMMER BASIC ATTACK
             if (Input.GetKeyDown(KeyCode.Mouse0)){
                 if(!isAbilityCooldownHammer){ // If the ability is not on cooldown
+                    MovementScript.enabled = false;
                     animator.SetTrigger("HammerBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownHammer = true; // Sets the ability to be on cooldown
                     CurrentHammerBasicCooldown = HammerBasicCooldown; // Current Cooldown becomes the basic cooldown
@@ -651,13 +657,14 @@ public class WeaponElement : MonoBehaviour
 
     // BASIC ATTACK ABILITY CALLS
     public void CutlassBasicAttack(){
-        damage = 5;
+        damage = (int) (scruffystats.damage);
         isAttacking = true;
     }
 
     public void CutlassEndAttack()
     {
         isAttacking = false;
+        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
@@ -665,13 +672,14 @@ public class WeaponElement : MonoBehaviour
     }
 
     void SpearBasicAttack(){
-        damage = 7;
+        damage = (int) (scruffystats.damage * 1.4);
         isAttacking = true;
     }
 
     public void SpearEndAttack()
     {
         isAttacking = false;
+        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
@@ -679,13 +687,14 @@ public class WeaponElement : MonoBehaviour
     }
 
     void HammerBasicAttack(){
-        damage = 10;
+        damage = (int) (scruffystats.damage * 1.8);
         isAttacking = true;
     }
 
     public void HammerEndAttack()
     {
         isAttacking = false;
+        MovementScript.enabled = true;
         foreach (var enemies in hitEnemies.Values)
         {
             enemies.Clear();
@@ -708,7 +717,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator FireBasicAttack()
     {
         FireBasicEnable.SetActive(true);
-        damage = 5;
+        damage = (int) (scruffystats.damage);
         FireCollider.enabled = true;
 
         float startTime = Time.time;
@@ -756,7 +765,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator IceBasicAttack()
     {
         IceBasicEnable.SetActive(true);
-        int damage = 5; // Set the damage value for the ice attack
+        int damage = (int) (scruffystats.damage); // Set the damage value for the ice attack
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the ice attack (you can adjust this value)
@@ -802,7 +811,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator LightningBasicAttack()
     {
         LightningBasicEnable.SetActive(true);
-        int damage = 5; // Set the damage value for the lightning attack
+        int damage = (int) (scruffystats.damage); // Set the damage value for the lightning attack
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the lightning attack (you can adjust this value)

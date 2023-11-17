@@ -193,11 +193,15 @@ public class SkillList : MonoBehaviour
     private float CurrentLightning5CD;
 
     private Animator animator;
+    private ScruffyStats scruffystats;
+    private int damage;
+    private PlayerStateMachine MovementScript;
 
     void Start(){
         animator = GetComponent<Animator>();
+        scruffystats = GetComponent<ScruffyStats>();
+        MovementScript = GetComponent<PlayerStateMachine>();
         CurrentSkill = new Sprite[5];
-        
     }
 
     void Update(){
@@ -433,32 +437,160 @@ public class SkillList : MonoBehaviour
             
         
     }
+    
+
+    //SWORD 1 STARTS HERE
+
+    private BoxCollider sword1_1col;
+    private BoxCollider sword1_2col;
+    private BoxCollider sword1_3col;
+    private int swdamage1_1;
+    private int swdamage1_2;
+    private int swdamage1_3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     //Individual Ability Actions Begin Here, these define what each skill does.
     void sword1()
     {
+        swdamage1_1 = (int) (scruffystats.damage);
+        swdamage1_2 = (int) (scruffystats.damage);
+        swdamage1_3 = (int) (scruffystats.damage);
+
+        // Gets the colliders for the first, second and third hit.
+        BoxCollider[] sw1colliders = SwordP1.GetComponentsInChildren<BoxCollider>();
+        sword1_1col = sw1colliders[0]; // First Slash
+        sword1_3col = sw1colliders[1]; //Third Slash
+        ParticleSystem Slash1 = SwordP1.GetComponentInChildren<ParticleSystem>();
+        ParticleSystem[] Slash2 = Slash1.GetComponentsInChildren<ParticleSystem>();
+        sword1_2col = Slash2[4].GetComponent<BoxCollider>(); // Second Slash
+
+        //Keeps colliders disactivated
+        sword1_1col.enabled = false;
+        sword1_2col.enabled = false;
+        sword1_3col.enabled = false;
+
+        if (!hitEnemiesSword1.ContainsKey(sword1_1col))
+        {
+            hitEnemiesSword1.Add(sword1_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesSword1.ContainsKey(sword1_2col))
+        {
+            hitEnemiesSword1.Add(sword1_2col, new HashSet<Collider>());
+        }
+        if (!hitEnemiesSword1.ContainsKey(sword1_3col))
+        {
+            hitEnemiesSword1.Add(sword1_3col, new HashSet<Collider>());
+        }
+
+        //Cooldown check
         if (!isAbilitySword1CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Sword1");
             CurrentSword1CD = Sword1CD;
             isAbilitySword1CD = true;
+
         }
     }
 
-    void sword1start(){
+    void sword1start(){ //Calls the start of the ability
         SwordP1.SetActive(true);
         ParticleSystem PS = SwordP1.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("sword1_firsthit", 0.0f);
+        Invoke("sword1_secondhit", 0.4f);
+        Invoke("sword1_thirdhit", 0.9f);
+        Invoke("sword1end", 1.2f); //Calls the end of the ability
+    }
+
+    void sword1_firsthit(){
+        sword1_1col.enabled = true;
+        CheckEnemiesInBoxColliderSword1(sword1_1col, swdamage1_1);
+    }
+
+    void sword1_secondhit(){
+        sword1_2col.enabled = true;
+        CheckEnemiesInBoxColliderSword1(sword1_2col, swdamage1_2);
+    }
+
+    void sword1_thirdhit(){
+        sword1_3col.enabled = true;    
+        CheckEnemiesInBoxColliderSword1(sword1_3col, swdamage1_3);
     }
 
     void sword1end(){
         SwordP1.SetActive(false);
+        MovementScript.enabled = true;
+        sword1_1col.enabled = false;
+        sword1_2col.enabled = false;
+        sword1_3col.enabled = false;
+
+        foreach (var collider in hitEnemiesSword1.Keys)
+        {
+            hitEnemiesSword1[collider].Clear();
+        }
     }
+
+    void CheckEnemiesInBoxColliderSword1(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSword1[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSword1[collider].Add(enemy);
+            }
+        }
+    }
+
+
+
+
+    // SWORD 2 STARTS HERE
+
+    private BoxCollider sword2_1col;
+    private BoxCollider sword2_2col;
+    private BoxCollider sword2_3col;
+    private int swdamage2_1;
+    private int swdamage2_2;
+    private int swdamage2_3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void sword2()
     {
+        swdamage2_1 = (int) (scruffystats.damage * 0.6);
+        swdamage2_2 = (int) (scruffystats.damage * 0.6);
+        swdamage2_3 = (int) (scruffystats.damage * 1.6);
+
+        BoxCollider[] sw2colliders = SwordP2.GetComponentsInChildren<BoxCollider>();
+        sword2_1col = sw2colliders[0]; // First Slash
+        sword2_2col = sw2colliders[1]; // Second Slash
+        Transform Slash1 =  SwordP2.transform.Find("Slash1");
+        Transform Slash2 = Slash1.Find("Slash3Collider");
+        sword2_3col = Slash2.GetComponent<BoxCollider>(); // Third Slash
+
+        //Keeps colliders disactivated
+        sword2_1col.enabled = false;
+        sword2_2col.enabled = false;
+        sword2_3col.enabled = false;
+
+        if (!hitEnemiesSword2.ContainsKey(sword2_1col))
+        {
+            hitEnemiesSword2.Add(sword2_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesSword2.ContainsKey(sword2_2col))
+        {
+            hitEnemiesSword2.Add(sword2_2col, new HashSet<Collider>());
+        }
+        if (!hitEnemiesSword2.ContainsKey(sword2_3col))
+        {
+            hitEnemiesSword2.Add(sword2_3col, new HashSet<Collider>());
+        }
+
         if (!isAbilitySword2CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Sword2");
             CurrentSword2CD = Sword2CD;
             isAbilitySword2CD = true;
@@ -469,16 +601,77 @@ public class SkillList : MonoBehaviour
         SwordP2.SetActive(true);
         ParticleSystem PS = SwordP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("sword2_firsthit", 0.0f);
+        Invoke("sword2_secondhit", 0.6f);
+        Invoke("sword2_thirdhit", 1.6f);
+        Invoke("sword2end", 2.2f); //Calls the end of the ability
+    }
+
+    void sword2_firsthit(){
+        sword2_1col.enabled = true;
+        CheckEnemiesInBoxColliderSword2(sword2_1col, swdamage2_1);
+    }
+
+    void sword2_secondhit(){
+        sword2_2col.enabled = true;
+        CheckEnemiesInBoxColliderSword2(sword2_2col, swdamage2_2);
+    }
+
+    void sword2_thirdhit(){
+        sword2_3col.enabled = true;    
+        CheckEnemiesInBoxColliderSword2(sword2_3col, swdamage2_3);
     }
 
     void sword2end(){
         SwordP2.SetActive(false);
+        MovementScript.enabled = true;
+        sword2_1col.enabled = false;
+        sword2_2col.enabled = false;
+        sword2_3col.enabled = false;
+
+        foreach (var collider in hitEnemiesSword2.Keys)
+        {
+            hitEnemiesSword2[collider].Clear();
+        }
     }
+
+    void CheckEnemiesInBoxColliderSword2(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSword2[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSword2[collider].Add(enemy);
+            }
+        }
+    }
+
+
+
+
+
+
+    private BoxCollider sword3col;
+    private int swdamage3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void sword3()
     {
+        swdamage3 = (int) (scruffystats.damage * 1.8);
+
+        sword3col = SwordP3.GetComponentInChildren<BoxCollider>();
+        sword3col.enabled = false;
+
+        if (!hitEnemiesSword3.ContainsKey(sword3col))
+        {
+            hitEnemiesSword3.Add(sword3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilitySword3CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Sword3");
             CurrentSword3CD = Sword3CD;
             isAbilitySword3CD = true;
@@ -489,11 +682,40 @@ public class SkillList : MonoBehaviour
         SwordP3.SetActive(true);
         ParticleSystem PS = SwordP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("sword3hit", 0f);
+        Invoke("sword3end", 0.8f); //Calls the end of the ability
+    }
+
+    void sword3hit(){
+        sword3col.enabled = true;
+        CheckEnemiesInBoxColliderSword3(sword3col, swdamage3);
     }
 
     void sword3end(){
-        SwordP3.SetActive(false);        
+        SwordP3.SetActive(false);  
+        MovementScript.enabled = true; 
+        sword3col.enabled = false;
+
+        foreach (var collider in hitEnemiesSword3.Keys)
+        {
+            hitEnemiesSword3[collider].Clear();
+        }     
     }
+
+    void CheckEnemiesInBoxColliderSword3(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSword3[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSword3[collider].Add(enemy);
+            }
+        }
+    }
+
+
 
     void sword4()
     {
@@ -509,11 +731,21 @@ public class SkillList : MonoBehaviour
         SwordP4.SetActive(true);
         ParticleSystem PS = SwordP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        int Sword4heal = (int) (scruffystats.MaxHealth * 1/3);
+
+        scruffystats.FlatHeal(Sword4heal);
+        Invoke("sword4end", 5.0f);
     }
 
     void sword4end(){
         SwordP4.SetActive(false);       
     }
+
+
+
+    double DmgBoostValue;
+    double TakenDmgBoostValue;
 
     void sword5()
     {
@@ -529,16 +761,98 @@ public class SkillList : MonoBehaviour
         SwordP5.SetActive(true);
         ParticleSystem PS = SwordP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        DmgBoostValue = 1.5;
+        TakenDmgBoostValue = 1.5;
+
+        scruffystats.DamageBoost(DmgBoostValue);
+        scruffystats.TakenDamageBoost(TakenDmgBoostValue);  
+
+        Invoke("sword5end", 5.0f);
     }
 
     void sword5end(){
-        SwordP5.SetActive(false);        
+        SwordP5.SetActive(false);  
+        scruffystats.DamageBoostEnd(DmgBoostValue);
+        scruffystats.TakenDamageBoostEnd(TakenDmgBoostValue);     
     }
+
+
+
+
+
+    // SPEAR 1 STARS HERE
+
+    private BoxCollider spear1_1col;
+    private BoxCollider spear1_2col;
+    private BoxCollider spear1_3col;
+    private BoxCollider spear1_4col;
+    private BoxCollider spear1_5col;
+    private BoxCollider spear1_6col;
+    private int spdamage1_1;
+    private int spdamage1_2;
+    private int spdamage1_3;
+    private int spdamage1_4;
+    private int spdamage1_5;
+    private int spdamage1_6;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void spear1()
     {
+        spdamage1_1 = (int) (scruffystats.damage * 0.5);
+        spdamage1_2 = (int) (scruffystats.damage * 0.5);
+        spdamage1_3 = (int) (scruffystats.damage * 0.5);
+        spdamage1_4 = (int) (scruffystats.damage * 0.5);
+        spdamage1_5 = (int) (scruffystats.damage * 0.5);
+        spdamage1_6 = (int) (scruffystats.damage * 0.5);
+
+        Transform Slash1 =  SpearP1.transform.Find("Star hit");
+        Transform Slash2 = Slash1.Find("SpearColliders");
+        BoxCollider[] spearattacks = Slash2.GetComponents<BoxCollider>(); // Third Slash
+
+        spear1_1col = spearattacks[0];
+        spear1_2col = spearattacks[1];
+        spear1_3col = spearattacks[2];
+        spear1_4col = spearattacks[3];
+        spear1_5col = spearattacks[4];
+        spear1_6col = spearattacks[5];
+        
+        //Keeps colliders disactivated
+        spear1_1col.enabled = false;
+        spear1_2col.enabled = false;
+        spear1_3col.enabled = false;
+        spear1_4col.enabled = false;
+        spear1_5col.enabled = false;
+        spear1_6col.enabled = false;
+
+        if (!hitEnemiesSpear1.ContainsKey(spear1_1col))
+        {
+            hitEnemiesSpear1.Add(spear1_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesSpear1.ContainsKey(spear1_2col))
+        {
+            hitEnemiesSpear1.Add(spear1_2col, new HashSet<Collider>());
+        }
+        if (!hitEnemiesSpear1.ContainsKey(spear1_3col))
+        {
+            hitEnemiesSpear1.Add(spear1_3col, new HashSet<Collider>());
+        }
+        if (!hitEnemiesSpear1.ContainsKey(spear1_4col))
+        {
+            hitEnemiesSpear1.Add(spear1_4col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesSpear1.ContainsKey(spear1_5col))
+        {
+            hitEnemiesSpear1.Add(spear1_5col, new HashSet<Collider>());
+        }
+        if (!hitEnemiesSpear1.ContainsKey(spear1_6col))
+        {
+            hitEnemiesSpear1.Add(spear1_6col, new HashSet<Collider>());
+        }
+
         if (!isAbilitySpear1CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Spear1");
             CurrentSpear1CD = Spear1CD;
             isAbilitySpear1CD = true;
@@ -549,16 +863,103 @@ public class SkillList : MonoBehaviour
         SpearP1.SetActive(true);
         ParticleSystem PS = SpearP1.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("spear1_firsthit", 0.0f);
+        Invoke("spear1_secondhit", 0.2f);
+        Invoke("spear1_thirdhit", 0.4f);
+        Invoke("spear1_fourthhit", 0.6f);
+        Invoke("spear1_fifthhit", 0.8f);
+        Invoke("spear1_sixthhit", 1f);
+        Invoke("spear1end", 1.5f); 
+    }
+
+    void spear1_firsthit(){
+        spear1_1col.enabled = true;
+        CheckEnemiesInBoxColliderSpear1(spear1_1col, spdamage1_1);
+    }
+
+    void spear1_secondhit(){
+        spear1_2col.enabled = true;
+        CheckEnemiesInBoxColliderSpear1(spear1_2col, spdamage1_2);
+    }
+
+    void spear1_thirdhit(){
+        spear1_3col.enabled = true;    
+        CheckEnemiesInBoxColliderSpear1(spear1_3col, spdamage1_3);
+    }
+
+    void spear1_fourthhit(){
+        spear1_4col.enabled = true;    
+        CheckEnemiesInBoxColliderSpear1(spear1_4col, spdamage1_4);
+    }
+    void spear1_fifthhit(){
+        spear1_5col.enabled = true;    
+        CheckEnemiesInBoxColliderSpear1(spear1_5col, spdamage1_5);
+    }
+    void spear1_sixthhit(){
+        spear1_6col.enabled = true;    
+        CheckEnemiesInBoxColliderSpear1(spear1_6col, spdamage1_6);
     }
 
     void spear1end(){
-        SpearP1.SetActive(false);    
+        SpearP1.SetActive(false);
+        MovementScript.enabled = true;
+        spear1_1col.enabled = false;
+        spear1_2col.enabled = false;
+        spear1_3col.enabled = false;
+        spear1_4col.enabled = false;
+        spear1_5col.enabled = false;
+        spear1_6col.enabled = false;
+
+        foreach (var collider in hitEnemiesSpear1.Keys)
+        {
+            hitEnemiesSpear1[collider].Clear();
+        }
     }
+
+    void CheckEnemiesInBoxColliderSpear1(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSpear1[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSpear1[collider].Add(enemy);
+            }
+        }
+    }
+ 
+
+
+
+
+
+
+    // SPEAR 2
+
+
+    private BoxCollider spear2col;
+    private int spdamage2;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void spear2()
     {
+        spdamage2 = (int) (scruffystats.damage * 2.6);
+
+        Transform Slash1 =  SpearP2.transform.Find("Magic circle");
+        Transform Slash2 = Slash1.Find("Collider");
+        spear2col = Slash2.GetComponent<BoxCollider>();
+        
+        spear2col.enabled = false;
+
+        if (!hitEnemiesSpear2.ContainsKey(spear2col))
+        {
+            hitEnemiesSpear2.Add(spear2col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilitySpear2CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Spear2");
             CurrentSpear2CD = Spear2CD;
             isAbilitySpear2CD = true;
@@ -569,11 +970,45 @@ public class SkillList : MonoBehaviour
         SpearP2.SetActive(true);
         ParticleSystem PS = SpearP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("spear2hit", 1.5f);
+        Invoke("spear2end", 2.5f); 
+    }
+
+    void spear2hit(){
+        spear2col.enabled = true;
+        CheckEnemiesInBoxColliderSpear2(spear2col, spdamage2);
     }
 
     void spear2end(){
-        SpearP2.SetActive(false);    
+        SpearP2.SetActive(false);   
+        MovementScript.enabled = true; 
+        spear2col.enabled = false;
+
+        foreach (var collider in hitEnemiesSpear2.Keys)
+        {
+            hitEnemiesSpear2[collider].Clear();
+        }
     }
+
+    void CheckEnemiesInBoxColliderSpear2(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSpear2[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSpear2[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
+
+
+
+
 
     void spear3()
     {
@@ -594,11 +1029,33 @@ public class SkillList : MonoBehaviour
     void spear3end(){
         SpearP3.SetActive(false);    
     }
+    
+
+
+
+
+    private BoxCollider spear4col;
+    private int spdamage4;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear4 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void spear4()
     {
+        spdamage4 = (int) (scruffystats.damage * 1.8);
+
+        Transform Slash1 =  SpearP4.transform.Find("Slash1");
+        Transform Slash2 = Slash1.Find("Collider");
+        spear4col = Slash2.GetComponent<BoxCollider>();
+        
+        spear4col.enabled = false;
+
+        if (!hitEnemiesSpear4.ContainsKey(spear4col))
+        {
+            hitEnemiesSpear4.Add(spear4col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilitySpear4CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Spear4");
             CurrentSpear4CD = Spear4CD;
             isAbilitySpear4CD = true;
@@ -609,11 +1066,48 @@ public class SkillList : MonoBehaviour
         SpearP4.SetActive(true);
         ParticleSystem PS = SpearP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("spear4hit", 0f);
+        Invoke("spear4end", 0.6f); 
+    }
+
+    void spear4hit(){
+        spear4col.enabled = true;
+        CheckEnemiesInBoxColliderSpear4(spear4col, spdamage4);
     }
 
     void spear4end(){
-        SpearP4.SetActive(false);    
+        SpearP4.SetActive(false); 
+        MovementScript.enabled = true;   
+        spear4col.enabled = false;
+
+        foreach (var collider in hitEnemiesSpear4.Keys)
+        {
+            hitEnemiesSpear4[collider].Clear();
+        }
     }
+
+    void CheckEnemiesInBoxColliderSpear4(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesSpear4[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesSpear4[collider].Add(enemy);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     void spear5()
     {
@@ -634,11 +1128,47 @@ public class SkillList : MonoBehaviour
     void spear5end(){
         SpearP5.SetActive(false);    
     }
+    
+
+
+
+
+
+
+
+    private BoxCollider hammer1_1col;
+    private BoxCollider hammer1_2col;
+    private int hadamage1_1;
+    private int hadamage1_2;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void hammer1()
     {
+        hadamage1_1 = (int) (scruffystats.damage * 2);
+        hadamage1_2 = (int) (scruffystats.damage * 1.6);
+
+        Transform Slam1 =  HammerP1.transform.Find("Stones hit");
+        Transform Slam2 = Slam1.Find("Collider");
+        BoxCollider[] Slam3 = Slam2.GetComponents<BoxCollider>();
+
+        hammer1_1col = Slam3[0];
+        hammer1_2col = Slam3[1];
+        
+        hammer1_1col.enabled = false;
+        hammer1_2col.enabled = false;
+
+        if (!hitEnemiesHammer1.ContainsKey(hammer1_1col))
+        {
+            hitEnemiesHammer1.Add(hammer1_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesHammer1.ContainsKey(hammer1_2col))
+        {
+            hitEnemiesHammer1.Add(hammer1_2col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityHammer1CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Hammer1");
             CurrentHammer1CD = Hammer1CD;
             isAbilityHammer1CD = true;
@@ -649,16 +1179,95 @@ public class SkillList : MonoBehaviour
         HammerP1.SetActive(true);
         ParticleSystem PS = HammerP1.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("hammer1_1hit", 0f);
+        Invoke("hammer1_2hit", 1f);
+        Invoke("hammer1end", 2f); 
     }
 
-    void hammer1end(){
-        HammerP1.SetActive(false);    
+    void hammer1_1hit(){
+        hammer1_1col.enabled = true;
+        CheckEnemiesInBoxColliderHammer1(hammer1_1col, hadamage1_1);
     }
+    void hammer1_2hit(){
+        hammer1_2col.enabled = true;
+        CheckEnemiesInBoxColliderHammer1(hammer1_2col, hadamage1_2);
+    }
+
+
+    void hammer1end(){
+        HammerP1.SetActive(false); 
+        MovementScript.enabled = true;
+        hammer1_1col.enabled = false;
+        hammer1_2col.enabled = false;
+
+        foreach (var collider in hitEnemiesHammer1.Keys)
+        {
+            hitEnemiesHammer1[collider].Clear();
+        }   
+    }
+
+    void CheckEnemiesInBoxColliderHammer1(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesHammer1[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesHammer1[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
+
+
+
+
+
+    private BoxCollider hammer2_1col;
+    private BoxCollider hammer2_2col;
+    private BoxCollider hammer2_3col;
+    private int hadamage2_1;
+    private int hadamage2_2;
+    private int hadamage2_3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void hammer2()
     {
+        hadamage2_1 = (int) (scruffystats.damage * 1.5);
+        hadamage2_2 = (int) (scruffystats.damage * 1.5);
+        hadamage2_3 = (int) (scruffystats.damage * 1.5);
+
+        Transform Slam1 =  HammerP2.transform.Find("Stones hit");
+        Transform Slam2 = Slam1.Find("Collider");
+        BoxCollider[] Slam3 = Slam2.GetComponents<BoxCollider>();
+
+        hammer2_1col = Slam3[0];
+        hammer2_2col = Slam3[1];
+        hammer2_3col = Slam3[2];
+        
+        hammer2_1col.enabled = false;
+        hammer2_2col.enabled = false;
+        hammer2_3col.enabled = false;
+
+        if (!hitEnemiesHammer2.ContainsKey(hammer2_1col))
+        {
+            hitEnemiesHammer2.Add(hammer2_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesHammer2.ContainsKey(hammer2_2col))
+        {
+            hitEnemiesHammer2.Add(hammer2_2col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesHammer2.ContainsKey(hammer2_3col))
+        {
+            hitEnemiesHammer2.Add(hammer2_3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityHammer2CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Hammer2");
             CurrentHammer2CD = Hammer2CD;
             isAbilityHammer2CD = true;
@@ -669,16 +1278,83 @@ public class SkillList : MonoBehaviour
         HammerP2.SetActive(true);
         ParticleSystem PS = HammerP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("hammer2_1hit", 0f);
+        Invoke("hammer2_2hit", 0.3f);
+        Invoke("hammer2_3hit", 0.6f);
+        Invoke("hammer2end", 1.2f); 
+    }
+
+    void hammer2_1hit(){
+        hammer2_1col.enabled = true;
+        CheckEnemiesInBoxColliderHammer2(hammer2_1col, hadamage2_1);
+    }
+    void hammer2_2hit(){
+        hammer2_2col.enabled = true;
+        CheckEnemiesInBoxColliderHammer2(hammer2_2col, hadamage2_2);
+    }
+    void hammer2_3hit(){
+        hammer2_3col.enabled = true;
+        CheckEnemiesInBoxColliderHammer2(hammer2_3col, hadamage2_3);
     }
 
     void hammer2end(){
-        HammerP2.SetActive(false);    
+        HammerP2.SetActive(false); 
+        MovementScript.enabled = true;
+        hammer2_1col.enabled = false;
+        hammer2_2col.enabled = false;
+        hammer2_3col.enabled = false;
+
+        foreach (var collider in hitEnemiesHammer2.Keys)
+        {
+            hitEnemiesHammer2[collider].Clear();
+        }   
     }
+
+    
+    void CheckEnemiesInBoxColliderHammer2(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesHammer2[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesHammer2[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
+
+
+
+
+
+
+
+    private BoxCollider hammer3col;
+    private int hadamage3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void hammer3()
     {
+        hadamage3 = (int) (scruffystats.damage * 2);
+
+        Transform Slam1 =  HammerP3.transform.Find("Stones hit");
+        Transform Slam2 = Slam1.Find("Collider");
+        hammer3col = Slam2.GetComponent<BoxCollider>();
+        
+        hammer3col.enabled = false;
+
+        if (!hitEnemiesHammer3.ContainsKey(hammer3col))
+        {
+            hitEnemiesHammer3.Add(hammer3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityHammer3CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Hammer3");
             CurrentHammer3CD = Hammer3CD;
             isAbilityHammer3CD = true;
@@ -689,16 +1365,70 @@ public class SkillList : MonoBehaviour
         HammerP3.SetActive(true);
         ParticleSystem PS = HammerP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("hammer3hit", 0f);
+        Invoke("hammer3end", 0.8f); 
+    }
+
+    void hammer3hit(){
+        hammer3col.enabled = true;
+        CheckEnemiesInBoxColliderHammer3(hammer3col, hadamage3);
     }
 
     void hammer3end(){
-        HammerP3.SetActive(false);    
+        HammerP3.SetActive(false); 
+        MovementScript.enabled = true;
+        hammer3col.enabled = false;
+
+        foreach (var collider in hitEnemiesHammer3.Keys)
+        {
+            hitEnemiesHammer3[collider].Clear();
+        }   
     }
+
+    void CheckEnemiesInBoxColliderHammer3(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesHammer3[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesHammer3[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
+
+
+
+
+
+
+
+    private BoxCollider hammer4col;
+    private int hadamage4;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer4 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void hammer4()
     {
+        hadamage4 = (int) (scruffystats.damage);
+
+        Transform Slam1 =  HammerP4.transform.Find("StunCircle");
+        Transform Slam2 = Slam1.Find("Collider");
+        hammer4col = Slam2.GetComponent<BoxCollider>();
+        
+        hammer4col.enabled = false;
+
+        if (!hitEnemiesHammer4.ContainsKey(hammer4col))
+        {
+            hitEnemiesHammer4.Add(hammer4col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityHammer4CD)
         {
+            MovementScript.enabled = false;
             animator.SetTrigger("Hammer4");
             CurrentHammer4CD = Hammer4CD;
             isAbilityHammer4CD = true;
@@ -709,12 +1439,48 @@ public class SkillList : MonoBehaviour
         HammerP4.SetActive(true);
         ParticleSystem PS = HammerP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("hammer4hit", 0f);
+        Invoke("hammer4end", 0.8f); 
+    }
+
+    void hammer4hit(){
+        hammer4col.enabled = true;
+        CheckEnemiesInBoxColliderHammer4(hammer4col, hadamage4);
     }
 
     void hammer4end(){
-        HammerP4.SetActive(false);    
+        HammerP4.SetActive(false); 
+        MovementScript.enabled = true;
+        hammer4col.enabled = false;
+
+        foreach (var collider in hitEnemiesHammer4.Keys)
+        {
+            hitEnemiesHammer4[collider].Clear();
+        }   
     }
 
+    void CheckEnemiesInBoxColliderHammer4(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesHammer4[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<EnemyStats>().Stun();
+                hitEnemiesHammer4[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
+
+
+
+
+
+    int ArmorBoostValue;
     void hammer5()
     {
         if (!isAbilityHammer5CD)
@@ -729,14 +1495,41 @@ public class SkillList : MonoBehaviour
         HammerP5.SetActive(true);
         ParticleSystem PS = HammerP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        ArmorBoostValue = 10;
+        scruffystats.IncreaseArmor(ArmorBoostValue);
+
+        Invoke("hammer5end", 5.0f);
     }
 
     void hammer5end(){
-        HammerP5.SetActive(false);    
+        HammerP5.SetActive(false); 
+        scruffystats.IncreaseArmorEnd(ArmorBoostValue);   
     }
+    
+
+
+
+
+
+    private BoxCollider fire1col;
+    private int fidamage1;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void fire1()
     {
+        fidamage1 = (int) (scruffystats.damage * 2);
+
+        Transform Fire1 =  FireP1.transform.Find("FireElement");
+        Transform Fire2 = Fire1.Find("Collider");
+        fire1col = Fire2.GetComponent<BoxCollider>();
+        
+        fire1col.enabled = false;
+
+        if (!hitEnemiesFire1.ContainsKey(fire1col))
+        {
+            hitEnemiesFire1.Add(fire1col, new HashSet<Collider>()); 
+        }
         if (!isAbilityFire1CD)
         {
             animator.SetTrigger("Fire1");
@@ -782,16 +1575,54 @@ public class SkillList : MonoBehaviour
             Vector3 newPosition = originalPosition + initialParticleDirection * distanceCovered;
             FireP1.transform.position = newPosition;
 
-            yield return null; // Wait for the next frame
+            if (Time.time - startTime >= 2.0f)
+            {
+                fire1col.enabled = true;
+                CheckEnemiesInBoxColliderFire1(fire1col, fidamage1);
+            }
+
+            yield return null;
         }
+
 
         fire1end();
     }
 
     void fire1end()
     {
+        fire1col.enabled = false;
+
+        foreach (var collider in hitEnemiesFire1.Keys)
+        {
+            hitEnemiesFire1[collider].Clear();
+        }  
+
         FireP1.transform.position = FireinitialPosition;
     }
+
+    void CheckEnemiesInBoxColliderFire1(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesFire1[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<EnemyStats>().Stun();
+                hitEnemiesFire1[collider].Add(enemy);
+            }
+        }
+    }
+    
+    
+
+
+
+
+
+
+
+
 
 
     void fire2()
@@ -813,6 +1644,14 @@ public class SkillList : MonoBehaviour
     void fire2end(){
         FireP2.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
 
     void fire3()
     {
@@ -833,6 +1672,15 @@ public class SkillList : MonoBehaviour
     void fire3end(){
         FireP3.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void fire4()
     {
@@ -853,6 +1701,15 @@ public class SkillList : MonoBehaviour
     void fire4end(){
         FireP4.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void fire5()
     {
@@ -873,6 +1730,15 @@ public class SkillList : MonoBehaviour
     void fire5end(){
         FireP5.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void ice1()
     {
@@ -893,6 +1759,15 @@ public class SkillList : MonoBehaviour
     void ice1end(){
         IceP1.SetActive(false);
     }
+    
+
+
+
+
+
+
+
+
 
     void ice2()
     {
@@ -913,6 +1788,15 @@ public class SkillList : MonoBehaviour
     void ice2end(){
         IceP2.SetActive(false);
     }
+    
+
+
+
+
+
+
+
+
 
     void ice3()
     {
@@ -933,6 +1817,15 @@ public class SkillList : MonoBehaviour
     void ice3end(){
         IceP3.SetActive(false);
     }
+    
+
+
+
+
+
+
+
+
 
     void ice4()
     {
@@ -953,6 +1846,14 @@ public class SkillList : MonoBehaviour
     void ice4end(){
         IceP4.SetActive(false);
     }
+    
+
+
+
+
+
+
+
 
     void ice5()
     {
@@ -973,6 +1874,15 @@ public class SkillList : MonoBehaviour
     void ice5end(){
         IceP5.SetActive(false);
     }
+    
+
+
+
+
+
+
+
+
 
     void lightning1()
     {
@@ -993,6 +1903,15 @@ public class SkillList : MonoBehaviour
     void lightning1end(){
         LightningP1.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void lightning2()
     {
@@ -1014,6 +1933,15 @@ public class SkillList : MonoBehaviour
         LightningP2.SetActive(false);  
     }
 
+
+
+
+
+
+
+
+
+
     void lightning3()
     {
         if (!isAbilityLightning3CD)
@@ -1033,6 +1961,15 @@ public class SkillList : MonoBehaviour
     void lightning3end(){
         LightningP3.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void lightning4()
     {
@@ -1053,6 +1990,15 @@ public class SkillList : MonoBehaviour
     void lightning4end(){
         LightningP4.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
     void lightning5()
     {
@@ -1073,6 +2019,15 @@ public class SkillList : MonoBehaviour
     void lightning5end(){
         LightningP5.SetActive(false);  
     }
+    
+
+
+
+
+
+
+
+
 
 
     private void BasicAttackCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown)
