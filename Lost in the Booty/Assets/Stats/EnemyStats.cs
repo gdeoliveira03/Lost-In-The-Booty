@@ -120,6 +120,7 @@ public class EnemyStats : MonoBehaviour
             CurrentHealth -= damage;
             healthbar.UpdateHealthBar(CurrentHealth, MaxHealth);
             DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+            indicator.SetDamageTextColor(Color.black);
             indicator.SetDamageText(damage);
 
             if (CurrentHealth <= 0){

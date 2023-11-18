@@ -27,9 +27,16 @@ public class ScruffyStats : MonoBehaviour
         private float manarestoreTimer = 0f;
         private float manaRestoreInterval = 5f; // Restore mana every x seconds
         private float healthRestoreInterval = 8f; // Restore health every y seconds
+
+        private bool isTempHealth = false;
+        private int TemporaryHealth;
+        SkillList skills;
      
         void Start ()
         {
+
+            skills = GetComponent<SkillList>();
+
             CurrentHealth = MaxHealth;
             CurrentMana = MaxMana;
             healthBar.maxValue = MaxHealth;
@@ -94,6 +101,15 @@ public class ScruffyStats : MonoBehaviour
             armor -= armorvalue;
         }
 
+        public void TempMaxHPIncrease(int value){
+            isTempHealth = true;
+            TemporaryHealth = value;
+        }
+
+        public void TempMaxHPDecrease(int value){
+            isTempHealth = false;
+            TemporaryHealth = 0;
+        }
 
         public void FlatHeal (int flatheal)
         {
@@ -107,10 +123,27 @@ public class ScruffyStats : MonoBehaviour
 
 
 
-        public void HealOverTime (int DOTheal)
+        public void HealOverTimeX(int healAmount, float duration, float tickSpeed)
         {
-
+            StartCoroutine(HealOverTimeCoroutine(healAmount, duration, tickSpeed));
         }
+
+        private IEnumerator HealOverTimeCoroutine(int healAmount, float duration, float tickSpeed)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                yield return new WaitForSeconds(tickSpeed);
+
+                // Apply healing
+                FlatHeal(healAmount);
+
+                // Update elapsed time
+                elapsedTime += tickSpeed;
+            }
+        }
+
 
 
         private int initialdamage;
@@ -177,15 +210,38 @@ public class ScruffyStats : MonoBehaviour
             damagetaken -= armor;
             damagetaken = Mathf.Clamp(damagetaken, 0, int.MaxValue);
 
-            CurrentHealth -= damagetaken;
-            DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-            indicator.SetDamageText(damagetaken);
-            Debug.Log(transform.name + " takes " + damagetaken + "damage.");
+            if(isTempHealth == true){
+                if(damagetaken <= TemporaryHealth){
+                    TemporaryHealth -= damagetaken;
+                    DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                    indicator.SetDamageText(damagetaken);
+                    indicator.SetDamageTextColor(Color.white);
+                    Debug.Log(transform.name + " takes " + damagetaken + "damage.");
+                }
+                else if(damagetaken > TemporaryHealth){
+                    damagetaken -= TemporaryHealth;
+                    CurrentHealth -= damagetaken;
+                    isTempHealth = false;
+                    skills.IceP2.SetActive(false);
+                    DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                    indicator.SetDamageText(damagetaken);
+                    indicator.SetDamageTextColor(Color.white);
+                    Debug.Log(transform.name + " takes " + damagetaken + "damage.");
+                }
+            }
+            else{
+                CurrentHealth -= damagetaken;
+                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                indicator.SetDamageText(damagetaken);
+                indicator.SetDamageTextColor(Color.red);
+                Debug.Log(transform.name + " takes " + damagetaken + "damage.");
+            }
 
             if (CurrentHealth <= 0){
                 Die();
             }
         }
+
 
         public void UseMana (int manacost)
         {
@@ -194,7 +250,11 @@ public class ScruffyStats : MonoBehaviour
             }
             else{
                 CurrentMana -= manacost;
-                Debug.Log(transform.name + " used up " + manacost + " mana.");
+                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                indicator.SetDamageText(manacost);
+                indicator.SetDamageTextColor(Color.blue);
+                Debug.Log(transform.name + " takes " + manacost + "damage.");
+
             }
         }
 

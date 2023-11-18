@@ -1905,8 +1905,45 @@ public class SkillList : MonoBehaviour
 
 
 
+    private BoxCollider ice1_1col;
+    private BoxCollider ice1_2col;
+    private BoxCollider ice1_3col;
+    private int icdamage1_1;
+    private int icdamage1_2;
+    private int icdamage1_3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce1 = new Dictionary<BoxCollider, HashSet<Collider>>();
+
     void ice1()
     {
+        icdamage1_1 = (int) (scruffystats.damage * 1.6);
+        icdamage1_2 = (int) (scruffystats.damage * 1.6);
+        icdamage1_3 = (int) (scruffystats.damage * 1.6);
+
+        Transform Slam1 =  IceP1.transform.Find("IceBeam");
+        Transform Slam2 = Slam1.Find("Collider");
+        BoxCollider[] Slam3 = Slam2.GetComponents<BoxCollider>();
+
+        ice1_1col = Slam3[0];
+        ice1_2col = Slam3[1];
+        ice1_3col = Slam3[2];
+        
+        ice1_1col.enabled = false;
+        ice1_2col.enabled = false;
+        ice1_3col.enabled = false;
+
+        if (!hitEnemiesIce1.ContainsKey(ice1_1col))
+        {
+            hitEnemiesIce1.Add(ice1_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesIce1.ContainsKey(ice1_2col))
+        {
+            hitEnemiesIce1.Add(ice1_2col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesIce1.ContainsKey(ice1_3col))
+        {
+            hitEnemiesIce1.Add(ice1_3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityIce1CD)
         {
             animator.SetTrigger("Ice1");
@@ -1919,10 +1956,49 @@ public class SkillList : MonoBehaviour
         IceP1.SetActive(true);
         ParticleSystem PS = IceP1.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("ice1_1hit", 0f);
+        Invoke("ice1_2hit", 1f);
+        Invoke("ice1_3hit", 2f);
+        Invoke("ice1end", 3f); 
+    }
+
+    void ice1_1hit(){
+        ice1_1col.enabled = true;
+        CheckEnemiesInBoxColliderIce1(ice1_1col, icdamage1_1);
+    }
+    void ice1_2hit(){
+        ice1_2col.enabled = true;
+        CheckEnemiesInBoxColliderIce1(ice1_2col, icdamage1_2);
+    }
+    void ice1_3hit(){
+        ice1_3col.enabled = true;
+        CheckEnemiesInBoxColliderIce1(ice1_3col, icdamage1_3);
     }
 
     void ice1end(){
-        IceP1.SetActive(false);
+        IceP1.SetActive(false); 
+        ice1_1col.enabled = false;
+        ice1_2col.enabled = false;
+        ice1_3col.enabled = false;
+
+        foreach (var collider in hitEnemiesIce1.Keys)
+        {
+            hitEnemiesIce1[collider].Clear();
+        }   
+    }
+
+    
+    void CheckEnemiesInBoxColliderIce1(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesIce1[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesIce1[collider].Add(enemy);
+            }
+        }
     }
     
 
@@ -1933,7 +2009,7 @@ public class SkillList : MonoBehaviour
 
 
 
-
+    int HealthShieldValue;
     void ice2()
     {
         if (!isAbilityIce2CD)
@@ -1948,10 +2024,16 @@ public class SkillList : MonoBehaviour
         IceP2.SetActive(true);
         ParticleSystem PS = IceP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        HealthShieldValue = scruffystats.MaxHealth * 1/2;
+        scruffystats.TempMaxHPIncrease(HealthShieldValue);
+
+        Invoke("ice2end", 8.0f);
     }
 
     void ice2end(){
         IceP2.SetActive(false);
+        scruffystats.TempMaxHPDecrease(HealthShieldValue);   
     }
     
 
@@ -1961,10 +2043,24 @@ public class SkillList : MonoBehaviour
 
 
 
-
+    private BoxCollider ice3col;
+    private int icdamage3;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     void ice3()
     {
+        icdamage3 = (int) (scruffystats.damage * 3/4);
+        Transform ice1x =  IceP3.transform.Find("SlowCircle");
+        Transform ice2x = ice1x.Find("Collider");
+        ice3col = ice2x.GetComponent<BoxCollider>();
+        
+        ice3col.enabled = false;
+
+        if (!hitEnemiesIce3.ContainsKey(ice3col))
+        {
+            hitEnemiesIce3.Add(ice3col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityIce3CD)
         {
             animator.SetTrigger("Ice3");
@@ -1977,12 +2073,39 @@ public class SkillList : MonoBehaviour
         IceP3.SetActive(true);
         ParticleSystem PS = IceP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("ice3hit", 0f);
+        Invoke("ice3end", 4.5f); 
+    }
+
+    void ice3hit(){
+        ice3col.enabled = true;
+        CheckEnemiesInBoxColliderIce3(ice3col, icdamage3);
     }
 
     void ice3end(){
-        IceP3.SetActive(false);
+        IceP3.SetActive(false); 
+        ice3col.enabled = false;
+
+        foreach (var collider in hitEnemiesIce3.Keys)
+        {
+            hitEnemiesIce3[collider].Clear();
+        }   
+    }
+
+    void CheckEnemiesInBoxColliderIce3(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesIce3[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("ice", damage, 4f, 1f));
+                hitEnemiesIce3[collider].Add(enemy);
+            }
+        }
     }
     
+
 
 
 
@@ -2006,6 +2129,15 @@ public class SkillList : MonoBehaviour
         IceP4.SetActive(true);
         ParticleSystem PS = IceP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        int HealOvertime = (int) (scruffystats.MaxHealth * 1/8);
+        float duration = 5f;
+        float tickspeed = 1f;
+
+        scruffystats.HealOverTimeX(HealOvertime, duration, tickspeed);
+
+        Invoke("ice4end", 5.0f);
+
     }
 
     void ice4end(){
@@ -2020,8 +2152,25 @@ public class SkillList : MonoBehaviour
 
 
 
+
+    private BoxCollider ice5col;
+    private int icdamage5;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce5 = new Dictionary<BoxCollider, HashSet<Collider>>();
+
     void ice5()
     {
+        icdamage5 = (int) (scruffystats.damage);
+        Transform ice1x =  IceP5.transform.Find("Sparks");
+        Transform ice2x = ice1x.Find("Collider");
+        ice5col = ice2x.GetComponent<BoxCollider>();
+        
+        ice5col.enabled = false;
+
+        if (!hitEnemiesIce5.ContainsKey(ice5col))
+        {
+            hitEnemiesIce5.Add(ice5col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityIce5CD)
         {
             animator.SetTrigger("Ice5");
@@ -2034,11 +2183,40 @@ public class SkillList : MonoBehaviour
         IceP5.SetActive(true);
         ParticleSystem PS = IceP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        Invoke("ice5hit", 0f);
+        Invoke("ice5end", 4.5f); 
+    }
+
+    void ice5hit(){
+        ice5col.enabled = true;
+        CheckEnemiesInBoxColliderIce5(ice5col, icdamage5);
     }
 
     void ice5end(){
-        IceP5.SetActive(false);
+        IceP5.SetActive(false); 
+        ice5col.enabled = false;
+
+        foreach (var collider in hitEnemiesIce5.Keys)
+        {
+            hitEnemiesIce5[collider].Clear();
+        }   
     }
+
+    void CheckEnemiesInBoxColliderIce5(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesIce5[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesIce5[collider].Add(enemy);
+            }
+        }
+    }
+    
+
+
     
 
 

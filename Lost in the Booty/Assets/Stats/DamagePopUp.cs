@@ -45,4 +45,10 @@ public class DamagePopUp : MonoBehaviour
     {
         text.text = damage.ToString();
     }
+
+    public void SetDamageTextColor(Color color)
+    {
+        text.color = color;
+    }
+    
 }
