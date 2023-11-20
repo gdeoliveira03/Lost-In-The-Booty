@@ -41,9 +41,9 @@ public class DamagePopUp : MonoBehaviour
         transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, Mathf.Sin(timer / lifetime));
     }
 
-    public void SetDamageText(int damage)
+    public void SetDamageText(string damage)
     {
-        text.text = damage.ToString();
+        text.text = damage;
     }
 
     public void SetDamageTextColor(Color color)
