@@ -338,6 +338,7 @@ public class WeaponElement : MonoBehaviour
     private float CurrentLightningBasicCooldown;
 
     private bool isAttacking = false;
+    public bool isShockEffect = false;
     private string enemyTag = "Enemy";
     private int damage;
     private Dictionary<Collider, HashSet<Collider>> hitEnemies = new Dictionary<Collider, HashSet<Collider>>();
@@ -642,6 +643,9 @@ public class WeaponElement : MonoBehaviour
                 {
                     if (enemy.CompareTag(enemyTag) && !hitEnemies[activeWeaponCollider].Contains(enemy))
                     {
+                        if(isShockEffect == true){
+                            enemy.GetComponent<EnemyStats>().InflictShock();
+                        }
                         enemy.GetComponent<EnemyStats>().TakeDamage(damage);
                         hitEnemies[activeWeaponCollider].Add(enemy);
                     }
@@ -790,6 +794,7 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitIceEnemies.Contains(enemy))
                 {
+                    enemy.GetComponent<EnemyStats>().ApplySlow(1);
                     enemy.GetComponent<EnemyStats>().TakeDamage(damage);
                     hitIceEnemies.Add(enemy);
                 }
@@ -836,6 +841,7 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitLightningEnemies.Contains(enemy))
                 {
+                    enemy.GetComponent<EnemyStats>().InflictShock();
                     enemy.GetComponent<EnemyStats>().TakeDamage(damage);
                     hitLightningEnemies.Add(enemy);
                 }

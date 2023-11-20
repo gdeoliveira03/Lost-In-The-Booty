@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class ScruffyStats : MonoBehaviour
 {
-        public int damage;
-        public int armor;
-        public int evasion;
-        public int attackspeed;
+        public int damage = 5;
+        public int armor = 0;
+        public int evasion = 0;
         private int movementspeed = 0;
         private int luck = 0;
 
@@ -31,16 +30,23 @@ public class ScruffyStats : MonoBehaviour
         private bool isTempHealth = false;
         private int TemporaryHealth;
         SkillList skills;
+
+        private PlayerStateMachine MovementScript;
+        private float normalwalkSpeed;
+        private float normalrunSpeed;
      
         void Start ()
         {
-
+            MovementScript = GetComponent<PlayerStateMachine>();
             skills = GetComponent<SkillList>();
 
             CurrentHealth = MaxHealth;
             CurrentMana = MaxMana;
             healthBar.maxValue = MaxHealth;
             manaBar.maxValue = MaxMana;
+
+            normalwalkSpeed = MovementScript.walkSpeed;
+            normalrunSpeed = MovementScript.runSpeed;
 
             damage = 5;
         }
@@ -66,12 +72,19 @@ public class ScruffyStats : MonoBehaviour
                 manarestoreTimer = 0f;
             }
 
+            if (CurrentHealth <= 0){
+                Die();
+            }
+
+            
             if (Input.GetKeyDown(KeyCode.T)){
                 TakeDamage(5);
             }
             if (Input.GetKeyDown(KeyCode.Y)){
-                UseMana(5);
+                RestoreMana(20);
             }
+
+        
         }
 
         void NaturalRestoreHealth(int amount)
@@ -88,6 +101,25 @@ public class ScruffyStats : MonoBehaviour
             if (CurrentMana + amount <= MaxMana)
             {
                 CurrentMana += amount;
+                manaBar.value = CurrentMana;
+            }
+        }
+
+        public void RestoreMana(int amount){
+            if (CurrentMana + amount <= MaxMana)
+            {
+                CurrentMana += amount;
+                manaBar.value = CurrentMana;
+                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                indicator.SetDamageText(amount.ToString());
+                indicator.SetDamageTextColor(Color.blue);
+            }
+            else
+            {
+                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                indicator.SetDamageText((MaxMana-CurrentMana).ToString());
+                indicator.SetDamageTextColor(Color.blue);
+                CurrentMana = MaxMana;
                 manaBar.value = CurrentMana;
             }
         }
@@ -117,7 +149,7 @@ public class ScruffyStats : MonoBehaviour
                 flatheal = MaxHealth - CurrentHealth; 
             }
             DamagePopUp indicator = Instantiate(HealthText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-            indicator.SetDamageText(flatheal);
+            indicator.SetDamageText(flatheal.ToString());
             CurrentHealth += flatheal;   
         }
 
@@ -174,12 +206,32 @@ public class ScruffyStats : MonoBehaviour
             isTakenboosted = false;
         }
 
+        public void AddEvasion(int evasionvalue){
+            evasion += evasionvalue;
+        }
+
+        public void RemoveEvasion(int evasionvalue){
+            evasion -= evasionvalue;
+        }
+
+        
+
+        public void IncreaseMovementSpeed(float walkS, float runS){
+            MovementScript.walkSpeed = walkS;
+            MovementScript.runSpeed = runS;
+        }
+
+        public void ResetMovementSpeed(){
+            MovementScript.walkSpeed = normalwalkSpeed;
+            MovementScript.runSpeed = normalrunSpeed;
+        }
+
+
         private bool isburning = false;
         private int activeDOTEffects = 0;
 
         public IEnumerator TakeDamageOverTimeX(string DOTType, int damages, float duration, float tickSpeed)
         {
-            Debug.Log("hi>");
             float elapsedTime = 0f;
 
             activeDOTEffects++;
@@ -200,6 +252,15 @@ public class ScruffyStats : MonoBehaviour
 
         }
 
+        bool takenodamage = false;
+        public void GainImmunity (){
+            takenodamage = true;
+        }
+
+        public void RemoveImmunity (){
+            takenodamage = false;
+        }
+
 
         public void TakeDamage (int damagetaken)
         {
@@ -207,38 +268,49 @@ public class ScruffyStats : MonoBehaviour
                 damagetaken = (int) (damagetaken * takendamageboost);
             }
 
-            damagetaken -= armor;
-            damagetaken = Mathf.Clamp(damagetaken, 0, int.MaxValue);
-
-            if(isTempHealth == true){
-                if(damagetaken <= TemporaryHealth){
-                    TemporaryHealth -= damagetaken;
-                    DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-                    indicator.SetDamageText(damagetaken);
-                    indicator.SetDamageTextColor(Color.white);
-                    Debug.Log(transform.name + " takes " + damagetaken + "damage.");
-                }
-                else if(damagetaken > TemporaryHealth){
-                    damagetaken -= TemporaryHealth;
-                    CurrentHealth -= damagetaken;
-                    isTempHealth = false;
-                    skills.IceP2.SetActive(false);
-                    DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-                    indicator.SetDamageText(damagetaken);
-                    indicator.SetDamageTextColor(Color.white);
-                    Debug.Log(transform.name + " takes " + damagetaken + "damage.");
-                }
-            }
-            else{
-                CurrentHealth -= damagetaken;
+            if (Random.Range(0, 100) < evasion)
+            {
+                // Attack missed due to evasion
                 DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-                indicator.SetDamageText(damagetaken);
-                indicator.SetDamageTextColor(Color.red);
-                Debug.Log(transform.name + " takes " + damagetaken + "damage.");
+                indicator.SetDamageText("Miss");
+                indicator.SetDamageTextColor(Color.gray);
+                Debug.Log(transform.name + " evaded the attack!");
             }
+            else
+            {
+                if(takenodamage == true){
+                    DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                    indicator.SetDamageText("Immune");
+                    indicator.SetDamageTextColor(Color.white);
+                }
+                else{
+                    damagetaken -= armor;
+                    damagetaken = Mathf.Clamp(damagetaken, 0, int.MaxValue);
 
-            if (CurrentHealth <= 0){
-                Die();
+                    if(isTempHealth == true){
+                        if(damagetaken <= TemporaryHealth){
+                            TemporaryHealth -= damagetaken;
+                            DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                            indicator.SetDamageText(damagetaken.ToString());
+                            indicator.SetDamageTextColor(Color.white);
+                        }
+                        else if(damagetaken > TemporaryHealth){
+                            damagetaken -= TemporaryHealth;
+                            CurrentHealth -= damagetaken;
+                            isTempHealth = false;
+                            skills.IceP2.SetActive(false);
+                            DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                            indicator.SetDamageText(damagetaken.ToString());
+                            indicator.SetDamageTextColor(Color.white);
+                        }
+                    }
+                    else{
+                        CurrentHealth -= damagetaken;
+                        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                        indicator.SetDamageText(damagetaken.ToString());
+                        indicator.SetDamageTextColor(Color.red);
+                    }
+                }
             }
         }
 
@@ -246,16 +318,19 @@ public class ScruffyStats : MonoBehaviour
         public void UseMana (int manacost)
         {
             if(CurrentMana < manacost){
-                Debug.Log("Not Enough Mana");
+                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+                indicator.SetDamageText("Need Mana");
+                indicator.SetDamageTextColor(Color.cyan);
             }
             else{
                 CurrentMana -= manacost;
-                DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
-                indicator.SetDamageText(manacost);
-                indicator.SetDamageTextColor(Color.blue);
-                Debug.Log(transform.name + " takes " + manacost + "damage.");
-
             }
+        }
+
+        public void NeedMana(){
+            DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+            indicator.SetDamageText("Need Mana");
+            indicator.SetDamageTextColor(Color.cyan);
         }
 
         public virtual void Die ()

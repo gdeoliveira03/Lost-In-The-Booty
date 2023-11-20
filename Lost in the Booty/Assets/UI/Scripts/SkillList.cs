@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SkillList : MonoBehaviour
 {
@@ -82,41 +83,78 @@ public class SkillList : MonoBehaviour
     public GameObject LightningP5;
 
     // Cooldown times for abilities
-    private float Sword1CD = 3f;
-    private float Sword2CD = 3f;
-    private float Sword3CD = 3f;
-    private float Sword4CD = 3f;
-    private float Sword5CD = 3f;
+    private float Sword1CD = 8f;
+    private float Sword2CD = 8f;
+    private float Sword3CD = 8f;
+    private float Sword4CD = 15f;
+    private float Sword5CD = 15f;
 
-    private float Spear1CD = 3f;
-    private float Spear2CD = 3f;
-    private float Spear3CD = 3f;
-    private float Spear4CD = 3f;
-    private float Spear5CD = 3f;
+    private float Spear1CD = 10f;
+    private float Spear2CD = 12f;
+    private float Spear3CD = 40f;
+    private float Spear4CD = 12f;
+    private float Spear5CD = 18f;
 
-    private float Hammer1CD = 3f;
-    private float Hammer2CD = 3f;
-    private float Hammer3CD = 3f;
-    private float Hammer4CD = 3f;
-    private float Hammer5CD = 3f;
+    private float Hammer1CD = 8f;
+    private float Hammer2CD = 10f;
+    private float Hammer3CD = 12f;
+    private float Hammer4CD = 15f;
+    private float Hammer5CD = 15f;
 
-    private float Fire1CD = 3f;
-    private float Fire2CD = 3f;
-    private float Fire3CD = 3f;
-    private float Fire4CD = 3f;
-    private float Fire5CD = 3f;
+    private float Fire1CD = 10f;
+    private float Fire2CD = 12f;
+    private float Fire3CD = 10f;
+    private float Fire4CD = 14f;
+    private float Fire5CD = 16f;
     
-    private float Ice1CD = 3f;
-    private float Ice2CD = 3f;
-    private float Ice3CD = 3f;
-    private float Ice4CD = 3f;
-    private float Ice5CD = 3f;
+    private float Ice1CD = 10f;
+    private float Ice2CD = 15f;
+    private float Ice3CD = 10f;
+    private float Ice4CD = 15f;
+    private float Ice5CD = 20f;
 
-    private float Lightning1CD = 3f;
-    private float Lightning2CD = 3f;
+    private float Lightning1CD = 15f;
+    private float Lightning2CD = 12f;
     private float Lightning3CD = 3f;
-    private float Lightning4CD = 3f;
-    private float Lightning5CD = 3f;
+    private float Lightning4CD = 14f;
+    private float Lightning5CD = 16f;
+
+    // ManaCost for abilities
+    private int Sword1MC = 8;
+    private int Sword2MC = 8;
+    private int Sword3MC = 8;
+    private int Sword4MC = 15;
+    private int Sword5MC = 15;
+
+    private int Spear1MC = 8;
+    private int Spear2MC = 12;
+    private int Spear3MC = 2;
+    private int Spear4MC = 8;
+    private int Spear5MC = 10;
+
+    private int Hammer1MC = 8;
+    private int Hammer2MC = 10;
+    private int Hammer3MC = 10;
+    private int Hammer4MC = 15;
+    private int Hammer5MC = 15;
+
+    private int Fire1MC = 10;
+    private int Fire2MC = 12;
+    private int Fire3MC = 8;
+    private int Fire4MC = 10;
+    private int Fire5MC = 5;
+    
+    private int Ice1MC = 8;
+    private int Ice2MC = 15;
+    private int Ice3MC = 10;
+    private int Ice4MC = 8;
+    private int Ice5MC = 12;
+
+    private int Lightning1MC = 12;
+    private int Lightning2MC = 6;
+    private int Lightning3MC = 3;
+    private int Lightning4MC = 14;
+    private int Lightning5MC = 16;
 
     // Cooldown true/false for basic abilities
     private bool isAbilitySword1CD = false;
@@ -196,11 +234,16 @@ public class SkillList : MonoBehaviour
     private ScruffyStats scruffystats;
     private int damage;
     private PlayerStateMachine MovementScript;
+    WeaponElement weaponElementScript;
+
+    public Image[] CooldownBackgrounds;
+    public TextMeshProUGUI[] skillslottexts;
 
     void Start(){
         animator = GetComponent<Animator>();
         scruffystats = GetComponent<ScruffyStats>();
         MovementScript = GetComponent<PlayerStateMachine>();
+        weaponElementScript = GetComponent<WeaponElement>();
         CurrentSkill = new Sprite[5];
     }
 
@@ -262,182 +305,207 @@ public class SkillList : MonoBehaviour
         if (CurrentSkill[0] != null){ //Just to make sure nothing happens if the Current Skill is NULL
             if (Input.GetKeyDown(KeyCode.Alpha1 + 0))
             {
-                if (ReferenceEquals(CurrentSkill[0], Sword1)) sword1();
-                else if (ReferenceEquals(CurrentSkill[0], Sword2)) sword2();
-                else if (ReferenceEquals(CurrentSkill[0], Sword3)) sword3();
-                else if (ReferenceEquals(CurrentSkill[0], Sword4)) sword4();
-                else if (ReferenceEquals(CurrentSkill[0], Sword5)) sword5();
-                else if (ReferenceEquals(CurrentSkill[0], Spear1)) spear1();
-                else if (ReferenceEquals(CurrentSkill[0], Spear2)) spear2();
-                else if (ReferenceEquals(CurrentSkill[0], Spear3)) spear3();
-                else if (ReferenceEquals(CurrentSkill[0], Spear4)) spear4();
-                else if (ReferenceEquals(CurrentSkill[0], Spear5)) spear5();
-                else if (ReferenceEquals(CurrentSkill[0], Hammer1)) hammer1();
-                else if (ReferenceEquals(CurrentSkill[0], Hammer2)) hammer2();
-                else if (ReferenceEquals(CurrentSkill[0], Hammer3)) hammer3();
-                else if (ReferenceEquals(CurrentSkill[0], Hammer4)) hammer4();
-                else if (ReferenceEquals(CurrentSkill[0], Hammer5)) hammer5();
-                else if (ReferenceEquals(CurrentSkill[0], Fire1)) fire1();
-                else if (ReferenceEquals(CurrentSkill[0], Fire2)) fire2();
-                else if (ReferenceEquals(CurrentSkill[0], Fire3)) fire3();
-                else if (ReferenceEquals(CurrentSkill[0], Fire4)) fire4();
-                else if (ReferenceEquals(CurrentSkill[0], Fire5)) fire5();
-                else if (ReferenceEquals(CurrentSkill[0], Ice1)) ice1();
-                else if (ReferenceEquals(CurrentSkill[0], Ice2)) ice2();
-                else if (ReferenceEquals(CurrentSkill[0], Ice3)) ice3();
-                else if (ReferenceEquals(CurrentSkill[0], Ice4)) ice4();
-                else if (ReferenceEquals(CurrentSkill[0], Ice5)) ice5();
-                else if (ReferenceEquals(CurrentSkill[0], Lightning1)) lightning1();
-                else if (ReferenceEquals(CurrentSkill[0], Lightning2)) lightning2();
-                else if (ReferenceEquals(CurrentSkill[0], Lightning3)) lightning3();
-                else if (ReferenceEquals(CurrentSkill[0], Lightning4)) lightning4();
-                else if (ReferenceEquals(CurrentSkill[0], Lightning5)) lightning5();
+                if (ReferenceEquals(CurrentSkill[0], Sword1)) sword1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Sword2)) sword2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Sword3)) sword3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Sword4)) sword4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Sword5)) sword5(1);
+                else if (ReferenceEquals(CurrentSkill[0], Spear1)) spear1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Spear2)) spear2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Spear3)) spear3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Spear4)) spear4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Spear5)) spear5(1);
+                else if (ReferenceEquals(CurrentSkill[0], Hammer1)) hammer1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Hammer2)) hammer2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Hammer3)) hammer3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Hammer4)) hammer4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Hammer5)) hammer5(1);
+                else if (ReferenceEquals(CurrentSkill[0], Fire1)) fire1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Fire2)) fire2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Fire3)) fire3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Fire4)) fire4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Fire5)) fire5(1);
+                else if (ReferenceEquals(CurrentSkill[0], Ice1)) ice1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Ice2)) ice2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Ice3)) ice3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Ice4)) ice4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Ice5)) ice5(1);
+                else if (ReferenceEquals(CurrentSkill[0], Lightning1)) lightning1(1);
+                else if (ReferenceEquals(CurrentSkill[0], Lightning2)) lightning2(1);
+                else if (ReferenceEquals(CurrentSkill[0], Lightning3)) lightning3(1);
+                else if (ReferenceEquals(CurrentSkill[0], Lightning4)) lightning4(1);
+                else if (ReferenceEquals(CurrentSkill[0], Lightning5)) lightning5(1);
             }
         }
         if (CurrentSkill[1] != null){ //Just to make sure nothing happens if the Current Skill is NULL
             if (Input.GetKeyDown(KeyCode.Alpha1 + 1))
             {
-                if (ReferenceEquals(CurrentSkill[1], Sword1)) sword1();
-                else if (ReferenceEquals(CurrentSkill[1], Sword2)) sword2();
-                else if (ReferenceEquals(CurrentSkill[1], Sword3)) sword3();
-                else if (ReferenceEquals(CurrentSkill[1], Sword4)) sword4();
-                else if (ReferenceEquals(CurrentSkill[1], Sword5)) sword5();
-                else if (ReferenceEquals(CurrentSkill[1], Spear1)) spear1();
-                else if (ReferenceEquals(CurrentSkill[1], Spear2)) spear2();
-                else if (ReferenceEquals(CurrentSkill[1], Spear3)) spear3();
-                else if (ReferenceEquals(CurrentSkill[1], Spear4)) spear4();
-                else if (ReferenceEquals(CurrentSkill[1], Spear5)) spear5();
-                else if (ReferenceEquals(CurrentSkill[1], Hammer1)) hammer1();
-                else if (ReferenceEquals(CurrentSkill[1], Hammer2)) hammer2();
-                else if (ReferenceEquals(CurrentSkill[1], Hammer3)) hammer3();
-                else if (ReferenceEquals(CurrentSkill[1], Hammer4)) hammer4();
-                else if (ReferenceEquals(CurrentSkill[1], Hammer5)) hammer5();
-                else if (ReferenceEquals(CurrentSkill[1], Fire1)) fire1();
-                else if (ReferenceEquals(CurrentSkill[1], Fire2)) fire2();
-                else if (ReferenceEquals(CurrentSkill[1], Fire3)) fire3();
-                else if (ReferenceEquals(CurrentSkill[1], Fire4)) fire4();
-                else if (ReferenceEquals(CurrentSkill[1], Fire5)) fire5();
-                else if (ReferenceEquals(CurrentSkill[1], Ice1)) ice1();
-                else if (ReferenceEquals(CurrentSkill[1], Ice2)) ice2();
-                else if (ReferenceEquals(CurrentSkill[1], Ice3)) ice3();
-                else if (ReferenceEquals(CurrentSkill[1], Ice4)) ice4();
-                else if (ReferenceEquals(CurrentSkill[1], Ice5)) ice5();
-                else if (ReferenceEquals(CurrentSkill[1], Lightning1)) lightning1();
-                else if (ReferenceEquals(CurrentSkill[1], Lightning2)) lightning2();
-                else if (ReferenceEquals(CurrentSkill[1], Lightning3)) lightning3();
-                else if (ReferenceEquals(CurrentSkill[1], Lightning4)) lightning4();
-                else if (ReferenceEquals(CurrentSkill[1], Lightning5)) lightning5();
+                if (ReferenceEquals(CurrentSkill[1], Sword1)) sword1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Sword2)) sword2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Sword3)) sword3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Sword4)) sword4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Sword5)) sword5(2);
+                else if (ReferenceEquals(CurrentSkill[1], Spear1)) spear1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Spear2)) spear2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Spear3)) spear3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Spear4)) spear4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Spear5)) spear5(2);
+                else if (ReferenceEquals(CurrentSkill[1], Hammer1)) hammer1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Hammer2)) hammer2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Hammer3)) hammer3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Hammer4)) hammer4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Hammer5)) hammer5(2);
+                else if (ReferenceEquals(CurrentSkill[1], Fire1)) fire1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Fire2)) fire2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Fire3)) fire3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Fire4)) fire4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Fire5)) fire5(2);
+                else if (ReferenceEquals(CurrentSkill[1], Ice1)) ice1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Ice2)) ice2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Ice3)) ice3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Ice4)) ice4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Ice5)) ice5(2);
+                else if (ReferenceEquals(CurrentSkill[1], Lightning1)) lightning1(2);
+                else if (ReferenceEquals(CurrentSkill[1], Lightning2)) lightning2(2);
+                else if (ReferenceEquals(CurrentSkill[1], Lightning3)) lightning3(2);
+                else if (ReferenceEquals(CurrentSkill[1], Lightning4)) lightning4(2);
+                else if (ReferenceEquals(CurrentSkill[1], Lightning5)) lightning5(2);
             }
         }
         if (CurrentSkill[2] != null){ //Just to make sure nothing happens if the Current Skill is NULL
             if (Input.GetKeyDown(KeyCode.Alpha1 + 2))
             {
-                if (ReferenceEquals(CurrentSkill[2], Sword1)) sword1();
-                else if (ReferenceEquals(CurrentSkill[2], Sword2)) sword2();
-                else if (ReferenceEquals(CurrentSkill[2], Sword3)) sword3();
-                else if (ReferenceEquals(CurrentSkill[2], Sword4)) sword4();
-                else if (ReferenceEquals(CurrentSkill[2], Sword5)) sword5();
-                else if (ReferenceEquals(CurrentSkill[2], Spear1)) spear1();
-                else if (ReferenceEquals(CurrentSkill[2], Spear2)) spear2();
-                else if (ReferenceEquals(CurrentSkill[2], Spear3)) spear3();
-                else if (ReferenceEquals(CurrentSkill[2], Spear4)) spear4();
-                else if (ReferenceEquals(CurrentSkill[2], Spear5)) spear5();
-                else if (ReferenceEquals(CurrentSkill[2], Hammer1)) hammer1();
-                else if (ReferenceEquals(CurrentSkill[2], Hammer2)) hammer2();
-                else if (ReferenceEquals(CurrentSkill[2], Hammer3)) hammer3();
-                else if (ReferenceEquals(CurrentSkill[2], Hammer4)) hammer4();
-                else if (ReferenceEquals(CurrentSkill[2], Hammer5)) hammer5();
-                else if (ReferenceEquals(CurrentSkill[2], Fire1)) fire1();
-                else if (ReferenceEquals(CurrentSkill[2], Fire2)) fire2();
-                else if (ReferenceEquals(CurrentSkill[2], Fire3)) fire3();
-                else if (ReferenceEquals(CurrentSkill[2], Fire4)) fire4();
-                else if (ReferenceEquals(CurrentSkill[2], Fire5)) fire5();
-                else if (ReferenceEquals(CurrentSkill[2], Ice1)) ice1();
-                else if (ReferenceEquals(CurrentSkill[2], Ice2)) ice2();
-                else if (ReferenceEquals(CurrentSkill[2], Ice3)) ice3();
-                else if (ReferenceEquals(CurrentSkill[2], Ice4)) ice4();
-                else if (ReferenceEquals(CurrentSkill[2], Ice5)) ice5();
-                else if (ReferenceEquals(CurrentSkill[2], Lightning1)) lightning1();
-                else if (ReferenceEquals(CurrentSkill[2], Lightning2)) lightning2();
-                else if (ReferenceEquals(CurrentSkill[2], Lightning3)) lightning3();
-                else if (ReferenceEquals(CurrentSkill[2], Lightning4)) lightning4();
-                else if (ReferenceEquals(CurrentSkill[2], Lightning5)) lightning5();
+                if (ReferenceEquals(CurrentSkill[2], Sword1)) sword1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Sword2)) sword2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Sword3)) sword3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Sword4)) sword4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Sword5)) sword5(3);
+                else if (ReferenceEquals(CurrentSkill[2], Spear1)) spear1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Spear2)) spear2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Spear3)) spear3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Spear4)) spear4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Spear5)) spear5(3);
+                else if (ReferenceEquals(CurrentSkill[2], Hammer1)) hammer1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Hammer2)) hammer2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Hammer3)) hammer3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Hammer4)) hammer4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Hammer5)) hammer5(3);
+                else if (ReferenceEquals(CurrentSkill[2], Fire1)) fire1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Fire2)) fire2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Fire3)) fire3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Fire4)) fire4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Fire5)) fire5(3);
+                else if (ReferenceEquals(CurrentSkill[2], Ice1)) ice1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Ice2)) ice2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Ice3)) ice3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Ice4)) ice4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Ice5)) ice5(3);
+                else if (ReferenceEquals(CurrentSkill[2], Lightning1)) lightning1(3);
+                else if (ReferenceEquals(CurrentSkill[2], Lightning2)) lightning2(3);
+                else if (ReferenceEquals(CurrentSkill[2], Lightning3)) lightning3(3);
+                else if (ReferenceEquals(CurrentSkill[2], Lightning4)) lightning4(3);
+                else if (ReferenceEquals(CurrentSkill[2], Lightning5)) lightning5(3);
             }
         }
         if (CurrentSkill[3] != null){ //Just to make sure nothing happens if the Current Skill is NULL
             if (Input.GetKeyDown(KeyCode.Alpha1 + 3))
             {
-                if (ReferenceEquals(CurrentSkill[3], Sword1)) sword1();
-                else if (ReferenceEquals(CurrentSkill[3], Sword2)) sword2();
-                else if (ReferenceEquals(CurrentSkill[3], Sword3)) sword3();
-                else if (ReferenceEquals(CurrentSkill[3], Sword4)) sword4();
-                else if (ReferenceEquals(CurrentSkill[3], Sword5)) sword5();
-                else if (ReferenceEquals(CurrentSkill[3], Spear1)) spear1();
-                else if (ReferenceEquals(CurrentSkill[3], Spear2)) spear2();
-                else if (ReferenceEquals(CurrentSkill[3], Spear3)) spear3();
-                else if (ReferenceEquals(CurrentSkill[3], Spear4)) spear4();
-                else if (ReferenceEquals(CurrentSkill[3], Spear5)) spear5();
-                else if (ReferenceEquals(CurrentSkill[3], Hammer1)) hammer1();
-                else if (ReferenceEquals(CurrentSkill[3], Hammer2)) hammer2();
-                else if (ReferenceEquals(CurrentSkill[3], Hammer3)) hammer3();
-                else if (ReferenceEquals(CurrentSkill[3], Hammer4)) hammer4();
-                else if (ReferenceEquals(CurrentSkill[3], Hammer5)) hammer5();
-                else if (ReferenceEquals(CurrentSkill[3], Fire1)) fire1();
-                else if (ReferenceEquals(CurrentSkill[3], Fire2)) fire2();
-                else if (ReferenceEquals(CurrentSkill[3], Fire3)) fire3();
-                else if (ReferenceEquals(CurrentSkill[3], Fire4)) fire4();
-                else if (ReferenceEquals(CurrentSkill[3], Fire5)) fire5();
-                else if (ReferenceEquals(CurrentSkill[3], Ice1)) ice1();
-                else if (ReferenceEquals(CurrentSkill[3], Ice2)) ice2();
-                else if (ReferenceEquals(CurrentSkill[3], Ice3)) ice3();
-                else if (ReferenceEquals(CurrentSkill[3], Ice4)) ice4();
-                else if (ReferenceEquals(CurrentSkill[3], Ice5)) ice5();
-                else if (ReferenceEquals(CurrentSkill[3], Lightning1)) lightning1();
-                else if (ReferenceEquals(CurrentSkill[3], Lightning2)) lightning2();
-                else if (ReferenceEquals(CurrentSkill[3], Lightning3)) lightning3();
-                else if (ReferenceEquals(CurrentSkill[3], Lightning4)) lightning4();
-                else if (ReferenceEquals(CurrentSkill[3], Lightning5)) lightning5();
+                if (ReferenceEquals(CurrentSkill[3], Sword1)) sword1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Sword2)) sword2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Sword3)) sword3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Sword4)) sword4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Sword5)) sword5(4);
+                else if (ReferenceEquals(CurrentSkill[3], Spear1)) spear1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Spear2)) spear2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Spear3)) spear3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Spear4)) spear4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Spear5)) spear5(4);
+                else if (ReferenceEquals(CurrentSkill[3], Hammer1)) hammer1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Hammer2)) hammer2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Hammer3)) hammer3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Hammer4)) hammer4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Hammer5)) hammer5(4);
+                else if (ReferenceEquals(CurrentSkill[3], Fire1)) fire1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Fire2)) fire2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Fire3)) fire3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Fire4)) fire4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Fire5)) fire5(4);
+                else if (ReferenceEquals(CurrentSkill[3], Ice1)) ice1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Ice2)) ice2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Ice3)) ice3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Ice4)) ice4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Ice5)) ice5(4);
+                else if (ReferenceEquals(CurrentSkill[3], Lightning1)) lightning1(4);
+                else if (ReferenceEquals(CurrentSkill[3], Lightning2)) lightning2(4);
+                else if (ReferenceEquals(CurrentSkill[3], Lightning3)) lightning3(4);
+                else if (ReferenceEquals(CurrentSkill[3], Lightning4)) lightning4(4);
+                else if (ReferenceEquals(CurrentSkill[3], Lightning5)) lightning5(4);
             }
         }
         if (CurrentSkill[4] != null){ //Just to make sure nothing happens if the Current Skill is NULL
             if (Input.GetKeyDown(KeyCode.Alpha1 + 4))
             {
-                if (ReferenceEquals(CurrentSkill[4], Sword1)) sword1();
-                else if (ReferenceEquals(CurrentSkill[4], Sword2)) sword2();
-                else if (ReferenceEquals(CurrentSkill[4], Sword3)) sword3();
-                else if (ReferenceEquals(CurrentSkill[4], Sword4)) sword4();
-                else if (ReferenceEquals(CurrentSkill[4], Sword5)) sword5();
-                else if (ReferenceEquals(CurrentSkill[4], Spear1)) spear1();
-                else if (ReferenceEquals(CurrentSkill[4], Spear2)) spear2();
-                else if (ReferenceEquals(CurrentSkill[4], Spear3)) spear3();
-                else if (ReferenceEquals(CurrentSkill[4], Spear4)) spear4();
-                else if (ReferenceEquals(CurrentSkill[4], Spear5)) spear5();
-                else if (ReferenceEquals(CurrentSkill[4], Hammer1)) hammer1();
-                else if (ReferenceEquals(CurrentSkill[4], Hammer2)) hammer2();
-                else if (ReferenceEquals(CurrentSkill[4], Hammer3)) hammer3();
-                else if (ReferenceEquals(CurrentSkill[4], Hammer4)) hammer4();
-                else if (ReferenceEquals(CurrentSkill[4], Hammer5)) hammer5();
-                else if (ReferenceEquals(CurrentSkill[4], Fire1)) fire1();
-                else if (ReferenceEquals(CurrentSkill[4], Fire2)) fire2();
-                else if (ReferenceEquals(CurrentSkill[4], Fire3)) fire3();
-                else if (ReferenceEquals(CurrentSkill[4], Fire4)) fire4();
-                else if (ReferenceEquals(CurrentSkill[4], Fire5)) fire5();
-                else if (ReferenceEquals(CurrentSkill[4], Ice1)) ice1();
-                else if (ReferenceEquals(CurrentSkill[4], Ice2)) ice2();
-                else if (ReferenceEquals(CurrentSkill[4], Ice3)) ice3();
-                else if (ReferenceEquals(CurrentSkill[4], Ice4)) ice4();
-                else if (ReferenceEquals(CurrentSkill[4], Ice5)) ice5();
-                else if (ReferenceEquals(CurrentSkill[4], Lightning1)) lightning1();
-                else if (ReferenceEquals(CurrentSkill[4], Lightning2)) lightning2();
-                else if (ReferenceEquals(CurrentSkill[4], Lightning3)) lightning3();
-                else if (ReferenceEquals(CurrentSkill[4], Lightning4)) lightning4();
-                else if (ReferenceEquals(CurrentSkill[4], Lightning5)) lightning5();
+                if (ReferenceEquals(CurrentSkill[4], Sword1)) sword1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Sword2)) sword2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Sword3)) sword3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Sword4)) sword4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Sword5)) sword5(5);
+                else if (ReferenceEquals(CurrentSkill[4], Spear1)) spear1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Spear2)) spear2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Spear3)) spear3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Spear4)) spear4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Spear5)) spear5(5);
+                else if (ReferenceEquals(CurrentSkill[4], Hammer1)) hammer1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Hammer2)) hammer2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Hammer3)) hammer3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Hammer4)) hammer4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Hammer5)) hammer5(5);
+                else if (ReferenceEquals(CurrentSkill[4], Fire1)) fire1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Fire2)) fire2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Fire3)) fire3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Fire4)) fire4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Fire5)) fire5(5);
+                else if (ReferenceEquals(CurrentSkill[4], Ice1)) ice1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Ice2)) ice2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Ice3)) ice3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Ice4)) ice4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Ice5)) ice5(5);
+                else if (ReferenceEquals(CurrentSkill[4], Lightning1)) lightning1(5);
+                else if (ReferenceEquals(CurrentSkill[4], Lightning2)) lightning2(5);
+                else if (ReferenceEquals(CurrentSkill[4], Lightning3)) lightning3(5);
+                else if (ReferenceEquals(CurrentSkill[4], Lightning4)) lightning4(5);
+                else if (ReferenceEquals(CurrentSkill[4], Lightning5)) lightning5(5);
             }
         }
             
         
     }
     
+    // Sets the cooldown Backgrounds
+    public void cooldownUI(int skillslot, Image[] BackgroundImages, TextMeshProUGUI[] skillslottexts, float cooldownDuration, bool isAbilityCD)
+    {
+        if(isAbilityCD){
+            int arrayIndex = skillslot - 1;
+            BackgroundImages[arrayIndex].gameObject.SetActive(true);
+            StartCoroutine(UpdateCooldownText(skillslottexts[arrayIndex], cooldownDuration));
+        }
+    }
+
+    private IEnumerator UpdateCooldownText(TextMeshProUGUI textElement, float cooldownDuration)
+    {
+        float currentCooldown = cooldownDuration;
+
+        while (currentCooldown > 0f)
+        {
+            textElement.text = Mathf.Ceil(currentCooldown).ToString();
+            yield return new WaitForSeconds(0.1f);
+            currentCooldown -= 0.1f;
+        }
+        textElement.text = "0";
+        textElement.transform.parent.gameObject.SetActive(false);
+    }
+
+
 
     //SWORD 1 STARTS HERE
 
@@ -450,8 +518,9 @@ public class SkillList : MonoBehaviour
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
     //Individual Ability Actions Begin Here, these define what each skill does.
-    void sword1()
+    void sword1(int skilslot)
     {
+
         swdamage1_1 = (int) (scruffystats.damage);
         swdamage1_2 = (int) (scruffystats.damage);
         swdamage1_3 = (int) (scruffystats.damage);
@@ -485,12 +554,22 @@ public class SkillList : MonoBehaviour
         //Cooldown check
         if (!isAbilitySword1CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Sword1");
-            CurrentSword1CD = Sword1CD;
-            isAbilitySword1CD = true;
-
+            if (scruffystats.CurrentMana >= Sword1MC)
+            {   
+                scruffystats.UseMana(Sword1MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Sword1");
+                CurrentSword1CD = Sword1CD;
+                isAbilitySword1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSword1CD, isAbilitySword1CD);
+        
+
     }
 
     void sword1start(){ //Calls the start of the ability
@@ -557,8 +636,9 @@ public class SkillList : MonoBehaviour
     private int swdamage2_3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void sword2()
+    void sword2(int skilslot)
     {
+        
         swdamage2_1 = (int) (scruffystats.damage * 0.6);
         swdamage2_2 = (int) (scruffystats.damage * 0.6);
         swdamage2_3 = (int) (scruffystats.damage * 1.6);
@@ -590,11 +670,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilitySword2CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Sword2");
-            CurrentSword2CD = Sword2CD;
-            isAbilitySword2CD = true;
+            if (scruffystats.CurrentMana >= Sword2MC)
+            {   
+                scruffystats.UseMana(Sword2MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Sword2");
+                CurrentSword2CD = Sword2CD;
+                isAbilitySword2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSword2CD, isAbilitySword2CD);
     }
 
     void sword2start(){
@@ -657,7 +747,7 @@ public class SkillList : MonoBehaviour
     private int swdamage3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSword3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void sword3()
+    void sword3(int skilslot)
     {
         swdamage3 = (int) (scruffystats.damage * 1.8);
 
@@ -671,11 +761,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilitySword3CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Sword3");
-            CurrentSword3CD = Sword3CD;
-            isAbilitySword3CD = true;
+            if (scruffystats.CurrentMana >= Sword3MC)
+            {   
+                scruffystats.UseMana(Sword3MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Sword3");
+                CurrentSword3CD = Sword3CD;
+                isAbilitySword3CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSword3CD, isAbilitySword3CD);
     }
 
     void sword3start(){
@@ -717,14 +816,23 @@ public class SkillList : MonoBehaviour
 
 
 
-    void sword4()
+    void sword4(int skilslot)
     {
         if (!isAbilitySword4CD)
         {
-            animator.SetTrigger("Sword4");
-            CurrentSword4CD = Sword4CD;
-            isAbilitySword4CD = true;
+            if (scruffystats.CurrentMana >= Sword4MC)
+            {   
+                scruffystats.UseMana(Sword4MC); //Uses the mana
+                animator.SetTrigger("Sword4");
+                CurrentSword4CD = Sword4CD;
+                isAbilitySword4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }       
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSword4CD, isAbilitySword4CD);
     }
 
     void sword4start(){
@@ -747,14 +855,24 @@ public class SkillList : MonoBehaviour
     double DmgBoostValue;
     double TakenDmgBoostValue;
 
-    void sword5()
+    void sword5(int skilslot)
     {
         if (!isAbilitySword5CD)
         {
-            animator.SetTrigger("Sword5");
-            CurrentSword5CD = Sword5CD;
-            isAbilitySword5CD = true;
+            if (scruffystats.CurrentMana >= Sword5MC)
+            {   
+                scruffystats.UseMana(Sword5MC); //Uses the mana
+                animator.SetTrigger("Sword5");
+                CurrentSword5CD = Sword5CD;
+                isAbilitySword5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSword5CD, isAbilitySword5CD);
     }
 
     void sword5start(){
@@ -797,7 +915,7 @@ public class SkillList : MonoBehaviour
     private int spdamage1_6;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void spear1()
+    void spear1(int skilslot)
     {
         spdamage1_1 = (int) (scruffystats.damage * 0.5);
         spdamage1_2 = (int) (scruffystats.damage * 0.5);
@@ -852,11 +970,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilitySpear1CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Spear1");
-            CurrentSpear1CD = Spear1CD;
-            isAbilitySpear1CD = true;
+            if (scruffystats.CurrentMana >= Spear1MC)
+            {   
+                scruffystats.UseMana(Spear1MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Spear1");
+                CurrentSpear1CD = Spear1CD;
+                isAbilitySpear1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSpear1CD, isAbilitySpear1CD);
     }
 
     void spear1start(){
@@ -942,7 +1070,7 @@ public class SkillList : MonoBehaviour
     private int spdamage2;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void spear2()
+    void spear2(int skilslot)
     {
         spdamage2 = (int) (scruffystats.damage * 2.6);
 
@@ -959,11 +1087,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilitySpear2CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Spear2");
-            CurrentSpear2CD = Spear2CD;
-            isAbilitySpear2CD = true;
+            if (scruffystats.CurrentMana >= Spear2MC)
+            {   
+                scruffystats.UseMana(Spear2MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Spear2");
+                CurrentSpear2CD = Spear2CD;
+                isAbilitySpear2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSpear2CD, isAbilitySpear2CD);
     }
 
     void spear2start(){
@@ -1010,25 +1147,58 @@ public class SkillList : MonoBehaviour
 
 
 
-    void spear3()
+    void spear3(int skilslot)
     {
         if (!isAbilitySpear3CD)
         {
-            animator.SetTrigger("Spear3");
-            CurrentSpear3CD = Spear3CD;
-            isAbilitySpear3CD = true;
+            if (scruffystats.CurrentMana >= Spear3MC)
+            {   
+                scruffystats.UseMana(Spear3MC); //Uses the mana
+                animator.SetTrigger("Spear3");
+                CurrentSpear3CD = Spear3CD;
+                isAbilitySpear3CD = true;   
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSpear3CD, isAbilitySpear3CD);
     }
 
     void spear3start(){
         SpearP3.SetActive(true);
         ParticleSystem PS = SpearP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+        scruffystats.AddEvasion(25);
+        Invoke("spear3ManaGain1", 0f);
+        Invoke("spear3ManaGain2", 1f);
+        Invoke("spear3ManaGain3", 2f);
+        Invoke("spear3ManaGain4", 3f);
+        Invoke("spear3end", 4f);
+    }
+
+    void spear3ManaGain1(){
+        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
+    }
+    void spear3ManaGain2(){
+        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
+    }
+    void spear3ManaGain3(){
+        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
+    }
+    void spear3ManaGain4(){
+        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
     }
 
     void spear3end(){
+        scruffystats.RemoveEvasion(25);
         SpearP3.SetActive(false);    
     }
+
+
+
     
 
 
@@ -1038,9 +1208,9 @@ public class SkillList : MonoBehaviour
     private int spdamage4;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesSpear4 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void spear4()
+    void spear4(int skilslot)
     {
-        spdamage4 = (int) (scruffystats.damage * 2);
+        spdamage4 = (int) (scruffystats.damage * 4);
 
         Transform Slash1 =  SpearP4.transform.Find("Slash1");
         Transform Slash2 = Slash1.Find("Collider");
@@ -1055,11 +1225,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilitySpear4CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Spear4");
-            CurrentSpear4CD = Spear4CD;
-            isAbilitySpear4CD = true;
+            if (scruffystats.CurrentMana >= Spear4MC)
+            {   
+                scruffystats.UseMana(Spear4MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Spear4");
+                CurrentSpear4CD = Spear4CD;
+                isAbilitySpear4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSpear4CD, isAbilitySpear4CD);
     }
 
     void spear4start(){
@@ -1109,24 +1289,39 @@ public class SkillList : MonoBehaviour
 
 
 
-    void spear5()
+    void spear5(int skilslot)
     {
         if (!isAbilitySpear5CD)
         {
-            animator.SetTrigger("Spear5");
-            CurrentSpear5CD = Spear5CD;
-            isAbilitySpear5CD = true;
+            if (scruffystats.CurrentMana >= Spear5MC)
+            {   
+                scruffystats.UseMana(Spear5MC); //Uses the mana
+                animator.SetTrigger("Spear5");
+                CurrentSpear5CD = Spear5CD;
+                isAbilitySpear5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentSpear5CD, isAbilitySpear5CD);
     }
 
     void spear5start(){
         SpearP5.SetActive(true);
         ParticleSystem PS = SpearP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        scruffystats.GainImmunity();
+
+        Invoke("spear5end", 1.1f);
     }
 
     void spear5end(){
         SpearP5.SetActive(false);    
+        scruffystats.RemoveImmunity();
     }
     
 
@@ -1142,7 +1337,7 @@ public class SkillList : MonoBehaviour
     private int hadamage1_2;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void hammer1()
+    void hammer1(int skilslot)
     {
         hadamage1_1 = (int) (scruffystats.damage * 2);
         hadamage1_2 = (int) (scruffystats.damage * 1.6);
@@ -1168,11 +1363,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityHammer1CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Hammer1");
-            CurrentHammer1CD = Hammer1CD;
-            isAbilityHammer1CD = true;
+            if (scruffystats.CurrentMana >= Hammer1MC)
+            {   
+                scruffystats.UseMana(Hammer1MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Hammer1");
+                CurrentHammer1CD = Hammer1CD;
+                isAbilityHammer1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentHammer1CD, isAbilityHammer1CD);
     }
 
     void hammer1start(){
@@ -1234,7 +1438,7 @@ public class SkillList : MonoBehaviour
     private int hadamage2_3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void hammer2()
+    void hammer2(int skilslot)
     {
         hadamage2_1 = (int) (scruffystats.damage * 1.2);
         hadamage2_2 = (int) (scruffystats.damage * 1.2);
@@ -1267,11 +1471,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityHammer2CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Hammer2");
-            CurrentHammer2CD = Hammer2CD;
-            isAbilityHammer2CD = true;
+            if (scruffystats.CurrentMana >= Hammer2MC)
+            {   
+                scruffystats.UseMana(Hammer2MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Hammer2");
+                CurrentHammer2CD = Hammer2CD;
+                isAbilityHammer2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentHammer2CD, isAbilityHammer2CD);
     }
 
     void hammer2start(){
@@ -1337,7 +1550,7 @@ public class SkillList : MonoBehaviour
     private int hadamage3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void hammer3()
+    void hammer3(int skilslot)
     {
         hadamage3 = (int) (scruffystats.damage * 2);
 
@@ -1354,11 +1567,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityHammer3CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Hammer3");
-            CurrentHammer3CD = Hammer3CD;
-            isAbilityHammer3CD = true;
+            if (scruffystats.CurrentMana >= Hammer3MC)
+            {   
+                scruffystats.UseMana(Hammer3MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Hammer3");
+                CurrentHammer3CD = Hammer3CD;
+                isAbilityHammer3CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentHammer3CD, isAbilityHammer3CD);
     }
 
     void hammer3start(){
@@ -1411,7 +1634,7 @@ public class SkillList : MonoBehaviour
     private int hadamage4;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesHammer4 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void hammer4()
+    void hammer4(int skilslot)
     {
         hadamage4 = (int) (scruffystats.damage);
 
@@ -1428,11 +1651,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityHammer4CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Hammer4");
-            CurrentHammer4CD = Hammer4CD;
-            isAbilityHammer4CD = true;
+            if (scruffystats.CurrentMana >= Hammer4MC)
+            {   
+                scruffystats.UseMana(Hammer4MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Hammer4");
+                CurrentHammer4CD = Hammer4CD;
+                isAbilityHammer4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentHammer4CD, isAbilityHammer4CD);
     }
 
     void hammer4start(){
@@ -1481,14 +1714,24 @@ public class SkillList : MonoBehaviour
 
 
     int ArmorBoostValue;
-    void hammer5()
+    void hammer5(int skilslot)
     {
         if (!isAbilityHammer5CD)
         {
-            animator.SetTrigger("Hammer5");
-            CurrentHammer5CD = Hammer5CD;
-            isAbilityHammer5CD = true;
+            if (scruffystats.CurrentMana >= Hammer5MC)
+            {   
+                scruffystats.UseMana(Hammer5MC); //Uses the mana
+                animator.SetTrigger("Hammer5");
+                CurrentHammer5CD = Hammer5CD;
+                isAbilityHammer5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentHammer5CD, isAbilityHammer5CD);
     }
 
     void hammer5start(){
@@ -1517,7 +1760,7 @@ public class SkillList : MonoBehaviour
     private int fidamage1_2;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void fire1()
+    void fire1(int skilslot)
     {
         fidamage1 = (int) (scruffystats.damage * 2);
         fidamage1_2 = (int) (scruffystats.damage * 1/5);
@@ -1534,10 +1777,20 @@ public class SkillList : MonoBehaviour
         }
         if (!isAbilityFire1CD)
         {
-            animator.SetTrigger("Fire1");
-            CurrentFire1CD = Fire1CD;
-            isAbilityFire1CD = true;
+            if (scruffystats.CurrentMana >= Fire1MC)
+            {   
+                scruffystats.UseMana(Fire1MC); //Uses the mana
+                animator.SetTrigger("Fire1");
+                CurrentFire1CD = Fire1CD;
+                isAbilityFire1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentFire1CD, isAbilityFire1CD);
     }
 
     private float FireparticleMoveSpeed = 2f;
@@ -1600,6 +1853,7 @@ public class SkillList : MonoBehaviour
         }  
 
         FireP1.transform.position = FireinitialPosition;
+        FireP1.SetActive(false); 
     }
 
     void CheckEnemiesInBoxColliderFire1(BoxCollider collider, int damage)
@@ -1635,7 +1889,7 @@ public class SkillList : MonoBehaviour
     private int fidamage2;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire2 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void fire2()
+    void fire2(int skilslot)
     {
         fidamage2 = (int) (scruffystats.damage * 1/5);
         Transform Fire1 =  FireP2.transform.Find("FireCircle");
@@ -1651,10 +1905,19 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityFire2CD)
         {
-            animator.SetTrigger("Fire2");
-            CurrentFire2CD = Fire2CD;
-            isAbilityFire2CD = true;
+            if (scruffystats.CurrentMana >= Fire2MC)
+            {   
+                scruffystats.UseMana(Fire2MC); //Uses the mana
+               animator.SetTrigger("Fire2");
+                CurrentFire2CD = Fire2CD;
+                isAbilityFire2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentFire2CD, isAbilityFire2CD);
     }
 
     void fire2start(){
@@ -1667,8 +1930,24 @@ public class SkillList : MonoBehaviour
 
     void fire2hit(){
         fire2col.enabled = true;
-        CheckEnemiesInBoxColliderFire2(fire2col, fidamage2);
+        StartCoroutine(Fire2HitRoutine());
     }
+
+    IEnumerator Fire2HitRoutine()
+    {
+        float duration = 5f; // Duration of the lightning effect
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Check for enemies in colliders
+            CheckEnemiesInBoxColliderFire2(fire2col, fidamage2);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }   
 
     void fire2end(){
         FireP2.SetActive(false); 
@@ -1714,7 +1993,7 @@ public class SkillList : MonoBehaviour
     private int fidamage3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void fire3()
+    void fire3(int skilslot)
     {
         fidamage3 = (int) (scruffystats.damage);
         Transform Fire1 =  FireP3.transform.Find("FireBeam");
@@ -1730,11 +2009,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityFire3CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Fire3");
-            CurrentFire3CD = Fire3CD;
-            isAbilityFire3CD = true;
+            if (scruffystats.CurrentMana >= Fire3MC)
+            {   
+                scruffystats.UseMana(Fire3MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Fire3");
+                CurrentFire3CD = Fire3CD;
+                isAbilityFire3CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentFire3CD, isAbilityFire3CD);
     }
 
     void fire3start(){
@@ -1795,7 +2084,7 @@ public class SkillList : MonoBehaviour
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesFire4 = new Dictionary<BoxCollider, HashSet<Collider>>();
     Transform FireExplosion;
 
-    void fire4()
+    void fire4(int skilslot)
     {
         fidamage4 = (int) (scruffystats.damage * 4);
         fidamage4_1 = (int) (scruffystats.MaxHealth * 1/5);
@@ -1813,11 +2102,21 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityFire4CD)
         {
-            MovementScript.enabled = false;
-            animator.SetTrigger("Fire4");
-            CurrentFire4CD = Fire4CD;
-            isAbilityFire4CD = true;
+            if (scruffystats.CurrentMana >= Fire4MC)
+            {   
+                scruffystats.UseMana(Fire4MC); //Uses the mana
+                MovementScript.enabled = false;
+                animator.SetTrigger("Fire4");
+                CurrentFire4CD = Fire4CD;
+                isAbilityFire4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentFire4CD, isAbilityFire4CD);
     }
 
     void fire4start(){
@@ -1866,18 +2165,24 @@ public class SkillList : MonoBehaviour
 
 
     private bool DoubleDotDamage = false;
-    WeaponElement weaponElementScript;
 
-    void fire5()
+    void fire5(int skilslot)
     {
-        weaponElementScript = GetComponent<WeaponElement>();
-
         if (!isAbilityFire5CD)
         {
-            animator.SetTrigger("Fire5");
-            CurrentFire5CD = Fire5CD;
-            isAbilityFire5CD = true;
+            if (scruffystats.CurrentMana >= Fire5MC)
+            {   
+                scruffystats.UseMana(Fire5MC); //Uses the mana
+                animator.SetTrigger("Fire5");
+                CurrentFire5CD = Fire5CD;
+                isAbilityFire5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentFire5CD, isAbilityFire5CD);
     }
 
     void fire5start(){
@@ -1913,7 +2218,7 @@ public class SkillList : MonoBehaviour
     private int icdamage1_3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce1 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void ice1()
+    void ice1(int skilslot)
     {
         icdamage1_1 = (int) (scruffystats.damage * 1.6);
         icdamage1_2 = (int) (scruffystats.damage * 1.6);
@@ -1946,10 +2251,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityIce1CD)
         {
-            animator.SetTrigger("Ice1");
-            CurrentIce1CD = Ice1CD;
-            isAbilityIce1CD = true;
+            if (scruffystats.CurrentMana >= Ice1MC)
+            {   
+                scruffystats.UseMana(Ice1MC); //Uses the mana
+                animator.SetTrigger("Ice1");
+                CurrentIce1CD = Ice1CD;
+                isAbilityIce1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentIce1CD, isAbilityIce1CD);
     }
 
     void ice1start(){
@@ -1964,16 +2279,42 @@ public class SkillList : MonoBehaviour
 
     void ice1_1hit(){
         ice1_1col.enabled = true;
-        CheckEnemiesInBoxColliderIce1(ice1_1col, icdamage1_1);
+        StartCoroutine(Ice1HitRoutine());
     }
     void ice1_2hit(){
         ice1_2col.enabled = true;
-        CheckEnemiesInBoxColliderIce1(ice1_2col, icdamage1_2);
+        StartCoroutine(Ice1HitRoutine());
     }
     void ice1_3hit(){
         ice1_3col.enabled = true;
-        CheckEnemiesInBoxColliderIce1(ice1_3col, icdamage1_3);
+        StartCoroutine(Ice1HitRoutine());
     }
+
+    IEnumerator Ice1HitRoutine()
+    {
+        float duration = 5f; // Duration of the lightning effect
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Check for enemies in colliders
+            if(ice1_1col.enabled == true){
+                CheckEnemiesInBoxColliderIce1(ice1_1col, icdamage1_1);
+            }
+            if(ice1_2col.enabled == true){
+                CheckEnemiesInBoxColliderIce1(ice1_2col, icdamage1_2);
+            }
+            if(ice1_3col.enabled == true){
+                CheckEnemiesInBoxColliderIce1(ice1_3col, icdamage1_3);
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }   
+
+    
 
     void ice1end(){
         IceP1.SetActive(false); 
@@ -1995,6 +2336,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce1[collider].Contains(enemy))
             {
+                enemy.GetComponent<EnemyStats>().ApplySlow(1);
                 enemy.GetComponent<EnemyStats>().TakeDamage(damage);
                 hitEnemiesIce1[collider].Add(enemy);
             }
@@ -2010,14 +2352,24 @@ public class SkillList : MonoBehaviour
 
 
     int HealthShieldValue;
-    void ice2()
+    void ice2(int skilslot)
     {
         if (!isAbilityIce2CD)
         {
-            animator.SetTrigger("Ice2");
-            CurrentIce2CD = Ice2CD;
-            isAbilityIce2CD = true;
+            if (scruffystats.CurrentMana >= Ice2MC)
+            {   
+                scruffystats.UseMana(Ice2MC); //Uses the mana
+                animator.SetTrigger("Ice2");
+                CurrentIce2CD = Ice2CD;
+                isAbilityIce2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentIce2CD, isAbilityIce2CD);
     }
 
     void ice2start(){
@@ -2047,7 +2399,7 @@ public class SkillList : MonoBehaviour
     private int icdamage3;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce3 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void ice3()
+    void ice3(int skilslot)
     {
         icdamage3 = (int) (scruffystats.damage * 3/4);
         Transform ice1x =  IceP3.transform.Find("SlowCircle");
@@ -2063,10 +2415,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityIce3CD)
         {
-            animator.SetTrigger("Ice3");
-            CurrentIce3CD = Ice3CD;
-            isAbilityIce3CD = true;
+            if (scruffystats.CurrentMana >= Ice3MC)
+            {   
+                scruffystats.UseMana(Ice3MC); //Uses the mana
+                animator.SetTrigger("Ice3");
+                CurrentIce3CD = Ice3CD;
+                isAbilityIce3CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentIce3CD, isAbilityIce3CD);
     }
 
     void ice3start(){
@@ -2074,13 +2436,29 @@ public class SkillList : MonoBehaviour
         ParticleSystem PS = IceP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
         Invoke("ice3hit", 0f);
-        Invoke("ice3end", 4.5f); 
+        Invoke("ice3end", 4f); 
     }
 
     void ice3hit(){
         ice3col.enabled = true;
-        CheckEnemiesInBoxColliderIce3(ice3col, icdamage3);
+        StartCoroutine(Ice3HitRoutine());
     }
+
+    IEnumerator Ice3HitRoutine()
+    {
+        float duration = 5f; // Duration of the lightning effect
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Check for enemies in colliders
+            CheckEnemiesInBoxColliderIce3(ice3col, icdamage3);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }   
 
     void ice3end(){
         IceP3.SetActive(false); 
@@ -2100,6 +2478,7 @@ public class SkillList : MonoBehaviour
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce3[collider].Contains(enemy))
             {
                 enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("ice", damage, 4f, 1f));
+                enemy.GetComponent<EnemyStats>().ApplySlow(2);
                 hitEnemiesIce3[collider].Add(enemy);
             }
         }
@@ -2113,16 +2492,24 @@ public class SkillList : MonoBehaviour
 
 
 
-
-
-    void ice4()
+    void ice4(int skilslot)
     {
         if (!isAbilityIce4CD)
         {
-            animator.SetTrigger("Ice4");
-            CurrentIce4CD = Ice4CD;
-            isAbilityIce4CD = true;
+            if (scruffystats.CurrentMana >= Ice4MC)
+            {   
+                scruffystats.UseMana(Ice4MC); //Uses the mana
+                animator.SetTrigger("Ice4");
+                CurrentIce4CD = Ice4CD;
+                isAbilityIce4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentIce4CD, isAbilityIce4CD);
     }
 
     void ice4start(){
@@ -2157,7 +2544,7 @@ public class SkillList : MonoBehaviour
     private int icdamage5;
     private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesIce5 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
-    void ice5()
+    void ice5(int skilslot)
     {
         icdamage5 = (int) (scruffystats.damage);
         Transform ice1x =  IceP5.transform.Find("Sparks");
@@ -2173,10 +2560,20 @@ public class SkillList : MonoBehaviour
 
         if (!isAbilityIce5CD)
         {
-            animator.SetTrigger("Ice5");
-            CurrentIce5CD = Ice5CD;
-            isAbilityIce5CD = true;
+            if (scruffystats.CurrentMana >= Ice5MC)
+            {   
+                scruffystats.UseMana(Ice5MC); //Uses the mana
+                animator.SetTrigger("Ice5");
+                CurrentIce5CD = Ice5CD;
+                isAbilityIce5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentIce5CD, isAbilityIce5CD);
     }
 
     void ice5start(){
@@ -2209,6 +2606,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce5[collider].Contains(enemy))
             {
+                enemy.GetComponent<EnemyStats>().freezeOn();
                 enemy.GetComponent<EnemyStats>().TakeDamage(damage);
                 hitEnemiesIce5[collider].Add(enemy);
             }
@@ -2226,25 +2624,47 @@ public class SkillList : MonoBehaviour
 
 
 
-
-    void lightning1()
+    private int lightningevasion;
+    private float walkSIncrease;
+    private float runSIncrease;
+    void lightning1(int skilslot)
     {
+        lightningevasion = 50;
+        walkSIncrease = 7f;
+        runSIncrease = 10f;
         if (!isAbilityLightning1CD)
         {
-            animator.SetTrigger("Lightning1");
-            CurrentLightning1CD = Lightning1CD;
-            isAbilityLightning1CD = true;
+            if (scruffystats.CurrentMana >= Lightning1MC)
+            {   
+                scruffystats.UseMana(Lightning1MC); //Uses the mana
+                animator.SetTrigger("Lightning1");
+                CurrentLightning1CD = Lightning1CD;
+                isAbilityLightning1CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning1CD, isAbilityLightning1CD);
     }
 
     void lightning1start(){
         LightningP1.SetActive(true);
         ParticleSystem PS = LightningP1.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        scruffystats.AddEvasion(lightningevasion);
+        scruffystats.IncreaseMovementSpeed(walkSIncrease, runSIncrease);
+
+        Invoke("lightning1end", 7f); 
     }
 
     void lightning1end(){
         LightningP1.SetActive(false);  
+        scruffystats.RemoveEvasion(lightningevasion);
+        scruffystats.ResetMovementSpeed();
     }
     
 
@@ -2256,24 +2676,38 @@ public class SkillList : MonoBehaviour
 
 
 
-    void lightning2()
+    void lightning2(int skilslot)
     {
         if (!isAbilityLightning2CD)
         {
-            animator.SetTrigger("Lightning2");
-            CurrentLightning2CD = Lightning2CD;
-            isAbilityLightning2CD = true;
+            if (scruffystats.CurrentMana >= Lightning2MC)
+            {   
+                scruffystats.UseMana(Lightning2MC); //Uses the mana
+                animator.SetTrigger("Lightning2");
+                CurrentLightning2CD = Lightning2CD;
+                isAbilityLightning2CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning2CD, isAbilityLightning2CD);
     }
 
     void lightning2start(){
         LightningP2.SetActive(true);
         ParticleSystem PS = LightningP2.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        weaponElementScript.isShockEffect = true;
+        Invoke("lightning2end", 10f); 
     }
 
     void lightning2end(){
         LightningP2.SetActive(false);  
+        weaponElementScript.isShockEffect = false;
     }
 
 
@@ -2285,14 +2719,24 @@ public class SkillList : MonoBehaviour
 
 
 
-    void lightning3()
+    void lightning3(int skilslot)
     {
         if (!isAbilityLightning3CD)
         {
-            animator.SetTrigger("Lightning3");
-            CurrentLightning3CD = Lightning3CD;
-            isAbilityLightning3CD = true;
+            if (scruffystats.CurrentMana >= Lightning3MC)
+            {   
+                scruffystats.UseMana(Lightning3MC); //Uses the mana
+                animator.SetTrigger("Lightning3");
+                CurrentLightning3CD = Lightning3CD;
+                isAbilityLightning3CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning3CD, isAbilityLightning3CD);
     }
 
     void lightning3start(){
@@ -2311,67 +2755,451 @@ public class SkillList : MonoBehaviour
 
 
 
+    private BoxCollider lightning4_1col;
+    private BoxCollider lightning4_2col;
+    private BoxCollider lightning4_3col;
+    private BoxCollider lightning4_4col;
+    private BoxCollider lightning4_5col;
+    private BoxCollider lightning4_6col;
+    private BoxCollider lightning4_7col;
+    private BoxCollider lightning4_8col;
+    private int lidamage4;
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesLightning4 = new Dictionary<BoxCollider, HashSet<Collider>>();
 
 
-
-    void lightning4()
+    void lightning4(int skilslot)
     {
+        lidamage4 = (int) (scruffystats.damage * 1/2);
+
+        Transform li1x =  LightningP4.transform.Find("Lightning aura");
+        lightning4_1col = li1x.GetComponent<BoxCollider>();
+
+        Transform li2x = li1x.Find("Lightning aura (1)");
+        lightning4_2col = li2x.GetComponent<BoxCollider>();
+
+        Transform li3x = li1x.Find("Lightning aura (2)");
+        lightning4_3col = li3x.GetComponent<BoxCollider>();
+
+        Transform li4x = li1x.Find("Lightning aura (3)");
+        lightning4_4col = li4x.GetComponent<BoxCollider>();
+
+        Transform li5x = li1x.Find("Lightning aura (4)");
+        lightning4_5col = li5x.GetComponent<BoxCollider>();
+
+        Transform li6x = li1x.Find("Lightning aura (5)");
+        lightning4_6col = li6x.GetComponent<BoxCollider>();
+
+        Transform li7x = li1x.Find("Lightning aura (6)");
+        lightning4_7col = li7x.GetComponent<BoxCollider>();
+
+        Transform li8x = li1x.Find("Lightning aura (7)");
+        lightning4_8col = li8x.GetComponent<BoxCollider>();
+
+        lightning4_1col.enabled = false;
+        lightning4_2col.enabled = false;
+        lightning4_3col.enabled = false;
+        lightning4_4col.enabled = false;
+        lightning4_5col.enabled = false;
+        lightning4_6col.enabled = false;
+        lightning4_7col.enabled = false;
+        lightning4_8col.enabled = false;
+
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_1col))
+        {
+            hitEnemiesLightning4.Add(lightning4_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_2col))
+        {
+            hitEnemiesLightning4.Add(lightning4_2col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_3col))
+        {
+            hitEnemiesLightning4.Add(lightning4_3col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_4col))
+        {
+            hitEnemiesLightning4.Add(lightning4_4col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_5col))
+        {
+            hitEnemiesLightning4.Add(lightning4_5col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_6col))
+        {
+            hitEnemiesLightning4.Add(lightning4_6col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_7col))
+        {
+            hitEnemiesLightning4.Add(lightning4_7col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning4.ContainsKey(lightning4_8col))
+        {
+            hitEnemiesLightning4.Add(lightning4_8col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityLightning4CD)
         {
-            animator.SetTrigger("Lightning4");
-            CurrentLightning4CD = Lightning4CD;
-            isAbilityLightning4CD = true;
+            if (scruffystats.CurrentMana >= Lightning4MC)
+            {   
+                scruffystats.UseMana(Lightning4MC); //Uses the mana
+                animator.SetTrigger("Lightning4");
+                CurrentLightning4CD = Lightning4CD;
+                isAbilityLightning4CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning4CD, isAbilityLightning4CD);
     }
 
+    
     void lightning4start(){
         LightningP4.SetActive(true);
         ParticleSystem PS = LightningP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+         Invoke("lightning4hit", 0f);
+        // Rotate LightningP4 over 5 seconds
+        float rotationSpeed = 360f / 5f; // 360 degrees in 5 seconds
+        float rotationTime = 0f;
+
+        // Use a coroutine to smoothly rotate the object
+        StartCoroutine(RotateLightningP4(rotationSpeed, rotationTime));
+
+        Invoke("lightning4end", 5f);
     }
+
+    IEnumerator RotateLightningP4(float rotationSpeed, float rotationTime)
+    {
+        while (rotationTime < 5f) // Rotate for 5 seconds
+        {
+            float rotationAmount = rotationSpeed * Time.deltaTime;
+            LightningP4.transform.Rotate(Vector3.up, rotationAmount);
+            rotationTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    void lightning4hit(){
+        lightning4_1col.enabled = true;
+        lightning4_2col.enabled = true;
+        lightning4_3col.enabled = true;
+        lightning4_4col.enabled = true;
+        lightning4_5col.enabled = true;
+        lightning4_6col.enabled = true;
+        lightning4_7col.enabled = true;
+        lightning4_8col.enabled = true;
+        StartCoroutine(Lightning4HitRoutine());
+    }
+
+    IEnumerator Lightning4HitRoutine()
+    {
+        float duration = 5f; // Duration of the lightning effect
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Check for enemies in colliders
+            CheckEnemiesInBoxColliderLightning4(lightning4_1col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_2col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_3col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_4col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_5col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_6col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_7col, lidamage4);
+            CheckEnemiesInBoxColliderLightning4(lightning4_8col, lidamage4);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }   
 
     void lightning4end(){
-        LightningP4.SetActive(false);  
+        LightningP4.SetActive(false); 
+        lightning4_1col.enabled = false;
+        lightning4_2col.enabled = false;
+        lightning4_3col.enabled = false;
+        lightning4_4col.enabled = false;
+        lightning4_5col.enabled = false;
+        lightning4_6col.enabled = false;
+        lightning4_7col.enabled = false;
+        lightning4_8col.enabled = false;
+
+        foreach (var collider in hitEnemiesLightning4.Keys)
+        {
+            hitEnemiesLightning4[collider].Clear();
+        } 
     }
-    
 
-
-
-
-
-
-
-
-
-    void lightning5()
+    void CheckEnemiesInBoxColliderLightning4(BoxCollider collider, int damage)
     {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesLightning4[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().InflictShock();
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesLightning4[collider].Add(enemy);
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+    private BoxCollider lightning5_1col;
+    private BoxCollider lightning5_2col;
+    private BoxCollider lightning5_3col;
+    private BoxCollider lightning5_4col;
+    private BoxCollider lightning5_5col;
+    private BoxCollider lightning5_6col;
+    private BoxCollider lightning5_7col;
+    private BoxCollider lightning5_8col;
+    private BoxCollider lightning5_9col;
+    private BoxCollider lightning5_10col;
+    private int lidamage5;
+
+    private Dictionary<BoxCollider, HashSet<Collider>> hitEnemiesLightning5 = new Dictionary<BoxCollider, HashSet<Collider>>();
+
+    void lightning5(int skilslot)
+    {
+        lidamage5 = (int) (scruffystats.damage * 1/2);
+
+        Transform li1 =  LightningP5.transform.Find("Lightning aura");
+        Transform li2 = li1.Find("Collider");
+        BoxCollider[] li3 = li2.GetComponents<BoxCollider>();
+
+        lightning5_1col = li3[0];
+        lightning5_2col = li3[1];
+        lightning5_3col = li3[2];
+        lightning5_4col = li3[3];
+        lightning5_5col = li3[4];
+        lightning5_6col = li3[5];
+        lightning5_7col = li3[6];
+        lightning5_8col = li3[7];
+        lightning5_9col = li3[8];
+        lightning5_10col = li3[9];
+        
+        lightning5_1col.enabled = false;
+        lightning5_2col.enabled = false;
+        lightning5_3col.enabled = false;
+        lightning5_4col.enabled = false;
+        lightning5_5col.enabled = false;
+        lightning5_6col.enabled = false;
+        lightning5_7col.enabled = false;
+        lightning5_8col.enabled = false;
+        lightning5_9col.enabled = false;
+        lightning5_10col.enabled = false;
+
+
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_1col))
+        {
+            hitEnemiesLightning5.Add(lightning5_1col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_2col))
+        {
+            hitEnemiesLightning5.Add(lightning5_2col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_3col))
+        {
+            hitEnemiesLightning5.Add(lightning5_3col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_4col))
+        {
+            hitEnemiesLightning5.Add(lightning5_4col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_5col))
+        {
+            hitEnemiesLightning5.Add(lightning5_5col, new HashSet<Collider>()); 
+        }
+         if (!hitEnemiesLightning5.ContainsKey(lightning5_6col))
+        {
+            hitEnemiesLightning5.Add(lightning5_6col, new HashSet<Collider>()); 
+        }
+         if (!hitEnemiesLightning5.ContainsKey(lightning5_7col))
+        {
+            hitEnemiesLightning5.Add(lightning5_7col, new HashSet<Collider>()); 
+        }
+         if (!hitEnemiesLightning5.ContainsKey(lightning5_8col))
+        {
+            hitEnemiesLightning5.Add(lightning5_8col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_9col))
+        {
+            hitEnemiesLightning5.Add(lightning5_9col, new HashSet<Collider>()); 
+        }
+        if (!hitEnemiesLightning5.ContainsKey(lightning5_10col))
+        {
+            hitEnemiesLightning5.Add(lightning5_10col, new HashSet<Collider>()); 
+        }
+
         if (!isAbilityLightning5CD)
         {
-            animator.SetTrigger("Lightning5");
-            CurrentLightning5CD = Lightning5CD;
-            isAbilityLightning5CD = true;
+            if (scruffystats.CurrentMana >= Lightning5MC)
+            {   
+                scruffystats.UseMana(Lightning5MC); //Uses the mana
+                animator.SetTrigger("Lightning5");
+                CurrentLightning5CD = Lightning5CD;
+                isAbilityLightning5CD = true;
+            }
+            else{
+                scruffystats.NeedMana();
+            }
+            
         }
+
+        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning5CD, isAbilityLightning5CD);
     }
 
     void lightning5start(){
         LightningP5.SetActive(true);
         ParticleSystem PS = LightningP5.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        Invoke("lightning5_1hit", 0f);
+        Invoke("lightning5_2hit", 0.5f);
+        Invoke("lightning5_3hit", 1f);
+        Invoke("lightning5_4hit", 1.5f);
+        Invoke("lightning5_5hit", 2f);
+        Invoke("lightning5_6hit", 2.5f);
+        Invoke("lightning5_7hit", 3f);
+        Invoke("lightning5_8hit", 3.5f);
+        Invoke("lightning5_9hit", 4f);
+        Invoke("lightning5_10hit", 4.5f);
+        Invoke("lightning5end", 5f); 
     }
+
+    void lightning5_1hit(){
+        lightning5_1col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_2hit(){
+        lightning5_2col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_3hit(){
+        lightning5_3col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_4hit(){
+        lightning5_4col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_5hit(){
+        lightning5_5col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_6hit(){
+        lightning5_6col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_7hit(){
+        lightning5_7col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_8hit(){
+        lightning5_8col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_9hit(){
+        lightning5_9col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+    void lightning5_10hit(){
+        lightning5_10col.enabled = true;
+        StartCoroutine(Lightning5HitRoutine());
+    }
+
+    IEnumerator Lightning5HitRoutine()
+    {
+        float duration = 5f; // Duration of the lightning effect
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Check for enemies in colliders
+            if(lightning5_1col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_1col, lidamage5);
+            }
+            if(lightning5_2col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_2col, lidamage5);
+            }
+            if(lightning5_3col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_3col, lidamage5);
+            }
+            if(lightning5_4col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_4col, lidamage5);
+            }
+            if(lightning5_5col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_5col, lidamage5);
+            }
+            if(lightning5_6col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_6col, lidamage5);
+            }
+            if(lightning5_7col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_7col, lidamage5);
+            }
+            if(lightning5_8col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_8col, lidamage5);
+            }
+            if(lightning5_9col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_9col, lidamage5);
+            }
+            if(lightning5_10col.enabled == true){
+                CheckEnemiesInBoxColliderLightning5(lightning5_10col, lidamage5);
+            }
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }   
+
 
     void lightning5end(){
         LightningP5.SetActive(false);  
+        lightning5_1col.enabled = false;
+        lightning5_2col.enabled = false;
+        lightning5_3col.enabled = false;
+        lightning5_4col.enabled = false;
+        lightning5_5col.enabled = false;
+        lightning5_6col.enabled = false;
+        lightning5_7col.enabled = false;
+        lightning5_8col.enabled = false;
+        lightning5_9col.enabled = false;
+        lightning5_10col.enabled = false;
+        foreach (var collider in hitEnemiesLightning5.Keys)
+        {
+            hitEnemiesLightning5[collider].Clear();
+        }   
+    }
+
+    void CheckEnemiesInBoxColliderLightning5(BoxCollider collider, int damage)
+    {
+        Collider[] hitColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.extents, collider.transform.rotation, LayerMask.GetMask("Enemy"));
+        foreach (Collider enemy in hitColliders)
+        {
+            if (enemy.CompareTag("Enemy") && !hitEnemiesLightning5[collider].Contains(enemy))
+            {
+                enemy.GetComponent<EnemyStats>().InflictShock();
+                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                hitEnemiesLightning5[collider].Add(enemy);
+            }
+        }
     }
     
-
-
-
-
-
-
-
-
-
+ 
 
     private void BasicAttackCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown)
     {
