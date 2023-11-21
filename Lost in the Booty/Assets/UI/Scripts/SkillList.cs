@@ -135,8 +135,8 @@ public class SkillList : MonoBehaviour
     private int Hammer1MC = 8;
     private int Hammer2MC = 10;
     private int Hammer3MC = 10;
-    private int Hammer4MC = 15;
-    private int Hammer5MC = 15;
+    private int Hammer4MC = 10;
+    private int Hammer5MC = 12;
 
     private int Fire1MC = 10;
     private int Fire2MC = 12;
@@ -145,7 +145,7 @@ public class SkillList : MonoBehaviour
     private int Fire5MC = 5;
     
     private int Ice1MC = 8;
-    private int Ice2MC = 15;
+    private int Ice2MC = 12;
     private int Ice3MC = 10;
     private int Ice4MC = 8;
     private int Ice5MC = 12;
