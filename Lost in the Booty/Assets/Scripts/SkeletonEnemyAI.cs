@@ -22,16 +22,14 @@ public class EnemyAI : MonoBehaviour
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private EnemyStats enemyStats;
+    private Animator animator;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        if (player == null )
-        {
-            Debug.Log("player == null");
-        }
         navMeshAgent = GetComponent<NavMeshAgent>();
         enemyStats = GetComponent<EnemyStats>();
+        animator = GetComponent<Animator>();
 
         navMeshAgent.enabled = true;
 
@@ -107,12 +105,14 @@ public class EnemyAI : MonoBehaviour
     void StopPatrol()
     {
         // Example: Stop patrol-related behaviors
+        animator.SetBool("IsPatrolling", false);
         navMeshAgent.isStopped = true;
     }
 
     void StopChase()
     {
         // Example: Stop chase-related behaviors
+        animator.SetBool("IsChasing", false);
         navMeshAgent.isStopped = true;
     }
 
@@ -126,6 +126,9 @@ public class EnemyAI : MonoBehaviour
     {
         // Example: Move towards the current patrol point
         navMeshAgent.isStopped = false;
+
+        // Set IsPatrolling parameter in the Animator
+        animator.SetBool("IsPatrolling", true);
 
         if (patrolPoints != null && patrolPoints.Length > 0)
         {
@@ -161,6 +164,9 @@ public class EnemyAI : MonoBehaviour
         // Example: Move towards the player
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(player.position);
+
+        // Set IsChasing parameter in the Animator
+        animator.SetBool("IsChasing", true);
 
         // Check if the player is within the attack distance
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
