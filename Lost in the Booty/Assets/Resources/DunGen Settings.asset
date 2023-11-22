@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1ebb4e3aa3b474d849bc53fbe48191, type: 3}
   m_Name: DunGen Settings
   m_EditorClassIdentifier: 
-  defaultSocket: {fileID: 3159502179967448606}
+  defaultSocket: {fileID: 8409526528921273835}
   tagManager:
     keys: 
     values: []
---- !u!114 &3159502179967448606
+--- !u!114 &8409526528921273835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
