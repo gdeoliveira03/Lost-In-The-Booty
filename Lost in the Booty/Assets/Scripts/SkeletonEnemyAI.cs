@@ -124,27 +124,19 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol()
     {
-        // Example: Move towards the current patrol point
-        navMeshAgent.isStopped = false;
-
         // Set IsPatrolling parameter in the Animator
         animator.SetBool("IsPatrolling", true);
 
-        if (patrolPoints != null && patrolPoints.Length > 0)
+        // Check if the enemy has reached the current patrol point
+        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 1f)
         {
-            navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
+            // Move to the next patrol point
+            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+            SetDestinationToNextPatrolPoint();
+        }
 
-            // Check if the enemy has reached the current patrol point
-            if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 1f)
-            {
-                // Move to the next patrol point
-                currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            }
-        }
-        else
-        {
-            Debug.Log("patrolPoints array is null or empty.");
-        }
+        // Set the destination to the next patrol point
+        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
 
         // Check if the player is within the chase distance
         if (Vector3.Distance(transform.position, player.position) < chaseDistance)
