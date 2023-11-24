@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -14,12 +15,14 @@ public class EnemyAI : MonoBehaviour
     private bool isPaused = false;
     private float patrolTimer = 0f;
     private float patrolPauseTimer = 0f;
+    private float timeUntilNextAttack = 0f;
 
     public EnemyState currentState = EnemyState.Patrol;
 
     public float patrolAreaRadius = 10f; // Set the radius of the patrol area
     public float patrolInterval = 5f; // Set the interval between patrols
     public float patrolPauseDuration = 2f;
+    public float attackCooldown = 2f;
 
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
@@ -213,8 +216,16 @@ public class EnemyAI : MonoBehaviour
 
     void Attack()
     {
-        // Example: Perform attack actions
-        // This can include dealing damage to the player or triggering attack animations
+        // Check if the cooldown has elapsed
+        if (timeUntilNextAttack > 0f)
+        {
+            // Cooldown still active, wait for next frame
+            timeUntilNextAttack -= Time.deltaTime;
+            return;
+        }
+
+        PerformAttack();
+        timeUntilNextAttack = attackCooldown;
 
         // Check if the player is outside the attack distance, go back to chasing
         if (Vector3.Distance(transform.position, player.position) > attackDistance)
@@ -222,6 +233,16 @@ public class EnemyAI : MonoBehaviour
             SetState(EnemyState.Chase);
         }
     }
+
+    void PerformAttack()
+    {
+        // Perform your attack logic here
+        Debug.Log("Performing attack!");
+
+        // For demonstration purposes, let's assume the attack deals damage to the player
+        player.GetComponent<ScruffyStats>().TakeDamage(10);
+    }
+
 
     void SetRandomDestinationInPatrolArea()
     {
