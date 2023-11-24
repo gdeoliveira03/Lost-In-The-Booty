@@ -11,10 +11,15 @@ public class EnemyAI : MonoBehaviour
         Attack
     }
 
+    private bool isPaused = false;
+    private float patrolTimer = 0f;
+    private float patrolPauseTimer = 0f;
+
     public EnemyState currentState = EnemyState.Patrol;
 
-    public Transform[] patrolPoints;
-    private int currentPatrolIndex = 0;
+    public float patrolAreaRadius = 10f; // Set the radius of the patrol area
+    public float patrolInterval = 5f; // Set the interval between patrols
+    public float patrolPauseDuration = 2f;
 
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
@@ -79,7 +84,7 @@ public class EnemyAI : MonoBehaviour
         StopAttack();
 
         // Example: Set up patrol-specific variables
-        SetDestinationToNextPatrolPoint();
+        SetRandomDestinationInPatrolArea();
     }
 
     void InitializeChaseState()
@@ -127,16 +132,50 @@ public class EnemyAI : MonoBehaviour
         // Set IsPatrolling parameter in the Animator
         animator.SetBool("IsPatrolling", true);
 
-        // Check if the enemy has reached the current patrol point
-        if (Vector3.Distance(transform.position, patrolPoints[currentPatrolIndex].position) < 1f)
+        if (isPaused)
         {
-            // Move to the next patrol point
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
-            SetDestinationToNextPatrolPoint();
-        }
+            // Check if the patrol pause timer has elapsed
+            if (patrolPauseTimer <= 0f)
+            {
+                // Resume patrolling
+                isPaused = false;
 
-        // Set the destination to the next patrol point
-        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
+                // Set a random destination within the patrol area
+                SetRandomDestinationInPatrolArea();
+
+                // Reset the patrol timer
+                patrolTimer = patrolInterval;
+            }
+            else
+            {
+                // Continue counting down the patrol pause timer
+                patrolPauseTimer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            // Check if the patrol timer has elapsed
+            if (patrolTimer <= 0f)
+            {
+                // Pause patrolling
+                isPaused = true;
+
+                // Reset the patrol pause timer
+                patrolPauseTimer = patrolPauseDuration;
+            }
+            else
+            {
+                // Continue counting down the patrol timer
+                patrolTimer -= Time.deltaTime;
+
+                // Move towards the current patrol destination
+                navMeshAgent.isStopped = false;
+                if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance < 0.5f)
+                {
+                    SetRandomDestinationInPatrolArea();
+                }
+            }
+        }
 
         // Check if the player is within the chase distance
         if (Vector3.Distance(transform.position, player.position) < chaseDistance)
@@ -147,7 +186,6 @@ public class EnemyAI : MonoBehaviour
 
     void Chase()
     {
-
         Debug.Log("Chasing...");
         Debug.Log("NavMeshAgent.isActiveAndEnabled: " + navMeshAgent.isActiveAndEnabled);
         Debug.Log("NavMeshAgent.isOnNavMesh: " + navMeshAgent.isOnNavMesh);
@@ -185,9 +223,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void SetDestinationToNextPatrolPoint()
+    void SetRandomDestinationInPatrolArea()
     {
-        // Example: Set the destination to the next patrol point
-        navMeshAgent.SetDestination(patrolPoints[currentPatrolIndex].position);
+        // Set the destination to a random point within the patrol area
+        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * patrolAreaRadius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, patrolAreaRadius, 1);
+        navMeshAgent.SetDestination(hit.position);
     }
 }
