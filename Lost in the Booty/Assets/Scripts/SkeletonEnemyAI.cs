@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour
     private float patrolTimer = 0f;
     private float patrolPauseTimer = 0f;
     private float timeUntilNextAttack = 0f;
+    private float runSpeed = 4f;
+    private float walkSpeed = 2f;
 
     public EnemyState currentState = EnemyState.Patrol;
 
@@ -86,8 +88,14 @@ public class EnemyAI : MonoBehaviour
         StopChase();
         StopAttack();
 
+        // Set walking speed to patrol
+        navMeshAgent.speed = walkSpeed;
+
         // Example: Set up patrol-specific variables
         SetRandomDestinationInPatrolArea();
+
+        isPaused = false;
+        animator.SetBool("IsPaused", isPaused);
     }
 
     void InitializeChaseState()
@@ -97,6 +105,8 @@ public class EnemyAI : MonoBehaviour
         // Example: Stop any ongoing patrol or attack behaviors
         StopPatrol();
         StopAttack();
+
+        navMeshAgent.speed = runSpeed;
     }
 
     void InitializeAttackState()
@@ -135,8 +145,13 @@ public class EnemyAI : MonoBehaviour
         // Set IsPatrolling parameter in the Animator
         animator.SetBool("IsPatrolling", true);
 
+        // Set the "IsPaused" parameter in the Animator
+        animator.SetBool("IsPaused", isPaused);
+
         if (isPaused)
         {
+            Debug.Log("PAUSED");
+
             // Check if the patrol pause timer has elapsed
             if (patrolPauseTimer <= 0f)
             {
@@ -157,6 +172,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
+            Debug.Log("PATROLLING");
             // Check if the patrol timer has elapsed
             if (patrolTimer <= 0f)
             {
