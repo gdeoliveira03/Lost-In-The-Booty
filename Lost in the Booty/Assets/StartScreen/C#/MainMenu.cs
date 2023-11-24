@@ -5,10 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void StartButton()
+    public void Start()
     {
-        SceneManager.LoadScene(0); // Replace 1 with the build index of your first scene
-        //LoadingManager.instance.LoadSceneAsync(0);
         Debug.Log("Start Game!");
     }
 

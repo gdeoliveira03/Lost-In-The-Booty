@@ -32,10 +32,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scenes/Possible different main island.unity
     guid: 23211ffe37abc8d40894020ec905acbf
-  - enabled: 1
-    path: Assets/Scenes/DynamicStartMenu.unity
-    guid: 0026ccdfde104684aafef580dad7f6d6
-  - enabled: 1
-    path: Assets/Scenes/SceneTransition.unity
-    guid: 1d4bc262d58ae354eb4eba0678ec9093
   m_configObjects: {}
