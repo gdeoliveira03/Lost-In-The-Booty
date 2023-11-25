@@ -115,7 +115,7 @@ public class SkillList : MonoBehaviour
 
     private float Lightning1CD = 15f;
     private float Lightning2CD = 12f;
-    private float Lightning3CD = 3f;
+    private float Lightning3CD = 15f;
     private float Lightning4CD = 14f;
     private float Lightning5CD = 16f;
 
@@ -152,7 +152,7 @@ public class SkillList : MonoBehaviour
 
     private int Lightning1MC = 12;
     private int Lightning2MC = 6;
-    private int Lightning3MC = 3;
+    private int Lightning3MC = 15;
     private int Lightning4MC = 14;
     private int Lightning5MC = 16;
 
@@ -234,10 +234,12 @@ public class SkillList : MonoBehaviour
     private ScruffyStats scruffystats;
     private int damage;
     private PlayerStateMachine MovementScript;
+    private Transform playerTransform;
     WeaponElement weaponElementScript;
 
     public Image[] CooldownBackgrounds;
     public TextMeshProUGUI[] skillslottexts;
+    
 
     void Start(){
         animator = GetComponent<Animator>();
@@ -248,6 +250,9 @@ public class SkillList : MonoBehaviour
     }
 
     void Update(){
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerTransform = player.transform;
+
 
         BasicAttackCooldown(ref CurrentSword1CD, Sword1CD, ref isAbilitySword1CD);
         BasicAttackCooldown(ref CurrentSword2CD, Sword2CD, ref isAbilitySword2CD);
@@ -1700,7 +1705,7 @@ public class SkillList : MonoBehaviour
             if (enemy.CompareTag("Enemy") && !hitEnemiesHammer4[collider].Contains(enemy))
             {
                 enemy.GetComponent<EnemyStats>().TakeDamage(damage);
-                enemy.GetComponent<EnemyStats>().Stun();
+                enemy.GetComponent<EnemyStats>().Stun(3f);
                 hitEnemiesHammer4[collider].Add(enemy);
             }
         }
@@ -2716,39 +2721,118 @@ public class SkillList : MonoBehaviour
 
 
 
+    public GameObject LightningDagger;
+    public float daggerColliderRadius = 2f;
+    public float daggerDamageInterval = 0.5f;
+    public int daggerDamage;
 
+    private SphereCollider daggerCollider;
 
-
-    void lightning3(int skilslot)
+    void lightning3(int skillSlot)
     {
         if (!isAbilityLightning3CD)
         {
+            daggerDamage = (int) (scruffystats.damage * 1/2);
             if (scruffystats.CurrentMana >= Lightning3MC)
             {   
-                scruffystats.UseMana(Lightning3MC); //Uses the mana
+                scruffystats.UseMana(Lightning3MC); // Uses the mana
                 animator.SetTrigger("Lightning3");
                 CurrentLightning3CD = Lightning3CD;
                 isAbilityLightning3CD = true;
             }
-            else{
+            else
+            {
                 scruffystats.NeedMana();
+                return; // Exit early if not enough mana
             }
-            
         }
 
-        cooldownUI(skilslot, CooldownBackgrounds, skillslottexts, CurrentLightning3CD, isAbilityLightning3CD);
+        cooldownUI(skillSlot, CooldownBackgrounds, skillslottexts, CurrentLightning3CD, isAbilityLightning3CD);
     }
 
-    void lightning3start(){
+    void lightning3start()
+    {
         LightningP3.SetActive(true);
         ParticleSystem PS = LightningP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
+
+        daggerCollider = null;
+
+        SpawnLightningDaggers(8, 2f, 5f);
+        InvokeRepeating("DealDamageToEnemies", 0f, daggerDamageInterval);
+        Invoke("lightning3end", 5f);
     }
 
-    void lightning3end(){
-        LightningP3.SetActive(false);  
+    void DealDamageToEnemies()
+    {
+        if (daggerCollider != null)
+        {
+            // Find all colliders within the dagger collider
+            Collider[] colliders = Physics.OverlapSphere(daggerCollider.transform.position, daggerColliderRadius);
+
+            foreach (Collider collider in colliders)
+            {
+                // Check if the collider belongs to an enemy (you may need to adjust the tag or layer)
+                if (collider.CompareTag("Enemy"))
+                {
+                    collider.GetComponent<EnemyStats>().TakeDamage(daggerDamage);
+                    collider.GetComponent<EnemyStats>().Stun(0.2f);
+                    collider.GetComponent<EnemyStats>().InflictShock();
+                }
+            }
+        }
     }
-    
+
+    void SpawnLightningDaggers(int numberOfDaggers, float radius, float daggerDuration)
+    {
+
+        Vector3 centerPosition = Vector3.zero;
+
+        // Spawn daggers around the player
+        for (int i = 0; i < numberOfDaggers; i++)
+        {
+            float angle = i * (360f / numberOfDaggers);
+            float radians = Mathf.Deg2Rad * angle;
+            float xOffset = radius * Mathf.Sin(radians);
+            float zOffset = radius * Mathf.Cos(radians);
+
+            Quaternion playerRotation = playerTransform.rotation;
+            Vector3 offset = playerRotation * new Vector3(xOffset, 0f, zOffset);
+            offset += playerTransform.forward * 2f;
+
+            Vector3 spawnPosition = playerTransform.position + offset;
+            centerPosition += spawnPosition; // Accumulate positions for later averaging
+
+            GameObject lightningDagger = Instantiate(LightningDagger, spawnPosition, Quaternion.identity);
+            Destroy(lightningDagger, daggerDuration);
+        }
+
+        // Calculate the average position of the outer daggers
+        centerPosition /= numberOfDaggers;
+
+        // Spawn a central dagger at the average position with a sphere collider
+        GameObject centralLightningDagger = Instantiate(LightningDagger, centerPosition, Quaternion.identity);
+        daggerCollider = centralLightningDagger.AddComponent<SphereCollider>();
+        daggerCollider.radius = 4f; // Set the radius of the sphere collider
+        daggerCollider.isTrigger = true;
+
+
+        Destroy(centralLightningDagger, daggerDuration);
+    }
+
+    void lightning3end()
+    {
+        LightningP3.SetActive(false);
+        CancelInvoke("DealDamageToEnemies");
+        if (daggerCollider != null)
+        {
+            Destroy(daggerCollider);
+            daggerCollider = null;
+        }   
+    }
+        
+
+
 
 
 
