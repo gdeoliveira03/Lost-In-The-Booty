@@ -121,6 +121,7 @@ public class WeaponElement : MonoBehaviour
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
     private ScruffyStats scruffystats;
+    private SkillList skillist;
 
     // Start is called before the first frame update
     void Start()
@@ -128,6 +129,7 @@ public class WeaponElement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         scruffystats = GetComponent<ScruffyStats>();
+        skillist = GetComponent<SkillList>();
 
         Cutlasstoggle.onValueChanged.AddListener(delegate { ToggleChanged(Cutlasstoggle, ref Cutlass, CantSpear, CantHammer); });
         Speartoggle.onValueChanged.AddListener(delegate { ToggleChanged(Speartoggle, ref Spear, CantSword, CantHammer); });
@@ -347,11 +349,22 @@ public class WeaponElement : MonoBehaviour
     {
         weaponElement = toggle.isOn;
 
-        // Handle corresponding UI elements
         if (!weaponElement)
         {
             cantElement1.SetActive(false);
             cantElement2.SetActive(false);
+
+            if (skillist != null && skillist.ImageComponents != null)
+            {
+                foreach (Image imageComponent in skillist.ImageComponents)
+                {
+                    if (imageComponent.sprite != null)
+                    {
+                        imageComponent.sprite = null;
+                        imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, 0f);
+                    }
+                }
+            }
         }
         else
         {

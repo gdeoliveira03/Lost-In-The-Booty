@@ -294,17 +294,32 @@ public class SkillList : MonoBehaviour
         if (ImageComponents[0].sprite != null){
             CurrentSkill[0] = ImageComponents[0].sprite;
         }
+        else if (ImageComponents[0].sprite == null){
+            CurrentSkill[0] = null;
+        }
         if (ImageComponents[1].sprite != null){
             CurrentSkill[1] = ImageComponents[1].sprite;
+        }
+        else if (ImageComponents[0].sprite == null){
+            CurrentSkill[1] = null;
         }
         if (ImageComponents[2].sprite != null){
             CurrentSkill[2] = ImageComponents[2].sprite;
         }
+        else if (ImageComponents[0].sprite == null){
+            CurrentSkill[2] = null;
+        }
         if (ImageComponents[3].sprite != null){
             CurrentSkill[3] = ImageComponents[3].sprite;
         }
+        else if (ImageComponents[0].sprite == null){
+            CurrentSkill[3] = null;
+        }
         if (ImageComponents[4].sprite != null){
             CurrentSkill[4] = ImageComponents[4].sprite;
+        }
+        else if (ImageComponents[0].sprite == null){
+            CurrentSkill[4] = null;
         }
 
         if (CurrentSkill[0] != null){ //Just to make sure nothing happens if the Current Skill is NULL
