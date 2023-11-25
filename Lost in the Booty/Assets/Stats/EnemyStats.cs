@@ -87,14 +87,16 @@ public class EnemyStats : MonoBehaviour
 
     //STUNNED ENEMY
 
-    public void Stun()
+    public void Stun(float duration)
     {
         isStunned = true;
+
+        RecoverFromStun(duration);
     }
 
-    IEnumerator RecoverFromStun()
+    IEnumerator RecoverFromStun(float duration)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(duration);
 
         // Reset the flag and allow the enemy to move again
         isStunned = false;
