@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScruffyStats : MonoBehaviour
 {
         public int damage = 5;
-        public int armor = 0;
-        public int evasion = 0;
+        public int armor;
+        public int evasion;
         private int movementspeed = 0;
         private int luck = 0;
 
@@ -34,6 +35,8 @@ public class ScruffyStats : MonoBehaviour
         private PlayerStateMachine MovementScript;
         private float normalwalkSpeed;
         private float normalrunSpeed;
+
+        public TextMeshProUGUI[] StatTexts;
      
         void Start ()
         {
@@ -49,6 +52,16 @@ public class ScruffyStats : MonoBehaviour
             normalrunSpeed = MovementScript.runSpeed;
 
             damage = 5;
+            armor = 5;
+            evasion = 5;
+
+            StatTexts[0].text = "Health: " + MaxHealth;
+            StatTexts[1].text = "Mana: " + MaxMana;
+            StatTexts[2].text = "Damage: " + damage;
+            StatTexts[3].text = "Armor: " + armor;
+            StatTexts[4].text = "Evasion: " + evasion + "%";
+
+
         }
 
 
@@ -56,6 +69,12 @@ public class ScruffyStats : MonoBehaviour
 
             healthBar.value = CurrentHealth;
             manaBar.value = CurrentMana;
+
+            StatTexts[0].text = "Health: " + MaxHealth;
+            StatTexts[1].text = "Mana: " + MaxMana;
+            StatTexts[2].text = "Damage: " + damage;
+            StatTexts[3].text = "Armor: " + armor;
+            StatTexts[4].text = "Evasion: " + evasion + "%";
 
             // Natural Mana/Health regen
             healthrestoreTimer += Time.deltaTime;
@@ -76,7 +95,7 @@ public class ScruffyStats : MonoBehaviour
                 Die();
             }
 
-            
+            // FOR TESTING
             if (Input.GetKeyDown(KeyCode.T)){
                 TakeDamage(5);
             }
