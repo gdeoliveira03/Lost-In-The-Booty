@@ -25,6 +25,8 @@ public class EnemyAI : MonoBehaviour
     public float patrolInterval = 5f; // Set the interval between patrols
     public float patrolPauseDuration = 2f;
     public float attackCooldown = 2f;
+    public float chaseSpeed = 4f;
+    public float patrolSpeed = 2f;
 
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
@@ -89,7 +91,7 @@ public class EnemyAI : MonoBehaviour
         StopAttack();
 
         // Set walking speed to patrol
-        navMeshAgent.speed = walkSpeed;
+        navMeshAgent.speed = patrolSpeed;
 
         // Example: Set up patrol-specific variables
         SetRandomDestinationInPatrolArea();
@@ -108,7 +110,7 @@ public class EnemyAI : MonoBehaviour
         StopPatrol();
         StopAttack();
 
-        navMeshAgent.speed = runSpeed;
+        navMeshAgent.speed = chaseSpeed;
 
         animator.SetBool("IsChasing", true);
         animator.SetBool("IsPatrolling", false);
@@ -216,15 +218,14 @@ public class EnemyAI : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < chaseDistance)
         {
             SetState(EnemyState.Chase);
+            navMeshAgent.speed = chaseSpeed;
+            animator.SetBool("IsChasing", true);
         }
     }
 
     void Chase()
     {
         Debug.Log("Chasing...");
-        Debug.Log("NavMeshAgent.isActiveAndEnabled: " + navMeshAgent.isActiveAndEnabled);
-        Debug.Log("NavMeshAgent.isOnNavMesh: " + navMeshAgent.isOnNavMesh);
-        Debug.Log("NavMeshAgent.hasPath: " + navMeshAgent.hasPath);
 
         // Example: Move towards the player
         navMeshAgent.isStopped = false;
