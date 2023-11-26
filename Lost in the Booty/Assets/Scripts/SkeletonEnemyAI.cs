@@ -96,6 +96,8 @@ public class EnemyAI : MonoBehaviour
 
         isPaused = false;
         animator.SetBool("IsPaused", isPaused);
+        animator.SetBool("IsPatrolling", true);
+        animator.SetBool("IsChasing", false);
     }
 
     void InitializeChaseState()
@@ -107,6 +109,9 @@ public class EnemyAI : MonoBehaviour
         StopAttack();
 
         navMeshAgent.speed = runSpeed;
+
+        animator.SetBool("IsChasing", true);
+        animator.SetBool("IsPatrolling", false);
     }
 
     void InitializeAttackState()
@@ -117,7 +122,9 @@ public class EnemyAI : MonoBehaviour
         StopPatrol();
         StopChase();
 
-        // Example: Set up attack-specific variables
+        animator.SetBool("IsAttacking", true);
+        animator.SetBool("IsChasing", false);
+        animator.SetBool("IsPatrolling", false);
     }
 
     void StopPatrol()
@@ -173,6 +180,7 @@ public class EnemyAI : MonoBehaviour
         else
         {
             Debug.Log("PATROLLING");
+
             // Check if the patrol timer has elapsed
             if (patrolTimer <= 0f)
             {
@@ -246,6 +254,7 @@ public class EnemyAI : MonoBehaviour
         // Check if the player is outside the attack distance, go back to chasing
         if (Vector3.Distance(transform.position, player.position) > attackDistance)
         {
+            animator.SetBool("IsAttacking", false);
             SetState(EnemyState.Chase);
         }
     }
