@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Scenes/night island(wip).unity
     guid: bb409184be4bbea42a1b4bcebacf964e
   - enabled: 1
-    path: Assets/Scenes/Scenes/Possible different main island.unity
+    path: Assets/Scenes/Scenes/Main Island.unity
     guid: 23211ffe37abc8d40894020ec905acbf
   m_configObjects: {}
