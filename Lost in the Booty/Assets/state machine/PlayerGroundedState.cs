@@ -19,7 +19,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateState()
     {
-        Debug.Log("HELLO FROM GROUNDED update STATE");
+        // Debug.Log("HELLO FROM GROUNDED update STATE"); had to turn this off temporarily
         // if not grounded but in grounded state apply gravity
         if(Ctx.CharacterController.isGrounded == false)
         {
