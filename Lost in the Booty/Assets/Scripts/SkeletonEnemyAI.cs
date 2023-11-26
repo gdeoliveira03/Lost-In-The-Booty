@@ -157,11 +157,12 @@ public class EnemyAI : MonoBehaviour
 
         if (isPaused)
         {
-            Debug.Log("PAUSED");
+            Debug.Log("isPaused = true");
 
             // Check if the patrol pause timer has elapsed
             if (patrolPauseTimer <= 0f)
             {
+                Debug.Log("patrolPauseTimer <= 0");
                 // Resume patrolling
                 isPaused = false;
 
@@ -173,13 +174,14 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                Debug.Log("patrolPauseTimer > 0");
                 // Continue counting down the patrol pause timer
                 patrolPauseTimer -= Time.deltaTime;
             }
         }
         else
         {
-            Debug.Log("PATROLLING");
+            Debug.Log("isPaused = false");
 
             // Check if the patrol timer has elapsed
             if (patrolTimer <= 0f)
@@ -248,8 +250,9 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
-        PerformAttack();
-        timeUntilNextAttack = attackCooldown;
+        // Replaced with animation events
+        // PerformAttack(); 
+        // timeUntilNextAttack = attackCooldown;
 
         // Check if the player is outside the attack distance, go back to chasing
         if (Vector3.Distance(transform.position, player.position) > attackDistance)
@@ -264,8 +267,11 @@ public class EnemyAI : MonoBehaviour
         // Perform your attack logic here
         Debug.Log("Performing attack!");
 
-        // For demonstration purposes, let's assume the attack deals damage to the player
-        player.GetComponent<ScruffyStats>().TakeDamage(10);
+        // Check if the player is within the attack distance
+        if (Vector3.Distance(transform.position, player.position) < attackDistance)
+        {
+            player.GetComponent<ScruffyStats>().TakeDamage(10);
+        }
     }
 
 
