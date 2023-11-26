@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponElement : MonoBehaviour
 {
@@ -18,6 +19,20 @@ public class WeaponElement : MonoBehaviour
     public bool Fire;
     public bool Ice;
     public bool Lightning;
+
+    public Toggle Cutlasstoggle;
+    public Toggle Speartoggle;
+    public Toggle Hammertoggle;
+    public Toggle Firetoggle;
+    public Toggle Icetoggle;
+    public Toggle Lightningtoggle;
+
+    public GameObject CantSword;
+    public GameObject CantSpear;
+    public GameObject CantHammer;
+    public GameObject CantFire;
+    public GameObject CantIce;
+    public GameObject CantLightning;
 
     // GAME UI IMAGES FOR WEAPON/ELEMENT
     public GameObject GameUICutlass;
@@ -106,6 +121,7 @@ public class WeaponElement : MonoBehaviour
     // FOR BASIC ATTACK ANIMATIONS
     Animator animator;
     private ScruffyStats scruffystats;
+    private SkillList skillist;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +129,14 @@ public class WeaponElement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         scruffystats = GetComponent<ScruffyStats>();
+        skillist = GetComponent<SkillList>();
+
+        Cutlasstoggle.onValueChanged.AddListener(delegate { ToggleChanged(Cutlasstoggle, ref Cutlass, CantSpear, CantHammer); });
+        Speartoggle.onValueChanged.AddListener(delegate { ToggleChanged(Speartoggle, ref Spear, CantSword, CantHammer); });
+        Hammertoggle.onValueChanged.AddListener(delegate { ToggleChanged(Hammertoggle, ref Hammer, CantSpear, CantSword); });
+        Firetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Firetoggle, ref Fire, CantIce, CantLightning); });
+        Icetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Icetoggle, ref Ice, CantFire, CantLightning); });
+        Lightningtoggle.onValueChanged.AddListener(delegate { ToggleChanged(Lightningtoggle, ref Lightning, CantFire, CantIce); });
 
         // Get the weapon colliders
         NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
@@ -321,6 +345,34 @@ public class WeaponElement : MonoBehaviour
 
     }
 
+    void ToggleChanged(Toggle toggle, ref bool weaponElement, GameObject cantElement1, GameObject cantElement2)
+    {
+        weaponElement = toggle.isOn;
+
+        if (!weaponElement)
+        {
+            cantElement1.SetActive(false);
+            cantElement2.SetActive(false);
+
+            if (skillist != null && skillist.ImageComponents != null)
+            {
+                foreach (Image imageComponent in skillist.ImageComponents)
+                {
+                    if (imageComponent.sprite != null)
+                    {
+                        imageComponent.sprite = null;
+                        imageComponent.color = new Color(imageComponent.color.r, imageComponent.color.g, imageComponent.color.b, 0f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            cantElement1.SetActive(true);
+            cantElement2.SetActive(true);
+        }
+    }
+
     // Cooldown times for basic abilities
     private float CutlassBasicCooldown = 1f;
     private float SpearBasicCooldown = 1f;
@@ -351,10 +403,15 @@ public class WeaponElement : MonoBehaviour
     private int damage;
     private Dictionary<Collider, HashSet<Collider>> hitEnemies = new Dictionary<Collider, HashSet<Collider>>();
 
+
     // Update Function starts here
     void Update()
     {
         animator = GetComponent<Animator>();
+
+
+ 
+
 
         // Cooldown timers for basic attacks
         BasicAttackCooldown(ref CurrentCutlassBasicCooldown, CutlassBasicCooldown, ref isAbilityCooldownCutlass); // Counts Cooldown time for cutlass
@@ -376,7 +433,7 @@ public class WeaponElement : MonoBehaviour
                     isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
                     CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
                     //PlayAttackSound(swordAttackSound);
-}
+                }
             }
 
         }
