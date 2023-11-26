@@ -162,7 +162,6 @@ public class EnemyAI : MonoBehaviour
             // Check if the patrol pause timer has elapsed
             if (patrolPauseTimer <= 0f)
             {
-                Debug.Log("patrolPauseTimer <= 0");
                 // Resume patrolling
                 isPaused = false;
 
@@ -181,8 +180,6 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            Debug.Log("isPaused = false");
-
             // Check if the patrol timer has elapsed
             if (patrolTimer <= 0f)
             {
@@ -191,6 +188,9 @@ public class EnemyAI : MonoBehaviour
 
                 // Reset the patrol pause timer
                 patrolPauseTimer = patrolPauseDuration;
+
+                // Stop the navigation agent immediately
+                navMeshAgent.isStopped = true;
             }
             else
             {
@@ -199,8 +199,14 @@ public class EnemyAI : MonoBehaviour
 
                 // Move towards the current patrol destination
                 navMeshAgent.isStopped = false;
+
+                // Check if the skeleton has reached the destination
                 if (!navMeshAgent.hasPath || navMeshAgent.remainingDistance < 0.5f)
                 {
+                    // Stop the navigation agent immediately
+                    navMeshAgent.isStopped = true;
+
+                    // Set a new random destination within the patrol area
                     SetRandomDestinationInPatrolArea();
                 }
             }
