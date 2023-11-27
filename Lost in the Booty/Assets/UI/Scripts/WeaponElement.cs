@@ -716,9 +716,9 @@ public class WeaponElement : MonoBehaviour
                     if (enemy.CompareTag(enemyTag) && !hitEnemies[activeWeaponCollider].Contains(enemy))
                     {
                         if(isShockEffect == true){
-                            enemy.GetComponent<EnemyStats>().InflictShock();
+                            enemy.GetComponent<Enemy>().InflictShock();
                         }
-                        enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                        enemy.GetComponent<Enemy>().TakeDamage(damage);
                         hitEnemies[activeWeaponCollider].Add(enemy);
                     }
                 }
@@ -815,10 +815,10 @@ public class WeaponElement : MonoBehaviour
                 if (enemy.CompareTag(enemyTag) && !hitFireEnemies.Contains(enemy))
                 {
                     if(DoubleDotDamage == true){
-                        enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*(damage*1/5), 3f, 0.5f));
+                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2*(damage*1/5), 3f, 0.5f));
                     }
                     else{
-                        enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage*1/5, 3f, 0.5f));
+                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", damage*1/5, 3f, 0.5f));
                     }
                     hitFireEnemies.Add(enemy);
                 }
@@ -866,8 +866,8 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitIceEnemies.Contains(enemy))
                 {
-                    enemy.GetComponent<EnemyStats>().ApplySlow(1);
-                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    enemy.GetComponent<Enemy>().ApplySlow(1);
+                    enemy.GetComponent<Enemy>().TakeDamage(damage);
                     hitIceEnemies.Add(enemy);
                 }
             }
@@ -913,8 +913,8 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitLightningEnemies.Contains(enemy))
                 {
-                    enemy.GetComponent<EnemyStats>().InflictShock();
-                    enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                    enemy.GetComponent<Enemy>().InflictShock();
+                    enemy.GetComponent<Enemy>().TakeDamage(damage);
                     hitLightningEnemies.Add(enemy);
                 }
             }

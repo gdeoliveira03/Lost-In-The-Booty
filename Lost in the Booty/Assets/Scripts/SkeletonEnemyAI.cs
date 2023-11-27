@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -31,14 +31,14 @@ public class EnemyAI : MonoBehaviour
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
-    private EnemyStats enemyStats;
+    private EnemyAI enemyStats;
     private Animator animator;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         navMeshAgent = GetComponent<NavMeshAgent>();
-        enemyStats = GetComponent<EnemyStats>();
+        enemyStats = GetComponent<EnemyAI>();
         animator = GetComponent<Animator>();
 
         navMeshAgent.enabled = true;
@@ -278,4 +278,10 @@ public class EnemyAI : MonoBehaviour
         NavMesh.SamplePosition(randomDirection, out hit, patrolAreaRadius, 1);
         navMeshAgent.SetDestination(hit.position);
     }
+
+    internal void TakeDamage(int damage)
+    {
+        throw new NotImplementedException();
+    }
 }
+*/

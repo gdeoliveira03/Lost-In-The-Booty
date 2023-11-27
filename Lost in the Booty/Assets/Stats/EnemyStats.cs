@@ -1,9 +1,9 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using System.Collections;
 
-public class EnemyStats : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     private int damage = 0;
     private int armor = 0;
@@ -229,4 +229,4 @@ public class EnemyStats : MonoBehaviour
     {
         //Destroy(DeadEnemy);
     }
-}
+}*/

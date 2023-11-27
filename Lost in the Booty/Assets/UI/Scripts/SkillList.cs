@@ -637,7 +637,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSword1[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSword1[collider].Add(enemy);
             }
         }
@@ -752,7 +752,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSword2[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSword2[collider].Add(enemy);
             }
         }
@@ -828,7 +828,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSword3[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSword3[collider].Add(enemy);
             }
         }
@@ -1071,7 +1071,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSpear1[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSpear1[collider].Add(enemy);
             }
         }
@@ -1154,7 +1154,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSpear2[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSpear2[collider].Add(enemy);
             }
         }
@@ -1293,7 +1293,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesSpear4[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesSpear4[collider].Add(enemy);
             }
         }
@@ -1437,7 +1437,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesHammer1[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesHammer1[collider].Add(enemy);
             }
         }
@@ -1551,7 +1551,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesHammer2[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesHammer2[collider].Add(enemy);
             }
         }
@@ -1635,7 +1635,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesHammer3[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesHammer3[collider].Add(enemy);
             }
         }
@@ -1719,8 +1719,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesHammer4[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
-                enemy.GetComponent<EnemyStats>().Stun(3f);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().Stun(3f);
                 hitEnemiesHammer4[collider].Add(enemy);
             }
         }
@@ -1883,12 +1883,12 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesFire1[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 if(DoubleDotDamage == true){
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*fidamage1_2, 5f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2*fidamage1_2, 5f, 0.5f));
                 }
                 else{
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", fidamage1_2, 5f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", fidamage1_2, 5f, 0.5f));
                 }
 
                 hitEnemiesFire1[collider].Add(enemy);
@@ -1987,12 +1987,12 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesFire2[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 if(DoubleDotDamage == true){
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*damage, 5f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2*damage, 5f, 0.5f));
                 }
                 else{
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage, 5f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", damage, 5f, 0.5f));
                 }
 
 
@@ -2078,10 +2078,10 @@ public class SkillList : MonoBehaviour
             if (enemy.CompareTag("Enemy") && !hitEnemiesFire3[collider].Contains(enemy))
             {
                 if(DoubleDotDamage == true){
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", 2*(damage*3/4), 3f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2*(damage*3/4), 3f, 0.5f));
                 }
                 else{
-                    enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("fire", damage*3/4, 3f, 0.5f));
+                    enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", damage*3/4, 3f, 0.5f));
                 }
 
                 hitEnemiesFire3[collider].Add(enemy);
@@ -2171,7 +2171,7 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesFire4[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesFire4[collider].Add(enemy);
             }
         }
@@ -2356,8 +2356,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce1[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().ApplySlow(1);
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().ApplySlow(1);
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesIce1[collider].Add(enemy);
             }
         }
@@ -2497,8 +2497,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce3[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().StartCoroutine(enemy.GetComponent<EnemyStats>().TakeDamageOverTime("ice", damage, 4f, 1f));
-                enemy.GetComponent<EnemyStats>().ApplySlow(2);
+                enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("ice", damage, 4f, 1f));
+                enemy.GetComponent<Enemy>().ApplySlow(2);
                 hitEnemiesIce3[collider].Add(enemy);
             }
         }
@@ -2626,8 +2626,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesIce5[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().freezeOn();
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().freezeOn();
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesIce5[collider].Add(enemy);
             }
         }
@@ -2790,9 +2790,9 @@ public class SkillList : MonoBehaviour
                 // Check if the collider belongs to an enemy (you may need to adjust the tag or layer)
                 if (collider.CompareTag("Enemy"))
                 {
-                    collider.GetComponent<EnemyStats>().TakeDamage(daggerDamage);
-                    collider.GetComponent<EnemyStats>().Stun(0.2f);
-                    collider.GetComponent<EnemyStats>().InflictShock();
+                    collider.GetComponent<Enemy>().TakeDamage(daggerDamage);
+                    collider.GetComponent<Enemy>().Stun(0.2f);
+                    collider.GetComponent<Enemy>().InflictShock();
                 }
             }
         }
@@ -3042,8 +3042,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesLightning4[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().InflictShock();
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().InflictShock();
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesLightning4[collider].Add(enemy);
             }
         }
@@ -3291,8 +3291,8 @@ public class SkillList : MonoBehaviour
         {
             if (enemy.CompareTag("Enemy") && !hitEnemiesLightning5[collider].Contains(enemy))
             {
-                enemy.GetComponent<EnemyStats>().InflictShock();
-                enemy.GetComponent<EnemyStats>().TakeDamage(damage);
+                enemy.GetComponent<Enemy>().InflictShock();
+                enemy.GetComponent<Enemy>().TakeDamage(damage);
                 hitEnemiesLightning5[collider].Add(enemy);
             }
         }
