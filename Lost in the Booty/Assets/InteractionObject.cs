@@ -11,18 +11,31 @@ public class DoctorDialogue : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
     public GameObject scruffy;
+    public GameObject doctor;
     public Camera mainCamera;  // Assign the main camera in the Inspector
     public Camera dialogueCamera;  // Assign the dialogue camera in the Inspector
     public GameObject tutorialUI;  // Assign the tutorial UI GameObject in the Inspector
+    //public PlayerStateMachine playerStateMachine;  // Reference to the PlayerStateMachine component
+    public int conversationNumber;
     private bool isInRange = false;
     private int currentDialogueIndex = 0;
     private string[] dialogues;
 
     void Start()
     {
-        // Initialize your dialogues here
-        dialogues = new string[]
+        //playerStateMachine = doctor.GetComponent<PlayerStateMachine>();
+
+        string[] dialogue1 = new string[]
         {
+            "We're here!",
+            "This is my home village",
+            "That's strange I don't see any of those evil pirates around...",
+            "Let's ask around to see where they went",
+            // Add more dialogues as needed
+        };
+
+        string[] dialogue0 = new string[]
+            {
             "Hey I'm Dr. Hendrix!",
             "You must be that pirate that I saw get killed out there!",
             "How are you alive?",
@@ -40,8 +53,19 @@ public class DoctorDialogue : MonoBehaviour
             "I know where one of the commanders is now...",
             "Let's get started",
 
-            // Add more dialogues as needed
-        };
+                // Add more dialogues as needed
+            };
+
+        // Initialize your dialogues here
+        switch (conversationNumber)
+        {
+            case 0:
+                dialogues = dialogue0;
+                break;
+            case 1:
+                dialogues = dialogue1; // Corrected the assignment here
+                break;
+        }
 
         // Ensure the dialogue panel is initially hidden
         dialoguePanel.SetActive(false);
@@ -141,6 +165,17 @@ public class DoctorDialogue : MonoBehaviour
 
         // Reset the dialogue index for the next interaction
         currentDialogueIndex = 0;
+
+        PlayerStateMachine playerStateMachine = doctor.GetComponent<PlayerStateMachine>();
+        if (playerStateMachine != null)
+        {
+            playerStateMachine.enabled = true;
+        }
+
+        if (conversationNumber == 0)
         SceneManager.LoadScene(8);
+
+        if(conversationNumber == 1)
+            doctor.SetActive(false);
     }
 }
