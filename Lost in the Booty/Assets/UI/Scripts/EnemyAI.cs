@@ -382,6 +382,7 @@ public class Enemy : MonoBehaviour
     {
         FreezeEffect.SetActive(false);
         navMeshAgent.isStopped = false;
+        isFrozen = false;
         animator.speed = 1f;
     }
 
