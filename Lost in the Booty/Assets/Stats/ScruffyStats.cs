@@ -37,11 +37,13 @@ public class ScruffyStats : MonoBehaviour
         private float normalrunSpeed;
 
         public TextMeshProUGUI[] StatTexts;
+        Animator animator;
      
         void Start ()
         {
             MovementScript = GetComponent<PlayerStateMachine>();
             skills = GetComponent<SkillList>();
+            animator = GetComponent<Animator>();
 
             CurrentHealth = MaxHealth;
             CurrentMana = MaxMana;
@@ -87,7 +89,7 @@ public class ScruffyStats : MonoBehaviour
             manarestoreTimer += Time.deltaTime;
             if (manarestoreTimer >= manaRestoreInterval)
             {
-                NaturalRestoreMana(1);
+                NaturalRestoreMana(2);
                 manarestoreTimer = 0f;
             }
 
@@ -97,7 +99,7 @@ public class ScruffyStats : MonoBehaviour
 
             // FOR TESTING
             if (Input.GetKeyDown(KeyCode.T)){
-                TakeDamage(5);
+                TakeDamage(10);
             }
             if (Input.GetKeyDown(KeyCode.Y)){
                 RestoreMana(20);
@@ -352,8 +354,40 @@ public class ScruffyStats : MonoBehaviour
             indicator.SetDamageTextColor(Color.cyan);
         }
 
+        
+        
+        public GameObject deathScreenPrefab;
+        public float fadeDuration = 2f;
+        bool isdead = true;
         public virtual void Die ()
         {
-            Debug.Log(transform.name + " died.");
+            if(isdead){
+                StartCoroutine(DeathSequence());
+                Time.timeScale = 0f;
+            }
+            isdead = false;
+        }
+
+        private IEnumerator DeathSequence()
+        {
+            animator.SetTrigger("Died");
+
+            yield return new WaitForSeconds(2f);
+
+            GameObject deathScreen = Instantiate(deathScreenPrefab, transform.position, Quaternion.identity);
+
+            // Gradually fade in the death screen
+            CanvasGroup canvasGroup = deathScreen.GetComponent<CanvasGroup>();
+            if (canvasGroup != null)
+            {
+                float elapsedTime = 0f;
+                while (elapsedTime < fadeDuration)
+                {
+                    canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                canvasGroup.alpha = 1f;
+            }
         }
 }
