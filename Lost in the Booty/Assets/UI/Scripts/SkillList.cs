@@ -860,7 +860,7 @@ public class SkillList : MonoBehaviour
         ParticleSystem PS = SwordP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
 
-        int Sword4heal = (int) (scruffystats.MaxHealth * 1/3);
+        int Sword4heal = (int) (scruffystats.MaxHealth * 1/2);
 
         scruffystats.FlatHeal(Sword4heal);
         Invoke("sword4end", 5.0f);
@@ -2211,7 +2211,7 @@ public class SkillList : MonoBehaviour
         PS.Play();
         weaponElementScript. DoubleDotDamage = true;
         DoubleDotDamage = true;
-        StartCoroutine(scruffystats.TakeDamageOverTimeX("fire", 1, 7f, 1f));
+        StartCoroutine(scruffystats.TakeDamageOverTimeX("fire", 6, 7f, 1f));
         Invoke("fire5end", 7f); 
     }
 
