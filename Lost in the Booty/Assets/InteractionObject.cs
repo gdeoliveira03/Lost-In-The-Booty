@@ -165,17 +165,17 @@ public class DoctorDialogue : MonoBehaviour
 
         // Reset the dialogue index for the next interaction
         currentDialogueIndex = 0;
-
+         /*
         PlayerStateMachine playerStateMachine = doctor.GetComponent<PlayerStateMachine>();
         if (playerStateMachine != null)
         {
             playerStateMachine.enabled = true;
         }
-
-        if (conversationNumber == 0)
+         */
+        if(conversationNumber == 0)
         SceneManager.LoadScene(8);
 
-        if(conversationNumber == 1)
-            doctor.SetActive(false);
+        //if(conversationNumber == 1)
+          //  doctor.SetActive(false);
     }
 }
