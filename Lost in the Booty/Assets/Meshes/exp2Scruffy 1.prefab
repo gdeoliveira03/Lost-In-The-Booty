@@ -289,7 +289,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -373,15 +373,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c37ff1b08e8174fad79ceb6038f911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage:
-    baseValue: 5
-  armor:
-    baseValue: 1
-  evasion:
-    baseValue: 0
-  attackspeed:
-    baseValue: 0
+  damage: 5
+  armor: 0
+  evasion: 0
   MaxHealth: 25
   healthBar: {fileID: 0}
   MaxMana: 10
   manaBar: {fileID: 0}
+  DamageText: {fileID: 0}
+  HealthText: {fileID: 0}
+  StatTexts: []
