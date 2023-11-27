@@ -86,6 +86,7 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<FloatingHealthBar>();
+        DeadEnemy = gameObject;
 
         navMeshAgent.enabled = true;
 
@@ -485,6 +486,6 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        // Destroy(DeadEnemy);
+        Destroy(DeadEnemy);
     }
 }
