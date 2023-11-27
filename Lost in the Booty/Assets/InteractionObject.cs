@@ -74,6 +74,7 @@ public class DoctorDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = true;
+            other.enabled = false;
             StartDialogue();
         }
     }
@@ -84,6 +85,7 @@ public class DoctorDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = false;
+            other.enabled = true;
             EndDialogue();
         }
     }
