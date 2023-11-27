@@ -16,8 +16,6 @@ public class EnemyAI : MonoBehaviour
     private float patrolTimer = 0f;
     private float patrolPauseTimer = 0f;
     private float timeUntilNextAttack = 0f;
-    private float runSpeed = 4f;
-    private float walkSpeed = 2f;
 
     public EnemyState currentState = EnemyState.Patrol;
 
