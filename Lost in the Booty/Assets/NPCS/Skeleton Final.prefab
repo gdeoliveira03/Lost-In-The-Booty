@@ -15596,7 +15596,7 @@ MonoBehaviour:
   patrolAreaRadius: 10
   patrolInterval: 5
   patrolPauseDuration: 2
-  chaseSpeed: 4
+  chaseSpeed: 6
   patrolSpeed: 2
   chaseDistance: 10
   attackDistance: 2

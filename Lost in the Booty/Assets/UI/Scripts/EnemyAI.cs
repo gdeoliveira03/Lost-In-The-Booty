@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
     public float patrolAreaRadius = 10f;
     public float patrolInterval = 5f;
     public float patrolPauseDuration = 2f;
-    public float chaseSpeed = 4f;
+    public float chaseSpeed = 6f;
     public float patrolSpeed = 2f;
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
@@ -335,7 +335,7 @@ public class Enemy : MonoBehaviour
         // Check if the player is within the attack distance
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
         {
-            player.GetComponent<ScruffyStats>().TakeDamage(0); // Change 0 to damage
+            player.GetComponent<ScruffyStats>().TakeDamage(8); // Change 0 to damage
         }
     }
 
