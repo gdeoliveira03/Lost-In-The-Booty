@@ -7,8 +7,16 @@ public class FloatingHealthBar : MonoBehaviour
 {
 
     [SerializeField] private Slider slider;
-    [SerializeField] private Camera camera;
+    [SerializeField, HideInInspector] private Camera camera;
     [SerializeField] private Transform target;
+
+    private void Start()
+    {
+        if (camera == null)
+        {
+            camera = Camera.main;
+        }
+    }
 
     public void UpdateHealthBar(float CurrentValue, float MaxValue){
         slider.value = CurrentValue / MaxValue;
