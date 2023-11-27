@@ -19,7 +19,6 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateState()
     {
-        Debug.Log("HELLO FROM GROUNDED update STATE");
         // if not grounded but in grounded state apply gravity
         if(Ctx.CharacterController.isGrounded == false)
         {
@@ -64,7 +63,6 @@ public class PlayerGroundedState : PlayerBaseState
         float newYVelocity = Ctx.CurrentMovementY + (Ctx.Gravity * Time.deltaTime);
         float nextYvelocity = (previousYVelocity + newYVelocity) * .5f;
         nextYvelocity = -5.0f;
-        Debug.Log("our next velocity of y is: " + nextYvelocity);
         Ctx.CurrentMovementY = nextYvelocity;
         Ctx.CurrentRunMovementY = nextYvelocity;
     }
