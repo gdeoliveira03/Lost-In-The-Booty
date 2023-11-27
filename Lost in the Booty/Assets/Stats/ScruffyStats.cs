@@ -363,7 +363,6 @@ public class ScruffyStats : MonoBehaviour
         {
             if(isdead){
                 StartCoroutine(DeathSequence());
-                Time.timeScale = 0f;
             }
             isdead = false;
         }
@@ -388,6 +387,7 @@ public class ScruffyStats : MonoBehaviour
                     yield return null;
                 }
                 canvasGroup.alpha = 1f;
+                Time.timeScale = 0f;
             }
         }
 }
