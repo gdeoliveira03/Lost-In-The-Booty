@@ -960,11 +960,11 @@ MonoBehaviour:
   EnemyType: Skeleton
   healthbar: {fileID: 1193030080160758429}
   OnFireEffect: {fileID: 0}
-  LightningElement: {fileID: 0}
-  LightningExplosion: {fileID: 0}
-  SlowEffect: {fileID: 0}
-  FrostBiteEffect: {fileID: 0}
-  FreezeEffect: {fileID: 0}
+  LightningElement: {fileID: 6234332112270774291, guid: 5e57e3b4f29f3d642bc77c1621d29663, type: 3}
+  LightningExplosion: {fileID: 5681968776731761887, guid: d9080495b74d0f940ae455387dde470e, type: 3}
+  SlowEffect: {fileID: 3709028344029255066, guid: c867b46df922f0c4284defc0b88085d6, type: 3}
+  FrostBiteEffect: {fileID: 8905106505285411975, guid: 68fd90f4cb221404b8de0d2841cea510, type: 3}
+  FreezeEffect: {fileID: 5522400045558171923, guid: 1ff9a43bbd1fb7549ab6f850a58fcbb7, type: 3}
   playerTag: Player
 --- !u!136 &8032563996085587836
 CapsuleCollider:

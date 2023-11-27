@@ -264,7 +264,7 @@ public class EnemyAI : MonoBehaviour
         // Check if the player is within the attack distance
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
         {
-            player.GetComponent<ScruffyStats>().TakeDamage(10);
+            player.GetComponent<ScruffyStats>().TakeDamage(0);
         }
     }
 
