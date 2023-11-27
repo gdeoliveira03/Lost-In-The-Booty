@@ -10,6 +10,7 @@ public class DoctorDialogue : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
+    public GameObject scruffy;
     public Camera mainCamera;  // Assign the main camera in the Inspector
     public Camera dialogueCamera;  // Assign the dialogue camera in the Inspector
     public GameObject tutorialUI;  // Assign the tutorial UI GameObject in the Inspector
@@ -49,6 +50,7 @@ public class DoctorDialogue : MonoBehaviour
         mainCamera.enabled = true;
         dialogueCamera.enabled = false;
         tutorialUI.SetActive(true);
+        scruffy.SetActive(true);
 
     }
 
@@ -74,7 +76,7 @@ public class DoctorDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = true;
-            other.enabled = false;
+
             StartDialogue();
         }
     }
@@ -85,7 +87,7 @@ public class DoctorDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = false;
-            other.enabled = true;
+            
             EndDialogue();
         }
     }
@@ -99,7 +101,7 @@ public class DoctorDialogue : MonoBehaviour
         mainCamera.enabled = false;
         dialogueCamera.enabled = true;
         tutorialUI.SetActive(false);
-
+        scruffy.SetActive(false);
 
         // Show the first dialogue
         ShowDialogue(dialogues[currentDialogueIndex]);
@@ -135,6 +137,7 @@ public class DoctorDialogue : MonoBehaviour
         // Disable the dialogue camera and enable the main camera
         mainCamera.enabled = true;
         dialogueCamera.enabled = false;
+        scruffy.SetActive(true);
 
         // Reset the dialogue index for the next interaction
         currentDialogueIndex = 0;
