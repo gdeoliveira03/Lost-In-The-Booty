@@ -12,6 +12,7 @@ public class DoctorDialogue : MonoBehaviour
     public GameObject dialoguePanel;
     public GameObject scruffy;
     public GameObject doctor;
+    public bool isScruffy;
     public Camera mainCamera;  // Assign the main camera in the Inspector
     public Camera dialogueCamera;  // Assign the dialogue camera in the Inspector
     public GameObject tutorialUI;  // Assign the tutorial UI GameObject in the Inspector
@@ -20,6 +21,7 @@ public class DoctorDialogue : MonoBehaviour
     private bool isInRange = false;
     private int currentDialogueIndex = 0;
     private string[] dialogues;
+
 
     void Start()
     {
@@ -56,6 +58,17 @@ public class DoctorDialogue : MonoBehaviour
                 // Add more dialogues as needed
             };
 
+        string[] dialogue2 = new string[]
+    {
+            "Where am I?'\n\n'Press 'F' to advance dialogue",
+            "Also...",
+            "Who am I?",
+            "And why am I a skeleton???",
+            "I guess I should explore this island...",
+        // Add more dialogues as needed
+    };
+
+
         // Initialize your dialogues here
         switch (conversationNumber)
         {
@@ -64,6 +77,9 @@ public class DoctorDialogue : MonoBehaviour
                 break;
             case 1:
                 dialogues = dialogue1; // Corrected the assignment here
+                break;
+            case 2: 
+                dialogues = dialogue2;
                 break;
         }
 
@@ -74,7 +90,7 @@ public class DoctorDialogue : MonoBehaviour
         mainCamera.enabled = true;
         dialogueCamera.enabled = false;
         tutorialUI.SetActive(true);
-        scruffy.SetActive(true);
+        //scruffy.SetActive(false);
 
     }
 
@@ -95,7 +111,9 @@ public class DoctorDialogue : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {   if(!isScruffy)
+        scruffy.SetActive(false);
+
         // Check if the colliding object is the main character
         if (other.CompareTag("Player"))
         {
@@ -103,6 +121,7 @@ public class DoctorDialogue : MonoBehaviour
 
             StartDialogue();
         }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -125,6 +144,7 @@ public class DoctorDialogue : MonoBehaviour
         mainCamera.enabled = false;
         dialogueCamera.enabled = true;
         tutorialUI.SetActive(false);
+        if(!isScruffy)
         scruffy.SetActive(false);
 
         // Show the first dialogue
@@ -165,17 +185,23 @@ public class DoctorDialogue : MonoBehaviour
 
         // Reset the dialogue index for the next interaction
         currentDialogueIndex = 0;
-         /*
-        PlayerStateMachine playerStateMachine = doctor.GetComponent<PlayerStateMachine>();
-        if (playerStateMachine != null)
+        /* 
+        PlayerStateMachine doctorStateMachine = doctor.GetComponent<PlayerStateMachine>();
+        if (doctorStateMachine != null)
         {
-            playerStateMachine.enabled = true;
+            doctorStateMachine.enabled = true;
         }
-         */
+        */
+         
         if(conversationNumber == 0)
         SceneManager.LoadScene(8);
 
         //if(conversationNumber == 1)
-          //  doctor.SetActive(false);
+        //doctor.SetActive(false);
+        scruffy.SetActive(true);
+        Destroy(gameObject);
+        tutorialUI.SetActive(true);
+        
+
     }
 }

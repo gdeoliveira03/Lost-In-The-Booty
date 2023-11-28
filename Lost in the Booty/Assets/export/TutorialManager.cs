@@ -101,7 +101,7 @@ public class TutorialManager : MonoBehaviour
                 break;
             case TutorialStep.UseSpell:
                 currentStep = TutorialStep.ExploreIsland;
-                StartCoroutine(ShowTutorial("Explore the island and find out what happened to you", 300f));
+                StartCoroutine(ShowTutorial("Explore the island and find out what happened to you", 50f));
                 break;
             case TutorialStep.ExploreIsland:
                 // This could be the end of your tutorials or continue to the next step

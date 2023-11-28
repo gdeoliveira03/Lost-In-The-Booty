@@ -31,6 +31,7 @@ public class PlayerStateMachine : MonoBehaviour
     float rotationFactorPerFrame = 14.0f;
     public float walkSpeed;
     public float runSpeed;
+    public int shouldMove;
 
     // jumping variables
     bool isJumpPressed = false;
@@ -174,7 +175,8 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(shouldMove == 0)
+        OnDisable();
     }
 
     // Update is called once per frame

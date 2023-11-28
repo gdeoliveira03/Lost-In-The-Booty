@@ -9,6 +9,8 @@ public class CameraSwitcher : MonoBehaviour
     private int activeRigIndex = 0;
     void Start()
     {
+        ToggleRigs();
+
         if (freeLookCamera == null)
         {
             Debug.LogError("FreeLookCamera not assigned to CameraSwitcher script.");

@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
     private bool isSlowed = false;
     private bool isBurning = false;
     private bool isFrozen = false;
+    private bool isRunning = false;
     private int activeDOTEffects = 0;
 
     // Effect Prefabs
@@ -135,6 +136,10 @@ public class Enemy : MonoBehaviour
                 slowTime = 0;
             }
         }
+
+        //if (EnemyType == "Doctor")
+            animator.SetBool("IsRunning", isRunning);
+
     }
 
     // ---------------------------- AI METHODS ----------------------------
@@ -173,6 +178,8 @@ public class Enemy : MonoBehaviour
         isPaused = false;
         animator.SetBool("IsPaused", isPaused);
         animator.SetBool("IsPatrolling", true);
+        isRunning = false;  // Set running to false when patrolling
+
     }
 
     void InitializeChaseState()
@@ -187,6 +194,8 @@ public class Enemy : MonoBehaviour
         navMeshAgent.speed = movementSpeed;
 
         animator.SetBool("IsChasing", true);
+        isRunning = true;  
+
     }
 
     void InitializeAttackState()
@@ -197,6 +206,8 @@ public class Enemy : MonoBehaviour
         StopChase();
 
         animator.SetBool("IsAttacking", true);
+        isRunning = false;
+
     }
 
     void StopPatrol()
