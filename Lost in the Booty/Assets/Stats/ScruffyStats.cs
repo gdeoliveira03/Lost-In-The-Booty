@@ -25,7 +25,7 @@ public class ScruffyStats : MonoBehaviour
 
         private float healthrestoreTimer = 0f;
         private float manarestoreTimer = 0f;
-        private float manaRestoreInterval = 5f; // Restore mana every x seconds
+        private float manaRestoreInterval = 4f; // Restore mana every x seconds
         private float healthRestoreInterval = 8f; // Restore health every y seconds
 
         private bool isTempHealth = false;
@@ -89,7 +89,7 @@ public class ScruffyStats : MonoBehaviour
             manarestoreTimer += Time.deltaTime;
             if (manarestoreTimer >= manaRestoreInterval)
             {
-                NaturalRestoreMana(2);
+                NaturalRestoreMana(5);
                 manarestoreTimer = 0f;
             }
 
