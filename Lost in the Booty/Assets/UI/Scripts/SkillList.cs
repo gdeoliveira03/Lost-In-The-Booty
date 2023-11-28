@@ -83,78 +83,101 @@ public class SkillList : MonoBehaviour
     public GameObject LightningP5;
 
     // Cooldown times for abilities
-    private float Sword1CD = 8f;
-    private float Sword2CD = 8f;
-    private float Sword3CD = 8f;
-    private float Sword4CD = 14f;
-    private float Sword5CD = 14f;
-
-    private float Spear1CD = 10f;
-    private float Spear2CD = 12f;
-    private float Spear3CD = 30f;
-    private float Spear4CD = 12f;
-    private float Spear5CD = 14f;
-
-    private float Hammer1CD = 8f;
-    private float Hammer2CD = 10f;
-    private float Hammer3CD = 12f;
-    private float Hammer4CD = 14f;
-    private float Hammer5CD = 14f;
-
-    private float Fire1CD = 10f;
-    private float Fire2CD = 12f;
-    private float Fire3CD = 10f;
-    private float Fire4CD = 14f;
-    private float Fire5CD = 14f;
-    
-    private float Ice1CD = 10f;
-    private float Ice2CD = 15f;
-    private float Ice3CD = 10f;
-    private float Ice4CD = 15f;
-    private float Ice5CD = 20f;
-
-    private float Lightning1CD = 14f;
-    private float Lightning2CD = 10f;
-    private float Lightning3CD = 15f;
-    private float Lightning4CD = 14f;
-    private float Lightning5CD = 16f;
-
     // ManaCost for abilities
     private int Sword1MC = 8;
+    private float Sword1CD = 8f;
+
     private int Sword2MC = 8;
+    private float Sword2CD = 8f;
+
     private int Sword3MC = 8;
+    private float Sword3CD = 8f;
+
     private int Sword4MC = 12;
+    private float Sword4CD = 14f;
+
     private int Sword5MC = 12;
+    private float Sword5CD = 14f;
 
+    // Spear Abilities
     private int Spear1MC = 8;
+    private float Spear1CD = 10f;
+
     private int Spear2MC = 12;
+    private float Spear2CD = 12f;
+
     private int Spear3MC = 0;
+    private float Spear3CD = 30f;
+
     private int Spear4MC = 8;
+    private float Spear4CD = 12f;
+
     private int Spear5MC = 12;
+    private float Spear5CD = 14f;
 
+    // Hammer Abilities
     private int Hammer1MC = 8;
+    private float Hammer1CD = 8f;
+
     private int Hammer2MC = 10;
+    private float Hammer2CD = 10f;
+
     private int Hammer3MC = 10;
+    private float Hammer3CD = 12f;
+
     private int Hammer4MC = 12;
+    private float Hammer4CD = 14f;
+
     private int Hammer5MC = 12;
+    private float Hammer5CD = 14f;
 
+    // Fire Abilities
     private int Fire1MC = 8;
-    private int Fire2MC = 12;
-    private int Fire3MC = 8;
-    private int Fire4MC = 12;
-    private int Fire5MC = 5;
-    
-    private int Ice1MC = 8;
-    private int Ice2MC = 12;
-    private int Ice3MC = 10;
-    private int Ice4MC = 8;
-    private int Ice5MC = 12;
+    private float Fire1CD = 10f;
 
+    private int Fire2MC = 12;
+    private float Fire2CD = 12f;
+
+    private int Fire3MC = 8;
+    private float Fire3CD = 10f;
+
+    private int Fire4MC = 12;
+    private float Fire4CD = 14f;
+
+    private int Fire5MC = 5;
+    private float Fire5CD = 14f;
+
+    // Ice Abilities
+    private int Ice1MC = 8;
+    private float Ice1CD = 10f;
+
+    private int Ice2MC = 12;
+    private float Ice2CD = 15f;
+
+    private int Ice3MC = 10;
+    private float Ice3CD = 10f;
+
+    private int Ice4MC = 8;
+    private float Ice4CD = 15f;
+
+    private int Ice5MC = 12;
+    private float Ice5CD = 20f;
+
+    // Lightning Abilities
     private int Lightning1MC = 8;
+    private float Lightning1CD = 14f;
+
     private int Lightning2MC = 6;
+    private float Lightning2CD = 10f;
+
     private int Lightning3MC = 12;
+    private float Lightning3CD = 15f;
+
     private int Lightning4MC = 12;
+    private float Lightning4CD = 14f;
+
     private int Lightning5MC = 16;
+    private float Lightning5CD = 16f;
 
     // Cooldown true/false for basic abilities
     private bool isAbilitySword1CD = false;
