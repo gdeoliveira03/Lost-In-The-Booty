@@ -86,26 +86,26 @@ public class SkillList : MonoBehaviour
     private float Sword1CD = 8f;
     private float Sword2CD = 8f;
     private float Sword3CD = 8f;
-    private float Sword4CD = 15f;
-    private float Sword5CD = 15f;
+    private float Sword4CD = 14f;
+    private float Sword5CD = 14f;
 
     private float Spear1CD = 10f;
     private float Spear2CD = 12f;
-    private float Spear3CD = 40f;
+    private float Spear3CD = 30f;
     private float Spear4CD = 12f;
-    private float Spear5CD = 18f;
+    private float Spear5CD = 14f;
 
     private float Hammer1CD = 8f;
     private float Hammer2CD = 10f;
     private float Hammer3CD = 12f;
-    private float Hammer4CD = 15f;
-    private float Hammer5CD = 15f;
+    private float Hammer4CD = 14f;
+    private float Hammer5CD = 14f;
 
     private float Fire1CD = 10f;
     private float Fire2CD = 12f;
     private float Fire3CD = 10f;
     private float Fire4CD = 14f;
-    private float Fire5CD = 16f;
+    private float Fire5CD = 14f;
     
     private float Ice1CD = 10f;
     private float Ice2CD = 15f;
@@ -113,8 +113,8 @@ public class SkillList : MonoBehaviour
     private float Ice4CD = 15f;
     private float Ice5CD = 20f;
 
-    private float Lightning1CD = 15f;
-    private float Lightning2CD = 12f;
+    private float Lightning1CD = 14f;
+    private float Lightning2CD = 10f;
     private float Lightning3CD = 15f;
     private float Lightning4CD = 14f;
     private float Lightning5CD = 16f;
@@ -123,25 +123,25 @@ public class SkillList : MonoBehaviour
     private int Sword1MC = 8;
     private int Sword2MC = 8;
     private int Sword3MC = 8;
-    private int Sword4MC = 15;
-    private int Sword5MC = 15;
+    private int Sword4MC = 12;
+    private int Sword5MC = 12;
 
     private int Spear1MC = 8;
     private int Spear2MC = 12;
     private int Spear3MC = 2;
     private int Spear4MC = 8;
-    private int Spear5MC = 10;
+    private int Spear5MC = 12;
 
     private int Hammer1MC = 8;
     private int Hammer2MC = 10;
     private int Hammer3MC = 10;
-    private int Hammer4MC = 10;
+    private int Hammer4MC = 12;
     private int Hammer5MC = 12;
 
-    private int Fire1MC = 10;
+    private int Fire1MC = 8;
     private int Fire2MC = 12;
     private int Fire3MC = 8;
-    private int Fire4MC = 10;
+    private int Fire4MC = 12;
     private int Fire5MC = 5;
     
     private int Ice1MC = 8;
@@ -150,10 +150,10 @@ public class SkillList : MonoBehaviour
     private int Ice4MC = 8;
     private int Ice5MC = 12;
 
-    private int Lightning1MC = 12;
+    private int Lightning1MC = 8;
     private int Lightning2MC = 6;
-    private int Lightning3MC = 15;
-    private int Lightning4MC = 14;
+    private int Lightning3MC = 12;
+    private int Lightning4MC = 12;
     private int Lightning5MC = 16;
 
     // Cooldown true/false for basic abilities
@@ -1192,24 +1192,12 @@ public class SkillList : MonoBehaviour
         ParticleSystem PS = SpearP3.GetComponentInChildren<ParticleSystem>();
         PS.Play();
         scruffystats.AddEvasion(25);
-        Invoke("spear3ManaGain1", 0f);
-        Invoke("spear3ManaGain2", 1f);
-        Invoke("spear3ManaGain3", 2f);
-        Invoke("spear3ManaGain4", 3f);
+        Invoke("spear3ManaGain1", 0.5f);
         Invoke("spear3end", 4f);
     }
 
     void spear3ManaGain1(){
-        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
-    }
-    void spear3ManaGain2(){
-        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
-    }
-    void spear3ManaGain3(){
-        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
-    }
-    void spear3ManaGain4(){
-        scruffystats.RestoreMana(scruffystats.MaxMana * 1/4);
+        scruffystats.RestoreMana(scruffystats.MaxMana);
     }
 
     void spear3end(){
