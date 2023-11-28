@@ -128,7 +128,7 @@ public class SkillList : MonoBehaviour
 
     private int Spear1MC = 8;
     private int Spear2MC = 12;
-    private int Spear3MC = 2;
+    private int Spear3MC = 0;
     private int Spear4MC = 8;
     private int Spear5MC = 12;
 
