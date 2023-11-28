@@ -7,10 +7,7 @@ public class WeaponElement : MonoBehaviour
 {
 
     //Sounds
-    public AudioClip swordAttackSound;
-    public AudioClip magicAttackSound;
-
-    private AudioSource audioSource;
+    private footsteps Footsteps;
 
     // WEAPON/ELEMENT BOOL FOR WHICH THEY CURRENTLY HAVE
     public bool Cutlass;
@@ -126,10 +123,10 @@ public class WeaponElement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         scruffystats = GetComponent<ScruffyStats>();
         skillist = GetComponent<SkillList>();
+        Footsteps = GetComponent<footsteps>();
 
         Cutlasstoggle.onValueChanged.AddListener(delegate { ToggleChanged(Cutlasstoggle, ref Cutlass, CantSpear, CantHammer); });
         Speartoggle.onValueChanged.AddListener(delegate { ToggleChanged(Speartoggle, ref Spear, CantSword, CantHammer); });
@@ -432,7 +429,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("CutlassBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
                     CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
-                    //PlayAttackSound(swordAttackSound);
                 }
             }
 
@@ -454,7 +450,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("SpearBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownSpear = true; // Sets the ability to be on cooldown
                     CurrentSpearBasicCooldown = SpearBasicCooldown; // Current Cooldown becomes the basic cooldown  
-                    //PlayAttackSound(swordAttackSound);
 }
             }
 
@@ -476,7 +471,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("HammerBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownHammer = true; // Sets the ability to be on cooldown
                     CurrentHammerBasicCooldown = HammerBasicCooldown; // Current Cooldown becomes the basic cooldown
-                    //PlayAttackSound(swordAttackSound);
    }
             }
         }
@@ -498,7 +492,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownFire = true; // Sets the ability to be on cooldown
                     CurrentFireBasicCooldown = FireBasicCooldown; // Current Cooldown becomes the basic cooldown
-                    //PlayAttackSound(magicAttackSound);
 
                 }
             }
@@ -521,7 +514,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("IceBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownIce = true; // Sets the ability to be on cooldown
                     CurrentIceBasicCooldown = IceBasicCooldown; // Current Cooldown becomes the basic cooldown
-                    //PlayAttackSound(magicAttackSound);
 }
             }
         }
@@ -543,7 +535,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("LightningBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownLightning = true; // Sets the ability to be on cooldown
                     CurrentLightningBasicCooldown = LightningBasicCooldown; // Current Cooldown becomes the basic cooldown
-                    //PlayAttackSound(magicAttackSound);
 }
             }
         }
@@ -729,6 +720,7 @@ public class WeaponElement : MonoBehaviour
     // BASIC ATTACK ABILITY CALLS
     public void CutlassBasicAttack(){
         damage = (int) (scruffystats.damage);
+        Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
 
@@ -743,6 +735,7 @@ public class WeaponElement : MonoBehaviour
 
     void SpearBasicAttack(){
         damage = (int) (scruffystats.damage * 1.4);
+        Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
 
@@ -757,6 +750,7 @@ public class WeaponElement : MonoBehaviour
 
     void HammerBasicAttack(){
         damage = (int) (scruffystats.damage * 1.8);
+        Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
 
@@ -790,6 +784,7 @@ public class WeaponElement : MonoBehaviour
         FireBasicEnable.SetActive(true);
         damage = (int) (scruffystats.damage);
         FireCollider.enabled = true;
+        Footsteps.handleMagicAudioOn();
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // time
@@ -842,6 +837,7 @@ public class WeaponElement : MonoBehaviour
     {
         IceBasicEnable.SetActive(true);
         int damage = (int) (scruffystats.damage); // Set the damage value for the ice attack
+        Footsteps.handleMagicAudioOn();
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the ice attack (you can adjust this value)
@@ -889,6 +885,7 @@ public class WeaponElement : MonoBehaviour
     {
         LightningBasicEnable.SetActive(true);
         int damage = (int) (scruffystats.damage); // Set the damage value for the lightning attack
+        Footsteps.handleMagicAudioOn();
 
         float startTime = Time.time;
         float journeyLength = 2.0f; // 2 seconds for the lightning attack (you can adjust this value)
@@ -947,14 +944,5 @@ public class WeaponElement : MonoBehaviour
         }
     }
 
-    private void PlayAttackSound(AudioClip attackSound)
-    {
-        // Check if the AudioSource and AudioClip are set
-        if (audioSource != null && attackSound != null)
-        {
-            // Play the attack sound
-            audioSource.PlayOneShot(attackSound);
-        }
-    }
 
 }

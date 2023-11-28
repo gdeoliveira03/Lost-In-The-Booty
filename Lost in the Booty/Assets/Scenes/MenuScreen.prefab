@@ -220,7 +220,7 @@ MonoBehaviour:
 
     Mana Cost: 6
 
-    Cooldown: 12s'
+    Cooldown: 10s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7145,7 +7145,7 @@ MonoBehaviour:
     an instance of flat damage before burning hit enemies.
 
 
-    Mana Cost: 10
+    Mana Cost: 8
 
     Cooldown:
     10s'
@@ -7369,9 +7369,9 @@ MonoBehaviour:
     reduces damage taken by a flat amount.
 
 
-    Mana Cost: 15
+    Mana Cost: 12
 
-    Cooldown: 10s'
+    Cooldown: 14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8442,9 +8442,9 @@ MonoBehaviour:
     its duration.
 
 
-    Mana Cost: 10
+    Mana Cost: 12
 
-    Cooldown: 18s'
+    Cooldown: 14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11227,7 +11227,7 @@ MonoBehaviour:
     three explosive bursts of rock.
 
 
-    Mana Cost: 10
+    Mana Cost: 12
 
     Cooldown: 10s'
   m_isRightToLeft: 0
@@ -11994,9 +11994,9 @@ MonoBehaviour:
     dealt and received.
 
 
-    Mana Cost: 15
+    Mana Cost: 12
 
-    Cooldown: 15s'
+    Cooldown: 14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -25152,10 +25152,10 @@ MonoBehaviour:
     speed and evasion by 50% for its duration.
 
 
-    Mana Cost: 12
+    Mana Cost: 8
 
     Cooldown:
-    15s'
+    14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30484,9 +30484,9 @@ MonoBehaviour:
 
 
     Mana
-    Cost: 15
+    Cost: 12
 
-    Cooldown: 15s'
+    Cooldown: 14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -30774,9 +30774,9 @@ MonoBehaviour:
 
 
     Mana
-    Cost: 10
+    Cost: 12
 
-    Cooldown: 15s'
+    Cooldown: 14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -31476,7 +31476,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Surround yourself by a field of fire, causing burning damage to all enemies
-    within. \n\nMana Cost: 12\nCooldown: 10s"
+    within. \n\nMana Cost: 12\nCooldown: 12s"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -32447,7 +32447,7 @@ MonoBehaviour:
     that deals damage to both enemies and yourself.
 
 
-    Mana Cost: 10
+    Mana Cost: 12
 
     Cooldown:
     14s'
@@ -50789,7 +50789,7 @@ MonoBehaviour:
     applying shock to enemies hit.
 
 
-    Mana Cost: 14
+    Mana Cost: 12
 
     Cooldown: 14s'
   m_isRightToLeft: 0
@@ -51229,10 +51229,10 @@ MonoBehaviour:
     by 25% throughout the ability''s duration.
 
 
-    Mana Cost: 2
+    Mana Cost: 0
 
     Cooldown:
-    40s'
+    30s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -52882,7 +52882,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lightning ability text information
+  m_text: 'Form nine daggers of lightning in front of you, stunning and shocking
+    enemies hit over their duration.
+
+
+    Mana Cost: 12
+
+    Cooldown: 15s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -60551,7 +60557,7 @@ MonoBehaviour:
     Mana Cost: 5
 
     Cooldown:
-    16s'
+    14s'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -67690,14 +67696,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399560d995ddd88489367f4ca5db728a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordAttackSound: {fileID: 0}
-  magicAttackSound: {fileID: 0}
   Cutlass: 1
   Spear: 0
   Hammer: 0
   Fire: 1
   Ice: 0
   Lightning: 0
+  Cutlasstoggle: {fileID: 0}
+  Speartoggle: {fileID: 0}
+  Hammertoggle: {fileID: 0}
+  Firetoggle: {fileID: 0}
+  Icetoggle: {fileID: 0}
+  Lightningtoggle: {fileID: 0}
+  CantSword: {fileID: 0}
+  CantSpear: {fileID: 0}
+  CantHammer: {fileID: 0}
+  CantFire: {fileID: 0}
+  CantIce: {fileID: 0}
+  CantLightning: {fileID: 0}
   GameUICutlass: {fileID: 6509498969531971032}
   GameUISpear: {fileID: 1072493556773537849}
   GameUIHammer: {fileID: 2587656565261080081}

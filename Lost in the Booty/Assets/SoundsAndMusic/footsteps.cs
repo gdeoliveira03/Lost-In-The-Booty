@@ -10,27 +10,6 @@ public class footsteps : MonoBehaviour
 
     void Update()
     {
-
-        if(Input.GetMouseButtonDown(0)) 
-        {
-            if(autoSound.enabled == false) 
-            {
-                Invoke("handleAutoAudioOn", .5f);
-            }
-                
-        }
-
-
-        if(Input.GetMouseButtonDown(1)) 
-        {
-            if(magicSound.enabled == false) 
-            {
-                handleMagicAudioOn();
-            }
-                
-        }
-            
-
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             
@@ -53,24 +32,24 @@ public class footsteps : MonoBehaviour
         }
     }
 
-    void handleAutoAudioOn()
+    public void handleAutoAudioOn()
     {
         autoSound.enabled = true;
         Invoke("handleAutoAudioOff", 1f);
     }
 
-    void handleAutoAudioOff()
+    public void handleAutoAudioOff()
     {
         autoSound.enabled = false;
     }
 
-    void handleMagicAudioOn()
+    public void handleMagicAudioOn()
     {
         magicSound.enabled = true;
         Invoke("handleMagicAudioOff", 1f);
     }
 
-    void handleMagicAudioOff()
+    public void handleMagicAudioOff()
     {
         magicSound.enabled = false;
     }

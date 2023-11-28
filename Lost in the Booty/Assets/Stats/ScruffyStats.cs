@@ -25,7 +25,7 @@ public class ScruffyStats : MonoBehaviour
 
         private float healthrestoreTimer = 0f;
         private float manarestoreTimer = 0f;
-        private float manaRestoreInterval = 5f; // Restore mana every x seconds
+        private float manaRestoreInterval = 4f; // Restore mana every x seconds
         private float healthRestoreInterval = 8f; // Restore health every y seconds
 
         private bool isTempHealth = false;
@@ -89,18 +89,15 @@ public class ScruffyStats : MonoBehaviour
             manarestoreTimer += Time.deltaTime;
             if (manarestoreTimer >= manaRestoreInterval)
             {
-                NaturalRestoreMana(2);
+                NaturalRestoreMana(4);
                 manarestoreTimer = 0f;
             }
+           
 
             if (CurrentHealth <= 0){
                 Die();
             }
 
-            // FOR TESTING
-            if (Input.GetKeyDown(KeyCode.T)){
-                TakeDamage(10);
-            }
             if (Input.GetKeyDown(KeyCode.Y)){
                 RestoreMana(20);
             }
@@ -122,6 +119,10 @@ public class ScruffyStats : MonoBehaviour
             if (CurrentMana + amount <= MaxMana)
             {
                 CurrentMana += amount;
+                manaBar.value = CurrentMana;
+            }
+            else if ((MaxMana-CurrentMana) < amount){
+                CurrentMana = MaxMana;
                 manaBar.value = CurrentMana;
             }
         }
