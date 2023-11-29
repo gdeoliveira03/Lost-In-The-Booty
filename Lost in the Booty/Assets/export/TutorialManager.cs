@@ -102,6 +102,7 @@ public class TutorialManager : MonoBehaviour
             case TutorialStep.UseSpell:
                 currentStep = TutorialStep.ExploreIsland;
                 StartCoroutine(ShowTutorial("Explore the island and find out what happened to you", 50f));
+                Invoke("endtutorial", 10f);
                 break;
             case TutorialStep.ExploreIsland:
                 // This could be the end of your tutorials or continue to the next step
@@ -109,5 +110,10 @@ public class TutorialManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+
+    void endtutorial(){
+        Destroy(gameObject);
     }
 }
