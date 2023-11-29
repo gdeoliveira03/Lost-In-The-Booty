@@ -111,13 +111,14 @@ public class DoctorDialogue : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {   if(!isScruffy)
-        scruffy.SetActive(false);
-
-        // Check if the colliding object is the main character
+    {      
         if (other.CompareTag("Player"))
         {
             isInRange = true;
+
+            // Hide scruffy only when isScruffy is false
+            if (!isScruffy)
+                scruffy.SetActive(false);
 
             StartDialogue();
         }

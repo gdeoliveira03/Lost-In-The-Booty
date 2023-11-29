@@ -528,9 +528,10 @@ MonoBehaviour:
   MaxHealth: 0
   MaxMana: 0
   DeadEnemy: {fileID: 351022174949459227}
-  DamageText: {fileID: 0}
+  DamageText: {fileID: 1213133989951465600, guid: 1bec8afe5172bf4409bc2e4316e117a9, type: 3}
   EnemyType: Minotaur
   healthBar: {fileID: 8487309859417815014}
+  isDoctor: 0
   OnFireEffect: {fileID: 5870331403762959460}
   LightningElement: {fileID: 3779375842072909737}
   LightningExplosion: {fileID: 7360162294567668117}
