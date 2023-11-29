@@ -57,16 +57,51 @@ public class DoctorDialogue : MonoBehaviour
 
                 // Add more dialogues as needed
             };
-
+        //Scruffy Start Dialogue
         string[] dialogue2 = new string[]
     {
-            "Where am I?'\n\n'Press 'F' to advance dialogue",
+            "Where am I?\n\nPress 'F' to advance dialogue",
             "Also...",
             "Who am I?",
             "And why am I a skeleton???",
             "I guess I should explore this island...",
         // Add more dialogues as needed
     };
+    //VolcanicIsland
+     string[] dialogue3 = new string[]
+    {
+            "I've heard rumors about this place...\n\nPress 'F' to advance dialogue",
+            "There are many stories about people coming to this island and never coming back...",
+            "Supposedly, there is an entrance to the volcano just ahead...",
+            "I figure this is as good a place as any to find information on Davy Jones or his commanders...",
+            "You go on ahead...I will catch up to you",
+        // Add more dialogues as needed
+    };
+        string[] dialogue4 = new string[]
+    {
+            "This island supposedly has a dungeon that is rich with treasures...\n\nPress 'F' to advance dialogue",
+            "Seems to me that this is a great place to find one of Davy Jones' commanders",
+            "Let's go check it out!",
+        // Add more dialogues as needed
+    };
+
+        string[] dialogue5 = new string[]
+   {
+            "This is Davy Jones' Island...\n\nPress 'F' to advance dialogue",
+            "Maybe it's too soon to be here...",
+            "We could always come back when you feel you are better prepared for the task...",
+            "It wouldn't hurt to gain some experience first...",
+            "But if you feel like you are ready...",
+            "Let's do this!",
+       // Add more dialogues as needed
+   };
+        string[] dialogue6 = new string[]
+       {
+            "This place is scary...'\n\n'Press 'F' to advance dialogue",
+            "So this is the inside of the dungeon...",
+           // Add more dialogues as needed
+       };
+
 
 
         // Initialize your dialogues here

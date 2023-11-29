@@ -4807,6 +4807,12 @@ PrefabInstance:
       propertyPath: StatTexts.Array.data[4]
       value: 
       objectReference: {fileID: 4396647428576042971}
+    - target: {fileID: 7502697050805547351, guid: 787adb778d0e7734db21125204d5a563, type: 3}
+      propertyPath: m_text
+      value: 'Scruffy the Undead Pirate:
+
+        Press F to advance dialogue'
+      objectReference: {fileID: 0}
     - target: {fileID: 8314634047630031710, guid: 787adb778d0e7734db21125204d5a563, type: 3}
       propertyPath: CantIce
       value: 
@@ -6485,6 +6491,12 @@ PrefabInstance:
       propertyPath: footstepsSound
       value: 
       objectReference: {fileID: 3753317846916249475}
+    - target: {fileID: 4853908275951484255, guid: 7d3dac0eb9460b74b89b6897163aa3e0, type: 3}
+      propertyPath: m_text
+      value: 'Dr. Hendrix:
+
+        Press ''F'' to advance dialogue'
+      objectReference: {fileID: 0}
     - target: {fileID: 7297096379173603226, guid: 7d3dac0eb9460b74b89b6897163aa3e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -328.84607
@@ -7497,7 +7509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6634164868408797965, guid: 12e37433d5f89534bb8317c4b1907b93, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7048779959389648845, guid: 12e37433d5f89534bb8317c4b1907b93, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8184,15 +8196,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4854473786856180980, guid: 4bd53f1745926ee43bd1f2c8fe472e13, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -480.85007
+      value: -621.1049
       objectReference: {fileID: 0}
     - target: {fileID: 4854473786856180980, guid: 4bd53f1745926ee43bd1f2c8fe472e13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -290.325
+      value: -292.26
       objectReference: {fileID: 0}
     - target: {fileID: 4854473786856180980, guid: 4bd53f1745926ee43bd1f2c8fe472e13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 329.5
+      value: -250.35135
       objectReference: {fileID: 0}
     - target: {fileID: 4854473786856180980, guid: 4bd53f1745926ee43bd1f2c8fe472e13, type: 3}
       propertyPath: m_LocalRotation.w
