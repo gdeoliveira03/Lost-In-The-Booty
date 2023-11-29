@@ -5,18 +5,35 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public GameObject InventoryUI;
+    public GameObject PauseMenu;
+    public KeyCode keybind = KeyCode.I;
 
     // Start is called before the first frame update
-    public void openInventory(){
+    public void open()
+    {
+        Debug.Log("Opening inventory");
         Time.timeScale = 0f;
         InventoryUI.SetActive(true);
     }
 
-    public void closeInventory(){
+    public void close()
+    {
         Time.timeScale = 1f;
         InventoryUI.SetActive(false);
     }
 
-    void Update () {
+    void Update()
+    {
+        // Check for keybind input
+        if (Input.GetKeyDown(keybind))
+        {
+            Debug.Log("Inventory keybind pressed. Opening now");
+            open();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)
+        {
+            close();
+        }
     }
 }
