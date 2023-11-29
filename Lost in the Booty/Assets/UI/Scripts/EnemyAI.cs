@@ -78,6 +78,8 @@ public class Enemy : MonoBehaviour
     public float patrolSpeed = 2f;
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
+    private float originalMovementSpeed;
+    private float slowedamount = 1f;
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
@@ -99,7 +101,7 @@ public class Enemy : MonoBehaviour
         // Set Enemy Stats Here
         if (EnemyType == "Skeleton")
         {
-            damage = 5;
+            damage = 8;
             MaxHealth = 30;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
@@ -111,7 +113,7 @@ public class Enemy : MonoBehaviour
         }
         if(EnemyType == "Minotaur")
         {
-            damage = 5;
+            damage = 15;
             MaxHealth = 200;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
@@ -151,13 +153,23 @@ public class Enemy : MonoBehaviour
         {
             slowTime += Time.deltaTime;
 
+            navMeshAgent.speed = slowedamount;
+
             if (slowTime >= slowDuration)
             {
                 slowStacks = 0;
-                SlowEffect.SetActive(false);
-                isSlowed = false;
                 slowTime = 0;
+                navMeshAgent.speed = Mathf.Max(0f, chaseSpeed);
+                SlowEffect.SetActive(false);
+                animator.speed = 1f;
+                isSlowed = false;
             }
+        }
+
+        if (isFrozen){
+            navMeshAgent.velocity = Vector3.zero; // Stop the movement
+            navMeshAgent.isStopped = true; // Ensure that the agent is stopped
+            animator.speed = 0f;
         }
 
         if (isDoctor && isRunning)
@@ -435,9 +447,8 @@ public class Enemy : MonoBehaviour
     public void freezeOn()
     {
         FreezeEffect.SetActive(true);
-        navMeshAgent.isStopped = true;
+        originalMovementSpeed = movementSpeed;
         isFrozen = true;
-        animator.speed = 0f;
         Invoke("freezeOff", 5f);
     }
 
@@ -447,12 +458,14 @@ public class Enemy : MonoBehaviour
         navMeshAgent.isStopped = false;
         isFrozen = false;
         animator.speed = 1f;
+        movementSpeed = originalMovementSpeed;
+        navMeshAgent.speed = Mathf.Max(0f, movementSpeed);
     }
 
     public void ApplySlow(int stacksToAdd)
     {
         slowStacks = Mathf.Min(slowStacks + stacksToAdd, maxSlowStacks);
-        slowDuration = Mathf.Min(slowDuration + (stacksToAdd * 5), 20f);
+        slowDuration = Mathf.Min(slowDuration + (stacksToAdd * 4), 12f);
         isSlowed = true;
 
         if (stacksToAdd > 0 && slowStacks == stacksToAdd)
@@ -460,8 +473,9 @@ public class Enemy : MonoBehaviour
             SlowEffect.SetActive(true);
         }
 
-        movementSpeed = movementSpeed - (slowToAffectMovement * slowStacks * movementSpeed);
-        navMeshAgent.speed = Mathf.RoundToInt(Mathf.Max(0f, movementSpeed));
+        float slowMultiplier = 1.0f - (slowStacks * 0.2f); // 20% reduction per stack
+        slowedamount = slowMultiplier * navMeshAgent.speed;
+        animator.speed = slowMultiplier * 1f;
     }
 
     public void InflictShock()
