@@ -172,6 +172,12 @@ public class Enemy : MonoBehaviour
             animator.speed = 0f;
         }
 
+        if(isStunned){
+            navMeshAgent.velocity = Vector3.zero; // Stop the movement
+            navMeshAgent.isStopped = true; // Ensure that the agent is stopped
+            animator.speed = 0f;
+        }
+
         if (isDoctor && isRunning)
         {
             //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
@@ -432,16 +438,17 @@ public class Enemy : MonoBehaviour
     public void Stun(float duration)
     {
         isStunned = true;
+        originalMovementSpeed = movementSpeed;
         StunEffect.SetActive(true);
-        RecoverFromStun(duration);
+        Invoke("StunOff", duration);
     }
 
-    IEnumerator RecoverFromStun(float duration)
+    public void StunOff()
     {
-        yield return new WaitForSeconds(duration);
-
-        // Reset the flag and allow the enemy to move again
         isStunned = false;
+        StunEffect.SetActive(false);
+        movementSpeed = originalMovementSpeed;
+        navMeshAgent.speed = Mathf.Max(0f, movementSpeed);
     }
 
     public void freezeOn()
