@@ -415,7 +415,7 @@ public class Enemy : MonoBehaviour
         // Check if the player is within the attack distance
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
         {
-            player.GetComponent<ScruffyStats>().TakeDamage(8); // Change 0 to damage
+            player.GetComponent<ScruffyStats>().TakeDamage(damage); // Change 0 to damage
         }
     }
 
