@@ -104,6 +104,18 @@ public class Enemy : MonoBehaviour
             healthRegen = 0;
             manaRegen = 0;
         }
+        if(EnemyType == "Minotaur")
+        {
+            damage = 5;
+            MaxHealth = 200;
+            CurrentHealth = MaxHealth;
+            MaxMana = 0;
+            armor = 0;
+            evasion = 0;
+            attackSpeed = 0;
+            healthRegen = 0;
+            manaRegen = 0;
+        }
 
         CurrentHealth = MaxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
