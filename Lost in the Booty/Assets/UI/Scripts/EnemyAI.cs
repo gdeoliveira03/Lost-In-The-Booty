@@ -30,6 +30,9 @@ public class Enemy : MonoBehaviour
 
     // Effects
     public bool isDoctor = false;
+    private bool isSkeleton = false;
+    private bool isMinotaur = false;
+    private bool isCrab = false;
     private bool isStunned = false;
     private bool isSlowed = false;
     private bool isBurning = false;
@@ -74,8 +77,8 @@ public class Enemy : MonoBehaviour
     public float patrolAreaRadius = 10f;
     public float patrolInterval = 5f;
     public float patrolPauseDuration = 2f;
-    public float chaseSpeed = 6f;
-    public float patrolSpeed = 2f;
+    public float chaseSpeed;
+    public float patrolSpeed;
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
     private float originalMovementSpeed;
@@ -86,7 +89,6 @@ public class Enemy : MonoBehaviour
     private Animator animator;
 
     public int IsRunningHashDoctor { get { return isRunningHashDoctor; } }
-
 
     void Start()
     {
@@ -110,9 +112,13 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+
+            patrolSpeed = 2f;
+            chaseSpeed = 6f;
         }
         if(EnemyType == "Minotaur")
         {
+
             damage = 0; // change back to 15
             MaxHealth = 200;
             CurrentHealth = MaxHealth;
@@ -122,6 +128,25 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+
+            patrolSpeed = 1f;
+            chaseSpeed = 3f;
+        }
+        if(EnemyType == "Crab")
+        {
+
+            damage = 6; // change back to 15
+            MaxHealth = 10;
+            CurrentHealth = MaxHealth;
+            MaxMana = 0;
+            armor = 0;
+            evasion = 0;
+            attackSpeed = 0;
+            healthRegen = 0;
+            manaRegen = 0;
+
+            patrolSpeed = 2f;
+            chaseSpeed = 6f;
         }
 
         if(EnemyType == "Doctor")
