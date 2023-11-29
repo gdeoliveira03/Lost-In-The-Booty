@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private int luck = 0;
     private int healthRegen = 0;
     private int manaRegen = 0;
+    int isRunningHashDoctor;
 
     // Health and Mana
     public int MaxHealth;
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] FloatingHealthBar healthBar;
 
     // Effects
+    public bool isDoctor = false;
     private bool isStunned = false;
     private bool isSlowed = false;
     private bool isBurning = false;
@@ -81,6 +83,9 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
+    public int IsRunningHashDoctor { get { return isRunningHashDoctor; } }
+
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(playerTag).transform;
@@ -103,6 +108,12 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+        }
+
+        if(EnemyType == "Doctor")
+        {
+            isDoctor = true;
+
         }
 
         CurrentHealth = MaxHealth;
@@ -137,9 +148,21 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        //if (EnemyType == "Doctor")
-            animator.SetBool("IsRunning", isRunning);
+        if (isDoctor && isRunning)
+        {
+            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
+            animator.StopPlayback();
+            animator.SetBool("IsDoctorRunning", true);
+            //animator.Play("isDoctorRunning", 0, 0);
 
+        }
+        else if (isDoctor && !isRunning)
+        {
+            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
+            animator.StopPlayback();
+            animator.SetBool("IsDoctorRunning", false);
+            
+        }
     }
 
     // ---------------------------- AI METHODS ----------------------------
@@ -194,8 +217,24 @@ public class Enemy : MonoBehaviour
         navMeshAgent.speed = movementSpeed;
 
         animator.SetBool("IsChasing", true);
-        isRunning = true;  
 
+        isRunning = true;
+
+        if (isDoctor && isRunning)
+        {
+            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
+            animator.StopPlayback();
+            animator.SetBool("IsDoctorRunning", true);
+            //animator.Play("isDoctorRunning", 0, 0);
+
+        }
+        else if (isDoctor && !isRunning)
+        {
+            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
+            animator.StopPlayback();
+            animator.SetBool("IsDoctorRunning", false);
+
+        }
     }
 
     void InitializeAttackState()
