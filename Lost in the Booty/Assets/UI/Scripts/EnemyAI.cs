@@ -101,7 +101,7 @@ public class Enemy : MonoBehaviour
         // Set Enemy Stats Here
         if (EnemyType == "Skeleton")
         {
-            damage = 8;
+            damage = 0; // change back to 8
             MaxHealth = 30;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
         }
         if(EnemyType == "Minotaur")
         {
-            damage = 15;
+            damage = 0; // change back to 15
             MaxHealth = 200;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
