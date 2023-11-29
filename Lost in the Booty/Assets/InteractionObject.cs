@@ -175,6 +175,8 @@ public class DoctorDialogue : MonoBehaviour
 
     private void EndDialogue()
     {
+        scruffy.SetActive(true);
+
         // Hide the dialogue panel
         dialoguePanel.SetActive(false);
 
@@ -201,7 +203,12 @@ public class DoctorDialogue : MonoBehaviour
         scruffy.SetActive(true);
         Destroy(gameObject);
         tutorialUI.SetActive(true);
-        
+
+        scruffy.SetActive(true);
+
+        scruffy.SetActive(true);
+
+
 
     }
 }
