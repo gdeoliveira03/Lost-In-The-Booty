@@ -97,11 +97,6 @@ public class ScruffyStats : MonoBehaviour
             if (CurrentHealth <= 0){
                 Die();
             }
-
-            if (Input.GetKeyDown(KeyCode.Y)){
-                RestoreMana(20);
-            }
-
         
         }
 
