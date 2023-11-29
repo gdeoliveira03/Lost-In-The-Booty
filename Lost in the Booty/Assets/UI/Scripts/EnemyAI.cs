@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
 
     // Effects
     public bool isDoctor = false;
+    public bool isFriendly = false;
     private bool isSkeleton = false;
     private bool isMinotaur = false;
     private bool isCrab = false;
@@ -152,6 +153,7 @@ public class Enemy : MonoBehaviour
         if(EnemyType == "Doctor")
         {
             isDoctor = true;
+            isFriendly = true;
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;            
         }
@@ -221,7 +223,9 @@ public class Enemy : MonoBehaviour
                 } 
 
                 lastHealTime = Time.time;
-            }   
+            } 
+
+
         }
 
     }
@@ -286,6 +290,11 @@ public class Enemy : MonoBehaviour
         // Set chasing speed
         movementSpeed = chaseSpeed;
         navMeshAgent.speed = movementSpeed;
+
+        if (isFriendly)
+        {
+            animator.SetTrigger("ChaseYes"); // Set "ChaseYes" trigger only for the doctor
+        }
 
         animator.SetBool("IsChasing", true);
 
@@ -405,12 +414,20 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
         {
             SetState(EnemyState.Attack);
+            if (isFriendly)
+            {
+                animator.SetTrigger("ChaseNo"); // Set "ChaseNo" trigger only for the doctor
+            }
         }
 
         // Check if the player is outside the chase distance, go back to patrolling
         if (Vector3.Distance(transform.position, player.position) > chaseDistance)
         {
             SetState(EnemyState.Patrol);
+            if (isFriendly)
+            {
+                animator.SetTrigger("ChaseYes"); // Set "ChaseYes" trigger only for the doctor
+            }
         }
     }
 
