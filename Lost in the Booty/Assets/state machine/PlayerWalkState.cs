@@ -9,6 +9,7 @@ public class PlayerWalkState : PlayerBaseState
 
     public override void EnterState()
     {
+        
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
         Ctx.CurrentMovementY = 0;
@@ -17,8 +18,8 @@ public class PlayerWalkState : PlayerBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
-        Ctx.CurrentMovementX = Ctx.CurrentMovementInput.x * 3.0f;
-        Ctx.CurrentMovementZ = Ctx.CurrentMovementInput.y * 3.0f;
+        Ctx.CurrentMovementX = Ctx.CurrentMovementInput.x * Ctx.walkMultiplier;
+        Ctx.CurrentMovementZ = Ctx.CurrentMovementInput.y * Ctx.walkMultiplier;
         
         //HandleGravity();
     }

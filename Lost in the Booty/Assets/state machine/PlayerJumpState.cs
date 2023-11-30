@@ -13,8 +13,9 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void EnterState()
     {
+        
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, true);
-        Ctx.IsJumpAnimating = true;
+        //Ctx.IsJumpAnimating = true;
         Debug.Log("HELLO FROM jUMP STATE");
         HandleJump();
     }
@@ -23,6 +24,7 @@ public class PlayerJumpState : PlayerBaseState
     {
         CheckSwitchStates();
         HandleGravity();
+        
     }
 
     public override void ExitState()
@@ -30,7 +32,12 @@ public class PlayerJumpState : PlayerBaseState
         Debug.Log("HELLO FROM JUMP STATE EXIT");
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
-        Ctx.IsJumpAnimating = false;
+        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
+        //Ctx.IsJumpAnimating = false;
+        Ctx.IsMovementPressed = false;
+        Ctx.IsMovementPressed = false;
+        Ctx.CurrentMovementY = 0;
+        Ctx.CurrentMovementX = 0;
         
     }
 
@@ -41,20 +48,24 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
+        //Ctx.handleRotation();
         if(Ctx.CharacterController.isGrounded)
         {
+            Debug.Log("We are switching to grounded state");
             SwitchStates(Factory.Grounded());
         }
+        
     }
 
     void HandleJump() 
     {
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, true);
-        Ctx.IsJumpAnimating = true;
+        //Ctx.IsJumpAnimating = true;
         Ctx.IsJumping = true;
-
+        Ctx.handleRotation();
         Ctx.CurrentMovementY = Ctx.InitialJumpVelocity * .5f;
         Ctx.CurrentRunMovementY = Ctx.InitialJumpVelocity *.5f;
+
     }
 
     void HandleGravity()

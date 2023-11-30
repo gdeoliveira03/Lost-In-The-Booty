@@ -15,6 +15,7 @@ public class PlayerGroundedState : PlayerBaseState
     {
         Ctx.CurrentMovementY = Ctx.GroundedGravity;
         Ctx.CurrentRunMovementY = Ctx.GroundedGravity;
+        Ctx.CurrentMovementZ = 0;
     }
 
     public override void UpdateState()
