@@ -59,6 +59,9 @@ public class Enemy : MonoBehaviour
     private int shockStacks = 0;
     private int shockThreshold = 3;
     private int shockDamage = 5; // Adjust the damage as needed
+    private float chaseSpeed;
+    private float patrolSpeed;
+    private float attackDistance;
 
     // Tags
     public string playerTag = "Player";
@@ -78,10 +81,7 @@ public class Enemy : MonoBehaviour
     public float patrolAreaRadius = 10f;
     public float patrolInterval = 5f;
     public float patrolPauseDuration = 2f;
-    public float chaseSpeed;
-    public float patrolSpeed;
     public float chaseDistance = 10f;
-    public float attackDistance = 2f;
     public float HealDistance = 10f;
     private float originalMovementSpeed;
     private float slowedamount = 1f;
@@ -115,8 +115,8 @@ public class Enemy : MonoBehaviour
             healthRegen = 0;
             manaRegen = 0;
             isFriendly = false;
-
-            patrolSpeed = 2f;
+            attackDistance = 2f;
+            patrolSpeed = 1f;
             chaseSpeed = 6f;
         }
         if(EnemyType == "Minotaur")
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
             healthRegen = 0;
             manaRegen = 0;
             isFriendly = false;
-
+            attackDistance = 2f;
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;
         }
@@ -148,9 +148,9 @@ public class Enemy : MonoBehaviour
             healthRegen = 0;
             manaRegen = 0;
             isFriendly = false;
-
-            patrolSpeed = 2f;
-            chaseSpeed = 6.5f;
+            attackDistance = 1f;
+            patrolSpeed = 1f;
+            chaseSpeed = 6.0f;
         }
 
         if(EnemyType == "Doctor")
@@ -163,6 +163,7 @@ public class Enemy : MonoBehaviour
 
         CurrentHealth = MaxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
+        navMeshAgent.speed = patrolSpeed;
     }
 
     void Update()
