@@ -14,6 +14,19 @@ public class Pause : MonoBehaviour
     public GameObject WorldMapUI;
     public GameObject StatsUI;
 
+    void Start()
+    {
+        PauseMenu = transform.Find("PauseMenu").gameObject;
+        GameUI = transform.Find("GameUI").gameObject;
+        OptionsUI = transform.Find("OptionsPage").gameObject;
+        VideoOptionsUI = transform.Find("OptionsPage").transform.Find("VideoOptions").gameObject;
+        AudioOptionsUI = transform.Find("OptionsPage").transform.Find("AudioOptions").gameObject;
+        AbilityUI = transform.Find("AbilityPageUI").gameObject;
+        InventoryUI = transform.Find("InventoryUI").gameObject;
+        WorldMapUI = transform.Find("MapUI").gameObject;
+        StatsUI = transform.Find("StatsPageUI").gameObject;
+    }
+
     public void PauseGame()
     {
         Time.timeScale = 0f;

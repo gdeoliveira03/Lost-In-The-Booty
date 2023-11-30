@@ -11,6 +11,15 @@ public class Stats : MonoBehaviour
     public GameObject PauseMenu;
     public KeyCode keybind = KeyCode.C;
 
+    void Start()
+    {
+        PauseMenu = transform.Find("PauseMenu").gameObject;
+        AbilityUI = transform.Find("AbilityPageUI").gameObject;
+        InventoryUI = transform.Find("InventoryPageUI").gameObject;
+        WorldMapUI = transform.Find("MapUI").gameObject;
+        StatsUI = transform.Find("StatsPageUI").gameObject;
+    }
+
     // Start is called before the first frame update
     public void open()
     {
