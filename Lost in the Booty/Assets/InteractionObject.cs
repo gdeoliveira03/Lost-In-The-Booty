@@ -79,7 +79,8 @@ public class DoctorDialogue : MonoBehaviour
     };
         string[] dialogue4 = new string[]
     {
-            "This island supposedly has a dungeon that is rich with treasures...\n\nPress 'F' to advance dialogue",
+            "We're here...\n\nPress 'F' to advance dialogue",
+            "This island supposedly has a dungeon that is rich with treasures...",
             "Seems to me that this is a great place to find one of Davy Jones' commanders",
             "Let's go check it out!",
         // Add more dialogues as needed
@@ -101,6 +102,15 @@ public class DoctorDialogue : MonoBehaviour
             "So this is the inside of the dungeon...",
            // Add more dialogues as needed
        };
+        string[] dialogue7 = new string[]
+{
+            "We're here...\n\nPress 'F' to advance dialogue",
+            "Sorry Scruffy, I don't really know much about this island...",
+            "It's crawling with enemies, there must be something valuable here...",
+            "But I figure there might be something here worth exploring...",
+            "Let's go check it out!",
+    // Add more dialogues as needed
+};
 
 
 
@@ -115,6 +125,21 @@ public class DoctorDialogue : MonoBehaviour
                 break;
             case 2: 
                 dialogues = dialogue2;
+                break;
+            case 3:
+                dialogues = dialogue3;
+                break;
+            case 4:
+                dialogues = dialogue4; // Corrected the assignment here
+                break;
+            case 5:
+                dialogues = dialogue5;
+                break;
+            case 6:
+                dialogues = dialogue6;
+                break;
+            case 7:
+                dialogues = dialogue7;
                 break;
         }
 

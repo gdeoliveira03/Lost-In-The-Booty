@@ -9,7 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource[] _effectsSources;
 
-    private float masterVolume = 1.0f;
+    private float masterVolume = 0.15f;
     private float musicVolume = 1.0f;
     private float effectsVolume = 1.0f;
 
@@ -22,7 +22,9 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+
+            //Destroy(gameObject);
         }
     }
 
