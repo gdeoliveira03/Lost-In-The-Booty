@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class WorldMap : MonoBehaviour
 {
+    public GameObject AbilityUI;
+    public GameObject InventoryUI;
     public GameObject WorldMapUI;
+    public GameObject StatsUI;
     public GameObject PauseMenu;
     public KeyCode keybind = KeyCode.M;
 
@@ -26,7 +29,10 @@ public class WorldMap : MonoBehaviour
         // Check for keybind input
         if (Input.GetKeyDown(keybind))
         {
-            open();
+            if (!InventoryUI.activeSelf && !AbilityUI.activeSelf && !StatsUI.activeSelf)
+            {
+                open();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)

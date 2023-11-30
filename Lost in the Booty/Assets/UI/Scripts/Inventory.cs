@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public GameObject AbilityUI;
     public GameObject InventoryUI;
+    public GameObject WorldMapUI;
+    public GameObject StatsUI;
     public GameObject PauseMenu;
     public KeyCode keybind = KeyCode.I;
 
@@ -27,8 +30,10 @@ public class Inventory : MonoBehaviour
         // Check for keybind input
         if (Input.GetKeyDown(keybind))
         {
-            Debug.Log("Inventory keybind pressed. Opening now");
-            open();
+            if (!AbilityUI.activeSelf && !WorldMapUI.activeSelf && !StatsUI.activeSelf)
+            {
+                open();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)

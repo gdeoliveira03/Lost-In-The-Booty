@@ -5,6 +5,9 @@ using UnityEngine;
 public class AbilityBook : MonoBehaviour
 {
     public GameObject AbilityUI;
+    public GameObject InventoryUI;
+    public GameObject WorldMapUI;
+    public GameObject StatsUI;
     public GameObject PauseMenu;
     public KeyCode keybind = KeyCode.B;
 
@@ -24,7 +27,10 @@ public class AbilityBook : MonoBehaviour
         // Check for keybind input and if not open
         if (Input.GetKeyDown(keybind))
         {
-            open();
+            if (!InventoryUI.activeSelf && !WorldMapUI.activeSelf && !StatsUI.activeSelf)
+            {
+                open();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)

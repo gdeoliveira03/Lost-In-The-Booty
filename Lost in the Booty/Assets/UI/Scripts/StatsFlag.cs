@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+    public GameObject AbilityUI;
+    public GameObject InventoryUI;
+    public GameObject WorldMapUI;
     public GameObject StatsUI;
     public GameObject PauseMenu;
     public KeyCode keybind = KeyCode.C;
@@ -26,7 +29,10 @@ public class Stats : MonoBehaviour
         // Check for keybind input
         if (Input.GetKeyDown(keybind))
         {
-            open();
+            if (!InventoryUI.activeSelf && !WorldMapUI.activeSelf && !AbilityUI.activeSelf)
+            {
+                open();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && !PauseMenu.activeSelf)
