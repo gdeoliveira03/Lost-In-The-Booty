@@ -41,6 +41,13 @@ public class ScruffyStats : MonoBehaviour
      
         void Start ()
         {
+            InitializeStats();
+        }
+
+        void InitializeStats()
+        {
+            isdead = true;
+            // Your initialization logic from the Start method
             MovementScript = GetComponent<PlayerStateMachine>();
             skills = GetComponent<SkillList>();
             animator = GetComponent<Animator>();
@@ -62,8 +69,6 @@ public class ScruffyStats : MonoBehaviour
             StatTexts[2].text = "Damage: " + damage;
             StatTexts[3].text = "Armor: " + armor;
             StatTexts[4].text = "Evasion: " + evasion + "%";
-
-
         }
 
 
@@ -353,11 +358,15 @@ public class ScruffyStats : MonoBehaviour
         
         
         public GameObject deathScreenPrefab;
+        public GameObject spawnPoint;
+        Vector3 spawnPointPosition;
         public float fadeDuration = 2f;
         bool isdead = true;
         public virtual void Die ()
         {
+            spawnPointPosition = spawnPoint.transform.position;
             if(isdead){
+                animator.SetTrigger("Died");
                 StartCoroutine(DeathSequence());
             }
             isdead = false;
@@ -365,25 +374,17 @@ public class ScruffyStats : MonoBehaviour
 
         private IEnumerator DeathSequence()
         {
-            animator.SetTrigger("Died");
-
             yield return new WaitForSeconds(2f);
 
             GameObject deathScreen = Instantiate(deathScreenPrefab, transform.position, Quaternion.identity);
 
-            // Gradually fade in the death screen
-            CanvasGroup canvasGroup = deathScreen.GetComponent<CanvasGroup>();
-            if (canvasGroup != null)
-            {
-                float elapsedTime = 0f;
-                while (elapsedTime < fadeDuration)
-                {
-                    canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-                canvasGroup.alpha = 1f;
-                Time.timeScale = 0f;
-            }
+            gameObject.transform.position = spawnPointPosition;
+            InitializeStats();
+
+            yield return new WaitForSeconds(0.5f);
+
+            Time.timeScale = 0f;
+
         }
+
 }

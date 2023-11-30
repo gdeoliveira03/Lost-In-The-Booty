@@ -5,6 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private Transform player;
+    private string playerTag = "Player";
+    void Start(){
+        player = GameObject.FindGameObjectWithTag(playerTag).transform;
+    }
+
+    public void KeepPlayingAfterDeath(GameObject deathscreenprefab){
+        Time.timeScale = 1f;
+        Destroy(deathscreenprefab);
+    }
+
     public void StartButton()
     {
         SceneManager.LoadScene(0);

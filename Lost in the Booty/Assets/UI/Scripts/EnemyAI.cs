@@ -148,7 +148,7 @@ public class Enemy : MonoBehaviour
             healthRegen = 0;
             manaRegen = 0;
             isFriendly = false;
-            attackDistance = 1f;
+            attackDistance = 2f;
             patrolSpeed = 1f;
             chaseSpeed = 6.0f;
         }
