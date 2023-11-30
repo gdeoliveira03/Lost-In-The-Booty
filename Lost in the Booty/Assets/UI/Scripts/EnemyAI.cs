@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour
     private int luck = 0;
     private int healthRegen = 0;
     private int manaRegen = 0;
-    int isRunningHashDoctor;
 
     // Health and Mana
     public int MaxHealth;
@@ -30,11 +29,15 @@ public class Enemy : MonoBehaviour
 
     // Effects
     public bool isDoctor = false;
+    public bool isFriendly = false;
+    private bool isSkeleton = false;
+    private bool isMinotaur = false;
+    private bool isCrab = false;
     private bool isStunned = false;
     private bool isSlowed = false;
     private bool isBurning = false;
     private bool isFrozen = false;
-    private bool isRunning = false;
+    private bool healingeffect = false;
     private int activeDOTEffects = 0;
 
     // Effect Prefabs
@@ -45,6 +48,7 @@ public class Enemy : MonoBehaviour
     public GameObject SlowEffect;
     public GameObject FrostBiteEffect;
     public GameObject FreezeEffect;
+    public GameObject DoctorHeal;
 
     // Effect Variables
     private float slowTime = 0f;
@@ -74,19 +78,19 @@ public class Enemy : MonoBehaviour
     public float patrolAreaRadius = 10f;
     public float patrolInterval = 5f;
     public float patrolPauseDuration = 2f;
-    public float chaseSpeed = 6f;
-    public float patrolSpeed = 2f;
+    public float chaseSpeed;
+    public float patrolSpeed;
     public float chaseDistance = 10f;
     public float attackDistance = 2f;
+    public float HealDistance = 10f;
     private float originalMovementSpeed;
     private float slowedamount = 1f;
+    private float lastHealTime;
+    public float healCooldown = 10f;
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
-
-    public int IsRunningHashDoctor { get { return isRunningHashDoctor; } }
-
 
     void Start()
     {
@@ -101,7 +105,7 @@ public class Enemy : MonoBehaviour
         // Set Enemy Stats Here
         if (EnemyType == "Skeleton")
         {
-            damage = 0; // change back to 8
+            damage = 8; // change back to 8
             MaxHealth = 30;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
@@ -110,10 +114,15 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+            isFriendly = false;
+
+            patrolSpeed = 2f;
+            chaseSpeed = 6f;
         }
         if(EnemyType == "Minotaur")
         {
-            damage = 0; // change back to 15
+
+            damage = 15; // change back to 15
             MaxHealth = 200;
             CurrentHealth = MaxHealth;
             MaxMana = 0;
@@ -122,12 +131,34 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+            isFriendly = false;
+
+            patrolSpeed = 2f;
+            chaseSpeed = 6.5f;
+        }
+        if(EnemyType == "Crab")
+        {
+            damage = 6;
+            MaxHealth = 10;
+            CurrentHealth = MaxHealth;
+            MaxMana = 0;
+            armor = 0;
+            evasion = 0;
+            attackSpeed = 0;
+            healthRegen = 0;
+            manaRegen = 0;
+            isFriendly = false;
+
+            patrolSpeed = 2f;
+            chaseSpeed = 6.5f;
         }
 
         if(EnemyType == "Doctor")
         {
             isDoctor = true;
-
+            isFriendly = true;
+            patrolSpeed = 2f;
+            chaseSpeed = 6.5f;            
         }
 
         CurrentHealth = MaxHealth;
@@ -177,25 +208,44 @@ public class Enemy : MonoBehaviour
             navMeshAgent.isStopped = true; // Ensure that the agent is stopped
             animator.speed = 0f;
         }
+        
 
-        if (isDoctor && isRunning)
-        {
-            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
-            animator.StopPlayback();
-            animator.SetBool("IsDoctorRunning", true);
-            //animator.Play("isDoctorRunning", 0, 0);
+        if(isDoctor){
+            if (CanHeal()) // Check if the heal is allowed based on cooldown
+            {
+                if (Vector3.Distance(transform.position, player.position) < HealDistance &&
+                    player.GetComponent<ScruffyStats>().CurrentHealth < player.GetComponent<ScruffyStats>().MaxHealth * 0.5f)
+                {
+                    healingeffect = true;
+                    player.GetComponent<ScruffyStats>().FlatHeal(5);
+                }
+
+                if(healingeffect == true)
+                {
+                    DoctorHeal.SetActive(true);
+                    Invoke("DoctorHealOff", 1f);
+                } 
+
+                lastHealTime = Time.time;
+            } 
+
 
         }
-        else if (isDoctor && !isRunning)
-        {
-            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
-            animator.StopPlayback();
-            animator.SetBool("IsDoctorRunning", false);
-            
-        }
+
     }
 
     // ---------------------------- AI METHODS ----------------------------
+
+    public void DoctorHealOff(){
+        DoctorHeal.SetActive(false);
+        healingeffect = false;
+    }
+
+    public bool CanHeal() //Cooldown for healing ability
+    {
+        return Time.time - lastHealTime >= healCooldown;
+    }
+
 
     void SetState(EnemyState newState)
     {
@@ -231,7 +281,6 @@ public class Enemy : MonoBehaviour
         isPaused = false;
         animator.SetBool("IsPaused", isPaused);
         animator.SetBool("IsPatrolling", true);
-        isRunning = false;  // Set running to false when patrolling
 
     }
 
@@ -246,25 +295,13 @@ public class Enemy : MonoBehaviour
         movementSpeed = chaseSpeed;
         navMeshAgent.speed = movementSpeed;
 
+        if (isFriendly)
+        {
+            animator.SetTrigger("ChaseYes"); // Set "ChaseYes" trigger only for the doctor
+        }
+
         animator.SetBool("IsChasing", true);
 
-        isRunning = true;
-
-        if (isDoctor && isRunning)
-        {
-            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
-            animator.StopPlayback();
-            animator.SetBool("IsDoctorRunning", true);
-            //animator.Play("isDoctorRunning", 0, 0);
-
-        }
-        else if (isDoctor && !isRunning)
-        {
-            //isRunningHashDoctor = Animator.StringToHash("isDoctorRunning");
-            animator.StopPlayback();
-            animator.SetBool("IsDoctorRunning", false);
-
-        }
     }
 
     void InitializeAttackState()
@@ -275,7 +312,6 @@ public class Enemy : MonoBehaviour
         StopChase();
 
         animator.SetBool("IsAttacking", true);
-        isRunning = false;
 
     }
 
@@ -382,12 +418,20 @@ public class Enemy : MonoBehaviour
         if (Vector3.Distance(transform.position, player.position) < attackDistance)
         {
             SetState(EnemyState.Attack);
+            if (isFriendly)
+            {
+                animator.SetTrigger("ChaseNo"); // Set "ChaseNo" trigger only for the doctor
+            }
         }
 
         // Check if the player is outside the chase distance, go back to patrolling
         if (Vector3.Distance(transform.position, player.position) > chaseDistance)
         {
             SetState(EnemyState.Patrol);
+            if (isFriendly)
+            {
+                animator.SetTrigger("ChaseYes"); // Set "ChaseYes" trigger only for the doctor
+            }
         }
     }
 
@@ -449,6 +493,7 @@ public class Enemy : MonoBehaviour
         StunEffect.SetActive(false);
         movementSpeed = originalMovementSpeed;
         navMeshAgent.speed = Mathf.Max(0f, movementSpeed);
+        animator.speed = 1f;
     }
 
     public void freezeOn()

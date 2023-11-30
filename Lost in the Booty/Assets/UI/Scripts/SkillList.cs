@@ -2155,7 +2155,7 @@ public class SkillList : MonoBehaviour
         ParticleSystem PS = FireP4.GetComponentInChildren<ParticleSystem>();
         PS.Play();
         Invoke("fire4hit", 0f);
-        scruffystats.TakeDamage(fidamage4_1);
+        scruffystats.TakeDamage(fidamage4_1*2);
         Invoke("fire4end", 1f); 
     }
 
