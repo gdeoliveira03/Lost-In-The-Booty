@@ -157,6 +157,7 @@ public class Enemy : MonoBehaviour
         {
             isDoctor = true;
             isFriendly = true;
+            attackDistance = 2f;
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;            
         }
