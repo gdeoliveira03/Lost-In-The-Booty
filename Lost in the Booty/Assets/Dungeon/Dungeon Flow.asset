@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e228b45736a8cf4ea000616e628a4dd, type: 3}
-  m_Name: Dungeon
+  m_Name: Dungeon Flow
   m_EditorClassIdentifier: 
   globalPropGroupID_obsolete: 
   globalPropRanges_obsolete: []
