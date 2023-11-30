@@ -29,6 +29,7 @@ public class PlayerJumpState : PlayerBaseState
     {
         Debug.Log("HELLO FROM JUMP STATE EXIT");
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
+        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
         Ctx.IsJumpAnimating = false;
         
     }

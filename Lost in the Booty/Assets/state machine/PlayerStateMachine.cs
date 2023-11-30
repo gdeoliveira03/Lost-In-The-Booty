@@ -85,7 +85,7 @@ public class PlayerStateMachine : MonoBehaviour
     void onJump(InputAction.CallbackContext context)
     {
         isJumpPressed = context.ReadValueAsButton();
-        Debug.Log("HELLO we have pressed jump");
+        
     }
 
     // (callback func) handler for run

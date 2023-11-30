@@ -40,12 +40,20 @@ public class PlayerGroundedState : PlayerBaseState
         if(!Ctx.IsMovementPressed && !Ctx.IsRunPressed) {
             SetSubState(Factory.Idle());
         }
+        // this is where problem is ********
+
         // if movement pressed but not run switch to walk
         else if(Ctx.IsMovementPressed && !Ctx.IsRunPressed) {
-            SetSubState(Factory.Walk());
+            if(!Ctx.IsJumpPressed) {
+                SetSubState(Factory.Walk());
+            }
+            
         }
         else {
-            SetSubState(Factory.Run());
+            if(!Ctx.IsJumpPressed) {
+                SetSubState(Factory.Run());
+            }
+            
         }
     }
 
