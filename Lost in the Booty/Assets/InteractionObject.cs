@@ -107,7 +107,7 @@ public class DoctorDialogue : MonoBehaviour
             "We're here...\n\nPress 'F' to advance dialogue",
             "Sorry Scruffy, I don't really know much about this island...",
             "It's crawling with enemies, there must be something valuable here...",
-            "But I figure there might be something here worth exploring...",
+            "I figure there might be something here worth exploring...",
             "Let's go check it out!",
     // Add more dialogues as needed
 };
