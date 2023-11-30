@@ -114,6 +114,7 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+            isFriendly = false;
 
             patrolSpeed = 2f;
             chaseSpeed = 6f;
@@ -130,6 +131,7 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+            isFriendly = false;
 
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;
@@ -145,6 +147,7 @@ public class Enemy : MonoBehaviour
             attackSpeed = 0;
             healthRegen = 0;
             manaRegen = 0;
+            isFriendly = false;
 
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;
@@ -205,6 +208,7 @@ public class Enemy : MonoBehaviour
             navMeshAgent.isStopped = true; // Ensure that the agent is stopped
             animator.speed = 0f;
         }
+        
 
         if(isDoctor){
             if (CanHeal()) // Check if the heal is allowed based on cooldown
@@ -489,6 +493,7 @@ public class Enemy : MonoBehaviour
         StunEffect.SetActive(false);
         movementSpeed = originalMovementSpeed;
         navMeshAgent.speed = Mathf.Max(0f, movementSpeed);
+        animator.speed = 1f;
     }
 
     public void freezeOn()
