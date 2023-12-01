@@ -16,6 +16,7 @@ public class Pause : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         PauseMenu = transform.Find("PauseMenu").gameObject;
         GameUI = transform.Find("GameUI").gameObject;
         OptionsUI = transform.Find("OptionsPage").gameObject;
