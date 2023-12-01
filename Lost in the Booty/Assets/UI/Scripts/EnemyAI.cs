@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private int attackSpeed = 0;
     private float movementSpeed;
     private int luck = 0;
-    private int healthRegen = 0;
+    private float healthRegen = 0f;
     private int manaRegen = 0;
 
     // Health and Mana
@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour
     private float chaseSpeed;
     private float patrolSpeed;
     private float attackDistance;
+    private float timeInPatrol = 0f;
 
     // Tags
     public string playerTag = "Player";
@@ -112,7 +113,7 @@ public class Enemy : MonoBehaviour
             armor = 0;
             evasion = 0;
             attackSpeed = 0;
-            healthRegen = 0;
+            healthRegen = MaxHealth * 0.1f;
             manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
@@ -129,7 +130,7 @@ public class Enemy : MonoBehaviour
             armor = 0;
             evasion = 0;
             attackSpeed = 0;
-            healthRegen = 0;
+            healthRegen = MaxHealth * 0.1f;
             manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
@@ -145,7 +146,7 @@ public class Enemy : MonoBehaviour
             armor = 0;
             evasion = 0;
             attackSpeed = 0;
-            healthRegen = 0;
+            healthRegen = MaxHealth * 0.1f;
             manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
@@ -408,6 +409,17 @@ public class Enemy : MonoBehaviour
             movementSpeed = chaseSpeed;
             animator.SetBool("IsChasing", true);
         }
+
+        if (currentState == EnemyState.Patrol)
+        {
+            timeInPatrol += Time.deltaTime;
+
+            if (timeInPatrol >= 5f)
+            {
+                timeInPatrol = 0f;
+                StartHealing();
+            }
+        }
     }
 
     void Chase()
@@ -454,6 +466,24 @@ public class Enemy : MonoBehaviour
         {
             SetState(EnemyState.Chase);
         }
+    }
+
+    void StartHealing()
+    {
+        if (CurrentHealth < MaxHealth)
+        {
+            int healAmount = Mathf.Min(healthRegen, MaxHealth - CurrentHealth);
+            FlatHeal(healAmount);
+        }
+    }
+
+    public void FlatHeal(int amount)
+    {
+        CurrentHealth += amount;
+        healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
+        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+        indicator.SetDamageTextColor(Color.green);
+        indicator.SetDamageText(amount.ToString());
     }
 
     void PerformAttack()
