@@ -405,7 +405,7 @@ Animator:
   m_GameObject: {fileID: 7930749687380761888}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3923e4f74caa7724d91aefd2fa229016, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4d7ec113324b6844e974dfd065969408, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -489,6 +489,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 3602611626041669846}
   scruffy: {fileID: 0}
   doctor: {fileID: 0}
+  isScruffy: 0
   mainCamera: {fileID: 0}
   dialogueCamera: {fileID: 0}
   tutorialUI: {fileID: 0}
@@ -511,6 +512,8 @@ MonoBehaviour:
   DamageText: {fileID: 1213133989951465600, guid: 1bec8afe5172bf4409bc2e4316e117a9, type: 3}
   EnemyType: Doctor
   healthBar: {fileID: 0}
+  isDoctor: 0
+  isFriendly: 0
   OnFireEffect: {fileID: 0}
   LightningElement: {fileID: 0}
   LightningExplosion: {fileID: 0}
@@ -518,15 +521,15 @@ MonoBehaviour:
   SlowEffect: {fileID: 0}
   FrostBiteEffect: {fileID: 0}
   FreezeEffect: {fileID: 0}
+  DoctorHeal: {fileID: 0}
   playerTag: Player
   currentState: 1
   patrolAreaRadius: 10
   patrolInterval: 5
   patrolPauseDuration: 2
-  chaseSpeed: 7
-  patrolSpeed: 2
   chaseDistance: 100
-  attackDistance: 2
+  HealDistance: 10
+  healCooldown: 10
 --- !u!195 &544607164838056303
 NavMeshAgent:
   m_ObjectHideFlags: 0
