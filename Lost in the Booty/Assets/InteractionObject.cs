@@ -131,6 +131,23 @@ public class DoctorDialogue : MonoBehaviour
     // Add more dialogues as needed
 };
 
+        string[] dialogue10 = new string[]
+{
+            "Welcome to horseshoe crab island... n\nPress 'F' to advance dialogue",
+            "The villagers say that there is a dungeon here that is frequented by Pirates...",
+            "It should be somewhere on this island...",
+            "Let's go check it out!"
+    // Add more dialogues as needed
+};
+
+        string[] dialogue11 = new string[]
+{
+            "You made it!... n\nPress 'F' to advance dialogue",
+            "The dungeon should be somewhere around here...",
+            "Take a look...I'll meet you inside!",
+    // Add more dialogues as needed
+};
+
 
 
         // Initialize your dialogues here
@@ -165,6 +182,12 @@ public class DoctorDialogue : MonoBehaviour
                 break;
             case 9:
                 dialogues = dialogue9;
+                break;
+            case 10:
+                dialogues = dialogue10;
+                break;
+            case 11:
+                dialogues = dialogue11;
                 break;
         }
 
