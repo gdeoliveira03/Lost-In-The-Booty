@@ -8,12 +8,8 @@ public class Enemy : MonoBehaviour
     // Stats
     private int damage = 0;
     private int armor = 0;
-    private int evasion = 0;
-    private int attackSpeed = 0;
     private float movementSpeed;
-    private int luck = 0;
     private float healthRegen = 0f;
-    private int manaRegen = 0;
 
     // Health and Mana
     public int MaxHealth;
@@ -111,10 +107,7 @@ public class Enemy : MonoBehaviour
             CurrentHealth = MaxHealth;
             MaxMana = 0;
             armor = 0;
-            evasion = 0;
-            attackSpeed = 0;
             healthRegen = MaxHealth * 0.1f;
-            manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
             patrolSpeed = 1f;
@@ -128,10 +121,7 @@ public class Enemy : MonoBehaviour
             CurrentHealth = MaxHealth;
             MaxMana = 0;
             armor = 0;
-            evasion = 0;
-            attackSpeed = 0;
             healthRegen = MaxHealth * 0.1f;
-            manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
             patrolSpeed = 2f;
@@ -144,10 +134,7 @@ public class Enemy : MonoBehaviour
             CurrentHealth = MaxHealth;
             MaxMana = 0;
             armor = 0;
-            evasion = 0;
-            attackSpeed = 0;
             healthRegen = MaxHealth * 0.1f;
-            manaRegen = 0;
             isFriendly = false;
             attackDistance = 2f;
             patrolSpeed = 1f;
