@@ -16,9 +16,28 @@ public class MainMenu : MonoBehaviour
         Destroy(deathscreenprefab);
     }
 
+    public void NewSaveButton(){
+        if (PlayerPrefs.HasKey("SavedScene"))
+        {
+            int savedSceneIndex = PlayerPrefs.GetInt("SavedScene");
+            PlayerPrefs.DeleteKey("SavedScene");
+        }
+        SceneManager.LoadScene(0);
+    }
+
     public void StartButton()
     {
-        SceneManager.LoadScene(0);
+        int savedSceneIndex = PlayerPrefs.GetInt("SavedScene", 0);
+        if (savedSceneIndex != 0)
+        {
+            // Load the saved scene
+            SceneManager.LoadScene(savedSceneIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+
         Debug.Log("Start Game!");
     }
 

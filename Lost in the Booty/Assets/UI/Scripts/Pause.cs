@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -40,6 +41,25 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         GameUI.SetActive(true);
         PauseMenu.SetActive(false);
+    }
+
+    Vector3 spawnPointPosition;
+    public GameObject spawnPoint;
+    public GameObject ScruffyMain;
+    public void UnstuckScruffy()
+    {
+        StartCoroutine(UnstuckScruffyCoroutine());
+    }
+
+    IEnumerator UnstuckScruffyCoroutine(){
+        Time.timeScale = 1f;
+        GameUI.SetActive(true);
+        PauseMenu.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+        spawnPointPosition = spawnPoint.transform.position;
+        ScruffyMain.transform.position = spawnPointPosition;
+
     }
 
     public void OptionsMenu()
@@ -82,6 +102,8 @@ public class Pause : MonoBehaviour
 
     public void QuitGame()
     {
+        PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.Save();
         Application.Quit();
     }
 
