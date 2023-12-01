@@ -72,7 +72,7 @@ public class WeaponElement : MonoBehaviour
     // Stores the weapon colliders
     private Collider NCWeaponCollider;
     private Collider NSWeaponCollider;
-    private Collider NHWeaponCollider;  
+    private Collider NHWeaponCollider;
     private Collider FCWeaponCollider;
     private Collider FSWeaponCollider;
     private Collider FHWeaponCollider;
@@ -128,12 +128,12 @@ public class WeaponElement : MonoBehaviour
         skillist = GetComponent<SkillList>();
         Footsteps = GetComponent<footsteps>();
 
-        Cutlasstoggle.onValueChanged.AddListener(delegate { ToggleChanged(Cutlasstoggle, ref Cutlass, CantSpear, CantHammer); });
-        Speartoggle.onValueChanged.AddListener(delegate { ToggleChanged(Speartoggle, ref Spear, CantSword, CantHammer); });
-        Hammertoggle.onValueChanged.AddListener(delegate { ToggleChanged(Hammertoggle, ref Hammer, CantSpear, CantSword); });
-        Firetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Firetoggle, ref Fire, CantIce, CantLightning); });
-        Icetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Icetoggle, ref Ice, CantFire, CantLightning); });
-        Lightningtoggle.onValueChanged.AddListener(delegate { ToggleChanged(Lightningtoggle, ref Lightning, CantFire, CantIce); });
+        Cutlasstoggle.onValueChanged.AddListener(delegate { ToggleChanged(Cutlasstoggle, ref GameManager.Instance.scruffyInventory.Cutlass, CantSpear, CantHammer); });
+        Speartoggle.onValueChanged.AddListener(delegate { ToggleChanged(Speartoggle, ref GameManager.Instance.scruffyInventory.Spear, CantSword, CantHammer); });
+        Hammertoggle.onValueChanged.AddListener(delegate { ToggleChanged(Hammertoggle, ref GameManager.Instance.scruffyInventory.Hammer, CantSpear, CantSword); });
+        Firetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Firetoggle, ref GameManager.Instance.scruffyInventory.Fire, CantIce, CantLightning); });
+        Icetoggle.onValueChanged.AddListener(delegate { ToggleChanged(Icetoggle, ref GameManager.Instance.scruffyInventory.Ice, CantFire, CantLightning); });
+        Lightningtoggle.onValueChanged.AddListener(delegate { ToggleChanged(Lightningtoggle, ref GameManager.Instance.scruffyInventory.Lightning, CantFire, CantIce); });
 
         // Get the weapon colliders
         NCWeaponCollider = NormalCutlass.GetComponent<Collider>();
@@ -182,67 +182,79 @@ public class WeaponElement : MonoBehaviour
         characterTransform = transform;
 
 
-        if (Cutlass == true){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true)
+        {
             GameUICutlass.SetActive(true);
             SpellBookImageCutlass.SetActive(true);
             SpellBookSkillsCutlass.SetActive(true);
         }
-        else {
+        else
+        {
             GameUICutlass.SetActive(false);
             SpellBookImageCutlass.SetActive(false);
             SpellBookSkillsCutlass.SetActive(false);
         }
 
-        if (Spear == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true)
+        {
             GameUISpear.SetActive(true);
             SpellBookImageSpear.SetActive(true);
             SpellBookSkillsSpear.SetActive(true);
         }
-        else {
+        else
+        {
             GameUISpear.SetActive(false);
             SpellBookImageSpear.SetActive(false);
             SpellBookSkillsSpear.SetActive(false);
         }
 
-        if (Hammer == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true)
+        {
             GameUIHammer.SetActive(true);
             SpellBookImageHammer.SetActive(true);
             SpellBookSkillsHammer.SetActive(true);
         }
-        else {
+        else
+        {
             GameUIHammer.SetActive(false);
             SpellBookImageHammer.SetActive(false);
             SpellBookSkillsHammer.SetActive(false);
         }
 
-        if (Fire == true){
+        if (GameManager.Instance.scruffyInventory.Fire == true)
+        {
             GameUIFire.SetActive(true);
             SpellBookImageFire.SetActive(true);
             SpellBookSkillsFire.SetActive(true);
         }
-        else {
+        else
+        {
             GameUIFire.SetActive(false);
             SpellBookImageFire.SetActive(false);
             SpellBookSkillsFire.SetActive(false);
         }
 
-        if (Ice == true){
+        if (GameManager.Instance.scruffyInventory.Ice == true)
+        {
             GameUIIce.SetActive(true);
             SpellBookImageIce.SetActive(true);
             SpellBookSkillsIce.SetActive(true);
         }
-        else {
+        else
+        {
             GameUIIce.SetActive(false);
             SpellBookImageIce.SetActive(false);
             SpellBookSkillsIce.SetActive(false);
         }
 
-        if (Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             GameUILightning.SetActive(true);
             SpellBookImageLightning.SetActive(true);
             SpellBookSkillsLightning.SetActive(true);
         }
-        else {
+        else
+        {
             GameUILightning.SetActive(false);
             SpellBookImageLightning.SetActive(false);
             SpellBookSkillsLightning.SetActive(false);
@@ -251,92 +263,122 @@ public class WeaponElement : MonoBehaviour
 
         // FOR WEAPON HOLDING
 
-        if (Cutlass == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireCutlass.SetActive(true);
         }
-        else{
+        else
+        {
             FireCutlass.SetActive(false);
         }
 
-        if (Cutlass == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceCutlass.SetActive(true);
         }
-        else{
-            IceCutlass.SetActive(false);           
+        else
+        {
+            IceCutlass.SetActive(false);
         }
 
-        if (Cutlass == true && Lightning == true){
-            LightningCutlass.SetActive(true);           
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
+            LightningCutlass.SetActive(true);
         }
-        else{
-            LightningCutlass.SetActive(false);             
+        else
+        {
+            LightningCutlass.SetActive(false);
         }
 
-        if (Spear == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireSpear.SetActive(true);
         }
-        else{
+        else
+        {
             FireSpear.SetActive(false);
         }
 
-        if (Spear == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceSpear.SetActive(true);
         }
-        else{
+        else
+        {
             IceSpear.SetActive(false);
         }
 
-        if (Spear == true && Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             LightningSpear.SetActive(true);
         }
-        else{
+        else
+        {
             LightningSpear.SetActive(false);
         }
 
-        if (Hammer == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireHammer.SetActive(true);
         }
-        else{
+        else
+        {
             FireHammer.SetActive(false);
         }
 
-        if (Hammer == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceHammer.SetActive(true);
         }
-        else{
+        else
+        {
             IceHammer.SetActive(false);
         }
 
-        if (Hammer == true && Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             LightningHammer.SetActive(true);
         }
-        else{
+        else
+        {
             LightningHammer.SetActive(false);
         }
 
         // Implementation for normal weapons only
         // Normal Cutlass
-        if (Cutlass == true && Spear == false && Hammer == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Spear == false &&
+            GameManager.Instance.scruffyInventory.Hammer == false && GameManager.Instance.scruffyInventory.Fire == false &&
+            GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalCutlass.SetActive(true);
         }
-        else{
-            NormalCutlass.SetActive(false);        
+        else
+        {
+            NormalCutlass.SetActive(false);
         }
 
         // Normal Spear
-        if (Spear == true && Cutlass == false && Hammer == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Cutlass == false
+            && GameManager.Instance.scruffyInventory.Hammer == false && GameManager.Instance.scruffyInventory.Fire == false
+            && GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalSpear.SetActive(true);
         }
-        else{
+        else
+        {
             NormalSpear.SetActive(false);
         }
 
 
         // Normal Hammer
-        if (Hammer == true && Spear == false && Cutlass == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Spear == false
+            && GameManager.Instance.scruffyInventory.Cutlass == false && GameManager.Instance.scruffyInventory.Fire == false
+            && GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalHammer.SetActive(true);
         }
-        else{
+        else
+        {
             NormalHammer.SetActive(false);
         }
 
@@ -407,7 +449,7 @@ public class WeaponElement : MonoBehaviour
         animator = GetComponent<Animator>();
 
 
- 
+
 
 
         // Cooldown timers for basic attacks
@@ -417,15 +459,18 @@ public class WeaponElement : MonoBehaviour
         BasicAttackCooldown(ref CurrentFireBasicCooldown, FireBasicCooldown, ref isAbilityCooldownFire); // Counts Cooldown time for fire
         BasicAttackCooldown(ref CurrentIceBasicCooldown, IceBasicCooldown, ref isAbilityCooldownIce); // Counts Cooldown time for ice
         BasicAttackCooldown(ref CurrentLightningBasicCooldown, LightningBasicCooldown, ref isAbilityCooldownLightning); // Counts Cooldown time for lightning
-        
-        if (Cutlass == true){
+
+        if (GameManager.Instance.scruffyInventory.Cutlass == true)
+        {
             GameUICutlass.SetActive(true);
             SpellBookImageCutlass.SetActive(true);
             SpellBookSkillsCutlass.SetActive(true);
 
             // CUTLASS BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                if(!isAbilityCooldownCutlass){
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (!isAbilityCooldownCutlass)
+                {
                     animator.SetTrigger("CutlassBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownCutlass = true; // Sets the ability to be on cooldown
                     CurrentCutlassBasicCooldown = CutlassBasicCooldown; // Current Cooldown becomes the basic cooldown
@@ -433,61 +478,73 @@ public class WeaponElement : MonoBehaviour
             }
 
         }
-        else {
+        else
+        {
             GameUICutlass.SetActive(false);
             SpellBookImageCutlass.SetActive(false);
             SpellBookSkillsCutlass.SetActive(false);
         }
 
-        if (Spear == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true)
+        {
             GameUISpear.SetActive(true);
             SpellBookImageSpear.SetActive(true);
             SpellBookSkillsSpear.SetActive(true);
 
             // SPEAR BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                if(!isAbilityCooldownSpear){ // If the ability is not on cooldown
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (!isAbilityCooldownSpear)
+                { // If the ability is not on cooldown
                     animator.SetTrigger("SpearBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownSpear = true; // Sets the ability to be on cooldown
                     CurrentSpearBasicCooldown = SpearBasicCooldown; // Current Cooldown becomes the basic cooldown  
-}
+                }
             }
 
         }
-        else {
+        else
+        {
             GameUISpear.SetActive(false);
             SpellBookImageSpear.SetActive(false);
             SpellBookSkillsSpear.SetActive(false);
         }
 
-        if (Hammer == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true)
+        {
             GameUIHammer.SetActive(true);
             SpellBookImageHammer.SetActive(true);
             SpellBookSkillsHammer.SetActive(true);
 
             // HAMMER BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse0)){
-                if(!isAbilityCooldownHammer){ // If the ability is not on cooldown
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (!isAbilityCooldownHammer)
+                { // If the ability is not on cooldown
                     animator.SetTrigger("HammerBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownHammer = true; // Sets the ability to be on cooldown
                     CurrentHammerBasicCooldown = HammerBasicCooldown; // Current Cooldown becomes the basic cooldown
-   }
+                }
             }
         }
-        else {
+        else
+        {
             GameUIHammer.SetActive(false);
             SpellBookImageHammer.SetActive(false);
             SpellBookSkillsHammer.SetActive(false);
         }
 
-        if (Fire == true){
+        if (GameManager.Instance.scruffyInventory.Fire == true)
+        {
             GameUIFire.SetActive(true);
             SpellBookImageFire.SetActive(true);
             SpellBookSkillsFire.SetActive(true);
 
             // FIRE BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                if(!isAbilityCooldownFire){ // If the ability is not on cooldown
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (!isAbilityCooldownFire)
+                { // If the ability is not on cooldown
                     characterTransform = transform;
                     animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownFire = true; // Sets the ability to be on cooldown
@@ -496,140 +553,179 @@ public class WeaponElement : MonoBehaviour
                 }
             }
         }
-        else {
+        else
+        {
             GameUIFire.SetActive(false);
             SpellBookImageFire.SetActive(false);
             SpellBookSkillsFire.SetActive(false);
         }
 
-        if (Ice == true){
+        if (GameManager.Instance.scruffyInventory.Ice == true)
+        {
             GameUIIce.SetActive(true);
             SpellBookImageIce.SetActive(true);
             SpellBookSkillsIce.SetActive(true);
 
             // ICE BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                if(!isAbilityCooldownIce){ // If the ability is not on cooldown
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (!isAbilityCooldownIce)
+                { // If the ability is not on cooldown
                     characterTransform = transform;
                     animator.SetTrigger("IceBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownIce = true; // Sets the ability to be on cooldown
                     CurrentIceBasicCooldown = IceBasicCooldown; // Current Cooldown becomes the basic cooldown
-}
+                }
             }
         }
-        else {
+        else
+        {
             GameUIIce.SetActive(false);
             SpellBookImageIce.SetActive(false);
             SpellBookSkillsIce.SetActive(false);
         }
 
-        if (Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             GameUILightning.SetActive(true);
             SpellBookImageLightning.SetActive(true);
             SpellBookSkillsLightning.SetActive(true);
 
             // LIGHTNING BASIC ATTACK
-            if (Input.GetKeyDown(KeyCode.Mouse1)){
-                if(!isAbilityCooldownLightning){ // If the ability is not on cooldown
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (!isAbilityCooldownLightning)
+                { // If the ability is not on cooldown
                     characterTransform = transform;
                     animator.SetTrigger("LightningBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownLightning = true; // Sets the ability to be on cooldown
                     CurrentLightningBasicCooldown = LightningBasicCooldown; // Current Cooldown becomes the basic cooldown
-}
+                }
             }
         }
-        else {
+        else
+        {
             GameUILightning.SetActive(false);
             SpellBookImageLightning.SetActive(false);
             SpellBookSkillsLightning.SetActive(false);
         }
 
-        // FOR WEAPONS HOLDING
-        if (Cutlass == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireCutlass.SetActive(true);
         }
-        else{
+        else
+        {
             FireCutlass.SetActive(false);
         }
 
-        if (Cutlass == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceCutlass.SetActive(true);
         }
-        else{
-            IceCutlass.SetActive(false);           
+        else
+        {
+            IceCutlass.SetActive(false);
         }
 
-        if (Cutlass == true && Lightning == true){
-            LightningCutlass.SetActive(true);           
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
+            LightningCutlass.SetActive(true);
         }
-        else{
-            LightningCutlass.SetActive(false);             
+        else
+        {
+            LightningCutlass.SetActive(false);
         }
 
-        if (Spear == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireSpear.SetActive(true);
         }
-        else{
+        else
+        {
             FireSpear.SetActive(false);
         }
 
-        if (Spear == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceSpear.SetActive(true);
         }
-        else{
+        else
+        {
             IceSpear.SetActive(false);
         }
 
-        if (Spear == true && Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             LightningSpear.SetActive(true);
         }
-        else{
+        else
+        {
             LightningSpear.SetActive(false);
         }
 
-        if (Hammer == true && Fire == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Fire == true)
+        {
             FireHammer.SetActive(true);
         }
-        else{
+        else
+        {
             FireHammer.SetActive(false);
         }
 
-        if (Hammer == true && Ice == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Ice == true)
+        {
             IceHammer.SetActive(true);
         }
-        else{
+        else
+        {
             IceHammer.SetActive(false);
         }
 
-        if (Hammer == true && Lightning == true){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Lightning == true)
+        {
             LightningHammer.SetActive(true);
         }
-        else{
+        else
+        {
             LightningHammer.SetActive(false);
         }
 
         // Implementation for normal weapons only
         // Normal Cutlass
-        if (Cutlass == true && Spear == false && Hammer == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Cutlass == true && GameManager.Instance.scruffyInventory.Spear == false &&
+            GameManager.Instance.scruffyInventory.Hammer == false && GameManager.Instance.scruffyInventory.Fire == false &&
+            GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalCutlass.SetActive(true);
         }
-        else{
-            NormalCutlass.SetActive(false);        
+        else
+        {
+            NormalCutlass.SetActive(false);
         }
 
         // Normal Spear
-        if (Spear == true && Cutlass == false && Hammer == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Spear == true && GameManager.Instance.scruffyInventory.Cutlass == false
+            && GameManager.Instance.scruffyInventory.Hammer == false && GameManager.Instance.scruffyInventory.Fire == false
+            && GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalSpear.SetActive(true);
         }
-        else{
+        else
+        {
             NormalSpear.SetActive(false);
         }
 
+
         // Normal Hammer
-        if (Hammer == true && Spear == false && Cutlass == false && Fire == false && Ice == false && Lightning == false){
+        if (GameManager.Instance.scruffyInventory.Hammer == true && GameManager.Instance.scruffyInventory.Spear == false
+            && GameManager.Instance.scruffyInventory.Cutlass == false && GameManager.Instance.scruffyInventory.Fire == false
+            && GameManager.Instance.scruffyInventory.Ice == false && GameManager.Instance.scruffyInventory.Lightning == false)
+        {
             NormalHammer.SetActive(true);
         }
-        else{
+        else
+        {
             NormalHammer.SetActive(false);
         }
 
@@ -638,51 +734,63 @@ public class WeaponElement : MonoBehaviour
             Collider activeWeaponCollider = null;
 
             // Determine which weapon collider to use based on the currently selected element
-            if (Fire && Cutlass){
+            if (GameManager.Instance.scruffyInventory.Fire && GameManager.Instance.scruffyInventory.Cutlass)
+            {
                 activeWeaponCollider = FCWeaponCollider;
                 FCWeaponCollider.enabled = true;
             }
-            else if (Ice && Cutlass){
+            else if (GameManager.Instance.scruffyInventory.Ice && GameManager.Instance.scruffyInventory.Cutlass)
+            {
                 activeWeaponCollider = ICWeaponCollider;
                 ICWeaponCollider.enabled = true;
             }
-            else if (Lightning && Cutlass){
+            else if (GameManager.Instance.scruffyInventory.Lightning && GameManager.Instance.scruffyInventory.Cutlass)
+            {
                 activeWeaponCollider = LCWeaponCollider;
                 LCWeaponCollider.enabled = true;
             }
-            else if (Fire && Spear){
+            else if (GameManager.Instance.scruffyInventory.Fire && GameManager.Instance.scruffyInventory.Spear)
+            {
                 activeWeaponCollider = FSWeaponCollider;
                 FSWeaponCollider.enabled = true;
             }
-            else if (Ice && Spear){
+            else if (GameManager.Instance.scruffyInventory.Ice && GameManager.Instance.scruffyInventory.Spear)
+            {
                 activeWeaponCollider = ISWeaponCollider;
                 ISWeaponCollider.enabled = true;
             }
-            else if (Lightning && Spear){
+            else if (GameManager.Instance.scruffyInventory.Lightning && GameManager.Instance.scruffyInventory.Spear)
+            {
                 activeWeaponCollider = LSWeaponCollider;
                 LSWeaponCollider.enabled = true;
             }
-            else if (Fire && Hammer){
+            else if (GameManager.Instance.scruffyInventory.Fire && GameManager.Instance.scruffyInventory.Hammer)
+            {
                 activeWeaponCollider = FHWeaponCollider;
                 FHWeaponCollider.enabled = true;
             }
-            else if (Ice && Hammer){
+            else if (GameManager.Instance.scruffyInventory.Ice && GameManager.Instance.scruffyInventory.Hammer)
+            {
                 activeWeaponCollider = IHWeaponCollider;
                 IHWeaponCollider.enabled = true;
             }
-            else if (Lightning && Hammer){
+            else if (GameManager.Instance.scruffyInventory.Lightning && GameManager.Instance.scruffyInventory.Hammer)
+            {
                 activeWeaponCollider = LHWeaponCollider;
                 LHWeaponCollider.enabled = true;
             }
-            else if (Cutlass){
+            else if (GameManager.Instance.scruffyInventory.Cutlass)
+            {
                 activeWeaponCollider = NCWeaponCollider;
                 NCWeaponCollider.enabled = true;
             }
-            else if (Spear){
+            else if (GameManager.Instance.scruffyInventory.Spear)
+            {
                 activeWeaponCollider = NSWeaponCollider;
                 NSWeaponCollider.enabled = true;
             }
-            else if (Hammer){
+            else if (GameManager.Instance.scruffyInventory.Hammer)
+            {
                 activeWeaponCollider = NHWeaponCollider;
                 NHWeaponCollider.enabled = true;
             }
@@ -706,7 +814,8 @@ public class WeaponElement : MonoBehaviour
                 {
                     if (enemy.CompareTag(enemyTag) && !hitEnemies[activeWeaponCollider].Contains(enemy))
                     {
-                        if(isShockEffect == true){
+                        if (isShockEffect == true)
+                        {
                             enemy.GetComponent<Enemy>().InflictShock();
                         }
                         enemy.GetComponent<Enemy>().TakeDamage(damage);
@@ -718,8 +827,9 @@ public class WeaponElement : MonoBehaviour
     }
 
     // BASIC ATTACK ABILITY CALLS
-    public void CutlassBasicAttack(){
-        damage = (int) (scruffystats.damage);
+    public void CutlassBasicAttack()
+    {
+        damage = (int)(scruffystats.damage);
         Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
@@ -733,8 +843,9 @@ public class WeaponElement : MonoBehaviour
         }
     }
 
-    void SpearBasicAttack(){
-        damage = (int) (scruffystats.damage * 1.4);
+    void SpearBasicAttack()
+    {
+        damage = (int)(scruffystats.damage * 1.4);
         Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
@@ -748,8 +859,9 @@ public class WeaponElement : MonoBehaviour
         }
     }
 
-    void HammerBasicAttack(){
-        damage = (int) (scruffystats.damage * 1.8);
+    void HammerBasicAttack()
+    {
+        damage = (int)(scruffystats.damage * 1.8);
         Footsteps.handleAutoAudioOn();
         isAttacking = true;
     }
@@ -782,7 +894,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator FireBasicAttack()
     {
         FireBasicEnable.SetActive(true);
-        damage = (int) (scruffystats.damage);
+        damage = (int)(scruffystats.damage);
         FireCollider.enabled = true;
         Footsteps.handleMagicAudioOn();
 
@@ -809,11 +921,13 @@ public class WeaponElement : MonoBehaviour
             {
                 if (enemy.CompareTag(enemyTag) && !hitFireEnemies.Contains(enemy))
                 {
-                    if(DoubleDotDamage == true){
-                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2*(damage*1/5), 3f, 0.5f));
+                    if (DoubleDotDamage == true)
+                    {
+                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", 2 * (damage * 1 / 5), 3f, 0.5f));
                     }
-                    else{
-                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", damage*1/5, 3f, 0.5f));
+                    else
+                    {
+                        enemy.GetComponent<Enemy>().StartCoroutine(enemy.GetComponent<Enemy>().TakeDamageOverTime("fire", damage * 1 / 5, 3f, 0.5f));
                     }
                     hitFireEnemies.Add(enemy);
                 }
@@ -832,11 +946,11 @@ public class WeaponElement : MonoBehaviour
         FireBasicEnable.SetActive(false);
         hitFireEnemies.Clear(); // Reset the set of hit enemies
     }
-    
+
     IEnumerator IceBasicAttack()
     {
         IceBasicEnable.SetActive(true);
-        int damage = (int) (scruffystats.damage); // Set the damage value for the ice attack
+        int damage = (int)(scruffystats.damage); // Set the damage value for the ice attack
         Footsteps.handleMagicAudioOn();
 
         float startTime = Time.time;
@@ -884,7 +998,7 @@ public class WeaponElement : MonoBehaviour
     IEnumerator LightningBasicAttack()
     {
         LightningBasicEnable.SetActive(true);
-        int damage = (int) (scruffystats.damage); // Set the damage value for the lightning attack
+        int damage = (int)(scruffystats.damage); // Set the damage value for the lightning attack
         Footsteps.handleMagicAudioOn();
 
         float startTime = Time.time;
@@ -932,12 +1046,12 @@ public class WeaponElement : MonoBehaviour
 
     private void BasicAttackCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown)
     {
-        if(isCooldown)
+        if (isCooldown)
         {
             currentCooldown -= Time.deltaTime;
 
-            if(currentCooldown <= 0f)
-            {   
+            if (currentCooldown <= 0f)
+            {
                 isCooldown = false;
                 currentCooldown = 0f;
             }

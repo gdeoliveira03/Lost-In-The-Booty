@@ -89,6 +89,13 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Animator animator;
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(playerTag))
+        {
+            Debug.Log("We are being hit");
+        }
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(playerTag).transform;

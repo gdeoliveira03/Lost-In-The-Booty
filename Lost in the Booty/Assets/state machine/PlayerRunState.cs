@@ -9,6 +9,7 @@ public class PlayerRunState : PlayerBaseState
 
     public override void EnterState()
     {
+        
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
         Ctx.CurrentMovementX = 0;
@@ -21,8 +22,10 @@ public class PlayerRunState : PlayerBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
+        
         Ctx.CurrentMovementX = Ctx.CurrentMovementInput.x * Ctx.RunMultiplier;
         Ctx.CurrentMovementZ = Ctx.CurrentMovementInput.y * Ctx.RunMultiplier;
+        Debug.Log("We are running and moving at this speed: " + Ctx.CurrentMovementX);
         //Ctx.CurrentMovementY = 0.05f;
         //HandleGravity();
     }

@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5091171584557591410}
   - component: {fileID: 4292686845596109391}
-  - component: {fileID: -4092007553972976989}
-  - component: {fileID: 778412627859814513}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -137,8 +135,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7649273645110792700}
   - component: {fileID: 8643208467663426030}
-  - component: {fileID: 5466565238527652605}
-  - component: {fileID: 6073013696584532151}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -256,14 +252,13 @@ MonoBehaviour:
   m_CenterOnActivate: 1
 --- !u!1 &3069186800804911731
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6634164868408797965}
-  - component: {fileID: 9196946392996705941}
   m_Layer: 0
   m_Name: BottomRig
   m_TagString: Untagged
@@ -273,7 +268,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &6634164868408797965
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -335,14 +330,13 @@ MonoBehaviour:
   m_ComponentOwner: {fileID: 7649273645110792700}
 --- !u!1 &3863199576833490414
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7048779959389648845}
-  - component: {fileID: -1468530119104144129}
   m_Layer: 0
   m_Name: TopRig
   m_TagString: Untagged
@@ -352,7 +346,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &7048779959389648845
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -549,10 +543,7 @@ MonoBehaviour:
   - m_Height: 5
     m_Radius: 10
   m_LegacyHeadingBias: 3.4028235e+38
-  m_Rigs:
-  - {fileID: -1468530119104144129}
-  - {fileID: -1885638474758257922}
-  - {fileID: 9196946392996705941}
+  m_Rigs: []
 --- !u!114 &197406077725517905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,14 +562,13 @@ MonoBehaviour:
   ZAxis: {fileID: 0}
 --- !u!1 &6137772397492342324
 GameObject:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7330596844955232601}
-  - component: {fileID: -1885638474758257922}
   m_Layer: 0
   m_Name: MiddleRig
   m_TagString: Untagged
@@ -588,7 +578,7 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &7330596844955232601
 Transform:
-  m_ObjectHideFlags: 3
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -658,8 +648,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3983191638575801251}
   - component: {fileID: 2319944539294646272}
-  - component: {fileID: -7225324120530224875}
-  - component: {fileID: 6425597424634963900}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged

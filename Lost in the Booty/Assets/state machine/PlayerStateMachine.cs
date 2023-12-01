@@ -56,9 +56,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     public bool IsJumpPressed { get {return isJumpPressed;} set {isJumpPressed = value;} }
     public bool IsJumping { get { return isJumping;} set {isJumping = value;} }
-    public bool IsJumpAnimating { get { return isJumpAnimating;} set {isJumpAnimating = value;} }
-    public bool IsRunPressed { get {return isRunPressed;} }
-    public bool IsMovementPressed {get {return isMovementPressed;} }
+    //public bool IsJumpAnimating { get { return isJumpAnimating;} set {isJumpAnimating = value;} }
+    public bool IsRunPressed { get {return isRunPressed;} set {isRunPressed = value;}  }
+    public bool IsMovementPressed {get {return isMovementPressed;} set {isMovementPressed = value;} }
 
     public float InitialJumpVelocity {get { return initialJumpVelocity;} }
     public float Gravity { get { return gravity; } set {gravity = value; } }
@@ -72,6 +72,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float CurrentRunMovementZ { get { return currentRunMovement.z;} set {currentMovement.z = value; } }
 
     public float RunMultiplier { get { return runSpeed;} }
+    public float walkMultiplier { get {return walkSpeed;} }
 
     public Vector2 CurrentMovementInput { get {return currentMovementInput;} }
     //public float AppliedMovementX { get {return }}
@@ -85,7 +86,7 @@ public class PlayerStateMachine : MonoBehaviour
     void onJump(InputAction.CallbackContext context)
     {
         isJumpPressed = context.ReadValueAsButton();
-        Debug.Log("HELLO we have pressed jump");
+        
     }
 
     // (callback func) handler for run
@@ -112,7 +113,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    void handleRotation()
+    public void handleRotation()
     {
         Vector3 positionToLookAt;
 
@@ -124,7 +125,7 @@ public class PlayerStateMachine : MonoBehaviour
         Quaternion currentRotation = transform.rotation;
 
         // creates a new rotation where the player is curr pressing
-        if(isMovementPressed) {
+        if(isMovementPressed || IsJumpPressed) {
            Quaternion targetRotation = Quaternion.LookRotation(positionToLookAt);
            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame *Time.deltaTime);
         }
@@ -140,7 +141,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         // get the animator component that belongs to Scruffy
         animator = GetComponent<Animator>();
-
+        DontDestroyOnLoad(gameObject);
         // setup state
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
@@ -182,10 +183,10 @@ public class PlayerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        handleRotation();
         _currentState.UpdateStates();
         _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
         characterController.Move(_cameraRelativeMovement * Time.deltaTime);
+        handleRotation();
     }
 
     void OnEnable()
