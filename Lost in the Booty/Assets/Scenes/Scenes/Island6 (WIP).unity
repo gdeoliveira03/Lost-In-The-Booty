@@ -17318,11 +17318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 298126252652369759, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 3e-45
+      value: -1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 298126252652369759, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1e-45
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1151024670516785374, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_AnchorMax.x
@@ -17408,6 +17408,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3647529904062226877, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4d7ec113324b6844e974dfd065969408, type: 2}
     - target: {fileID: 3776179218223118838, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -17438,11 +17442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4170383788628380575, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.97445077
+      value: 0.9744508
       objectReference: {fileID: 0}
     - target: {fileID: 4170383788628380575, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.22460131
+      value: 0.22460134
       objectReference: {fileID: 0}
     - target: {fileID: 4170383788628380575, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.y
@@ -17490,11 +17494,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539389092061748899, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000039094843
+      value: -0.000000027644234
       objectReference: {fileID: 0}
     - target: {fileID: 4539389092061748899, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000015746433
+      value: 0.000000011134411
       objectReference: {fileID: 0}
     - target: {fileID: 4742362790070339108, guid: 369ffa1f02417b4479083b67d9d7f2cc, type: 3}
       propertyPath: m_AnchorMax.x

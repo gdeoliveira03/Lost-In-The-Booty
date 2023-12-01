@@ -1598,6 +1598,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: scruffyMain
       objectReference: {fileID: 0}
+    - target: {fileID: 2302952349450339129, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4664343178882509325, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5260401477765774794, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367365631222396559, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315409116859980080, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8435926832854361647, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3304,6 +3328,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 582823811}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1529782830
 MonoBehaviour:
