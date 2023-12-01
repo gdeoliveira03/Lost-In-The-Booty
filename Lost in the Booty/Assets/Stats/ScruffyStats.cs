@@ -38,6 +38,9 @@ public class ScruffyStats : MonoBehaviour
 
         public TextMeshProUGUI[] StatTexts;
         Animator animator;
+
+        public TextMeshProUGUI CoinsUI;
+        public TextMeshProUGUI SkullsUI;
      
         void Start ()
         {
@@ -74,8 +77,14 @@ public class ScruffyStats : MonoBehaviour
 
         void Update (){
 
+            CoinsUI.text = "" + GameManager.Instance.scruffyInventory.Coins;
+            SkullsUI.text = "" + GameManager.Instance.scruffyInventory.Skulls;
+
             healthBar.value = CurrentHealth;
             manaBar.value = CurrentMana;
+
+
+
 
             StatTexts[0].text = "Health: " + MaxHealth;
             StatTexts[1].text = "Mana: " + MaxMana;

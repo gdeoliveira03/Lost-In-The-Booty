@@ -11,5 +11,8 @@ public class ScruffyInventory : ScriptableObject
     public bool Lightning = false;
     public bool Ice = false;
     public bool Fire = false;
+
+    public int Coins;
+    public int Skulls;
     
 }
