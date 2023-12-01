@@ -112,6 +112,25 @@ public class DoctorDialogue : MonoBehaviour
     // Add more dialogues as needed
 };
 
+        string[] dialogue8 = new string[]
+{
+            "A skeleton! n\nPress 'F' to advance dialogue",
+            "Hot damn! The dead walk amongst us...",
+            "I've seen stranger...Don't ask....",
+            "So you want to know where those dirty pirates went off to?",
+            "There's a dungeon at the rear of the island, check there!",
+    // Add more dialogues as needed
+};
+
+        string[] dialogue9 = new string[]
+{
+            "My dog would love to get his paws on you n\nPress 'F' to advance dialogue",
+            "Ah! You're after those pirates...",
+            "I think they went into that dungeon across the island",
+            "Good luck!"
+    // Add more dialogues as needed
+};
+
 
 
         // Initialize your dialogues here
@@ -140,6 +159,12 @@ public class DoctorDialogue : MonoBehaviour
                 break;
             case 7:
                 dialogues = dialogue7;
+                break;
+            case 8:
+                dialogues = dialogue8;
+                break;
+            case 9:
+                dialogues = dialogue9;
                 break;
         }
 
