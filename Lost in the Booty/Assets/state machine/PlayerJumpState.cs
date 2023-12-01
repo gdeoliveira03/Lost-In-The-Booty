@@ -38,6 +38,7 @@ public class PlayerJumpState : PlayerBaseState
         Ctx.IsMovementPressed = false;
         Ctx.CurrentMovementY = 0;
         Ctx.CurrentMovementX = 0;
+        Ctx.CurrentMovementX = 0;
         
     }
 

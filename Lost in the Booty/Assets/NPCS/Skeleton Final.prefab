@@ -15563,6 +15563,7 @@ MonoBehaviour:
   EnemyType: Skeleton
   healthBar: {fileID: 0}
   isDoctor: 0
+  isFriendly: 0
   OnFireEffect: {fileID: 9184053509672097037}
   LightningElement: {fileID: 7871123086828142377}
   LightningExplosion: {fileID: 5681968776731761887}
@@ -15570,15 +15571,15 @@ MonoBehaviour:
   SlowEffect: {fileID: 3709028344029255066}
   FrostBiteEffect: {fileID: 8905106505285411975}
   FreezeEffect: {fileID: 5522400045558171923}
+  DoctorHeal: {fileID: 0}
   playerTag: Player
   currentState: 0
   patrolAreaRadius: 10
   patrolInterval: 5
   patrolPauseDuration: 2
-  chaseSpeed: 6
-  patrolSpeed: 2
   chaseDistance: 10
-  attackDistance: 2
+  HealDistance: 10
+  healCooldown: 10
 --- !u!65 &7091871358327533431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15594,7 +15595,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

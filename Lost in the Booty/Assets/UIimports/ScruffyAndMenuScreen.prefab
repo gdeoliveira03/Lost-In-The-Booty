@@ -2053,6 +2053,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3807657704476083544, guid: dcd6d6abcdcf8814c9ee28c84fdd7916, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8162791173694043051}
     - targetCorrespondingSourceObject: {fileID: 9141855103988730133, guid: dcd6d6abcdcf8814c9ee28c84fdd7916, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3749107544885234709}
@@ -2174,6 +2177,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2361933188488065363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3807657704476083544, guid: dcd6d6abcdcf8814c9ee28c84fdd7916, type: 3}
+  m_PrefabInstance: {fileID: 1445867938167583755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8162791173694043051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2361933188488065363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f643398d078628428170f028aec816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Cutlass: {fileID: 6744413796125213849}
+  Spear: {fileID: 2938369482097889112}
+  Hammer: {fileID: 2413939242132182771}
+  Fire: {fileID: 5093265666703036162}
+  Ice: {fileID: 8210748076264080187}
+  Lightning: {fileID: 7781953747184888580}
 --- !u!114 &2413939242132182771 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3859806749308543736, guid: dcd6d6abcdcf8814c9ee28c84fdd7916, type: 3}
