@@ -96,14 +96,14 @@ public class ScruffyStats : MonoBehaviour
             healthrestoreTimer += Time.deltaTime;
             if (healthrestoreTimer >= healthRestoreInterval)
             {
-                NaturalRestoreHealth(1);
+                NaturalRestoreHealth((int) MaxHealth * 1/25 );
                 healthrestoreTimer = 0f;
             }
 
             manarestoreTimer += Time.deltaTime;
             if (manarestoreTimer >= manaRestoreInterval)
             {
-                NaturalRestoreMana(4);
+                NaturalRestoreMana((int) MaxMana * 1/5);
                 manarestoreTimer = 0f;
             }
            
