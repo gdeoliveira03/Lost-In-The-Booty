@@ -148,6 +148,18 @@ public class DoctorDialogue : MonoBehaviour
     // Add more dialogues as needed
 };
 
+        string[] dialogue12 = new string[]
+{
+            "Scruffy... n\nPress 'F' to advance dialogue",
+            "You want to know why I killed you...",
+            "The unfortunate truth is....!",
+            "I got lost in the booty....",
+            "And I did not want to share my treasure with the likes of you!",
+            "I won't apologize for what I did...",
+            "Let's get this over with!",
+    // Add more dialogues as needed
+};
+
 
 
         // Initialize your dialogues here
@@ -188,6 +200,10 @@ public class DoctorDialogue : MonoBehaviour
                 break;
             case 11:
                 dialogues = dialogue11;
+                break;
+
+            case 12:
+                dialogues = dialogue12;
                 break;
         }
 
