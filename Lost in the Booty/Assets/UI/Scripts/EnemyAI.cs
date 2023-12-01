@@ -459,7 +459,7 @@ public class Enemy : MonoBehaviour
     {
         if (CurrentHealth < MaxHealth)
         {
-            int healAmount = Mathf.Min(healthRegen, MaxHealth - CurrentHealth);
+            int healAmount = (int) Mathf.Min(healthRegen, (MaxHealth - CurrentHealth));
             FlatHeal(healAmount);
         }
     }
