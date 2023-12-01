@@ -43,6 +43,25 @@ public class Pause : MonoBehaviour
         PauseMenu.SetActive(false);
     }
 
+    Vector3 spawnPointPosition;
+    public GameObject spawnPoint;
+    public GameObject ScruffyMain;
+    public void UnstuckScruffy()
+    {
+        StartCoroutine(UnstuckScruffyCoroutine());
+    }
+
+    IEnumerator UnstuckScruffyCoroutine(){
+        Time.timeScale = 1f;
+        GameUI.SetActive(true);
+        PauseMenu.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+        spawnPointPosition = spawnPoint.transform.position;
+        ScruffyMain.transform.position = spawnPointPosition;
+
+    }
+
     public void OptionsMenu()
     {
         OptionsUI.SetActive(true);
