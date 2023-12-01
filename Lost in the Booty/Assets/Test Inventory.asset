@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cutlass: 0
   Spear: 0
-  Hammer: 1
+  Hammer: 0
   Lightning: 0
   Ice: 0
   Fire: 0
