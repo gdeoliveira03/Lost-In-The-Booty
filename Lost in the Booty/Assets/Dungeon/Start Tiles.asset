@@ -15,7 +15,7 @@ MonoBehaviour:
   TileWeights:
     Weights:
     - Value: {fileID: 995271676805937697, guid: adef5c2fb7aed754b83f9189827cd2ac, type: 3}
-      MainPathWeight: 1
+      MainPathWeight: 100
       BranchPathWeight: 1
       DepthWeightScale:
         serializedVersion: 2
@@ -153,5 +153,5 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      TileSet: {fileID: 0}
+      TileSet: {fileID: 11400000}
   LockPrefabs: []
