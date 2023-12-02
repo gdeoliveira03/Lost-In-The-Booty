@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
+            scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
 
             
             DontDestroyOnLoad(gameObject);

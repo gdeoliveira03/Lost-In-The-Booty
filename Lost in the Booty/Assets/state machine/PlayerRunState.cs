@@ -12,10 +12,10 @@ public class PlayerRunState : PlayerBaseState
         
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, true);
-        Ctx.CurrentMovementX = 0;
-        Ctx.CurrentRunMovementX = 0;
-        Ctx.CurrentMovementZ = 0;
-        Ctx.CurrentRunMovementZ = 0;
+        //Ctx.CurrentMovementX = 0;
+        //Ctx.CurrentRunMovementX = 0;
+        //Ctx.CurrentMovementZ = 0;
+        //Ctx.CurrentRunMovementZ = 0;
         
     }
 

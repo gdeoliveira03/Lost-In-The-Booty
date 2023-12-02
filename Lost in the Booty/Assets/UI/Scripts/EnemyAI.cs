@@ -424,7 +424,7 @@ public class Enemy : MonoBehaviour
             movementSpeed = chaseSpeed;
             animator.SetBool("IsChasing", true);
         }
-
+        /*
         if (currentState == EnemyState.Patrol)
         {
             timeInPatrol += Time.deltaTime;
@@ -434,7 +434,7 @@ public class Enemy : MonoBehaviour
                 timeInPatrol = 0f;
                 StartHealing();
             }
-        }
+        }*/
     }
 
     void Chase()
