@@ -167,6 +167,32 @@ public class DoctorDialogue : MonoBehaviour
     // Add more dialogues as needed
 };
 
+        string[] dialogue13 = new string[]
+{
+            "Hello There!",
+            "Where are the pirates you ask??",
+            "Check one of the two dungeons in the area.",
+    // Add more dialogues as needed
+};
+
+        string[] dialogue14 = new string[]
+{
+            "Hello There!",
+            "Yes, there is a dungeon across this bridge...",
+            "Good luck finding it!",
+    // Add more dialogues as needed
+};
+
+        string[] dialogue15 = new string[]
+{
+            "Hello There!",
+            "Can't I get some peace and quiet!",
+
+    // Add more dialogues as needed
+};
+
+
+
 
         // Initialize your dialogues here
         switch (conversationNumber)
@@ -210,6 +236,15 @@ public class DoctorDialogue : MonoBehaviour
 
             case 12:
                 dialogues = dialogue12;
+                break;
+            case 13:
+                dialogues = dialogue13;
+                break;
+            case 14:
+                dialogues = dialogue14;
+                break;
+            case 15:
+                dialogues = dialogue15;
                 break;
             case 99:
                 dialogues = dialogue99;

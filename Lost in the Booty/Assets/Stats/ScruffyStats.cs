@@ -396,4 +396,14 @@ public class ScruffyStats : MonoBehaviour
 
         }
 
+    void OnTriggerEnter(Collider other)
+    {
+        
+           if(other.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            Die();
+        } 
+
+    }
+
 }
