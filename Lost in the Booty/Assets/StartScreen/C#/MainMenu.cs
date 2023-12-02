@@ -65,6 +65,10 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     public void Quit()
     {
+        PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("SavedCoins", GameManager.Instance.scruffyInventory.Coins);
+        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);    
+        PlayerPrefs.Save();
         Application.Quit();
         Debug.Log("Quit!");
     }
