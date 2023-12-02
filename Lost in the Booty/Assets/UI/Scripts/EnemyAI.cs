@@ -84,6 +84,8 @@ public class Enemy : MonoBehaviour
     private float slowedamount = 1f;
     private float lastHealTime;
     public float healCooldown = 10f;
+    private bool isHealing = false;
+    
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
@@ -150,12 +152,13 @@ public class Enemy : MonoBehaviour
             isFriendly = true;
             attackDistance = 2f;
             patrolSpeed = 2f;
-            chaseSpeed = 6.5f;            
+            chaseSpeed = 6.5f;    
         }
 
         CurrentHealth = MaxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         navMeshAgent.speed = patrolSpeed;
+
     }
 
     void Update()
@@ -201,28 +204,9 @@ public class Enemy : MonoBehaviour
             navMeshAgent.isStopped = true; // Ensure that the agent is stopped
             animator.speed = 0f;
         }
-        
 
         if(isDoctor){
-            if (CanHeal()) // Check if the heal is allowed based on cooldown
-            {
-                if (Vector3.Distance(transform.position, player.position) < HealDistance &&
-                    player.GetComponent<ScruffyStats>().CurrentHealth < player.GetComponent<ScruffyStats>().MaxHealth * 0.7f)
-                {
-                    healingeffect = true;
-                    player.GetComponent<ScruffyStats>().FlatHeal(scruffystats.MaxHealth*2/7);
-                }
-
-                if(healingeffect == true)
-                {
-                    DoctorHeal.SetActive(true);
-                    Invoke("DoctorHealOff", 1f);
-                } 
-
-                lastHealTime = Time.time;
-            } 
-
-
+            StartCoroutine(HealOverTime());
         }
 
     }
@@ -262,6 +246,38 @@ public class Enemy : MonoBehaviour
     public bool CanHeal() //Cooldown for healing ability
     {
         return Time.time - lastHealTime >= healCooldown;
+    }
+
+    IEnumerator HealOverTime()
+    {
+        while (true)
+        {
+            // Check if it's time to heal
+            if (CanHeal())
+            {
+                // Check if the conditions for healing are met
+                if (Vector3.Distance(transform.position, player.position) < HealDistance &&
+                    scruffystats.CurrentHealth < scruffystats.MaxHealth * 0.7f)
+                {
+                    healingeffect = true;
+                    scruffystats.FlatHeal(scruffystats.MaxHealth * 2 / 7);
+
+                    // Show healing effect
+                    DoctorHeal.SetActive(true);
+
+                    // Wait for 1 second (you can adjust the duration as needed)
+                    yield return new WaitForSeconds(1f);
+
+                    // Hide healing effect
+                    DoctorHeal.SetActive(false);
+                }
+
+                lastHealTime = Time.time;
+            }
+
+            // Wait for the next iteration (10 seconds)
+            yield return new WaitForSeconds(healCooldown);
+        }
     }
 
 
