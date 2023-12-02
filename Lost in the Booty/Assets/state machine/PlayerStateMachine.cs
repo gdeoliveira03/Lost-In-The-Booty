@@ -141,7 +141,6 @@ public class PlayerStateMachine : MonoBehaviour
 
         // get the animator component that belongs to Scruffy
         animator = GetComponent<Animator>();
-    
         // setup state
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
