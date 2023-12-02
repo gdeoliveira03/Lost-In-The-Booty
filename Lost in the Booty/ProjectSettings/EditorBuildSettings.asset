@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scenes/Cool volcanic island.unity
     guid: 1f45a9950efbfc544ad2921cbf1e50f5
+  - enabled: 1
+    path: Assets/Dungeon/DungeonScene.unity
+    guid: 0b825a17e09096e409a37920fd3e80f1
   m_configObjects: {}
