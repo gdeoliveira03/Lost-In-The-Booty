@@ -3,20 +3,6 @@
 Welcome to the GitHub repository for **Lost in the Booty**, an exhilarating Pirate Adventure RPG game developed for an AI Game Programming class. In this game, you take on the role of Scruffy, an undead pirate on a quest to conquer dungeons, level up, and master both elemental powers and a variety of weapons.
 
 
-## Table of Contents
-[Introduction](https://github.com/gdeoliveira03/Lost-In-The-Booty#introduction)
-
-[Features](https://github.com/gdeoliveira03/Lost-In-The-Booty#features)
-
-[Gameplay](https://github.com/gdeoliveira03/Lost-In-The-Booty#gameplay)
-
-[Technologies Used](https://github.com/gdeoliveira03/Lost-In-The-Booty#technologies-used)
-
-[Contributing](https://github.com/gdeoliveira03/Lost-In-The-Booty#contributing)
-
-[License](https://github.com/gdeoliveira03/Lost-In-The-Booty#license)
-
-
 ## Introduction
 **Lost in the Booty** is an epic adventure where you guide Scruffy through treacherous dungeons, battle fearsome foes, and gain experience points to level up. Customize Scruffy by choosing one of three elemental affinities (ice, lightning, or fire) and selecting a weapon from a unique trio (spear, hammer, or cutlass). These choices significantly influence Scruffy's abilities, strategy, and playstyle.
 
