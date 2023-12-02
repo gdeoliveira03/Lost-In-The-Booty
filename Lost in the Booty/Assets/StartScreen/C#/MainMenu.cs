@@ -56,6 +56,9 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene(1);
         }
 
+        GameManager.Instance.scruffyInventory.Coins = PlayerPrefs.GetInt("SavedCoins", 0);
+        GameManager.Instance.scruffyInventory.Skulls = PlayerPrefs.GetInt("SavedSkulls", 0);
+
         Debug.Log("Start Game!");
     }
 

@@ -103,6 +103,8 @@ public class Pause : MonoBehaviour
     public void QuitGame()
     {
         PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
+        PlayerPrefs.SetInt("SavedCoins", GameManager.Instance.scruffyInventory.Coins);
+        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);    
         PlayerPrefs.Save();
         Application.Quit();
     }
