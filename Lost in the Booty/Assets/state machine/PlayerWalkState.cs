@@ -12,7 +12,7 @@ public class PlayerWalkState : PlayerBaseState
         
         Ctx.Animator.SetBool(Ctx.IsWalkingHash, true);
         Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
-        Ctx.CurrentMovementY = 0;
+        //Ctx.CurrentMovementY = 0;
     }
 
     public override void UpdateState()

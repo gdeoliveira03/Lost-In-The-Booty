@@ -29,16 +29,13 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void ExitState()
     {
-        Debug.Log("HELLO FROM JUMP STATE EXIT");
+        //Debug.Log("HELLO FROM JUMP STATE EXIT");
         Ctx.Animator.SetBool(Ctx.IsJumpingHash, false);
-        Ctx.Animator.SetBool(Ctx.IsRunningHash, false);
-        Ctx.Animator.SetBool(Ctx.IsWalkingHash, false);
-        //Ctx.IsJumpAnimating = false;
-        Ctx.IsMovementPressed = false;
-        Ctx.IsMovementPressed = false;
-        Ctx.CurrentMovementY = 0;
+        
+        
+        Ctx.CurrentMovementZ = 0;
         Ctx.CurrentMovementX = 0;
-        Ctx.CurrentMovementX = 0;
+        //Ctx.CurrentMovementX = 0;
         
     }
 

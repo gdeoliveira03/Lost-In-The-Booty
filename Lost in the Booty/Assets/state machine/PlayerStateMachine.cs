@@ -141,7 +141,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         // get the animator component that belongs to Scruffy
         animator = GetComponent<Animator>();
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         // setup state
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
@@ -183,9 +183,16 @@ public class PlayerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         _currentState.UpdateStates();
         _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
+
+        
+
         characterController.Move(_cameraRelativeMovement * Time.deltaTime);
+        
+        
+
         handleRotation();
     }
 
