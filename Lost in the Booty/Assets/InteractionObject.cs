@@ -144,6 +144,7 @@ public class DoctorDialogue : MonoBehaviour
 {
             "You made it!... n\nPress 'F' to advance dialogue",
             "The dungeon should be somewhere around here...",
+            "Check the area behind me to me right...",
             "Take a look...I'll meet you inside!",
     // Add more dialogues as needed
 };
@@ -159,7 +160,12 @@ public class DoctorDialogue : MonoBehaviour
             "Let's get this over with!",
     // Add more dialogues as needed
 };
-
+        string[] dialogue99 = new string[]
+{
+            "Hello There!",
+            "Talk to someone else!"
+    // Add more dialogues as needed
+};
 
 
         // Initialize your dialogues here
@@ -204,6 +210,9 @@ public class DoctorDialogue : MonoBehaviour
 
             case 12:
                 dialogues = dialogue12;
+                break;
+            case 99:
+                dialogues = dialogue99;
                 break;
         }
 
