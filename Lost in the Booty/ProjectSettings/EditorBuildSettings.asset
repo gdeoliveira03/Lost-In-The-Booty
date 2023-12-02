@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/DynamicStartScreen.unity
+    guid: 2fdaf6b6801426b43b910846f5fdcce6
+  - enabled: 1
     path: Assets/Scenes/With_UI_Updated_Main_scene.unity
     guid: af3ae8e586d37d54ca3c75702d1232bd
   - enabled: 1
