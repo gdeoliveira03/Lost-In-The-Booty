@@ -8,8 +8,6 @@ Welcome to the GitHub repository for **Lost in the Booty**, an exhilarating Pira
 
 [Features](https://github.com/gdeoliveira03/Lost-In-The-Booty#features)
 
-[Getting Started](https://github.com/gdeoliveira03/Lost-In-The-Booty#getting-started)
-
 [Gameplay](https://github.com/gdeoliveira03/Lost-In-The-Booty#gameplay)
 
 [Technologies Used](https://github.com/gdeoliveira03/Lost-In-The-Booty#technologies-used)
@@ -28,13 +26,13 @@ Welcome to the GitHub repository for **Lost in the Booty**, an exhilarating Pira
 
 - **Procedurally Generated Dungeons**: Embark on thrilling adventures in dynamically generated dungeons, ensuring a fresh experience with each playthrough.
 
-- **Leveling System**: Gain experience points by defeating enemies and overcoming challenges to level up your stats and become even stronger.
+- **Leveling System**: Gain skulls by defeating powerful enemies and overcoming challenges to level up your stats and become even stronger.
 
 - **Challenging Enemies**: Face an array of formidable foes, each with their strengths and weaknesses, making each battle an engaging puzzle.
 
 - **Strategic Gameplay**: Develop a tactical approach, using your chosen elemental power and weapon to your advantage in battles.
 
-- **AI Development**: The game is tailored for AI Game Programming classes, providing ample opportunities to implement intelligent AI behaviors and strategies.
+- **AI Development**: The game is tailored for an AI Game Programming class, providing ample opportunities to implement intelligent AI behaviors and strategies via friendly and enemy NPC behaviors and world generation.
 
 ## Technologies Used
 This project harnesses the following technologies and tools:
