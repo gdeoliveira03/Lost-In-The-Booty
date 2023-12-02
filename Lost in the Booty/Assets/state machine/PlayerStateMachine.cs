@@ -182,9 +182,16 @@ public class PlayerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         _currentState.UpdateStates();
         _cameraRelativeMovement = ConvertToCameraSpace(currentMovement);
+
+        
+
         characterController.Move(_cameraRelativeMovement * Time.deltaTime);
+        
+        
+
         handleRotation();
     }
 

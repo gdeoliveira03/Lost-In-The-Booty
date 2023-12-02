@@ -88,6 +88,7 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private ScruffyStats scruffystats;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -102,6 +103,7 @@ public class Enemy : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         healthBar = GetComponentInChildren<FloatingHealthBar>();
+        scruffystats = player.GetComponent<ScruffyStats>();
         DeadEnemy = gameObject;
 
         navMeshAgent.enabled = true;
@@ -109,9 +111,7 @@ public class Enemy : MonoBehaviour
         // Set Enemy Stats Here
         if (EnemyType == "Skeleton")
         {
-            damage = 8; // change back to 8
-            MaxHealth = 30;
-            CurrentHealth = MaxHealth;
+            UpdateEnemyStatsBasedOnSkullsSkeleton();
             MaxMana = 0;
             armor = 0;
             healthRegen = MaxHealth * 0.1f;
@@ -123,9 +123,7 @@ public class Enemy : MonoBehaviour
         if(EnemyType == "Minotaur")
         {
 
-            damage = 15; // change back to 15
-            MaxHealth = 200;
-            CurrentHealth = MaxHealth;
+            UpdateEnemyStatsBasedOnSkullsMinotaur();
             MaxMana = 0;
             armor = 0;
             healthRegen = MaxHealth * 0.1f;
@@ -136,9 +134,7 @@ public class Enemy : MonoBehaviour
         }
         if(EnemyType == "Crab")
         {
-            damage = 6;
-            MaxHealth = 10;
-            CurrentHealth = MaxHealth;
+            UpdateEnemyStatsBasedOnSkullsCrab();
             MaxMana = 0;
             armor = 0;
             healthRegen = MaxHealth * 0.1f;
@@ -232,6 +228,31 @@ public class Enemy : MonoBehaviour
     }
 
     // ---------------------------- AI METHODS ----------------------------
+
+    public void UpdateEnemyStatsBasedOnSkullsSkeleton()
+    {
+        if (EnemyType == "Skeleton"){
+            MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 30) + 30;
+            damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 8;
+            CurrentHealth = MaxHealth;
+        }
+    }
+    public void UpdateEnemyStatsBasedOnSkullsCrab()
+    {
+        if(EnemyType == "Crab"){
+            MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 10) + 10;
+            damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 6;
+            CurrentHealth = MaxHealth;
+        }
+    }
+    public void UpdateEnemyStatsBasedOnSkullsMinotaur()
+    {
+        if(EnemyType == "Minotaur"){
+            MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 200) + 200;
+            damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 15;
+            CurrentHealth = MaxHealth;
+        }
+    }
 
     public void DoctorHealOff(){
         DoctorHeal.SetActive(false);
@@ -403,7 +424,7 @@ public class Enemy : MonoBehaviour
             movementSpeed = chaseSpeed;
             animator.SetBool("IsChasing", true);
         }
-
+        /*
         if (currentState == EnemyState.Patrol)
         {
             timeInPatrol += Time.deltaTime;
@@ -413,7 +434,7 @@ public class Enemy : MonoBehaviour
                 timeInPatrol = 0f;
                 StartHealing();
             }
-        }
+        }*/
     }
 
     void Chase()
@@ -643,17 +664,16 @@ public class Enemy : MonoBehaviour
         if (EnemyType == "Skeleton")
         {
             GameManager.Instance.scruffyInventory.Coins += 1;
-            GameManager.Instance.scruffyInventory.Skulls += 0;
         }
         if(EnemyType == "Minotaur")
         {
             GameManager.Instance.scruffyInventory.Coins += 5;
-            GameManager.Instance.scruffyInventory.Skulls += 1;
+            scruffystats.IncreaseSkulls(1);
+            scruffystats.UpdateEnemyStatsBasedOnSkulls();
         }
         if(EnemyType == "Crab")
         {
-            GameManager.Instance.scruffyInventory.Coins += 1;
-            GameManager.Instance.scruffyInventory.Skulls += 0;
+            GameManager.Instance.scruffyInventory.Coins += 1;  
         }
         Destroy(DeadEnemy);
     }

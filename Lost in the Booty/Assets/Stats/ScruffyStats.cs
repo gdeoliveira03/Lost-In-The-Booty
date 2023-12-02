@@ -44,7 +44,36 @@ public class ScruffyStats : MonoBehaviour
      
         void Start ()
         {
+            UpdateStatsBasedOnSkulls();
             InitializeStats();
+        }
+
+        public void UpdateStatsBasedOnSkulls()
+        {
+            MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 4) + 24;
+            MaxMana = (GameManager.Instance.scruffyInventory.Skulls * 2) + 20;
+            damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 5;
+            armor = (GameManager.Instance.scruffyInventory.Skulls * 5) + 5;
+            evasion = (GameManager.Instance.scruffyInventory.Skulls * 1) + 5;
+
+            StatTexts[0].text = "Health: " + MaxHealth;
+            StatTexts[1].text = "Mana: " + MaxMana;
+            StatTexts[2].text = "Damage: " + damage;
+            StatTexts[3].text = "Armor: " + armor;
+            StatTexts[4].text = "Evasion: " + evasion + "%";
+        }
+
+        public void UpdateEnemyStatsBasedOnSkulls()
+        {
+            // Iterate through all enemies and update their stats based on skulls
+            Enemy[] enemies = FindObjectsOfType<Enemy>();
+
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.UpdateEnemyStatsBasedOnSkullsSkeleton();
+                enemy.UpdateEnemyStatsBasedOnSkullsCrab();
+                enemy.UpdateEnemyStatsBasedOnSkullsMinotaur();
+            }
         }
 
         void InitializeStats()
@@ -62,16 +91,16 @@ public class ScruffyStats : MonoBehaviour
 
             normalwalkSpeed = MovementScript.walkSpeed;
             normalrunSpeed = MovementScript.runSpeed;
+        }
 
-            damage = 5;
-            armor = 5;
-            evasion = 5;
-
-            StatTexts[0].text = "Health: " + MaxHealth;
-            StatTexts[1].text = "Mana: " + MaxMana;
-            StatTexts[2].text = "Damage: " + damage;
-            StatTexts[3].text = "Armor: " + armor;
-            StatTexts[4].text = "Evasion: " + evasion + "%";
+        public void IncreaseSkulls(int amount)
+        {
+            GameManager.Instance.scruffyInventory.Skulls += amount;
+            UpdateStatsBasedOnSkulls();
+            healthBar.maxValue = MaxHealth;
+            manaBar.maxValue = MaxMana;
+            CurrentHealth = MaxHealth;
+            CurrentMana = MaxMana;
         }
 
 
@@ -82,9 +111,6 @@ public class ScruffyStats : MonoBehaviour
 
             healthBar.value = CurrentHealth;
             manaBar.value = CurrentMana;
-
-
-
 
             StatTexts[0].text = "Health: " + MaxHealth;
             StatTexts[1].text = "Mana: " + MaxMana;
