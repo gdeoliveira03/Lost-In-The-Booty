@@ -38,6 +38,9 @@ public class ScruffyStats : MonoBehaviour
 
         public TextMeshProUGUI[] StatTexts;
         Animator animator;
+
+        public TextMeshProUGUI CoinsUI;
+        public TextMeshProUGUI SkullsUI;
      
         void Start ()
         {
@@ -74,8 +77,14 @@ public class ScruffyStats : MonoBehaviour
 
         void Update (){
 
+            CoinsUI.text = "" + GameManager.Instance.scruffyInventory.Coins;
+            SkullsUI.text = "" + GameManager.Instance.scruffyInventory.Skulls;
+
             healthBar.value = CurrentHealth;
             manaBar.value = CurrentMana;
+
+
+
 
             StatTexts[0].text = "Health: " + MaxHealth;
             StatTexts[1].text = "Mana: " + MaxMana;
@@ -87,14 +96,14 @@ public class ScruffyStats : MonoBehaviour
             healthrestoreTimer += Time.deltaTime;
             if (healthrestoreTimer >= healthRestoreInterval)
             {
-                NaturalRestoreHealth(1);
+                NaturalRestoreHealth((int) MaxHealth * 1/25 );
                 healthrestoreTimer = 0f;
             }
 
             manarestoreTimer += Time.deltaTime;
             if (manarestoreTimer >= manaRestoreInterval)
             {
-                NaturalRestoreMana(4);
+                NaturalRestoreMana((int) MaxMana * 1/5);
                 manarestoreTimer = 0f;
             }
            

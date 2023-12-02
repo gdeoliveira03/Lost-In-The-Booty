@@ -640,6 +640,21 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
+        if (EnemyType == "Skeleton")
+        {
+            GameManager.Instance.scruffyInventory.Coins += 1;
+            GameManager.Instance.scruffyInventory.Skulls += 0;
+        }
+        if(EnemyType == "Minotaur")
+        {
+            GameManager.Instance.scruffyInventory.Coins += 5;
+            GameManager.Instance.scruffyInventory.Skulls += 1;
+        }
+        if(EnemyType == "Crab")
+        {
+            GameManager.Instance.scruffyInventory.Coins += 1;
+            GameManager.Instance.scruffyInventory.Skulls += 0;
+        }
         Destroy(DeadEnemy);
     }
 }

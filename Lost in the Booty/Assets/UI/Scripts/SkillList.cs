@@ -2222,7 +2222,7 @@ public class SkillList : MonoBehaviour
         PS.Play();
         weaponElementScript. DoubleDotDamage = true;
         DoubleDotDamage = true;
-        StartCoroutine(scruffystats.TakeDamageOverTimeX("fire", 6, 7f, 1f));
+        StartCoroutine(scruffystats.TakeDamageOverTimeX("fire", (scruffystats.MaxHealth*1/5)+1, 7f, 1f));
         Invoke("fire5end", 7f); 
     }
 
