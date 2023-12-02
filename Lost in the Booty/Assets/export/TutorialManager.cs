@@ -20,6 +20,7 @@ public class TutorialManager : MonoBehaviour
         Magic,
         SelectSpell,
         UseSpell,
+        Save,
         ExploreIsland
     }
 

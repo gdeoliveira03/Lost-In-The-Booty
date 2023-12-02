@@ -33,6 +33,12 @@ public class DoctorDialogue : MonoBehaviour
             "This is my home village",
             "That's strange I don't see any of those evil pirates around...",
             "Let's ask around to see where they went",
+            "Also....",
+            "There are some strong enemies...",
+            "You'll know them when you see them...",
+            "If you were to defeat one they say your strength grows exponentially...",
+            "I heard of one person who beat so many he became invincible...",
+            "I think they called him Blackbeard...",
             // Add more dialogues as needed
         };
 
@@ -54,6 +60,7 @@ public class DoctorDialogue : MonoBehaviour
             "I'll tag along...",
             "I know where one of the commanders is now...",
             "Let's get started",
+
 
                 // Add more dialogues as needed
             };
