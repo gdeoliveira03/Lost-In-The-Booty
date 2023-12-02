@@ -53,16 +53,11 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.scruffyInventory.Cutlass = false;
-            GameManager.Instance.scruffyInventory.Spear = false;
-            GameManager.Instance.scruffyInventory.Hammer = false;
-            GameManager.Instance.scruffyInventory.Fire = false;
-            GameManager.Instance.scruffyInventory.Ice = false;
-            GameManager.Instance.scruffyInventory.Lightning = false;
-            GameManager.Instance.scruffyInventory.Coins = 0;
-            GameManager.Instance.scruffyInventory.Skulls = 0;
             SceneManager.LoadScene(0);
         }
+
+        GameManager.Instance.scruffyInventory.Coins = PlayerPrefs.GetInt("SavedCoins", 0);
+        GameManager.Instance.scruffyInventory.Skulls = PlayerPrefs.GetInt("SavedSkulls", 0);
 
         Debug.Log("Start Game!");
     }
