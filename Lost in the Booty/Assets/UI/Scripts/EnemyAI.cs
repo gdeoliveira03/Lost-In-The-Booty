@@ -207,10 +207,10 @@ public class Enemy : MonoBehaviour
             if (CanHeal()) // Check if the heal is allowed based on cooldown
             {
                 if (Vector3.Distance(transform.position, player.position) < HealDistance &&
-                    player.GetComponent<ScruffyStats>().CurrentHealth < player.GetComponent<ScruffyStats>().MaxHealth * 0.5f)
+                    player.GetComponent<ScruffyStats>().CurrentHealth < player.GetComponent<ScruffyStats>().MaxHealth * 0.7f)
                 {
                     healingeffect = true;
-                    player.GetComponent<ScruffyStats>().FlatHeal(5);
+                    player.GetComponent<ScruffyStats>().FlatHeal(scruffystats.MaxHealth*2/7);
                 }
 
                 if(healingeffect == true)

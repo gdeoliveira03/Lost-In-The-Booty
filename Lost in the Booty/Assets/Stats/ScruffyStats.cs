@@ -54,7 +54,7 @@ public class ScruffyStats : MonoBehaviour
             MaxMana = (GameManager.Instance.scruffyInventory.Skulls * 2) + 20;
             damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 5;
             armor = (GameManager.Instance.scruffyInventory.Skulls * 5) + 5;
-            evasion = (GameManager.Instance.scruffyInventory.Skulls * 1) + 5;
+            evasion = Mathf.Min((GameManager.Instance.scruffyInventory.Skulls * 1) + 5, 50);
 
             StatTexts[0].text = "Health: " + MaxHealth;
             StatTexts[1].text = "Mana: " + MaxMana;
@@ -122,7 +122,7 @@ public class ScruffyStats : MonoBehaviour
             healthrestoreTimer += Time.deltaTime;
             if (healthrestoreTimer >= healthRestoreInterval)
             {
-                NaturalRestoreHealth((int) MaxHealth * 1/25 );
+                NaturalRestoreHealth((int) MaxHealth * 1/24 );
                 healthrestoreTimer = 0f;
             }
 
