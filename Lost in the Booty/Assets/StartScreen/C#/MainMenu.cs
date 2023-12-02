@@ -40,7 +40,7 @@ public class MainMenu : MonoBehaviour
             GameManager.Instance.scruffyInventory.Coins = 0;
             GameManager.Instance.scruffyInventory.Skulls = 0;
         }
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void StartButton()
@@ -53,7 +53,7 @@ public class MainMenu : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         GameManager.Instance.scruffyInventory.Coins = PlayerPrefs.GetInt("SavedCoins", 0);

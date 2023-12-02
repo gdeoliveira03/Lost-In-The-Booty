@@ -372,7 +372,7 @@ public class DoctorDialogue : MonoBehaviour
         */
          
         if(conversationNumber == 0)
-        SceneManager.LoadScene(8);
+        SceneManager.LoadScene(9);
 
         //if(conversationNumber == 1)
         //doctor.SetActive(false);
