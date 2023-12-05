@@ -1,3 +1,6 @@
+using System;
+
+[Obsolete("Old State Machine")]
 public abstract class PlayerBaseState
 {
     private bool _isRootState = false; // hierarchy
