@@ -47,7 +47,7 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""99f23960-5df5-4ce1-aae0-9f0b3c80ea4c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -185,6 +185,17 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa075801-e2ee-4add-bcc9-0acf89fb2356"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
