@@ -86,6 +86,27 @@ namespace Assets.Scripts.Player.States.Movement.States
             stateMachine.Player.myRigidbody.rotation = Quaternion.Euler(0f, facingDirection, 0f);
             targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
         }
+        protected float GetGlobalFacingDirection(float horizontal, float vertical)
+        {
+            if ((vertical == 0f) && (horizontal == 0f))
+            {
+                return stateMachine.Player.transform.rotation.eulerAngles.y;
+            }
+            float y = stateMachine.Player.myCamera.transform.rotation.eulerAngles.y;
+            float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
+            angle = -angle + 90f;
+            return (y + angle);
+        }
+        protected Vector3 GetGlobalFacingVector3(float resultAngle)
+        {
+            float num = -resultAngle + 90f;
+            float x = Mathf.Cos(num * Mathf.Deg2Rad);
+            return new Vector3(x, 0f, Mathf.Sin(num * Mathf.Deg2Rad));
+        }
+        protected void RotateToFaceDirection()
+        {
+            stateMachine.Player.myRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.gameObject.transform.rotation, targetRotation, Time.deltaTime * 6f);
+        }
         protected virtual void AddInputActionsCallbacks()
         {
         }

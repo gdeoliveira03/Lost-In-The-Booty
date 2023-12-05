@@ -14,15 +14,16 @@ namespace Assets.Scripts.Player
         public ScruffyInput MyInputMap { get; private set; }
         private PlayerMovementStateMachine movementStateMachine;
         #endregion
+
         #region Main Fields
         public Rigidbody myRigidbody { get; private set; }
+        [field: SerializeField] public GameObject myCamera { get; private set; }
         #endregion
         private void Awake()
         {
             myRigidbody = GetComponent<Rigidbody>();
             MyInputMap = new ScruffyInput();
             MyInputMap.GroundedInputs.Enable();
-            
             movementStateMachine = new PlayerMovementStateMachine(this);
         }
         private void Start()
