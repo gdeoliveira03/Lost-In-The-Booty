@@ -24,7 +24,7 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
     ""name"": ""scruffyInput"",
     ""maps"": [
         {
-            ""name"": ""CharacterControls"",
+            ""name"": ""GroundedInputs"",
             ""id"": ""27bc0508-fb8c-45ef-988f-86a5285b4163"",
             ""actions"": [
                 {
@@ -202,12 +202,12 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
-        // CharacterControls
-        m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Move = m_CharacterControls.FindAction("Move", throwIfNotFound: true);
-        m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
-        m_CharacterControls_Look = m_CharacterControls.FindAction("Look", throwIfNotFound: true);
-        m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
+        // GroundedInputs
+        m_GroundedInputs = asset.FindActionMap("GroundedInputs", throwIfNotFound: true);
+        m_GroundedInputs_Move = m_GroundedInputs.FindAction("Move", throwIfNotFound: true);
+        m_GroundedInputs_Run = m_GroundedInputs.FindAction("Run", throwIfNotFound: true);
+        m_GroundedInputs_Look = m_GroundedInputs.FindAction("Look", throwIfNotFound: true);
+        m_GroundedInputs_Jump = m_GroundedInputs.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,30 +266,30 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // CharacterControls
-    private readonly InputActionMap m_CharacterControls;
-    private List<ICharacterControlsActions> m_CharacterControlsActionsCallbackInterfaces = new List<ICharacterControlsActions>();
-    private readonly InputAction m_CharacterControls_Move;
-    private readonly InputAction m_CharacterControls_Run;
-    private readonly InputAction m_CharacterControls_Look;
-    private readonly InputAction m_CharacterControls_Jump;
-    public struct CharacterControlsActions
+    // GroundedInputs
+    private readonly InputActionMap m_GroundedInputs;
+    private List<IGroundedInputsActions> m_GroundedInputsActionsCallbackInterfaces = new List<IGroundedInputsActions>();
+    private readonly InputAction m_GroundedInputs_Move;
+    private readonly InputAction m_GroundedInputs_Run;
+    private readonly InputAction m_GroundedInputs_Look;
+    private readonly InputAction m_GroundedInputs_Jump;
+    public struct GroundedInputsActions
     {
         private @ScruffyInput m_Wrapper;
-        public CharacterControlsActions(@ScruffyInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_CharacterControls_Move;
-        public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
-        public InputAction @Look => m_Wrapper.m_CharacterControls_Look;
-        public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
+        public GroundedInputsActions(@ScruffyInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_GroundedInputs_Move;
+        public InputAction @Run => m_Wrapper.m_GroundedInputs_Run;
+        public InputAction @Look => m_Wrapper.m_GroundedInputs_Look;
+        public InputAction @Jump => m_Wrapper.m_GroundedInputs_Jump;
+        public InputActionMap Get() { return m_Wrapper.m_GroundedInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterControlsActions set) { return set.Get(); }
-        public void AddCallbacks(ICharacterControlsActions instance)
+        public static implicit operator InputActionMap(GroundedInputsActions set) { return set.Get(); }
+        public void AddCallbacks(IGroundedInputsActions instance)
         {
-            if (instance == null || m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -304,7 +304,7 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @Jump.canceled += instance.OnJump;
         }
 
-        private void UnregisterCallbacks(ICharacterControlsActions instance)
+        private void UnregisterCallbacks(IGroundedInputsActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -320,22 +320,22 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @Jump.canceled -= instance.OnJump;
         }
 
-        public void RemoveCallbacks(ICharacterControlsActions instance)
+        public void RemoveCallbacks(IGroundedInputsActions instance)
         {
-            if (m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICharacterControlsActions instance)
+        public void SetCallbacks(IGroundedInputsActions instance)
         {
-            foreach (var item in m_Wrapper.m_CharacterControlsActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GroundedInputsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
-    public interface ICharacterControlsActions
+    public GroundedInputsActions @GroundedInputs => new GroundedInputsActions(this);
+    public interface IGroundedInputsActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);

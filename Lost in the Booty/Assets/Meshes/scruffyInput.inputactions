@@ -2,7 +2,7 @@
     "name": "scruffyInput",
     "maps": [
         {
-            "name": "CharacterControls",
+            "name": "GroundedInputs",
             "id": "27bc0508-fb8c-45ef-988f-86a5285b4163",
             "actions": [
                 {
