@@ -7,14 +7,16 @@ namespace Assets.Scripts.Player.States.Movement
     public class PlayerMovementStateMachine : Statemachine
     {
         public PlayerCharacter Player { get; }
-        public PlayerReusableData ReusableData = new PlayerReusableData();
+        public PlayerReusableData ReusableData = new();
         public PlayerIdleState IdleState { get; }
         public PlayerRunState RunState { get; }
+        public PlayerWalkState WalkState { get; }
         public PlayerMovementStateMachine(PlayerCharacter _player)
         {
             Player = _player;
-            IdleState = new PlayerIdleState(this);
-            RunState = new PlayerRunState(this);
+            IdleState = new(this);
+            WalkState = new(this);
+            RunState = new(this);
         }
     }
 }

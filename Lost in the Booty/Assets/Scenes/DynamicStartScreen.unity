@@ -1185,6 +1185,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 929382923753119248, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+      propertyPath: autoSound
+      value: 
+      objectReference: {fileID: 1360911073}
     - target: {fileID: 1478454120667426232, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.756
@@ -2561,6 +2565,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fef519a00cd25d343b8a23aa6bb098b5, type: 3}
+--- !u!82 &1360911073 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6302595215092125321, guid: 79cc3b8ad4af4d040ad0dab0cca80a92, type: 3}
+  m_PrefabInstance: {fileID: 597144903}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1477251791
 PrefabInstance:
   m_ObjectHideFlags: 0

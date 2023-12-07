@@ -23,7 +23,12 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         }
         protected void OnMove()
         {
-            stateMachine.ChangeState(stateMachine.RunState);
+            if (stateMachine.Player.MyInputMap.GroundedInputs.Run.inProgress)
+            {
+                stateMachine.ChangeState(stateMachine.RunState);
+                return;
+            }
+            stateMachine.ChangeState(stateMachine.WalkState);
         }
         #endregion
         #region Input Methods

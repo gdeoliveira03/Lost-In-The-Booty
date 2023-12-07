@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.States.Movement.States.Grounded.Moving
 {
-    public class PlayerRunState : PlayerGroundedState
+    public class PlayerRunState : PlayerWalkState
     {
         public PlayerRunState(PlayerMovementStateMachine stateMachine) : base(stateMachine)
         {
@@ -13,38 +12,24 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded.Moving
         public override void Enter()
         {
             base.Enter();
-            stateMachine.ReusableData.MovementSpeedModifier = groundedData.BaseSpeed;
+            stateMachine.ReusableData.MovementSpeedModifier = groundedData.RunSpeed;
+            stateMachine.Player.MyInputMap.GroundedInputs.Run.canceled += OnRunCancelled;
         }
-
-        public override void PhysicsUpdate()
+        public override void Exit()
         {
-            base.PhysicsUpdate();
-            Move();
+            base.Exit();
+            stateMachine.Player.MyInputMap.GroundedInputs.Run.canceled -= OnRunCancelled;
         }
         #endregion
-        #region Main Methods
-        private void Move()
+        #region Input Actions
+        private void OnRunCancelled(InputAction.CallbackContext context)
         {
-            Vector3 movementVector = GetMovementInputDirection();
-            float resultAngle = GetGlobalFacingDirection(movementVector.x, movementVector.z);
-            Vector3 zero = GetGlobalFacingVector3(resultAngle);
-            float movementMagnitudeChecker = (movementVector.magnitude <= 0.95f) ? ((movementVector.magnitude >= 0.25f) ? movementVector.magnitude : 0f) : 1f;
-            zero *= movementMagnitudeChecker;
-            zero *= groundedData.BaseSpeed;
-            if (resultAngle != -874f)
+            if (stateMachine.ReusableData.MovementVector != Vector2.zero)
             {
-                facingDirection = resultAngle;
-                targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
-                Vector3 velocity = stateMachine.Player.myRigidbody.velocity;
-                Vector3 force = zero - velocity;
-
-                force.x = Mathf.Clamp(force.x, -100f, 100f);
-                force.z = Mathf.Clamp(force.z, -100f, 100f);
-                force.y = 0f;
-                stateMachine.Player.myRigidbody.AddForce(force, ForceMode.VelocityChange);
-                RotateToFaceDirection();
-                stateMachine.Player.myRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.gameObject.transform.rotation, Quaternion.Euler(0f, facingDirection, 0f), Time.deltaTime * 10f);
+                stateMachine.ChangeState(stateMachine.WalkState);
+                return;
             }
+            stateMachine.ChangeState(stateMachine.IdleState);
         }
         #endregion
     }

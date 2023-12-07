@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2006098048779993579}
   - component: {fileID: 3674517963738599962}
-  - component: {fileID: 4478378425252562629}
   - component: {fileID: 26835745659300452}
   m_Layer: 0
   m_Name: DoctorCamera
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4478378425252562629
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4734310632138107298}
-  m_Enabled: 1
 --- !u!114 &26835745659300452
 MonoBehaviour:
   m_ObjectHideFlags: 0

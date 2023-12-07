@@ -67,7 +67,7 @@ namespace Assets.Scripts.Player.States.Movement.States
         #region Reusable Methods
         protected Vector3 GetVerticalVelocity()
         {
-            return new Vector3(0f, stateMachine.Player.myRigidbody.velocity.y, 0f);
+            return new Vector3(0f, stateMachine.Player.MyRigidbody.velocity.y, 0f);
         }
         protected Vector3 GetMovementInputDirection()
         {
@@ -75,15 +75,15 @@ namespace Assets.Scripts.Player.States.Movement.States
         }
         protected void ResetVelocity()
         {
-            stateMachine.Player.myRigidbody.velocity = Vector3.zero;
+            stateMachine.Player.MyRigidbody.velocity = Vector3.zero;
         }
         protected void RotatePlayerToFaceDirection()
         {
-            stateMachine.Player.myRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.transform.rotation, targetRotation, Time.deltaTime * 6f);
+            stateMachine.Player.MyRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.transform.rotation, targetRotation, Time.deltaTime * 6f);
         }
         protected void SnapToFaceDirection()
         {
-            stateMachine.Player.myRigidbody.rotation = Quaternion.Euler(0f, facingDirection, 0f);
+            stateMachine.Player.MyRigidbody.rotation = Quaternion.Euler(0f, facingDirection, 0f);
             targetRotation = Quaternion.Euler(0f, facingDirection, 0f);
         }
         protected float GetGlobalFacingDirection(float horizontal, float vertical)
@@ -92,7 +92,7 @@ namespace Assets.Scripts.Player.States.Movement.States
             {
                 return stateMachine.Player.transform.rotation.eulerAngles.y;
             }
-            float y = stateMachine.Player.myCamera.transform.rotation.eulerAngles.y;
+            float y = stateMachine.Player.MyCamera.transform.rotation.eulerAngles.y;
             float angle = Mathf.Atan2(vertical, horizontal) * Mathf.Rad2Deg;
             angle = -angle + 90f;
             return (y + angle);
@@ -105,7 +105,7 @@ namespace Assets.Scripts.Player.States.Movement.States
         }
         protected void RotateToFaceDirection()
         {
-            stateMachine.Player.myRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.gameObject.transform.rotation, targetRotation, Time.deltaTime * 6f);
+            stateMachine.Player.MyRigidbody.rotation = Quaternion.Lerp(stateMachine.Player.gameObject.transform.rotation, targetRotation, Time.deltaTime * 6f);
         }
         protected virtual void AddInputActionsCallbacks()
         {

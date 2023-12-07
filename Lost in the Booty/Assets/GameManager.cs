@@ -22,35 +22,41 @@ public class GameManager : Singleton<GameManager>
         scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
         menuInputs = new MenuInputActions();
         menuInputs.Enable();
-#if UNITY_EDITOR
-        menuInputs.Menu.Pause.started += (InputAction.CallbackContext context) => { Application.Quit(); };
-#else
         menuInputs.Menu.Pause.started += OnPauseStarted;
-#endif
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         DontDestroyOnLoad(gameObject);
     }
-
     private void OnPauseStarted(InputAction.CallbackContext context)
     {
-        if (currentState == GameState.PLAY)
+        switch (currentState)
         {
-            ChangeGameState(GameState.PAUSED);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            ChangeGameState(GameState.PLAY);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            case GameState.PLAY:
+                ChangeGameState(GameState.PAUSED);
+                break;
+            case GameState.PAUSED:
+                ChangeGameState(GameState.PLAY);
+                break;
         }
     }
-
-    private void ChangeGameState(GameState newState)
+    public void ChangeGameState(GameState newState)
     {
         currentState = newState;
+        switch (currentState)
+        {
+            case GameState.PLAY:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
+            case GameState.PAUSED:
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+            default:
+                Debug.LogError("[GameManager] Logic for passed in state has not been defined");
+                break;
+        }
         OnGameStateChange?.Invoke(currentState);
     }
 }

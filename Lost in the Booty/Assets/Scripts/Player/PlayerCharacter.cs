@@ -10,18 +10,23 @@ namespace Assets.Scripts.Player
     public class PlayerCharacter : MonoBehaviour
     {
         #region StateMachine
-        [field: SerializeField] public PlayerSO Data { get; private set; }
-        public ScruffyInput MyInputMap { get; private set; }
+        [field: SerializeField, Header("State Machine")] public PlayerSO Data { get; private set; }
+        [field: Header("State Machine")] public ScruffyInput MyInputMap { get; private set; }
         private PlayerMovementStateMachine movementStateMachine;
         #endregion
 
         #region Main Fields
-        public Rigidbody myRigidbody { get; private set; }
-        [field: SerializeField] public GameObject myCamera { get; private set; }
+        [field: SerializeField, Header("Main Fields")] public Rigidbody MyRigidbody { get; private set; }
+        [field: SerializeField] public GameObject MyCamera { get; private set; }
+        #endregion
+
+        #region Animation
+        [Header("Animation")]
+        [SerializeField] private Animator myAnimator;
         #endregion
         private void Awake()
         {
-            myRigidbody = GetComponent<Rigidbody>();
+            MyRigidbody = GetComponent<Rigidbody>();
             MyInputMap = new ScruffyInput();
             MyInputMap.GroundedInputs.Enable();
             movementStateMachine = new PlayerMovementStateMachine(this);
@@ -29,6 +34,11 @@ namespace Assets.Scripts.Player
         private void Start()
         {
             movementStateMachine.ChangeState(movementStateMachine.IdleState);
+            AudioListener[] ALs = FindObjectsOfType<AudioListener>();
+            foreach (var al in ALs)
+            {
+                Debug.LogWarning(al.gameObject);
+            }
         }
         private void Update()
         {
