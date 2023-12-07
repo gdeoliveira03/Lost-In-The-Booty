@@ -12685,7 +12685,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8ab52f91e8ed646bb03014b1dbef05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityUI: {fileID: 0}
   InventoryUI: {fileID: 1906656179232558264}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  keybind: 105
 --- !u!114 &6044383558897083860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13500,6 +13505,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityUI: {fileID: 1907199165215308641}
+  InventoryUI: {fileID: 0}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  keybind: 98
 --- !u!1 &1866586257353109407
 GameObject:
   m_ObjectHideFlags: 0
@@ -15015,8 +15025,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1918de6086fe94da2324917d2f06c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausemenu: {fileID: 6029136073685627526}
+  PauseMenu: {fileID: 0}
   GameUI: {fileID: 882698471679575501}
+  OptionsUI: {fileID: 0}
+  VideoOptionsUI: {fileID: 0}
+  AudioOptionsUI: {fileID: 0}
+  AbilityUI: {fileID: 0}
+  InventoryUI: {fileID: 0}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  ScruffyMain: {fileID: 0}
 --- !u!1 &2034584039584047202
 GameObject:
   m_ObjectHideFlags: 0
@@ -29504,7 +29523,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe8ab52f91e8ed646bb03014b1dbef05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AbilityUI: {fileID: 0}
   InventoryUI: {fileID: 1906656179232558264}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  keybind: 105
 --- !u!1 &4010583440934561525
 GameObject:
   m_ObjectHideFlags: 0
@@ -44056,6 +44080,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityUI: {fileID: 2084784736848296331}
+  InventoryUI: {fileID: 0}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  keybind: 98
 --- !u!1 &5600796455617887089
 GameObject:
   m_ObjectHideFlags: 0
@@ -59905,6 +59934,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AbilityUI: {fileID: 1907199165215308641}
+  InventoryUI: {fileID: 0}
+  WorldMapUI: {fileID: 0}
+  StatsUI: {fileID: 0}
+  PauseMenu: {fileID: 0}
+  keybind: 98
 --- !u!114 &9000338957593882390
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,12 +46,12 @@ public class GameManager : Singleton<GameManager>
         switch (currentState)
         {
             case GameState.PLAY:
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                break;
-            case GameState.PAUSED:
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case GameState.PAUSED:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
                 break;
             default:
                 Debug.LogError("[GameManager] Logic for passed in state has not been defined");
