@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Assets.Scripts.Player.Animations;
 
 namespace Assets.Scripts.Player.States.Movement.States.Grounded.Moving
 {
@@ -12,12 +13,14 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded.Moving
         public override void Enter()
         {
             base.Enter();
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.RUN_ANIM_BOOL, true);
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.RunSpeed;
             stateMachine.Player.MyInputMap.GroundedInputs.Run.canceled += OnRunCancelled;
         }
         public override void Exit()
         {
             base.Exit();
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.RUN_ANIM_BOOL, false);
             stateMachine.Player.MyInputMap.GroundedInputs.Run.canceled -= OnRunCancelled;
         }
         #endregion

@@ -1,7 +1,6 @@
+using Assets.Scripts.Player.Data.Airborne;
 using Assets.Scripts.Player.Data.Grounded;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Player.States.Movement.States.Airborne;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.States.Movement.States
@@ -10,6 +9,7 @@ namespace Assets.Scripts.Player.States.Movement.States
     {
         protected PlayerMovementStateMachine stateMachine;
         protected PlayerGroundedData groundedData;
+        protected PlayerAirborneData airborneData;
         protected float facingDirection;
         protected Quaternion targetRotation;
 
@@ -17,6 +17,7 @@ namespace Assets.Scripts.Player.States.Movement.States
         {
             this.stateMachine = stateMachine;
             groundedData = stateMachine.Player.Data.GroundedData;
+            airborneData = stateMachine.Player.Data.AirborneData;
         }
         public virtual void Enter()
         {
@@ -43,9 +44,9 @@ namespace Assets.Scripts.Player.States.Movement.States
         }
         public virtual void Update()
         {
-            if (!stateMachine.ReusableData.IsGrounded)
+            if (!stateMachine.ReusableData.IsGrounded && stateMachine.CurrentState is not PlayerAirborneState)
             {
-                //TODO: Change to Airborne State?
+                stateMachine.ChangeState(stateMachine.AirborneState);
             }
         }
         #region Main Methods
@@ -59,8 +60,9 @@ namespace Assets.Scripts.Player.States.Movement.States
         }
         private bool IsGrounded()
         {
-            LayerMask mask = LayerMask.NameToLayer("Ground");
-            return Physics.Raycast(stateMachine.Player.transform.position, Vector3.down, out RaycastHit hit, 0.3f, mask.value);
+            LayerMask mask = LayerMask.GetMask("Ground");
+            Vector3 PlayerToGroundOffset = stateMachine.Player.transform.position + Vector3.up * 0.5f;
+            return Physics.Raycast(PlayerToGroundOffset, Vector3.down, out RaycastHit hit, 1f, mask);
         }
         #endregion
 

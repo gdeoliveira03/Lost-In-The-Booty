@@ -1,9 +1,6 @@
 using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.States.Movement;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.Player
 {
@@ -21,8 +18,8 @@ namespace Assets.Scripts.Player
         #endregion
 
         #region Animation
-        [Header("Animation")]
-        [SerializeField] private Animator myAnimator;
+        [field: Header("Animation")]
+        [field: SerializeField] public Animator MyAnimator { get; private set; }
         #endregion
         private void Awake()
         {
@@ -30,6 +27,7 @@ namespace Assets.Scripts.Player
             MyInputMap = new ScruffyInput();
             MyInputMap.GroundedInputs.Enable();
             movementStateMachine = new PlayerMovementStateMachine(this);
+            MyAnimator = GetComponent<Animator>();
         }
         private void Start()
         {

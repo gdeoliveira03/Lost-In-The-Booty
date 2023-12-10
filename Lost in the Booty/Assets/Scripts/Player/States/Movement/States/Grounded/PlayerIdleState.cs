@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Player.Animations;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.States.Movement.States.Grounded
@@ -14,6 +13,7 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         {
             base.Enter();
             ResetVelocity();
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.WALK_ANIM_BOOL, false);
         }
         public override void Update()
         {

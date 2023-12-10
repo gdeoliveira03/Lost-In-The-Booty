@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Player.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,11 +14,14 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         {
             base.AddInputActionsCallbacks();
             stateMachine.Player.MyInputMap.GroundedInputs.Move.canceled += OnMovementCancelled;
+            stateMachine.Player.MyInputMap.GroundedInputs.Jump.started += OnJumpStarted;
         }
+
         protected override void RemoveInputActionsCallbacks()
         {
             base.RemoveInputActionsCallbacks();
             stateMachine.Player.MyInputMap.GroundedInputs.Move.canceled -= OnMovementCancelled;
+            stateMachine.Player.MyInputMap.GroundedInputs.Jump.started -= OnJumpStarted;
         }
         protected void OnMove()
         {
@@ -39,6 +41,11 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         private void OnMovementCancelled(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.IdleState);
+        }
+        private void OnJumpStarted(InputAction.CallbackContext context)
+        {
+            stateMachine.Player.MyRigidbody.AddForce(Vector3.up * stateMachine.Player.Data.AirborneData.JumpForce, ForceMode.Impulse);
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.JUMP_BOOL, true);
         }
         #endregion
     }

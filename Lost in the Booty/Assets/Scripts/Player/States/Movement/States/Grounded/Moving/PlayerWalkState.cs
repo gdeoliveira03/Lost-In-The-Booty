@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Assets.Scripts.Player.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,12 +13,14 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded.Moving
         public override void Enter()
         {
             base.Enter();
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.WALK_ANIM_BOOL, true);
             stateMachine.ReusableData.MovementSpeedModifier = groundedData.WalkSpeed;
             stateMachine.Player.MyInputMap.GroundedInputs.Run.started += OnRun;
         }
         public override void Exit()
         {
             base.Exit();
+            stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.WALK_ANIM_BOOL, false);
             stateMachine.Player.MyInputMap.GroundedInputs.Run.started -= OnRun;
         }
         public override void PhysicsUpdate()

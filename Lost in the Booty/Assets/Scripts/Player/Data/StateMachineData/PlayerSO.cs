@@ -1,6 +1,5 @@
+using Assets.Scripts.Player.Data.Airborne;
 using Assets.Scripts.Player.Data.Grounded;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Player.Data
@@ -9,5 +8,6 @@ namespace Assets.Scripts.Player.Data
     public class PlayerSO : ScriptableObject
     {
         [field: SerializeField] public PlayerGroundedData GroundedData {  get; private set; }
+        [field: SerializeField] public PlayerAirborneData AirborneData { get; private set; }
     }
 }
