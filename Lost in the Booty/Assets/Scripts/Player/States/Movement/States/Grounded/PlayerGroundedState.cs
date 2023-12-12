@@ -1,4 +1,5 @@
 using Assets.Scripts.Player.Animations;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,8 +16,9 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
             base.AddInputActionsCallbacks();
             stateMachine.Player.MyInputMap.GroundedInputs.Move.canceled += OnMovementCancelled;
             stateMachine.Player.MyInputMap.GroundedInputs.Jump.started += OnJumpStarted;
+            stateMachine.Player.MyInputMap.GroundedInputs.Attack.started += OnAttackStarted;
+            stateMachine.Player.MyInputMap.GroundedInputs.AbilityAttack.started += OnAbilityAttackStarted;
         }
-
         protected override void RemoveInputActionsCallbacks()
         {
             base.RemoveInputActionsCallbacks();
@@ -46,6 +48,14 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         {
             stateMachine.Player.MyRigidbody.AddForce(Vector3.up * stateMachine.Player.Data.AirborneData.JumpForce, ForceMode.Impulse);
             stateMachine.Player.MyAnimator.SetBool(PlayerAnimations.JUMP_BOOL, true);
+        }
+        private void OnAttackStarted(InputAction.CallbackContext context)
+        {
+            if(stateMachine.CurrentState is not PlayerAttackState) stateMachine.ChangeState(stateMachine.AttackState);
+        }
+        private void OnAbilityAttackStarted(InputAction.CallbackContext context)
+        {
+            if (stateMachine.CurrentState is not PlayerAttackState) stateMachine.ChangeState(stateMachine.AttackState);
         }
         #endregion
     }

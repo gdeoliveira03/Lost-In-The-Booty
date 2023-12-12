@@ -13,6 +13,7 @@ namespace Assets.Scripts.Player.States.Movement
         public PlayerRunState RunState { get; }
         public PlayerWalkState WalkState { get; }
         public PlayerAirborneState AirborneState { get; }
+        public PlayerAttackState AttackState { get; }
         public PlayerMovementStateMachine(PlayerCharacter _player)
         {
             Player = _player;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.Player.States.Movement
             WalkState = new(this);
             RunState = new(this);
             AirborneState = new(this);
+            AttackState = new(this);
         }
     }
 }

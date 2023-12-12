@@ -8,10 +8,6 @@ namespace Assets.Scripts.Player.States.Movement.States.Airborne
         {
         }
         #region IState Methods
-        public override void Enter()
-        {
-            base.Enter();
-        }
         public override void Exit()
         {
             base.Exit();

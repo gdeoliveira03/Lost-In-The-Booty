@@ -549,7 +549,6 @@ public class WeaponElement : MonoBehaviour
                     animator.SetTrigger("FireBasicAttack"); // Triggers the ability animation
                     isAbilityCooldownFire = true; // Sets the ability to be on cooldown
                     CurrentFireBasicCooldown = FireBasicCooldown; // Current Cooldown becomes the basic cooldown
-
                 }
             }
         }
