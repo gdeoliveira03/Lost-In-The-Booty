@@ -12,6 +12,8 @@ namespace Assets.Scripts.Player.States.Movement.States
         protected PlayerAirborneData airborneData;
         protected float facingDirection;
         protected Quaternion targetRotation;
+		private const float FLOOR_RAYCAST_OFFSET = 0.5f;
+		private const float MAX_TO_FLOOR_CAST = 1.0f;
 
         public PlayerMovementState(PlayerMovementStateMachine stateMachine)
         {
@@ -61,8 +63,8 @@ namespace Assets.Scripts.Player.States.Movement.States
         private bool IsGrounded()
         {
             LayerMask mask = LayerMask.GetMask("Ground");
-            Vector3 PlayerToGroundOffset = stateMachine.Player.transform.position + Vector3.up * 0.5f;
-            return Physics.Raycast(PlayerToGroundOffset, Vector3.down, out RaycastHit hit, 1f, mask);
+            Vector3 PlayerToGroundOffset = stateMachine.Player.transform.position + Vector3.up * FLOOR_RAYCAST_OFFSET;
+            return Physics.Raycast(PlayerToGroundOffset, Vector3.down, out RaycastHit hit, MAX_TO_FLOOR_CAST, mask);
         }
         #endregion
 

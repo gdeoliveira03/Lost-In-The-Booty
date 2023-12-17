@@ -6,6 +6,7 @@ namespace Assets.Scripts.Player
 {
     public class PlayerCharacter : MonoBehaviour
     {
+
         #region StateMachine
         [field: SerializeField, Header("State Machine")] public PlayerSO Data { get; private set; }
         [field: Header("State Machine")] public ScruffyInput MyInputMap { get; private set; }
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Player
         [field: Header("Animation")]
         [field: SerializeField] public Animator MyAnimator { get; private set; }
         #endregion
+
         private void Awake()
         {
             MyRigidbody = GetComponent<Rigidbody>();
@@ -29,31 +31,32 @@ namespace Assets.Scripts.Player
             movementStateMachine = new PlayerMovementStateMachine(this);
             MyAnimator = GetComponent<Animator>();
         }
+
         private void Start()
         {
             movementStateMachine.ChangeState(movementStateMachine.IdleState);
-            AudioListener[] ALs = FindObjectsOfType<AudioListener>();
-            foreach (var al in ALs)
-            {
-                Debug.LogWarning(al.gameObject);
-            }
         }
+
         private void Update()
         {
             movementStateMachine.HandleInput();
             movementStateMachine.Update();
         }
+
         private void FixedUpdate()
         {
             movementStateMachine.PhysicsUpdate();
         }
+
         public void OnAnimationEnterEvent()
         {
             movementStateMachine.OnAnimationEnterEvent();
-        }
+        }		
+		
         public void OnAnimationExitEvent()
         {
             movementStateMachine.OnAnimationExitEvent();
         }
+
     }
 }
