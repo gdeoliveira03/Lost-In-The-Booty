@@ -14,8 +14,6 @@ namespace Assets.Scripts.Player.States.Movement
         public PlayerWalkState WalkState { get; }
         public PlayerAirborneState AirborneState { get; }
         public PlayerAttackState AttackState { get; }
-        public PlayerDodgeState DodgeState { get; }
-
         public PlayerMovementStateMachine(PlayerCharacter _player)
         {
             Player = _player;
@@ -24,7 +22,6 @@ namespace Assets.Scripts.Player.States.Movement
             RunState = new(this);
             AirborneState = new(this);
             AttackState = new(this);
-            DodgeState = new(this);
         }
     }
 }

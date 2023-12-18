@@ -80,15 +80,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Dodge"",
-                    ""type"": ""Button"",
-                    ""id"": ""6516713b-e5b1-4549-9088-6cecca643b25"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -256,17 +247,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                     ""action"": ""AbilityAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0fb43689-b68d-453b-9a4d-05d9268c58ce"",
-                    ""path"": ""<Keyboard>/ctrl"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dodge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -281,7 +261,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
         m_GroundedInputs_Jump = m_GroundedInputs.FindAction("Jump", throwIfNotFound: true);
         m_GroundedInputs_Attack = m_GroundedInputs.FindAction("Attack", throwIfNotFound: true);
         m_GroundedInputs_AbilityAttack = m_GroundedInputs.FindAction("AbilityAttack", throwIfNotFound: true);
-        m_GroundedInputs_Dodge = m_GroundedInputs.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -349,7 +328,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_GroundedInputs_Jump;
     private readonly InputAction m_GroundedInputs_Attack;
     private readonly InputAction m_GroundedInputs_AbilityAttack;
-    private readonly InputAction m_GroundedInputs_Dodge;
     public struct GroundedInputsActions
     {
         private @ScruffyInput m_Wrapper;
@@ -360,7 +338,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_GroundedInputs_Jump;
         public InputAction @Attack => m_Wrapper.m_GroundedInputs_Attack;
         public InputAction @AbilityAttack => m_Wrapper.m_GroundedInputs_AbilityAttack;
-        public InputAction @Dodge => m_Wrapper.m_GroundedInputs_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_GroundedInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,9 +365,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @AbilityAttack.started += instance.OnAbilityAttack;
             @AbilityAttack.performed += instance.OnAbilityAttack;
             @AbilityAttack.canceled += instance.OnAbilityAttack;
-            @Dodge.started += instance.OnDodge;
-            @Dodge.performed += instance.OnDodge;
-            @Dodge.canceled += instance.OnDodge;
         }
 
         private void UnregisterCallbacks(IGroundedInputsActions instance)
@@ -413,9 +387,6 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @AbilityAttack.started -= instance.OnAbilityAttack;
             @AbilityAttack.performed -= instance.OnAbilityAttack;
             @AbilityAttack.canceled -= instance.OnAbilityAttack;
-            @Dodge.started -= instance.OnDodge;
-            @Dodge.performed -= instance.OnDodge;
-            @Dodge.canceled -= instance.OnDodge;
         }
 
         public void RemoveCallbacks(IGroundedInputsActions instance)
@@ -441,6 +412,5 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAbilityAttack(InputAction.CallbackContext context);
-        void OnDodge(InputAction.CallbackContext context);
     }
 }

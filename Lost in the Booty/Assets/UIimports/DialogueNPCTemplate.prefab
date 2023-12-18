@@ -75,7 +75,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6965165118081380100}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -402,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 5799601605320053574, guid: a6ef770f4a75a88469edb2e4042c2d5b, type: 3}
       propertyPath: dialogueCamera
       value: 
-      objectReference: {fileID: 2033594663363985965}
+      objectReference: {fileID: 6965165118081380100}
     - target: {fileID: 5799601605320053574, guid: a6ef770f4a75a88469edb2e4042c2d5b, type: 3}
       propertyPath: conversationNumber
       value: 8

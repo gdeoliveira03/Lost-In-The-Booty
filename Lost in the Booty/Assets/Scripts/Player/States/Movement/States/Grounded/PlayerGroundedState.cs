@@ -18,19 +18,13 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
             stateMachine.Player.MyInputMap.GroundedInputs.Jump.started += OnJumpStarted;
             stateMachine.Player.MyInputMap.GroundedInputs.Attack.started += OnAttackStarted;
             stateMachine.Player.MyInputMap.GroundedInputs.AbilityAttack.started += OnAbilityAttackStarted;
-			stateMachine.Player.MyInputMap.GroundedInputs.Dodge.started += OnDodgeStarted;
         }
-
         protected override void RemoveInputActionsCallbacks()
         {
             base.RemoveInputActionsCallbacks();
             stateMachine.Player.MyInputMap.GroundedInputs.Move.canceled -= OnMovementCancelled;
             stateMachine.Player.MyInputMap.GroundedInputs.Jump.started -= OnJumpStarted;
-			stateMachine.Player.MyInputMap.GroundedInputs.Attack.started -= OnAttackStarted;
-			stateMachine.Player.MyInputMap.GroundedInputs.AbilityAttack.started -= OnAbilityAttackStarted;
-			stateMachine.Player.MyInputMap.GroundedInputs.Dodge.started -= OnDodgeStarted;
         }
-
         protected void OnMove()
         {
             if (stateMachine.Player.MyInputMap.GroundedInputs.Run.inProgress)
@@ -44,9 +38,7 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         #region Input Methods
         private void OnDodgeStarted(InputAction.CallbackContext context)
         {
-			//TODO: Implement can dodge bool?
-			//This state assumes you are in either Idle, Dodge, Run, or Move states
-        	stateMachine.ChangeState(stateMachine.DodgeState); 
+            //TODO: Change State to Dodging
         }
         private void OnMovementCancelled(InputAction.CallbackContext context)
         {

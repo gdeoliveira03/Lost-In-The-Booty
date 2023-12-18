@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.AI;
 using System.Collections;
+using Assets.Scripts;
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -21,7 +22,9 @@ public class Enemy : MonoBehaviour
     public GameObject DeadEnemy;
     public GameObject DamageText;
     public string EnemyType;
-    [SerializeField] FloatingHealthBar healthBar;
+
+    [SerializeField]
+    FloatingHealthBar healthBar;
 
     // Effects
     public bool isDoctor = false;
@@ -68,12 +71,14 @@ public class Enemy : MonoBehaviour
     private float patrolTimer = 0f;
     private float patrolPauseTimer = 0f;
     private float timeUntilNextAttack = 0f;
+
     public enum EnemyState
     {
         Patrol,
         Chase,
         Attack
     }
+
     public EnemyState currentState = EnemyState.Patrol;
     public float patrolAreaRadius = 10f;
     public float patrolInterval = 5f;
@@ -85,7 +90,6 @@ public class Enemy : MonoBehaviour
     private float lastHealTime;
     public float healCooldown = 10f;
     private bool isHealing = false;
-    
 
     private Transform player;
     private NavMeshAgent navMeshAgent;
@@ -99,6 +103,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("We are being hit");
         }
     }
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(playerTag).transform;
@@ -122,9 +127,8 @@ public class Enemy : MonoBehaviour
             patrolSpeed = 1f;
             chaseSpeed = 6f;
         }
-        if(EnemyType == "Minotaur")
+        if (EnemyType == "Minotaur")
         {
-
             UpdateEnemyStatsBasedOnSkullsMinotaur();
             MaxMana = 0;
             armor = 0;
@@ -134,7 +138,7 @@ public class Enemy : MonoBehaviour
             patrolSpeed = 2f;
             chaseSpeed = 6.5f;
         }
-        if(EnemyType == "Crab")
+        if (EnemyType == "Crab")
         {
             UpdateEnemyStatsBasedOnSkullsCrab();
             MaxMana = 0;
@@ -146,19 +150,18 @@ public class Enemy : MonoBehaviour
             chaseSpeed = 6.0f;
         }
 
-        if(EnemyType == "Doctor")
+        if (EnemyType == "Doctor")
         {
             isDoctor = true;
             isFriendly = true;
             attackDistance = 2f;
             patrolSpeed = 2f;
-            chaseSpeed = 6.5f;    
+            chaseSpeed = 6.5f;
         }
 
         CurrentHealth = MaxHealth;
         healthBar = GetComponentInChildren<FloatingHealthBar>();
         navMeshAgent.speed = patrolSpeed;
-
     }
 
     void Update()
@@ -193,52 +196,60 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        if (isFrozen){
+        if (isFrozen)
+        {
             navMeshAgent.velocity = Vector3.zero; // Stop the movement
             navMeshAgent.isStopped = true; // Ensure that the agent is stopped
             animator.speed = 0f;
         }
 
-        if(isStunned){
+        if (isStunned)
+        {
             navMeshAgent.velocity = Vector3.zero; // Stop the movement
             navMeshAgent.isStopped = true; // Ensure that the agent is stopped
             animator.speed = 0f;
         }
 
-        if(isDoctor){
+        if (isDoctor)
+        {
             StartCoroutine(HealOverTime());
         }
-
     }
 
     // ---------------------------- AI METHODS ----------------------------
 
     public void UpdateEnemyStatsBasedOnSkullsSkeleton()
     {
-        if (EnemyType == "Skeleton"){
+        if (EnemyType == "Skeleton")
+        {
             MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 30) + 30;
             damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 8;
             CurrentHealth = MaxHealth;
         }
     }
+
     public void UpdateEnemyStatsBasedOnSkullsCrab()
     {
-        if(EnemyType == "Crab"){
+        if (EnemyType == "Crab")
+        {
             MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 10) + 10;
             damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 6;
             CurrentHealth = MaxHealth;
         }
     }
+
     public void UpdateEnemyStatsBasedOnSkullsMinotaur()
     {
-        if(EnemyType == "Minotaur"){
+        if (EnemyType == "Minotaur")
+        {
             MaxHealth = (GameManager.Instance.scruffyInventory.Skulls * 200) + 200;
             damage = (GameManager.Instance.scruffyInventory.Skulls * 5) + 15;
             CurrentHealth = MaxHealth;
         }
     }
 
-    public void DoctorHealOff(){
+    public void DoctorHealOff()
+    {
         DoctorHeal.SetActive(false);
         healingeffect = false;
     }
@@ -256,8 +267,10 @@ public class Enemy : MonoBehaviour
             if (CanHeal())
             {
                 // Check if the conditions for healing are met
-                if (Vector3.Distance(transform.position, player.position) < HealDistance &&
-                    scruffystats.CurrentHealth < scruffystats.MaxHealth * 0.7f)
+                if (
+                    Vector3.Distance(transform.position, player.position) < HealDistance
+                    && scruffystats.CurrentHealth < scruffystats.MaxHealth * 0.7f
+                )
                 {
                     healingeffect = true;
                     scruffystats.FlatHeal(scruffystats.MaxHealth * 2 / 7);
@@ -279,7 +292,6 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(healCooldown);
         }
     }
-
 
     void SetState(EnemyState newState)
     {
@@ -315,7 +327,6 @@ public class Enemy : MonoBehaviour
         isPaused = false;
         animator.SetBool("IsPaused", isPaused);
         animator.SetBool("IsPatrolling", true);
-
     }
 
     void InitializeChaseState()
@@ -335,7 +346,6 @@ public class Enemy : MonoBehaviour
         }
 
         animator.SetBool("IsChasing", true);
-
     }
 
     void InitializeAttackState()
@@ -346,7 +356,6 @@ public class Enemy : MonoBehaviour
         StopChase();
 
         animator.SetBool("IsAttacking", true);
-
     }
 
     void StopPatrol()
@@ -373,7 +382,8 @@ public class Enemy : MonoBehaviour
 
     void Patrol()
     {
-        if (navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete) return;
+        if (navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete)
+            return;
         // Set IsPatrolling parameter in the Animator
         animator.SetBool("IsPatrolling", true);
 
@@ -504,7 +514,7 @@ public class Enemy : MonoBehaviour
     {
         if (CurrentHealth < MaxHealth)
         {
-            int healAmount = (int) Mathf.Min(healthRegen, (MaxHealth - CurrentHealth));
+            int healAmount = (int)Mathf.Min(healthRegen, (MaxHealth - CurrentHealth));
             FlatHeal(healAmount);
         }
     }
@@ -513,7 +523,8 @@ public class Enemy : MonoBehaviour
     {
         CurrentHealth += amount;
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity)
+            .GetComponent<DamagePopUp>();
         indicator.SetDamageTextColor(Color.green);
         indicator.SetDamageText(amount.ToString());
     }
@@ -536,10 +547,6 @@ public class Enemy : MonoBehaviour
         NavMesh.SamplePosition(randomDirection, out hit, patrolAreaRadius, 1);
         navMeshAgent.SetDestination(hit.position);
     }
-
-
-
-
 
     // ---------------------------- STAT METHODS ----------------------------
 
@@ -618,7 +625,12 @@ public class Enemy : MonoBehaviour
         LightningExplosion.SetActive(false);
     }
 
-    public IEnumerator TakeDamageOverTime(string DOTType, int damages, float duration, float tickSpeed)
+    public IEnumerator TakeDamageOverTime(
+        string DOTType,
+        int damages,
+        float duration,
+        float tickSpeed
+    )
     {
         float elapsedTime = 0f;
 
@@ -666,7 +678,8 @@ public class Enemy : MonoBehaviour
 
         CurrentHealth -= damage;
         healthBar.UpdateHealthBar(CurrentHealth, MaxHealth);
-        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity).GetComponent<DamagePopUp>();
+        DamagePopUp indicator = Instantiate(DamageText, transform.position, Quaternion.identity)
+            .GetComponent<DamagePopUp>();
         indicator.SetDamageTextColor(Color.black);
         indicator.SetDamageText(damage.ToString());
 
@@ -682,15 +695,15 @@ public class Enemy : MonoBehaviour
         {
             GameManager.Instance.scruffyInventory.Coins += 1;
         }
-        if(EnemyType == "Minotaur")
+        if (EnemyType == "Minotaur")
         {
             GameManager.Instance.scruffyInventory.Coins += 5;
             scruffystats.IncreaseSkulls(1);
             scruffystats.UpdateEnemyStatsBasedOnSkulls();
         }
-        if(EnemyType == "Crab")
+        if (EnemyType == "Crab")
         {
-            GameManager.Instance.scruffyInventory.Coins += 1;  
+            GameManager.Instance.scruffyInventory.Coins += 1;
         }
         Destroy(DeadEnemy);
     }

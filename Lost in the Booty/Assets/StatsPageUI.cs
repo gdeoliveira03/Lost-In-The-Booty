@@ -1,16 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StatsPageUI : MonoBehaviour
 {
-    [SerializeField] private Toggle Cutlass;
-    [SerializeField] private Toggle Spear;
-    [SerializeField] private Toggle Hammer;
-    [SerializeField] private Toggle Fire;
-    [SerializeField] private Toggle Ice;
-    [SerializeField] private Toggle Lightning;
+    [SerializeField]
+    private Toggle Cutlass;
+
+    [SerializeField]
+    private Toggle Spear;
+
+    [SerializeField]
+    private Toggle Hammer;
+
+    [SerializeField]
+    private Toggle Fire;
+
+    [SerializeField]
+    private Toggle Ice;
+
+    [SerializeField]
+    private Toggle Lightning;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +34,4 @@ public class StatsPageUI : MonoBehaviour
         Ice.isOn = GameManager.Instance.scruffyInventory.Ice;
         Lightning.isOn = GameManager.Instance.scruffyInventory.Lightning;
     }
-
 }
