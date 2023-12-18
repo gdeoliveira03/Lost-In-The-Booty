@@ -72,6 +72,7 @@ namespace DistantLands
 
 		void CalcWave()
 		{
+			if (verts == null) return;
 			for (int i = 0; i < verts.Length; i++)
 			{
 				Vector3 v = verts[i];

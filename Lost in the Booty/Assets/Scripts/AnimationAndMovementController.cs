@@ -68,15 +68,15 @@ public class AnimationAndMovementController : MonoBehaviour
         isRunningHash = Animator.StringToHash("isRunning");
         isJumpingHash = Animator.StringToHash("isJumping");
 
-        playerInput.CharacterControls.Move.started += onMovementInput;
-        playerInput.CharacterControls.Move.canceled += onMovementInput;
-        playerInput.CharacterControls.Move.performed += onMovementInput;
+        playerInput.GroundedInputs.Move.started += onMovementInput;
+        playerInput.GroundedInputs.Move.canceled += onMovementInput;
+        playerInput.GroundedInputs.Move.performed += onMovementInput;
 
-        playerInput.CharacterControls.Run.started += onRun;
-        playerInput.CharacterControls.Run.canceled += onRun;
+        playerInput.GroundedInputs.Run.started += onRun;
+        playerInput.GroundedInputs.Run.canceled += onRun;
 
-        playerInput.CharacterControls.Jump.started += onJump;
-        playerInput.CharacterControls.Jump.canceled += onJump;
+        playerInput.GroundedInputs.Jump.started += onJump;
+        playerInput.GroundedInputs.Jump.canceled += onJump;
 
         setupJumpVariables();
     }
@@ -244,11 +244,11 @@ public class AnimationAndMovementController : MonoBehaviour
 
     void OnEnable()
     {
-        playerInput.CharacterControls.Enable();
+        playerInput.GroundedInputs.Enable();
     }
 
     void OnDisable() 
     {
-        playerInput.CharacterControls.Disable();
+        playerInput.GroundedInputs.Disable();
     }
 }

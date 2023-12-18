@@ -34,6 +34,7 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0f;
         GameUI.SetActive(false);
         PauseMenu.SetActive(true);
+        GameManager.Instance.ChangeGameState(GameManager.GameState.PAUSED);
     }
 
     public void UnpauseGame()
@@ -41,6 +42,7 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         GameUI.SetActive(true);
         PauseMenu.SetActive(false);
+        GameManager.Instance.ChangeGameState(GameManager.GameState.PLAY);
     }
 
     Vector3 spawnPointPosition;

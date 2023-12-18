@@ -24,7 +24,7 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
     ""name"": ""scruffyInput"",
     ""maps"": [
         {
-            ""name"": ""CharacterControls"",
+            ""name"": ""GroundedInputs"",
             ""id"": ""27bc0508-fb8c-45ef-988f-86a5285b4163"",
             ""actions"": [
                 {
@@ -47,7 +47,7 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""99f23960-5df5-4ce1-aae0-9f0b3c80ea4c"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -58,6 +58,24 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""e486812a-8403-47da-bf92-21a8237dc660"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""6e5de4a3-0eb7-4c68-ab7c-afe66fc7d88d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""a844adef-6617-4995-ad2d-697704f3f2d8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -188,6 +206,17 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""aa075801-e2ee-4add-bcc9-0acf89fb2356"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""491d3bf2-ea76-405f-9241-d2365eccfc00"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -196,18 +225,42 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""986c6d7f-d3f1-4169-b15c-5684b9bb7fde"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bd16336-3394-4eb5-839f-7ac0dca7d04c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // CharacterControls
-        m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
-        m_CharacterControls_Move = m_CharacterControls.FindAction("Move", throwIfNotFound: true);
-        m_CharacterControls_Run = m_CharacterControls.FindAction("Run", throwIfNotFound: true);
-        m_CharacterControls_Look = m_CharacterControls.FindAction("Look", throwIfNotFound: true);
-        m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
+        // GroundedInputs
+        m_GroundedInputs = asset.FindActionMap("GroundedInputs", throwIfNotFound: true);
+        m_GroundedInputs_Move = m_GroundedInputs.FindAction("Move", throwIfNotFound: true);
+        m_GroundedInputs_Run = m_GroundedInputs.FindAction("Run", throwIfNotFound: true);
+        m_GroundedInputs_Look = m_GroundedInputs.FindAction("Look", throwIfNotFound: true);
+        m_GroundedInputs_Jump = m_GroundedInputs.FindAction("Jump", throwIfNotFound: true);
+        m_GroundedInputs_Attack = m_GroundedInputs.FindAction("Attack", throwIfNotFound: true);
+        m_GroundedInputs_AbilityAttack = m_GroundedInputs.FindAction("AbilityAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -266,30 +319,34 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // CharacterControls
-    private readonly InputActionMap m_CharacterControls;
-    private List<ICharacterControlsActions> m_CharacterControlsActionsCallbackInterfaces = new List<ICharacterControlsActions>();
-    private readonly InputAction m_CharacterControls_Move;
-    private readonly InputAction m_CharacterControls_Run;
-    private readonly InputAction m_CharacterControls_Look;
-    private readonly InputAction m_CharacterControls_Jump;
-    public struct CharacterControlsActions
+    // GroundedInputs
+    private readonly InputActionMap m_GroundedInputs;
+    private List<IGroundedInputsActions> m_GroundedInputsActionsCallbackInterfaces = new List<IGroundedInputsActions>();
+    private readonly InputAction m_GroundedInputs_Move;
+    private readonly InputAction m_GroundedInputs_Run;
+    private readonly InputAction m_GroundedInputs_Look;
+    private readonly InputAction m_GroundedInputs_Jump;
+    private readonly InputAction m_GroundedInputs_Attack;
+    private readonly InputAction m_GroundedInputs_AbilityAttack;
+    public struct GroundedInputsActions
     {
         private @ScruffyInput m_Wrapper;
-        public CharacterControlsActions(@ScruffyInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_CharacterControls_Move;
-        public InputAction @Run => m_Wrapper.m_CharacterControls_Run;
-        public InputAction @Look => m_Wrapper.m_CharacterControls_Look;
-        public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
+        public GroundedInputsActions(@ScruffyInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_GroundedInputs_Move;
+        public InputAction @Run => m_Wrapper.m_GroundedInputs_Run;
+        public InputAction @Look => m_Wrapper.m_GroundedInputs_Look;
+        public InputAction @Jump => m_Wrapper.m_GroundedInputs_Jump;
+        public InputAction @Attack => m_Wrapper.m_GroundedInputs_Attack;
+        public InputAction @AbilityAttack => m_Wrapper.m_GroundedInputs_AbilityAttack;
+        public InputActionMap Get() { return m_Wrapper.m_GroundedInputs; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterControlsActions set) { return set.Get(); }
-        public void AddCallbacks(ICharacterControlsActions instance)
+        public static implicit operator InputActionMap(GroundedInputsActions set) { return set.Get(); }
+        public void AddCallbacks(IGroundedInputsActions instance)
         {
-            if (instance == null || m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Add(instance);
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -302,9 +359,15 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
+            @AbilityAttack.started += instance.OnAbilityAttack;
+            @AbilityAttack.performed += instance.OnAbilityAttack;
+            @AbilityAttack.canceled += instance.OnAbilityAttack;
         }
 
-        private void UnregisterCallbacks(ICharacterControlsActions instance)
+        private void UnregisterCallbacks(IGroundedInputsActions instance)
         {
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
@@ -318,28 +381,36 @@ public partial class @ScruffyInput: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
+            @AbilityAttack.started -= instance.OnAbilityAttack;
+            @AbilityAttack.performed -= instance.OnAbilityAttack;
+            @AbilityAttack.canceled -= instance.OnAbilityAttack;
         }
 
-        public void RemoveCallbacks(ICharacterControlsActions instance)
+        public void RemoveCallbacks(IGroundedInputsActions instance)
         {
-            if (m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICharacterControlsActions instance)
+        public void SetCallbacks(IGroundedInputsActions instance)
         {
-            foreach (var item in m_Wrapper.m_CharacterControlsActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GroundedInputsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CharacterControlsActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GroundedInputsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
-    public interface ICharacterControlsActions
+    public GroundedInputsActions @GroundedInputs => new GroundedInputsActions(this);
+    public interface IGroundedInputsActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+        void OnAbilityAttack(InputAction.CallbackContext context);
     }
 }

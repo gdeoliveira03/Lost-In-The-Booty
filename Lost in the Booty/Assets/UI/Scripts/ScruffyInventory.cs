@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "scruffy Inventory", menuName = "player/Inventory")]
+[CreateAssetMenu(fileName = "scruffy Inventory", menuName = "Player/Inventory")]
 public class ScruffyInventory : ScriptableObject
 {
     public bool Cutlass = true;

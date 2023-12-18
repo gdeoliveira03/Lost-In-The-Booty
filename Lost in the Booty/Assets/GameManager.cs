@@ -1,27 +1,62 @@
+using Assets.Scripts.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public ScruffyInventory scruffyInventory;
-
-    public static GameManager Instance = null;
-    private void Awake()
+    private MenuInputActions menuInputs { get; set; }
+    public enum GameState
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
+        PLAY,
+        PAUSED
+    };
+    public GameState currentState { get; private set; } = GameState.PLAY;
+    public event Action<GameState> OnGameStateChange;
+    protected override void Awake()
+    {
+        base.Awake();
+        scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
+        menuInputs = new MenuInputActions();
+        menuInputs.Enable();
+        menuInputs.Menu.Pause.started += OnPauseStarted;
 
-            
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        DontDestroyOnLoad(gameObject);
+    }
+    private void OnPauseStarted(InputAction.CallbackContext context)
+    {
+        switch (currentState)
         {
-            throw new Exception();
+            case GameState.PLAY:
+                ChangeGameState(GameState.PAUSED);
+                break;
+            case GameState.PAUSED:
+                ChangeGameState(GameState.PLAY);
+                break;
         }
     }
-   
+    public void ChangeGameState(GameState newState)
+    {
+        currentState = newState;
+        switch (currentState)
+        {
+            case GameState.PLAY:
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                break;
+            case GameState.PAUSED:
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                break;
+            default:
+                Debug.LogError("[GameManager] Logic for passed in state has not been defined");
+                break;
+        }
+        OnGameStateChange?.Invoke(currentState);
+    }
 }

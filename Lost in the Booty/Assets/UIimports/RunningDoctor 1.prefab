@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3555401092638949057}
   - component: {fileID: 3548410415279241089}
-  - component: {fileID: 8884721388713695001}
   - component: {fileID: 6667338518422318816}
   m_Layer: 0
   m_Name: DoctorCamera
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8884721388713695001
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3844817787896793519}
-  m_Enabled: 1
 --- !u!114 &6667338518422318816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 3.5
   runSpeed: 7
+  shouldMove: 0
 --- !u!114 &8064960647966765977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -672,6 +664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footstepsSound: {fileID: 0}
   sprintSound: {fileID: 0}
+  autoSound: {fileID: 0}
+  magicSound: {fileID: 0}
 --- !u!114 &2786157465615608375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,9 +681,12 @@ MonoBehaviour:
   dialogueText: {fileID: 486322934665835276}
   dialoguePanel: {fileID: 7419284793713864653}
   scruffy: {fileID: 0}
+  doctor: {fileID: 0}
+  isScruffy: 0
   mainCamera: {fileID: 0}
   dialogueCamera: {fileID: 0}
   tutorialUI: {fileID: 0}
+  conversationNumber: 0
 --- !u!4 &3023201810996258520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ae92d98d1a4ebd04ebd62bb1eeaecdcf, type: 3}

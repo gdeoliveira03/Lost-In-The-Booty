@@ -2,7 +2,7 @@
     "name": "scruffyInput",
     "maps": [
         {
-            "name": "CharacterControls",
+            "name": "GroundedInputs",
             "id": "27bc0508-fb8c-45ef-988f-86a5285b4163",
             "actions": [
                 {
@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "Look",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "99f23960-5df5-4ce1-aae0-9f0b3c80ea4c",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -36,6 +36,24 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "e486812a-8403-47da-bf92-21a8237dc660",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "6e5de4a3-0eb7-4c68-ab7c-afe66fc7d88d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AbilityAttack",
+                    "type": "Button",
+                    "id": "a844adef-6617-4995-ad2d-697704f3f2d8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -166,12 +184,45 @@
                 },
                 {
                     "name": "",
+                    "id": "aa075801-e2ee-4add-bcc9-0acf89fb2356",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "491d3bf2-ea76-405f-9241-d2365eccfc00",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "986c6d7f-d3f1-4169-b15c-5684b9bb7fde",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3bd16336-3394-4eb5-839f-7ac0dca7d04c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilityAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

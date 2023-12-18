@@ -373,6 +373,7 @@ public class Enemy : MonoBehaviour
 
     void Patrol()
     {
+        if (navMeshAgent.pathStatus != NavMeshPathStatus.PathComplete) return;
         // Set IsPatrolling parameter in the Animator
         animator.SetBool("IsPatrolling", true);
 
@@ -529,7 +530,7 @@ public class Enemy : MonoBehaviour
     void SetRandomDestinationInPatrolArea()
     {
         // Set the destination to a random point within the patrol area
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * patrolAreaRadius;
+        Vector3 randomDirection = Random.insideUnitSphere * patrolAreaRadius;
         randomDirection += transform.position;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, patrolAreaRadius, 1);
