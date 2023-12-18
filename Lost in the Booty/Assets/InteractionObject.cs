@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DoctorDialogue : MonoBehaviour
+public class InteractionObject : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
     public GameObject dialoguePanel;
