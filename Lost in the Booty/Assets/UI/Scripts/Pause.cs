@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -48,12 +49,14 @@ public class Pause : MonoBehaviour
     Vector3 spawnPointPosition;
     public GameObject spawnPoint;
     public GameObject ScruffyMain;
+
     public void UnstuckScruffy()
     {
         StartCoroutine(UnstuckScruffyCoroutine());
     }
 
-    IEnumerator UnstuckScruffyCoroutine(){
+    IEnumerator UnstuckScruffyCoroutine()
+    {
         Time.timeScale = 1f;
         GameUI.SetActive(true);
         PauseMenu.SetActive(false);
@@ -61,7 +64,6 @@ public class Pause : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         spawnPointPosition = spawnPoint.transform.position;
         ScruffyMain.transform.position = spawnPointPosition;
-
     }
 
     public void OptionsMenu()
@@ -99,19 +101,23 @@ public class Pause : MonoBehaviour
     public void SetBorderless()
     {
         Screen.fullScreen = false;
-        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, FullScreenMode.Windowed);
+        Screen.SetResolution(
+            Screen.currentResolution.width,
+            Screen.currentResolution.height,
+            FullScreenMode.Windowed
+        );
     }
 
     public void QuitGame()
     {
         PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetInt("SavedCoins", GameManager.Instance.scruffyInventory.Coins);
-        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);    
+        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);
         PlayerPrefs.Save();
         Application.Quit();
     }
 
-    void Update () 
+    void Update()
     {
         // Pauses in-game time while in menus
         if (PauseMenu.activeSelf || OptionsUI.activeSelf)
@@ -119,18 +125,32 @@ public class Pause : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && (AbilityUI.activeSelf   || 
-                                                 InventoryUI.activeSelf || 
-                                                 WorldMapUI.activeSelf  ||
-                                                 StatsUI.activeSelf))
+        if (
+            Input.GetKeyDown(KeyCode.Escape)
+            && (
+                AbilityUI.activeSelf
+                || InventoryUI.activeSelf
+                || WorldMapUI.activeSelf
+                || StatsUI.activeSelf
+            )
+        )
         {
             // Do nothing to close any of those menus that were open
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (OptionsUI.activeSelf) { CloseOptionsMenu(); } // Exit options menu
-            else if (PauseMenu.activeSelf) { UnpauseGame(); } // Unpause
-            else { PauseGame(); } // None open; pause
+            if (OptionsUI.activeSelf)
+            {
+                CloseOptionsMenu();
+            } // Exit options menu
+            else if (PauseMenu.activeSelf)
+            {
+                UnpauseGame();
+            } // Unpause
+            else
+            {
+                PauseGame();
+            } // None open; pause
         }
     }
 }
