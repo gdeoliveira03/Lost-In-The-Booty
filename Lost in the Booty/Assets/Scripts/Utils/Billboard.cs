@@ -4,17 +4,20 @@ namespace Assets.Scripts.Utils
 {
     public class Billboard : MonoBehaviour
     {
-        Camera cam;
+        [SerializeField]
+        private Camera camToLookAt;
+
         private void Update()
         {
-            if (cam == null)
+            if (camToLookAt == null)
             {
-                cam = GameObject.Find("scruffyMain").GetComponentInChildren<Camera>();
+                camToLookAt = GameObject.Find("scruffyMain")?.GetComponentInChildren<Camera>();
             }
 
-            if (cam == null) return;
+            if (camToLookAt == null)
+                return;
 
-            transform.LookAt(cam.transform);
+            transform.LookAt(camToLookAt.transform);
             transform.Rotate(Vector3.up * 180);
         }
     }

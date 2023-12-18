@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,30 +8,36 @@ public class MainMenu : MonoBehaviour
 {
     private Transform player;
     private string playerTag = "Player";
-    void Start(){
+
+    void Start()
+    {
         player = GameObject.FindGameObjectWithTag(playerTag).transform;
     }
 
-    public void KeepPlayingAfterDeath(GameObject deathscreenprefab){
+    public void KeepPlayingAfterDeath(GameObject deathscreenprefab)
+    {
         Time.timeScale = 1f;
         Destroy(deathscreenprefab);
     }
 
-    public void NewSaveButton(){
+    public void NewSaveButton()
+    {
         if (PlayerPrefs.HasKey("SavedScene"))
         {
             int savedSceneIndex = PlayerPrefs.GetInt("SavedScene");
             PlayerPrefs.DeleteKey("SavedScene");
         }
-        if(GameManager.Instance.scruffyInventory.Cutlass != null &&
-        GameManager.Instance.scruffyInventory.Spear != null &&
-        GameManager.Instance.scruffyInventory.Hammer != null &&
-        GameManager.Instance.scruffyInventory.Fire != null &&
-        GameManager.Instance.scruffyInventory.Ice != null &&
-        GameManager.Instance.scruffyInventory.Lightning != null &&
-        GameManager.Instance.scruffyInventory.Coins != null &&
-        GameManager.Instance.scruffyInventory.Skulls != null 
-        ){
+        if (
+            GameManager.Instance.scruffyInventory.Cutlass != null
+            && GameManager.Instance.scruffyInventory.Spear != null
+            && GameManager.Instance.scruffyInventory.Hammer != null
+            && GameManager.Instance.scruffyInventory.Fire != null
+            && GameManager.Instance.scruffyInventory.Ice != null
+            && GameManager.Instance.scruffyInventory.Lightning != null
+            && GameManager.Instance.scruffyInventory.Coins != null
+            && GameManager.Instance.scruffyInventory.Skulls != null
+        )
+        {
             GameManager.Instance.scruffyInventory.Cutlass = false;
             GameManager.Instance.scruffyInventory.Spear = false;
             GameManager.Instance.scruffyInventory.Hammer = false;
@@ -67,7 +74,7 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetInt("SavedCoins", GameManager.Instance.scruffyInventory.Coins);
-        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);    
+        PlayerPrefs.SetInt("SavedSkulls", GameManager.Instance.scruffyInventory.Skulls);
         PlayerPrefs.Save();
         Application.Quit();
         Debug.Log("Quit!");

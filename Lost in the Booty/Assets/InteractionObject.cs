@@ -1,10 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using System.Collections.Generic;
+using Assets.Scripts.Player;
 using TMPro;
 using UnityEngine;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DoctorDialogue : MonoBehaviour
 {
@@ -13,20 +14,20 @@ public class DoctorDialogue : MonoBehaviour
     public GameObject scruffy;
     public GameObject doctor;
     public bool isScruffy;
-    public Camera mainCamera;  // Assign the main camera in the Inspector
-    public Camera dialogueCamera;  // Assign the dialogue camera in the Inspector
-    public GameObject tutorialUI;  // Assign the tutorial UI GameObject in the Inspector
+    public GameObject mainCamera; // Assign the main camera in the Inspector
+    public GameObject dialogueCamera; // Assign the dialogue camera in the Inspector
+    public GameObject tutorialUI; // Assign the tutorial UI GameObject in the Inspector
+
     //public PlayerStateMachine playerStateMachine;  // Reference to the PlayerStateMachine component
     public int conversationNumber;
     private bool isInRange = false;
     private int currentDialogueIndex = 0;
     private string[] dialogues;
 
-
     void Start()
     {
         //playerStateMachine = doctor.GetComponent<PlayerStateMachine>();
-
+        mainCamera = GameObject.Find("scruffyMain").GetComponent<PlayerCharacter>().MyCamera;
         string[] dialogue1 = new string[]
         {
             "We're here!",
@@ -43,7 +44,7 @@ public class DoctorDialogue : MonoBehaviour
         };
 
         string[] dialogue0 = new string[]
-            {
+        {
             "Hey I'm Dr. Hendrix!",
             "You must be that pirate that I saw get killed out there!",
             "How are you alive?",
@@ -61,103 +62,102 @@ public class DoctorDialogue : MonoBehaviour
             "I know where one of the commanders is now...",
             "Let's get started",
 
-
-                // Add more dialogues as needed
-            };
+            // Add more dialogues as needed
+        };
         //Scruffy Start Dialogue
         string[] dialogue2 = new string[]
-    {
+        {
             "Where am I?\n\nPress 'F' to advance dialogue",
             "Also...",
             "Who am I?",
             "And why am I a skeleton???",
             "I guess I should explore this island...",
-        // Add more dialogues as needed
-    };
-    //VolcanicIsland
-     string[] dialogue3 = new string[]
-    {
+            // Add more dialogues as needed
+        };
+        //VolcanicIsland
+        string[] dialogue3 = new string[]
+        {
             "I've heard rumors about this place...\n\nPress 'F' to advance dialogue",
             "There are many stories about people coming to this island and never coming back...",
             "Supposedly, there is an entrance to the volcano just ahead...",
             "I figure this is as good a place as any to find information on Davy Jones or his commanders...",
             "You go on ahead...I will catch up to you",
-        // Add more dialogues as needed
-    };
+            // Add more dialogues as needed
+        };
         string[] dialogue4 = new string[]
-    {
+        {
             "We're here...\n\nPress 'F' to advance dialogue",
             "This island supposedly has a dungeon that is rich with treasures...",
             "Seems to me that this is a great place to find one of Davy Jones' commanders",
             "Let's go check it out!",
-        // Add more dialogues as needed
-    };
+            // Add more dialogues as needed
+        };
 
         string[] dialogue5 = new string[]
-   {
+        {
             "This is Davy Jones' Island...\n\nPress 'F' to advance dialogue",
             "Maybe it's too soon to be here...",
             "We could always come back when you feel you are better prepared for the task...",
             "It wouldn't hurt to gain some experience first...",
             "But if you feel like you are ready...",
             "Let's do this!",
-       // Add more dialogues as needed
-   };
+            // Add more dialogues as needed
+        };
         string[] dialogue6 = new string[]
-       {
+        {
             "This place is scary...'\n\n'Press 'F' to advance dialogue",
             "So this is the inside of the dungeon...",
-           // Add more dialogues as needed
-       };
+            // Add more dialogues as needed
+        };
         string[] dialogue7 = new string[]
-{
+        {
             "We're here...\n\nPress 'F' to advance dialogue",
             "Sorry Scruffy, I don't really know much about this island...",
             "It's crawling with enemies, there must be something valuable here...",
             "I figure there might be something here worth exploring...",
             "Let's go check it out!",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue8 = new string[]
-{
+        {
             "A skeleton! n\nPress 'F' to advance dialogue",
             "Hot damn! The dead walk amongst us...",
             "I've seen stranger...Don't ask....",
             "So you want to know where those dirty pirates went off to?",
             "There's a dungeon at the rear of the island, check there!",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue9 = new string[]
-{
+        {
             "My dog would love to get his paws on you n\nPress 'F' to advance dialogue",
             "Ah! You're after those pirates...",
             "I think they went into that dungeon across the island",
             "Good luck!"
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue10 = new string[]
-{
+        {
             "Welcome to horseshoe crab island... n\nPress 'F' to advance dialogue",
             "The villagers say that there is a dungeon here that is frequented by Pirates...",
             "It should be somewhere on this island...",
             "Let's go check it out!"
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue11 = new string[]
-{
+        {
             "You made it!... n\nPress 'F' to advance dialogue",
             "The dungeon should be somewhere around here...",
             "Check the area behind me to me right...",
             "Take a look...I'll meet you inside!",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue12 = new string[]
-{
+        {
             "Scruffy... n\nPress 'F' to advance dialogue",
             "You want to know why I killed you...",
             "The unfortunate truth is....!",
@@ -165,41 +165,38 @@ public class DoctorDialogue : MonoBehaviour
             "And I did not want to share my treasure with the likes of you!",
             "I won't apologize for what I did...",
             "Let's get this over with!",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
         string[] dialogue99 = new string[]
-{
+        {
             "Hello There!",
             "Talk to someone else!"
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue13 = new string[]
-{
+        {
             "Hello There!",
             "Where are the pirates you ask??",
             "Check one of the two dungeons in the area.",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue14 = new string[]
-{
+        {
             "Hello There!",
             "Yes, there is a dungeon across this bridge...",
             "Good luck finding it!",
-    // Add more dialogues as needed
-};
+            // Add more dialogues as needed
+        };
 
         string[] dialogue15 = new string[]
-{
+        {
             "Hello There!",
             "Can't I get some peace and quiet!",
 
-    // Add more dialogues as needed
-};
-
-
-
+            // Add more dialogues as needed
+        };
 
         // Initialize your dialogues here
         switch (conversationNumber)
@@ -210,7 +207,7 @@ public class DoctorDialogue : MonoBehaviour
             case 1:
                 dialogues = dialogue1; // Corrected the assignment here
                 break;
-            case 2: 
+            case 2:
                 dialogues = dialogue2;
                 break;
             case 3:
@@ -262,11 +259,10 @@ public class DoctorDialogue : MonoBehaviour
         dialoguePanel.SetActive(false);
 
         // Ensure the main camera is initially enabled, and the dialogue camera is initially disabled
-        mainCamera.enabled = true;
-        dialogueCamera.enabled = false;
+        mainCamera.SetActive(true);
+        dialogueCamera.SetActive(false);
         tutorialUI.SetActive(true);
         //scruffy.SetActive(false);
-
     }
 
     void Update()
@@ -286,7 +282,7 @@ public class DoctorDialogue : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {      
+    {
         if (other.CompareTag("Player"))
         {
             isInRange = true;
@@ -297,7 +293,6 @@ public class DoctorDialogue : MonoBehaviour
 
             StartDialogue();
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -306,7 +301,7 @@ public class DoctorDialogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = false;
-            
+
             EndDialogue();
         }
     }
@@ -317,11 +312,11 @@ public class DoctorDialogue : MonoBehaviour
         dialoguePanel.SetActive(true);
 
         // Disable the main camera and enable the dialogue camera
-        mainCamera.enabled = false;
-        dialogueCamera.enabled = true;
+        mainCamera.SetActive(false);
+        dialogueCamera.SetActive(true);
         tutorialUI.SetActive(false);
-        if(!isScruffy)
-        scruffy.SetActive(false);
+        if (!isScruffy)
+            scruffy.SetActive(false);
 
         // Show the first dialogue
         ShowDialogue(dialogues[currentDialogueIndex]);
@@ -357,22 +352,22 @@ public class DoctorDialogue : MonoBehaviour
         dialoguePanel.SetActive(false);
 
         // Disable the dialogue camera and enable the main camera
-        mainCamera.enabled = true;
-        dialogueCamera.enabled = false;
+        mainCamera.SetActive(true);
+        dialogueCamera.SetActive(false);
         scruffy.SetActive(true);
 
         // Reset the dialogue index for the next interaction
         currentDialogueIndex = 0;
-        /* 
+        /*
         PlayerStateMachine doctorStateMachine = doctor.GetComponent<PlayerStateMachine>();
         if (doctorStateMachine != null)
         {
             doctorStateMachine.enabled = true;
         }
         */
-         
-        if(conversationNumber == 0)
-        SceneManager.LoadScene(9);
+
+        if (conversationNumber == 0)
+            SceneManager.LoadScene(9);
 
         //if(conversationNumber == 1)
         //doctor.SetActive(false);
@@ -383,8 +378,5 @@ public class DoctorDialogue : MonoBehaviour
         scruffy.SetActive(true);
 
         scruffy.SetActive(true);
-
-
-
     }
 }
