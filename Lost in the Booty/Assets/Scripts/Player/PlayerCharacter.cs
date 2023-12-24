@@ -1,3 +1,4 @@
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.States.Movement;
 using UnityEngine;
@@ -28,6 +29,9 @@ namespace Assets.Scripts.Player
         [field: SerializeField]
         public Animator MyAnimator { get; private set; }
         #endregion
+        #region Inventory
+        public PlayerInventory MyInventory { get; private set; }
+        #endregion
         private void Awake()
         {
             MyRigidbody = GetComponent<Rigidbody>();
@@ -35,6 +39,9 @@ namespace Assets.Scripts.Player
             MyInputMap.GroundedInputs.Enable();
             movementStateMachine = new PlayerMovementStateMachine(this);
             MyAnimator = GetComponent<Animator>();
+
+            //For now we create a new inventory but saving and loading feature should be expanded
+            MyInventory = new PlayerInventory();
         }
 
         private void Start()
