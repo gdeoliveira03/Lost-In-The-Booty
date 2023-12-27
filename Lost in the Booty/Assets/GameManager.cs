@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.Player;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +8,7 @@ namespace Assets.Scripts
 {
     public class GameManager : Singleton<GameManager>
     {
-        public ScruffyInventory scruffyInventory;
+        public ScruffyInventory scruffyInventory { get; private set; }
         private MenuInputActions menuInputs { get; set; }
 
         public enum GameState
@@ -22,7 +23,6 @@ namespace Assets.Scripts
         protected override void Awake()
         {
             base.Awake();
-            scruffyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
             menuInputs = new MenuInputActions();
             menuInputs.Enable();
             menuInputs.Menu.Pause.started += OnPauseStarted;
@@ -30,6 +30,14 @@ namespace Assets.Scripts
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             DontDestroyOnLoad(gameObject);
+        }
+
+        public void Start()
+        {
+            scruffyInventory = GameObject
+                .Find("scruffyMain")
+                .GetComponent<PlayerCharacter>()
+                .MyInventory;
         }
 
         private void OnPauseStarted(InputAction.CallbackContext context)

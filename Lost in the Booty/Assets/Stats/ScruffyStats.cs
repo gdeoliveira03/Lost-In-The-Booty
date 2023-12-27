@@ -96,7 +96,7 @@ public class ScruffyStats : MonoBehaviour
 
     public void IncreaseSkulls(int amount)
     {
-        GameManager.Instance.scruffyInventory.Skulls += amount;
+        GameManager.Instance.scruffyInventory.AddSkulls(amount);
         UpdateStatsBasedOnSkulls();
         healthBar.maxValue = MaxHealth;
         manaBar.maxValue = MaxMana;

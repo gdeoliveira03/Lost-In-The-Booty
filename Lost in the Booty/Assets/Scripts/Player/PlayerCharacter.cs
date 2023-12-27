@@ -1,6 +1,6 @@
-using Assets.Scripts.Inventory;
 using Assets.Scripts.Player.Data;
 using Assets.Scripts.Player.States.Movement;
+using Assets.Scripts.Weapon.Weapons;
 using UnityEngine;
 
 namespace Assets.Scripts.Player
@@ -11,7 +11,6 @@ namespace Assets.Scripts.Player
         [field: SerializeField, Header("State Machine")]
         public PlayerSO Data { get; private set; }
 
-        [field: Header("State Machine")]
         public ScruffyInput MyInputMap { get; private set; }
         private PlayerMovementStateMachine movementStateMachine;
         #endregion
@@ -29,9 +28,20 @@ namespace Assets.Scripts.Player
         [field: SerializeField]
         public Animator MyAnimator { get; private set; }
         #endregion
+
         #region Inventory
-        public PlayerInventory MyInventory { get; private set; }
+        public ScruffyInventory MyInventory { get; private set; }
+
+        [SerializeField]
+        private Sword mySword;
+
+        [SerializeField]
+        private Spear mySpear;
+
+        [SerializeField]
+        private Hammer myHammer;
         #endregion
+
         private void Awake()
         {
             MyRigidbody = GetComponent<Rigidbody>();
@@ -41,7 +51,8 @@ namespace Assets.Scripts.Player
             MyAnimator = GetComponent<Animator>();
 
             //For now we create a new inventory but saving and loading feature should be expanded
-            MyInventory = new PlayerInventory();
+            MyInventory = ScriptableObject.CreateInstance<ScruffyInventory>();
+            MyInventory.InitializeWeapons(mySword, mySpear, myHammer);
         }
 
         private void Start()

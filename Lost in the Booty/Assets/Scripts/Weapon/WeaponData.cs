@@ -13,7 +13,7 @@ namespace Assets.Scripts.Weapon
     public class WeaponData : ScriptableObject
     {
         [field: SerializeField]
-        public WeaponType MyType { get; set; } = WeaponType.SWORD;
+        public WeaponType MyType { get; private set; } = WeaponType.SWORD;
 
         [field: SerializeField]
         public string WeaponName { get; private set; } = "Dummy Name";

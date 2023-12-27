@@ -82,18 +82,17 @@ public class StatsPageUI : MonoBehaviour
 
         if (change == Cutlass)
         {
-            playerCharacter.MyInventory.EquipMeleeWeapon(new Sword());
-            Debug.Log("Changed: " + change);
+            playerCharacter.MyInventory.EquipMeleeWeapon(WeaponType.SWORD);
             return;
         }
         if (change == Spear)
         {
-            playerCharacter.MyInventory.EquipMeleeWeapon(new Spear());
+            playerCharacter.MyInventory.EquipMeleeWeapon(WeaponType.SPEAR);
             return;
         }
         if (change == Hammer)
         {
-            playerCharacter.MyInventory.EquipMeleeWeapon(new Hammer());
+            playerCharacter.MyInventory.EquipMeleeWeapon(WeaponType.HAMMER);
             return;
         }
         if (change == Fire)

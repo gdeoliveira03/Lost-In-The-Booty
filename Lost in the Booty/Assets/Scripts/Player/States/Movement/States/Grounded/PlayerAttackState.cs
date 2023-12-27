@@ -9,7 +9,7 @@ namespace Assets.Scripts.Player.States.Movement.States.Grounded
         public override void Enter()
         {
             base.Enter();
-            stateMachine.Player.MyInventory.currentWeapon?.Use();
+            stateMachine.Player.MyInventory.CurrentWeapon?.Use();
         }
 
         public override void OnAnimationExitEvent()

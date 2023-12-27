@@ -2,7 +2,6 @@ using System.Collections;
 using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -691,19 +690,16 @@ public class Enemy : MonoBehaviour
 
     public virtual void Die()
     {
-        if (EnemyType == "Skeleton")
-        {
-            GameManager.Instance.scruffyInventory.Coins += 1;
-        }
+        //TODO: With enemy reworks this should just be something like Enemy.CoinsToGive
         if (EnemyType == "Minotaur")
         {
-            GameManager.Instance.scruffyInventory.Coins += 5;
+            GameManager.Instance.scruffyInventory.AddCoins(5);
             scruffystats.IncreaseSkulls(1);
             scruffystats.UpdateEnemyStatsBasedOnSkulls();
         }
-        if (EnemyType == "Crab")
+        else
         {
-            GameManager.Instance.scruffyInventory.Coins += 1;
+            GameManager.Instance.scruffyInventory.AddCoins(1);
         }
         Destroy(DeadEnemy);
     }

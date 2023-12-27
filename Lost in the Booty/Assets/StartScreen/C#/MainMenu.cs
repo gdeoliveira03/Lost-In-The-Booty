@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,26 +25,7 @@ public class MainMenu : MonoBehaviour
             int savedSceneIndex = PlayerPrefs.GetInt("SavedScene");
             PlayerPrefs.DeleteKey("SavedScene");
         }
-        if (
-            GameManager.Instance.scruffyInventory.Cutlass != null
-            && GameManager.Instance.scruffyInventory.Spear != null
-            && GameManager.Instance.scruffyInventory.Hammer != null
-            && GameManager.Instance.scruffyInventory.Fire != null
-            && GameManager.Instance.scruffyInventory.Ice != null
-            && GameManager.Instance.scruffyInventory.Lightning != null
-            && GameManager.Instance.scruffyInventory.Coins != null
-            && GameManager.Instance.scruffyInventory.Skulls != null
-        )
-        {
-            GameManager.Instance.scruffyInventory.Cutlass = false;
-            GameManager.Instance.scruffyInventory.Spear = false;
-            GameManager.Instance.scruffyInventory.Hammer = false;
-            GameManager.Instance.scruffyInventory.Fire = false;
-            GameManager.Instance.scruffyInventory.Ice = false;
-            GameManager.Instance.scruffyInventory.Lightning = false;
-            GameManager.Instance.scruffyInventory.Coins = 0;
-            GameManager.Instance.scruffyInventory.Skulls = 0;
-        }
+
         SceneManager.LoadScene(1);
     }
 
@@ -62,9 +41,10 @@ public class MainMenu : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }
-
-        GameManager.Instance.scruffyInventory.Coins = PlayerPrefs.GetInt("SavedCoins", 0);
-        GameManager.Instance.scruffyInventory.Skulls = PlayerPrefs.GetInt("SavedSkulls", 0);
+        GameManager.Instance.scruffyInventory.InitializeStats(
+            PlayerPrefs.GetInt("SavedSkulls", 0),
+            PlayerPrefs.GetInt("SavedCoins", 0)
+        );
 
         Debug.Log("Start Game!");
     }
